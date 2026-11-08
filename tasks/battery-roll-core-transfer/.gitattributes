@@ -1,0 +1,3 @@
+# Preserve exact evaluated bytes, including CRLF, for the hashes in evaluation.json.
+*.py -text whitespace=trailing-space,space-before-tab,cr-at-eol
+*.usda -text whitespace=trailing-space,space-before-tab,cr-at-eol

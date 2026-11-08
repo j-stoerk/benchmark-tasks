@@ -1,0 +1,16 @@
+{
+  "embodiment": "battery_roll",
+  "demo_policy": "battery_roll_scripted",
+  "demo_policy_args": {"hold_s": 75},
+  "task_file": "task.py",
+  "scorer": "task_score",
+  "max_steps": 2400,
+  "seed": 0,
+  "control_hz": 20,
+  "cam_width": 320,
+  "cam_height": 176,
+  "object_jitter": 0,
+  "expected_yam_revision": "0059d02a1a91bc6834c1d0846022891df0c78730",
+  "expected_inspect_robots": "1.0.0",
+  "expected_inspect_robots_yam": "0.38.0"
+}

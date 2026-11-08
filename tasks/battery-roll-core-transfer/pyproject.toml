@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robocurve-battery-roll"
+version = "0.1.0"
+description = "Through-core electrode-roll handling benchmark prototype."
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0"]
+
+[project.entry-points."inspect_robots.embodiments"]
+battery_roll = "battery_roll.embodiment:battery_roll"
+
+[project.entry-points."inspect_robots.policies"]
+battery_roll_scripted = "battery_roll.scripted:battery_roll_scripted"
+
+[tool.setuptools.packages.find]
+include = ["battery_roll*"]
+
+[tool.setuptools.package-data]
+battery_roll = ["*.usda"]

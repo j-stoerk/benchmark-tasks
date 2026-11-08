@@ -1,0 +1,33 @@
+{
+  "validated_utc": "2026-11-08T17:03:54.791971+00:00",
+  "status": "offline_and_gpu_validated",
+  "task_source_sha256": "48a51e574b45300560105dd493a44e3a6239c73c0b081900d0cae4825012a361",
+  "versions": {
+    "numpy": "2.5.4",
+    "pytest": "9.2.0",
+    "ruff": "0.17.4",
+    "inspect-robots": "1.0.0",
+    "inspect-robots-yam": "0.38.0"
+  },
+  "offline_tests_passed": 25,
+  "candidate_plan_duration_seconds": {
+    "left": 41.7,
+    "right": 41.7
+  },
+  "physics_demo": {
+    "run": true,
+    "score": 1.0,
+    "steps": 1093,
+    "success_hold_completed": true
+  },
+  "model_attempt": {
+    "run": true,
+    "score": 0.0,
+    "steps": 2400,
+    "checkpoint": "dreamlabs/dream-1-beta"
+  },
+  "media_id": "M-FHMLF8",
+  "novelty_review": "provisional_2026_11_08_through_core_tool_support_and_suspended_roll",
+  "environment_source_sha256": "18c4f0c56023d1d4025535938071063e90bf1725def7ccc4d3a4b8601fc24601",
+  "evaluation_receipt": "evaluation.json"
+}
