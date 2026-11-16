@@ -36,7 +36,11 @@ def verify_cooked_bores(directory=None):
         query = torch.tensor([points] * view.count, device="cuda:0", dtype=torch.float32)
         values = view.get_sdf_and_gradients(query).detach().cpu().numpy()
         report["sdf_and_gradients"] = values.tolist()
-        distances = values[:, :, 0]
+        # This pinned native binding returns gradient XYZ then signed distance.
+        # The recorded probe at x=60 mm has unit X gradient and 10/20 mm
+        # distance. Older wrapper documentation describes the opposite order.
+        report["native_output_layout"] = "gradient_x,gradient_y,gradient_z,signed_distance"
+        distances = values[:, :, 3]
         valid = (
             (distances[:, 0] > 0.030).all()
             and (distances[:, 1] > 0).all()
