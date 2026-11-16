@@ -39,6 +39,7 @@ DOCS = """Action [upper_x_m,upper_y_m,upper_interface_z_m,collar_degrees,active_
 XYZ ranges: +/-25 mm laterally, Z=0.98..1.12 m. Collar 0..32 degrees; active
 disc 0..90 degrees; proof 0/1. XY slew 20 mm/s, Z 25 mm/s, collar 20 deg/s,
 disc 30 deg/s. The upper payload including disc and seal carriers is 8 kg.
+Active-disc effort is limited to 10 Nm; the collar remains limited to 5 Nm.
 The lower half is fixed at Z=1.000 m. Dock with XYZ=(0,0,1.000), discs closed,
 and collar zero so the three upper lugs pass the actual collar slots. Rotate
 the collar to 30 only after seating. Its native ledges then resist separation.

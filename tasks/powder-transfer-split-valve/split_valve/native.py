@@ -193,7 +193,7 @@ class ValveMachine(EmbodimentBase):
                 ),
                 "active": ImplicitActuatorCfg(
                     joint_names_expr=["active"],
-                    joint_effort_limit=5,
+                    joint_effort_limit=10,
                     joint_velocity_limit=math.radians(30),
                     stiffness=600,
                     damping=2,
@@ -275,7 +275,7 @@ class ValveMachine(EmbodimentBase):
         cameras = []
         for name, eye, target in [
             ("overview_cam", (0.8, -1.0, 1.55), (0, 0, 0.95)),
-            ("valve_cam", (0.015, -0.020, 1.60), (0, 0, 1.0)),
+            ("valve_cam", (0, -0.065, 1.60), (0, 0, 1.0)),
         ]:
             cfg = CameraCfg(
                 prim_path="{ENV_REGEX_NS}/" + name,
