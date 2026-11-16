@@ -1,15 +1,7 @@
 {
   "command": {
-    "id": "roll-clear-demo-02",
-    "mode": "run",
-    "sha": "1ad6af5df55d752e60460f4d92a9e3afe872d1bf",
-    "task": "industrial-roll-handoff",
-    "trial": {
-      "mode": "demo",
-      "max_steps": 2400,
-      "lift_force": 6000,
-      "no_expand": false
-    }
+    "id": "cancel-clarity-keep-original",
+    "mode": "exit"
   },
   "responses": {
     "model-final-01:001": {
