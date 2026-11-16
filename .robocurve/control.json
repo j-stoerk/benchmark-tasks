@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "valve-demo-12",
+    "id": "slit-cpu-960-03",
     "mode": "run",
-    "sha": "65d1c7ed5b25847db713604afd5b9e584dc7bfdc",
-    "task": "powder-transfer-split-valve",
+    "sha": "017afc33bae082110f397308bfed7b568383e475",
+    "task": "slitter-blade-spacer-recipe",
     "trial": {
-      "mode": "demo",
-      "max_steps": 800,
-      "variant": "normal"
+      "mode": "smoke",
+      "max_steps": 400,
+      "variant": "contact-bench"
     }
   },
   "responses": {
