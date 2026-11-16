@@ -150,7 +150,7 @@ class ValveMachine(EmbodimentBase):
                 articulation_props=PhysxArticulationRootPropertiesCfg(
                     enabled_self_collisions=True,
                     solver_position_iteration_count=64,
-                    solver_velocity_iteration_count=16,
+                    solver_velocity_iteration_count=1,
                 ),
                 collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.00001, rest_offset=0),
                 physics_material=sim.RigidBodyMaterialCfg(static_friction=0.30, dynamic_friction=0.20),
@@ -165,6 +165,7 @@ class ValveMachine(EmbodimentBase):
                     "passive": 0,
                     "seal_.*": 0,
                     "lip_.*": 0,
+                    "shear_.*": 0,
                 },
                 joint_vel={".*": 0},
             ),
@@ -214,6 +215,13 @@ class ValveMachine(EmbodimentBase):
                 "axial_seat_compliance": ImplicitActuatorCfg(
                     joint_names_expr=["lip_.*"],
                     joint_effort_limit=10,
+                    joint_velocity_limit=0.1,
+                    stiffness=1000,
+                    damping=9,
+                ),
+                "tangential_seat_compliance": ImplicitActuatorCfg(
+                    joint_names_expr=["shear_.*"],
+                    joint_effort_limit=5,
                     joint_velocity_limit=0.1,
                     stiffness=1000,
                     damping=9,
@@ -322,8 +330,10 @@ class Sampler:
         self.term = env.action_manager.get_term("machine")
         seal_names = [f"seal_{half}_{i}" for half in ("lower", "upper") for i in range(8)]
         lip_names = [f"lip_{half}_{i}" for half in ("lower", "upper") for i in range(8)]
+        shear_names = [f"shear_{half}_{i}" for half in ("lower", "upper") for i in range(8)]
         self.seal_ids = self.robot.find_joints(seal_names, preserve_order=True)[0]
         self.lip_ids = self.robot.find_joints(lip_names, preserve_order=True)[0]
+        self.shear_ids = self.robot.find_joints(shear_names, preserve_order=True)[0]
 
     def contact(self, name):
         return array(self.env.scene[name].data.force_matrix_w)[0].reshape(-1, 3).sum(axis=0)
@@ -340,6 +350,7 @@ class Sampler:
             "velocities": v.tolist(),
             "seal_deflections_m": array(self.robot.data.joint_pos)[0, self.seal_ids].tolist(),
             "seal_axial_deflections_m": array(self.robot.data.joint_pos)[0, self.lip_ids].tolist(),
+            "seal_tangential_deflections_m": array(self.robot.data.joint_pos)[0, self.shear_ids].tolist(),
             "seal_normals": [spec.radial_force(force, i) for i, force in enumerate(forces)],
             "seal_contact_vectors_N": [force.tolist() for force in forces],
             "retaining_contact_N": max(0.0, -float(retaining[2])),
@@ -351,7 +362,7 @@ class Sampler:
         data = self.robot.data
         positions = array(data.body_link_pos_w if hasattr(data, "body_link_pos_w") else data.body_pos_w)[0]
         quats = array(data.body_link_quat_w if hasattr(data, "body_link_quat_w") else data.body_quat_w)[0]
-        result["body_poses_wxyz"] = {
+        result["body_poses_xyzw"] = {
             name: {"pos": positions[i].tolist(), "quat": quats[i].tolist()}
             for i, name in enumerate(self.robot.body_names)
         }

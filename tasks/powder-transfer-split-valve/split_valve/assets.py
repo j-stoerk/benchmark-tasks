@@ -120,7 +120,7 @@ def generate():
     box("base/crossbeam", (0.60, 0.10, 0.08), (0, 0.15, 1.65))
     box("base/lower_support", (0.06, 0.30, 0.90), (0, 0.22, 0.45))
     box("base/lower_bracket", (0.22, 0.32, 0.04), (0, 0.10, 0.90))
-    arc("base/housing", 0.05525, 0.080, 0, 2 * math.pi, 0.016, 0.992, steel)
+    arc("base/housing", 0.056, 0.080, 0, 2 * math.pi, 0.016, 0.992, steel)
     arc("base/neck", 0.052, 0.060, 0, 2 * math.pi, 0.08, 0.94, steel)
     body("X", (0, 0, 0), 2)
     body("Y", (0, 0, 0), 2)
@@ -128,7 +128,7 @@ def generate():
     box("Y/carriage", (0.08, 0.12, 0.06), (0, 0.15, 1.54))
     box("Y/guide", (0.05, 0.05, 0.4), (0, 0.15, 1.32))
     body("Upper", (0, 0, 0), 7.675)
-    arc("Upper/housing", 0.05525, 0.060, 0, 2 * math.pi, 0.016, 0.008, steel)
+    arc("Upper/housing", 0.056, 0.060, 0, 2 * math.pi, 0.016, 0.008, steel)
     arc("Upper/neck", 0.052, 0.060, 0, 2 * math.pi, 0.10, 0.066, (0.38, 0.48, 0.56))
     arc("Upper/vessel", 0.085, 0.090, 0, 2 * math.pi, 0.20, 0.216, steel)
     box("Upper/arm", (0.08, 0.20, 0.04), (0, 0.10, 0.30))
@@ -176,11 +176,17 @@ def generate():
             name = f"Seal_{half}_{i}"
             pos = (0.0509 * math.cos(angle), 0.0509 * math.sin(angle), z)
             guide = f"Guide_{half}_{i}"
-            body(guide, pos, 0.005, angle)
+            body(guide, pos, 0.003, angle)
             guide_mass = UsdPhysics.MassAPI(stage.GetPrimAtPath("/Machine/" + guide))
             guide_mass.CreateCenterOfMassAttr(Gf.Vec3f(0))
             guide_mass.CreateDiagonalInertiaAttr(Gf.Vec3f(1e-7))
             box(guide + "/guide_cover", (0.010, 0.004, 0.004), (0.005, 0, 0), steel, collision=False)
+            shear_guide = f"Tangent_{half}_{i}"
+            body(shear_guide, pos, 0.002, angle)
+            shear_mass = UsdPhysics.MassAPI(stage.GetPrimAtPath("/Machine/" + shear_guide))
+            shear_mass.CreateCenterOfMassAttr(Gf.Vec3f(0))
+            shear_mass.CreateDiagonalInertiaAttr(Gf.Vec3f(1e-7))
+            box(shear_guide + "/guide_cover", (0.004, 0.010, 0.004), (0, 0.005, 0), steel, collision=False)
             body(name, pos, 0.020, angle)
             arc(
                 name + "/shoe",
@@ -195,7 +201,8 @@ def generate():
                 4,
             )
             joint(f"seal_{half}_{i}", parent, guide, "X", pos, (-0.001, 0.003), angle=angle)
-            joint(f"lip_{half}_{i}", guide, name, "Z", (0, 0, 0), (-0.008, 0.008))
+            joint(f"shear_{half}_{i}", guide, shear_guide, "Y", (0, 0, 0), (-0.002, 0.002))
+            joint(f"lip_{half}_{i}", shear_guide, name, "Z", (0, 0, 0), (-0.008, 0.008))
     fixed = UsdPhysics.FixedJoint.Define(stage, "/Machine/anchor")
     fixed.CreateBody1Rel().SetTargets(["/Machine/base"])
     stage.GetRootLayer().Export(str(PACKAGE / "machine.usda"))

@@ -49,6 +49,7 @@ class Geometry(unittest.TestCase):
             "Passive",
             *[f"Seal_upper_{i}" for i in range(8)],
             *[f"Guide_upper_{i}" for i in range(8)],
+            *[f"Tangent_upper_{i}" for i in range(8)],
         ]
         total = sum(
             UsdPhysics.MassAPI(self.stage.GetPrimAtPath("/Machine/" + name)).GetMassAttr().Get()
@@ -73,7 +74,12 @@ class Geometry(unittest.TestCase):
                     points = np.asarray(prim.GetAttribute("points").Get())
                     clearances.append(np.linalg.norm((points[0, :2] + points[3, :2]) / 2))
             self.assertTrue(clearances)
-            self.assertGreater(min(clearances), 0.052 + 0.003 + 0.0001)
+            outer_radius = 0.052
+            half_angle = math.pi / 8
+            maximum_corner_radius = math.hypot(
+                outer_radius * math.cos(half_angle) + 0.003, outer_radius * math.sin(half_angle) + 0.002
+            )
+            self.assertGreater(min(clearances), maximum_corner_radius + 0.0001)
 
     def test_no_rigid_lip_segment_bridges_the_rotors_bending_axis(self):
         for half in ("lower", "upper"):

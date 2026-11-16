@@ -55,8 +55,9 @@ passive disc has only a return spring: native contact between the complementary
 half-thickness discs must transmit rotation. It is not a follower joint.
 Eight spring-backed seal carriers per half provide measured native seating
 contact. Native 10 kN/m radial springs (32 Ns/m) and 1 kN/m axial flexures
-(9 Ns/m, +/-8 mm) approximate elastomer seating and lip deflection. Each
-25 g seat unit is a 5 g guide plus a 20 g shoe; total upper payload is 8 kg.
+(9 Ns/m, +/-8 mm) approximate elastomer seating and lip deflection. Tangential
+compliance is 1 kN/m with 9 Ns/m damping and +/-2 mm travel. Each 25 g seat
+unit has a 3 g radial guide, 2 g tangential guide and 20 g shoe; upper payload is 8 kg.
 Shoe boundaries lie on the rotor Y axis so opposite sides of the lip can
 deflect in opposite axial directions. Continuous elastomer strain is not modeled.
 After opening BOTH discs to at least 88 degrees, close them to within 2 degrees,
