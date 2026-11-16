@@ -2,7 +2,7 @@
   "command": {
     "id": "valve-smoke-04",
     "mode": "run",
-    "sha": "59c3447acb6b67b15330f20ef85b3290406ff0a2",
+    "sha": "c5ba3193d30fa73927b8709180f574910616ef1d",
     "task": "powder-transfer-split-valve",
     "trial": {
       "mode": "smoke",
