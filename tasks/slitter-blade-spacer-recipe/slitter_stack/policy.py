@@ -25,10 +25,17 @@ class Demo(PolicyBase):
         t = observation.state_time
         q = np.asarray(observation.state["machine_encoders"])
         if self.item >= len(spec.PARTS):
-            command = [0, 0, 1.35, 0, 1, 0]
-            if self.phase != "clamp" and self.phase != "proof":
+            command = [0.60, -0.40, 1.35, 0, 0, 0]
+            if self.phase not in ("park", "clamp", "proof"):
+                self.phase, self.entered = "park", t
+            if self.phase == "park" and np.max(np.abs(q[:3] - command[:3])) < 0.00025:
                 self.phase, self.entered = "clamp", t
-            if float(observation.state["clamp_force"][0]) >= 300 and t - self.entered >= 1.2:
+            command[4] = float(self.phase in ("clamp", "proof"))
+            if (
+                self.phase == "clamp"
+                and float(observation.state["clamp_force"][0]) >= 300
+                and t - self.entered >= 1.2
+            ):
                 self.phase = "proof"
             command[5] = float(self.phase == "proof")
             return ActionChunk(actions=[Action(data=np.array(command, float))], control_hz=spec.HZ)

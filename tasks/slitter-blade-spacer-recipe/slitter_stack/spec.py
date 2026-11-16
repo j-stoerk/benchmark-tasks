@@ -50,7 +50,8 @@ The palm has a clear central bore; do not try to grasp inside a blade bore.
 Clamp 1 moves the retracted platen from Y=-0.45 to Y=0 at 0.10 m/s, then applies
 500 N DOWNWARD. Clamp 0 raises it before parking at Y=-0.45. The native PLC
 waits for actual alignment before lowering; allow about 8 seconds. Clamp only after all nine parts have been stacked
-and the head has moved to Z>=1.30 m. Proof 1 applies 25 N upward and 0.5 Nm Z
+and the head is parked at XYZ=(0.60,-0.40,1.35) m, clearing the pressure carriage
+and its upper rails as well as the tooling. Proof 1 applies 25 N upward and 0.5 Nm Z
 torque to EACH of the four free blades (100 N / 2 Nm total). It never supports
 their weight. Use the four actual blade-height gauges and clamp normal-force
 gauge to verify the final condition. The native shaft and all free ring contacts
