@@ -1,8 +1,14 @@
 {
   "command": {
-    "id": "cancel-valve-demo-12",
-    "mode": "cancel",
-    "target": "valve-demo-12"
+    "id": "slit-cpu-960-03",
+    "mode": "run",
+    "sha": "6e6f299022faf0408377e336d83cfa54699d6b35",
+    "task": "slitter-blade-spacer-recipe",
+    "trial": {
+      "mode": "smoke",
+      "max_steps": 400,
+      "variant": "contact-bench"
+    }
   },
   "responses": {
     "model-final-01:001": {
