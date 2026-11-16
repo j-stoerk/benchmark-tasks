@@ -304,16 +304,23 @@ def make_env(device="cuda:0", grip_force=50):
                         max_depenetration_velocity=0.1,
                         solver_position_iteration_count=64,
                         solver_velocity_iteration_count=16,
-                        enable_ccd=True,
                     ),
                 },
             )
         )
+    def configure(cfg):
+        env_cfg_callback(spec.HZ)(cfg)
+        # GPU PhysX does not support CCD. Use bounded joint speeds and smaller
+        # discrete steps for the real 0.7 mm knives rather than inflating them.
+        cfg.sim.dt = 1 / 480
+        cfg.decimation = 24
+        cfg.sim.render_interval = 24
+
     environment = IsaacLabArenaEnvironment(
         name="slitter_blade_spacer_recipe",
         scene=Scene(objects),
         embodiment=AssemblyMachine(grip_force),
-        env_cfg_callback=env_cfg_callback(spec.HZ),
+        env_cfg_callback=configure,
     )
     return ArenaEnvBuilder(
         environment, ArenaEnvBuilderCfg(num_envs=1, solve_relations=False, device=device)

@@ -49,7 +49,10 @@ proofs, not claimed production quality thresholds.
 Use the pinned Linux/RTX Isaac Lab-Arena environment, Python 3.12, Isaac Sim
 6.1, `yam-arena` and Inspect Robots. Import `native.py` only after AppLauncher
 starts Kit. The runner captures actual dependency versions, source hashes,
-seed, commands, exit status and logs. Seed is 0; actions and scoring run at 20 Hz.
+seed, commands, exit status and logs. Seed is 0; actions and scoring run at 20 Hz,
+with 480 Hz discrete physics. The 0.7 mm blades retain their actual thickness.
+GPU PhysX does not support CCD; smaller physics steps and bounded axis speeds
+are used instead of claiming CCD protection.
 
 ```bash
 source /data/IsaacLab-Arena/yam.env
