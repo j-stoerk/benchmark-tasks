@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "robocurve-lab-stirbar-recovery"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0"]
+description = "Native tool manipulation for an affordable laboratory procedure."
+[project.entry-points."inspect_robots.embodiments"]
+stirbar_recovery = "stirbar_recovery.adapter:embodiment"
+[project.entry-points."inspect_robots.policies"]
+stirbar_recovery_demo = "stirbar_recovery.policy:demo"
+stirbar_recovery_llm = "stirbar_recovery.policy:llm"
+[tool.setuptools.packages.find]
+include = ["stirbar_recovery*"]
+[tool.setuptools.package-data]
+stirbar_recovery = ["*.usda"]
