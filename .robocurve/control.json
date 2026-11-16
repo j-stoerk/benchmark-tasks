@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "film-smoke-02",
+    "id": "film-demo-03",
     "mode": "run",
     "sha": "0fb9f5fb1a9a07fce51ca0a23633f7ff864735fd",
     "task": "lab-film-drawdown",
     "trial": {
-      "mode": "smoke",
-      "max_steps": 200,
+      "mode": "demo",
+      "max_steps": 600,
       "variant": "normal"
     }
   },
