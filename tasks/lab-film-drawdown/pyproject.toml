@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "robocurve-lab-film-drawdown"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0"]
+description = "Native tool manipulation for an affordable laboratory procedure."
+[project.entry-points."inspect_robots.embodiments"]
+film_drawdown = "film_drawdown.adapter:embodiment"
+[project.entry-points."inspect_robots.policies"]
+film_drawdown_demo = "film_drawdown.policy:demo"
+film_drawdown_llm = "film_drawdown.policy:llm"
+[tool.setuptools.packages.find]
+include = ["film_drawdown*"]
+[tool.setuptools.package-data]
+film_drawdown = ["*.usda"]

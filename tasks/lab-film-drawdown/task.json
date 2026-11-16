@@ -1,0 +1,20 @@
+{
+  "title": "Draw a continuous laboratory film with a fixed-gap applicator, then lift it clear",
+  "category": "Other",
+  "keywords": [
+    "laboratory",
+    "coating",
+    "doctor blade",
+    "tool contact",
+    "materials research"
+  ],
+  "instruction": "Use the fixed-gap film applicator to draw the blue coating over the entire 80 by 200 mm rectangle on the glass plate. Leave no dry stripe wider than 5 mm. Finish with the applicator lifted clear of the coated rectangle.",
+  "context": "Manual drawdown is a common hands-on materials-research procedure for preparing coating and electrode test films. The physical skill is keeping both applicator feet seated while carrying a finite wet bead across a complete test area, without dry stripes. This tests laboratory automation, not choosing process settings or industrial electrode quality.",
+  "setup": "One single six-axis Cartesian-gimbal tool robot (40 N slide limits, 2 Nm gimbal limits, 120 mm/s); its end tool is a 100 x 30 x 30 mm, 0.7 kg stainless-steel fixed-gap applicator with an 80 mm wide, 0.10 mm aperture. Tool already mounted; tool pickup and gap adjustment are outside the task. A 120 x 300 x 4 mm glass plate is clamped flat on a 750 mm high bench; its top is Z=754 mm, centre X=Y=0. Four red marks bound X=-40..40 mm,Y=-100..100 mm. A 3 mL bead of water-based blue acrylic coating is placed across the width at Y=-105 mm. Applicator starts level, its foot datum at (0,-140,880) mm. Use water-based paint at room temperature and a drip mat; no active battery slurry, loose powder or hazardous solvent. Real props: MTI SeKTQ4S 80 mm fixed-gap applicator (listed from $238.98), glass plate, two ordinary clamps, washable paint and ruler/grid; approximately $280 excluding the shared robot, tax and delivery. All geometry is original; original build source and detailed dimensions supplied.",
+  "scoring": "Measure blue coverage with an overhead photo and a transparent 5 mm grid over the 80 x 200 mm rectangle. 0 below25% covered;0.25 at25% to under60%;0.5 at60% or more. Full1 only with at least95% coverage, no contiguous dry stripe wider than5mm in any cross-web row, and the applicator at least30mm clear above the glass continuously for1s. Otherwise the appropriate lower tier applies. Colour on a lifted tool or hovering without substrate contact cannot coat the surface. No film-thickness, porosity, adhesion or electrochemical-quality inference is scored.",
+  "run_limit": "2400 control actions at20Hz (120s); at most30 LLM calls,400 actions per call.",
+  "reset_notes": "Wipe glass and applicator clean with water, dry, return level tool to the starting position and dispense3mL of the same washable paint across the bead line. This takes a few minutes. Keep paint off shared robot surfaces; the mounted applicator alone touches it.",
+  "fidelity": "Native force-limited robot, rigid applicator and glass contacts. A finite 5mm coating raster responds only to measured tool motion with both feet seated and actual substrate contact; paint use is conserved at0.1mm nominal wet thickness. A bounded viscous reaction acts on the tool. No fluid CFD, drying or electrode-quality claim. Robot uses Cartesian slides and a gimbal rather than a commercial arm model; the tool is mounted before the trial.",
+  "scores": "Unmeasured; native demo and genuine LLM trial required before submission.",
+  "media": null
+}
