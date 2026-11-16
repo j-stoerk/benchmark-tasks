@@ -1,7 +1,14 @@
 {
   "command": {
-    "id": "rotate-suite-after-cpu03",
-    "mode": "exit"
+    "id": "valve-cpu-demo-14",
+    "mode": "run",
+    "sha": "87061702362cb7b8334e50013d699f2934ed4bc7",
+    "task": "powder-transfer-split-valve",
+    "trial": {
+      "mode": "demo",
+      "max_steps": 800,
+      "variant": "normal"
+    }
   },
   "responses": {
     "model-final-01:001": {
