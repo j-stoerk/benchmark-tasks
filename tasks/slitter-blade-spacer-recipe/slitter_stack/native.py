@@ -231,7 +231,11 @@ class AssemblyMachine(EmbodimentBase):
             (
                 "platen_contact",
                 ContactSensorCfg,
-                ContactSensorCfg(prim_path="{ENV_REGEX_NS}/Machine/Platen", history_length=1),
+                ContactSensorCfg(
+                    prim_path="{ENV_REGEX_NS}/Machine/Platen",
+                    filter_prim_paths_expr=["{ENV_REGEX_NS}/part_8"],
+                    history_length=1,
+                ),
             )
         ]
         for i in range(3):
@@ -348,6 +352,7 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
         cfg.sim.dt = 1 / 480
         cfg.decimation = 24
         cfg.sim.render_interval = 24
+        cfg.sim.physics.solve_articulation_contact_last = True
         return cfg
 
     environment = IsaacLabArenaEnvironment(

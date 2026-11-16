@@ -68,6 +68,8 @@ Lift a held part to Z=1.35 m before crossing the table. Place its bottom about
 Observations: native RGB, actual tool XYZ/mean normalized jaw extension and last
 clamp/proof commands, three pad normal forces in N, pressure-plate contact N,
 and four blade cutting-face heights in mm (-1 when that blade is off the arbor).
+The clamp gauge is the upward contact force from the final 48 mm spacer on the
+platen, excluding shaft contact and all lateral forces.
 No part pose, scorer status or successful-grasp oracle is supplied. The height
 gauges correspond to practical axial metrology, not gripper setpoints.
 At most 30 LLM calls and 2400 control actions at 20 Hz. A response may include

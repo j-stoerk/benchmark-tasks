@@ -103,8 +103,13 @@ class SlitterStack(EmbodimentBase):
                 float(np.linalg.norm(numpy(self.base.scene[f"pad_{i}"].data.net_normal_forces_w)[0]))
                 for i in range(3)
             ],
-            "clamp_contact_N": float(
-                np.linalg.norm(numpy(self.base.scene["platen_contact"].data.net_normal_forces_w)[0])
+            "clamp_contact_N": max(
+                0.0,
+                float(
+                    numpy(self.base.scene["platen_contact"].data.force_matrix_w)[0]
+                    .reshape(-1, 3)
+                    .sum(axis=0)[2]
+                ),
             ),
             "clamp_z": 1.20 + float(numpy(self.robot.data.joint_pos)[0, self.press_ids[0]]),
             "clamp_y": float(numpy(self.robot.data.joint_pos)[0, self.press_y_ids[0]]),

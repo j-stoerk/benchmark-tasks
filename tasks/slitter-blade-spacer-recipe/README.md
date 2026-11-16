@@ -51,6 +51,8 @@ The proof applies 25 N upward and 0.5 Nm Z torque to each free blade, totaling
 seconds of retained geometry and limited translation/rotation are required.
 The platen's joint cannot directly constrain any blade's translation or yaw.
 Its real face contact and friction must transmit the loads through the stack.
+The clamp gauge filters the platen contact against the final 48 mm spacer and
+measures its upward Z component. Shaft rubbing cannot count as clamp loading.
 Guide/drive covers are illustrative non-colliding geometry; existing native
 constraints represent their bearings and powered support. This is not a frame,
 anchor-strength or blade-damage test. All test conditions are declared fixture
@@ -65,6 +67,9 @@ seed, commands, exit status and logs. Seed is 0; actions and scoring run at 20 H
 with 480 Hz discrete physics. The 2 mm lower knives retain their actual thickness.
 GPU PhysX does not support CCD; smaller physics steps and bounded axis speeds
 are used instead of claiming CCD protection.
+TGS resolves articulation contacts last to test whether contact ordering corrects
+the observed loaded-stack penetration. That setting requires fresh native
+validation; the package currently has no full-score assembly evidence.
 
 ```bash
 source /data/IsaacLab-Arena/yam.env
