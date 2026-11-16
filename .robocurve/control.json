@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "stir-smoke-02",
+    "id": "stir-demo-03",
     "mode": "run",
-    "sha": "fdb7829671592f4e8ffd8abcc80eea31dd1002a8",
+    "sha": "4ff7b48fed8d39e5c4e20c5d191a138eb0797e33",
     "task": "lab-stirbar-recovery",
     "trial": {
-      "mode": "smoke",
-      "max_steps": 200,
+      "mode": "demo",
+      "max_steps": 1200,
       "variant": "normal"
     }
   },
