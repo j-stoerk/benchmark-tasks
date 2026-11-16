@@ -47,6 +47,7 @@ class AssemblyAction(ActionTerm):
         self.robot = env.scene["robot"]
         self.ids = self.robot.find_joints(spec.JOINT_NAMES, preserve_order=True)[0]
         self.press_ids = self.robot.find_joints(["press"])[0]
+        self.press_y_ids = self.robot.find_joints(["press_y"])[0]
         self._raw = torch.tensor([spec.INITIAL.tolist()], device=self.device)
         self._processed = self._raw.clone()
         self.speed = torch.tensor([0.40, 0.40, 0.40, 20, 20, 20], device=self.device)
@@ -75,15 +76,25 @@ class AssemblyAction(ActionTerm):
         q = self._processed
         xyz = q[:, :3]
         jaws = (1 - 2 * q[:, 3:4]).repeat(1, 3) * self.cfg.grip_force
-        press = 1000 * (1 - q[:, 4:5]) - 500 * q[:, 4:5]
+        press_y = tensor(self.robot.data.joint_pos)[:, self.press_y_ids]
+        press_z = tensor(self.robot.data.joint_pos)[:, self.press_ids]
+        requested = q[:, 4:5] >= 0.5
+        aligned = torch.abs(press_y) < 0.00002
+        press = torch.where(requested & aligned, -500.0, 1000.0)
+        # PLC sequencing uses actual joint feedback: retract before parking,
+        # and align the crosshead before applying its downward force.
+        park = torch.full_like(press_y, -0.45)
+        lateral = torch.where(requested, torch.zeros_like(press_y), torch.where(press_z > 0.0095, park, press_y))
         if hasattr(self.robot, "set_joint_position_target_index"):
             self.robot.set_joint_position_target_index(target=xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target_index(target=jaws, joint_ids=self.ids[3:])
             self.robot.set_joint_effort_target_index(target=press, joint_ids=self.press_ids)
+            self.robot.set_joint_position_target_index(target=lateral, joint_ids=self.press_y_ids)
         else:
             self.robot.set_joint_position_target(xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target(jaws, joint_ids=self.ids[3:])
             self.robot.set_joint_effort_target(press, joint_ids=self.press_ids)
+            self.robot.set_joint_position_target(lateral, joint_ids=self.press_y_ids)
         active = (q[:, 5] >= 0.5).float()
         self.applied_proof[:, 0] = 100 * active
         self.applied_proof[:, 1] = 2 * active
@@ -168,7 +179,14 @@ class AssemblyMachine(EmbodimentBase):
                 physics_material=sim.RigidBodyMaterialCfg(static_friction=0.65, dynamic_friction=0.5),
             ),
             init_state=ArticulationCfg.InitialStateCfg(
-                joint_pos={"slide_x": -0.15, "slide_y": -0.4, "slide_z": 1.35, "jaw_.*": 0, "press": 0},
+                joint_pos={
+                    "slide_x": -0.15,
+                    "slide_y": -0.4,
+                    "slide_z": 1.35,
+                    "jaw_.*": 0,
+                    "press": 0,
+                    "press_y": -0.45,
+                },
                 joint_vel={".*": 0.0},
             ),
             actuators={
@@ -192,6 +210,13 @@ class AssemblyMachine(EmbodimentBase):
                     joint_velocity_limit=0.02,
                     stiffness=0.0,
                     damping=800.0,
+                ),
+                "press_carriage": ImplicitActuatorCfg(
+                    joint_names_expr=["press_y"],
+                    joint_effort_limit=1000.0,
+                    joint_velocity_limit=0.10,
+                    stiffness=3_000_000.0,
+                    damping=15_000.0,
                 ),
             },
         )
@@ -308,6 +333,7 @@ def make_env(device="cuda:0", grip_force=50):
                 },
             )
         )
+
     def configure(cfg):
         env_cfg_callback(spec.HZ)(cfg)
         # GPU PhysX does not support CCD. Use bounded joint speeds and smaller

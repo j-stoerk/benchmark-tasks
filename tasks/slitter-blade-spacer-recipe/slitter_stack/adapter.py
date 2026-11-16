@@ -72,6 +72,7 @@ class SlitterStack(EmbodimentBase):
         self.robot = self.base.scene["robot"]
         self.ids = self.robot.find_joints(spec.JOINT_NAMES, preserve_order=True)[0]
         self.press_ids = self.robot.find_joints(["press"])[0]
+        self.press_y_ids = self.robot.find_joints(["press_y"])[0]
         self.term = self.base.action_manager.get_term("machine")
 
     def native_action(self, command):
@@ -101,6 +102,7 @@ class SlitterStack(EmbodimentBase):
                 np.linalg.norm(numpy(self.base.scene["platen_contact"].data.net_normal_forces_w)[0])
             ),
             "clamp_z": 1.20 + float(numpy(self.robot.data.joint_pos)[0, self.press_ids[0]]),
+            "clamp_y": float(numpy(self.robot.data.joint_pos)[0, self.press_y_ids[0]]),
             "applied_proof": numpy(self.term.applied_proof)[0].tolist(),
         }
 

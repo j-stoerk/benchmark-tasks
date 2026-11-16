@@ -18,6 +18,7 @@ def ready():
         "tool": [0, 0, 1.35, 0, 1, 0],
         "clamp_contact_N": 500,
         "clamp_z": spec.TOP + 0.01,
+        "clamp_y": 0.0,
         "applied_proof": [100, 2],
     }
 

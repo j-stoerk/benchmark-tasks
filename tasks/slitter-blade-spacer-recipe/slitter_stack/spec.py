@@ -47,8 +47,9 @@ setpoints, X -0.18..0.65, Y -0.45..0.45, Z 0.78..1.40 m; axis slew 0.40 m/s.
 Grip 0 opens all three jaws, grip 1 closes them with 50 N per drive and 20 mm/s
 joint-speed limit. The 30 mm tall pads grip OUTSIDE each ring, centred at tool Z.
 The palm has a clear central bore; do not try to grasp inside a blade bore.
-Clamp 1 applies 500 N DOWNWARD to the native annular pressure plate above the
-arbor; clamp 0 retracts it. Clamp only after all nine parts have been stacked
+Clamp 1 moves the retracted platen from Y=-0.45 to Y=0 at 0.10 m/s, then applies
+500 N DOWNWARD. Clamp 0 raises it before parking at Y=-0.45. The native PLC
+waits for actual alignment before lowering; allow about 8 seconds. Clamp only after all nine parts have been stacked
 and the head has moved to Z>=1.30 m. Proof 1 applies 25 N upward and 0.5 Nm Z
 torque to EACH of the four free blades (100 N / 2 Nm total). It never supports
 their weight. Use the four actual blade-height gauges and clamp normal-force
@@ -124,8 +125,9 @@ def geometry(readout):
         q = np.asarray(readout["tool"], float)
         force = float(readout["clamp_contact_N"])
         clamp_z = float(readout["clamp_z"])
+        clamp_y = float(readout["clamp_y"])
         finite = all(a.shape == (3,) and np.isfinite(a).all() for a in poses + velocity + angular)
-        valid = finite and q.shape == (6,) and np.isfinite(q).all() and math.isfinite(force + clamp_z)
+        valid = finite and q.shape == (6,) and np.isfinite(q).all() and math.isfinite(force + clamp_z + clamp_y)
         valid = valid and all(p[2] > 0.70 and abs(p[0]) < 0.9 and abs(p[1]) < 0.65 for p in poses)
         if not valid:
             return {"valid": False}
@@ -142,7 +144,7 @@ def geometry(readout):
         recipe = np.max(np.abs(np.asarray(cutting_faces) - POSITIONS)) <= TOLERANCE
         stable = all(np.linalg.norm(v) < 0.0015 for v in velocity) and all(np.linalg.norm(v) < 0.05 for v in angular)
         released = np.linalg.norm(q[:2]) >= 0.18 or q[2] - 0.015 > max(TOP, clamp_z + 0.01) + 0.03
-        clamped = force >= 300 and abs(clamp_z - 0.01 - TOP) <= 0.0001
+        clamped = force >= 300 and abs(clamp_z - 0.01 - TOP) <= 0.0001 and abs(clamp_y) <= 0.00015
         return {
             "valid": True,
             "assembled": bool(centered and upright and seated and recipe),

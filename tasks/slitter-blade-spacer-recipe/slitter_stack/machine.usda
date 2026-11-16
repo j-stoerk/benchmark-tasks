@@ -1617,6 +1617,26 @@ def Xform "Machine" (
         custom rel physxMimicJoint:rotX:referenceJoint = </Machine/jaw_0>
     }
 
+    def Xform "PressY" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 3
+        double3 xformOp:translate = (0, 0, 1.2)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "carriage" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.16, 0.25, 0.35)]
+            double size = 1
+            float3 xformOp:scale = (0.16, 0.24, 0.04)
+            double3 xformOp:translate = (0, 0, 0.4)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Platen" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
@@ -2843,6 +2863,26 @@ def Xform "Machine" (
         }
     }
 
+    def PhysicsPrismaticJoint "press_y" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 15000
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 3000000
+        float drive:linear:physics:targetPosition = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/PressY>
+        point3f physics:localPos0 = (0, 0, 1.2)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.46
+        float physics:upperLimit = 0.01
+    }
+
     def PhysicsPrismaticJoint "press" (
         prepend apiSchemas = ["PhysicsDriveAPI:linear"]
     )
@@ -2853,9 +2893,9 @@ def Xform "Machine" (
         float drive:linear:physics:targetPosition = 0
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "Z"
-        rel physics:body0 = </Machine/base>
+        rel physics:body0 = </Machine/PressY>
         rel physics:body1 = </Machine/Platen>
-        point3f physics:localPos0 = (0, 0, 1.2)
+        point3f physics:localPos0 = (0, 0, 0)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (1, 0, 0, 0)
         quatf physics:localRot1 = (1, 0, 0, 0)

@@ -133,6 +133,8 @@ def generate():
             prim.CreateRelationship(prefix + "referenceJoint").SetTargets(["/Machine/jaw_0"])
             prim.CreateAttribute(prefix + "gearing", Sdf.ValueTypeNames.Float).Set(-1.0)
             prim.CreateAttribute(prefix + "offset", Sdf.ValueTypeNames.Float).Set(0.0)
+    body(stage, "/Machine/PressY", (0, 0, 1.20), 3.0)
+    box(stage, "/Machine/PressY/carriage", (0.16, 0.24, 0.04), (0, 0, 0.40))
     body(stage, "/Machine/Platen", (0, 0, 1.20), 1.0)
     ring(stage, "/Machine/Platen/ContactRing", 0.050, spec.BORE, 0.020, color=(0.20, 0.32, 0.46))
     for i, side in enumerate((-1, 1)):
@@ -140,7 +142,8 @@ def generate():
         for j, x in enumerate((-0.04, 0.04)):
             cylinder(stage, f"/Machine/Platen/rod_{i}_{j}", 0.005, 0.4, (x, side * 0.09, 0.2), collision=False)
     box(stage, "/Machine/base/press_crosshead", (0.16, 1.22, 0.06), (0, 0, 1.63))
-    joint(stage, "press", "base", "Platen", "Z", (0, 0, 1.20), (-0.09, 0.01), force=True)
+    joint(stage, "press_y", "base", "PressY", "Y", (0, 0, 1.20), (-0.46, 0.01))
+    joint(stage, "press", "PressY", "Platen", "Z", (0, 0, 0), (-0.09, 0.01), force=True)
     fixed = UsdPhysics.FixedJoint.Define(stage, "/Machine/anchor")
     fixed.CreateBody1Rel().SetTargets(["/Machine/base"])
     stage.GetRootLayer().Export(str(PACKAGE / "machine.usda"))
