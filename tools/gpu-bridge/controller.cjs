@@ -61,13 +61,14 @@ module.exports = async ({github, context, core}) => {
       if (!['smoke', 'demo', 'model'].includes(trial.mode)) throw Error('Invalid trial mode');
       if (!Number.isInteger(trial.max_steps) || trial.max_steps < 1 || trial.max_steps > 2400) throw Error('Invalid step cap');
       if (![1000, 6000].includes(trial.lift_force)) throw Error('Invalid lift setting');
+      if (trial.no_expand !== undefined && typeof trial.no_expand !== 'boolean') throw Error('Invalid grip setting');
       const source = path.join(out, 'source');
       const gitEnv = {...process.env, GIT_LFS_SKIP_SMUDGE: '1', GIT_TERMINAL_PROMPT: '0'};
       execFileSync('git', ['clone', '--filter=blob:none', '--no-checkout', `https://github.com/${owner}/${repo}.git`, source], {env: gitEnv, stdio: 'inherit'});
       execFileSync('git', ['sparse-checkout', 'set', `tasks/${command.task}`], {cwd: source, env: gitEnv, stdio: 'inherit'});
       execFileSync('git', ['checkout', command.sha], {cwd: source, env: gitEnv, stdio: 'inherit'});
       args = [path.join(workspace, 'tools/gpu-bridge/trial.sh'), path.join(source, 'tasks', command.task), trial.mode,
-        path.join(out, 'trial'), bridge, String(trial.max_steps), String(trial.lift_force)];
+        path.join(out, 'trial'), bridge, String(trial.max_steps), String(trial.lift_force), trial.no_expand ? '1' : '0'];
     }
     const consolePath = path.join(out, 'worker.txt');
     const log = fs.openSync(consolePath, 'w');
