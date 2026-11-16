@@ -17,6 +17,9 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             tools/gpu-bridge
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
       - name: Install artifact transport
         run: npm install --prefix /tmp/robocurve-artifact --ignore-scripts --no-audit --no-fund @actions/artifact@2.3.2
       - name: Run bounded evidence controller
