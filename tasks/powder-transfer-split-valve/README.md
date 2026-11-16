@@ -37,8 +37,9 @@ current-source recordings. Offline checks alone do not establish feasibility.
 
 `task.json` specifies the fixed layout, dimensions, materials and complete rubric.
 `assets.py` regenerates the supplied original `machine.usda`; `native.py` builds
-the Arena articulation. GPU TGS uses960 Hz physics,64 position/1 velocity
-iteration and articulation contacts last. Control and video remain20 Hz.
+the Arena articulation. CPU TGS uses960 Hz physics,64 position/1 velocity
+iteration and articulation contacts last. RTX cameras render on the GPU;
+actual solver device and timestep are recorded privately. Control and video remain20 Hz.
 
 The 8 kg payload comprises7.500 kg body,0.300 kg passive rotor and eight25 g seat
 units. Each rotor has a60x12x12 mm steel dog atY=-135 mm, outside the casing and
