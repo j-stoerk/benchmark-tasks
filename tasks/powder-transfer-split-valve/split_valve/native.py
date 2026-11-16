@@ -400,6 +400,14 @@ class Sampler:
             name: self.contact(name).tolist()
             for name in ("active_frame", "active_collar", "active_passive", "passive_housing")
         }
+        try:
+            reactions = array(data.body_joint_wrench)[0]
+            result["diagnostic_body_joint_wrench"] = {
+                name: reactions[index].tolist() for index, name in enumerate(self.robot.body_names)
+            }
+        except (AttributeError, NotImplementedError, RuntimeError) as error:
+            # Optional private SDK diagnostic; not a scoring or policy input.
+            result["diagnostic_joint_wrench_status"] = type(error).__name__
         for attribute in (
             "applied_torque",
             "computed_torque",
