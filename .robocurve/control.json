@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "valve-smoke-07",
+    "id": "slit-sdf-gravity-01",
     "mode": "run",
-    "sha": "059eb46e775951d7129a6e77e0546211e1480232",
-    "task": "powder-transfer-split-valve",
+    "sha": "91dcd50f7c1b601b76055c5531511f8f30e8a7e2",
+    "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
-      "max_steps": 650,
+      "max_steps": 100,
       "variant": "normal"
     }
   },
