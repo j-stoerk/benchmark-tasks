@@ -55,6 +55,7 @@ class AssemblyAction(ActionTerm):
         self.torque = self.force.clone()
         self.applied_proof = torch.zeros((env.num_envs, 2), device=self.device)
         self.lateral_target = torch.full((env.num_envs, 1), -0.45, device=self.device)
+        self.press_force = torch.full((env.num_envs, 1), 1000.0, device=self.device)
 
     @property
     def action_dim(self):
@@ -81,7 +82,12 @@ class AssemblyAction(ActionTerm):
         press_z = tensor(self.robot.data.joint_pos)[:, self.press_ids]
         requested = q[:, 4:5] >= 0.5
         aligned = torch.abs(press_y) < 0.00002
-        press = torch.where(requested & aligned, -500.0, 1000.0)
+        desired_force = torch.where(requested & aligned, -500.0, 1000.0)
+        # Finite pneumatic force buildup, including reversal from retraction.
+        # The sustained clamp remains 500 N; contact gauges score actual load.
+        increment = 1500.0 * self._env.physics_dt
+        self.press_force += torch.clamp(desired_force - self.press_force, -increment, increment)
+        press = self.press_force
         # PLC sequencing uses actual joint feedback: retract before parking,
         # and align the crosshead before applying its downward force.
         park = torch.full_like(press_y, -0.45)
@@ -124,6 +130,7 @@ class AssemblyAction(ActionTerm):
         self._processed[:] = self._raw
         self.applied_proof[:] = 0
         self.lateral_target[:] = -0.45
+        self.press_force[:] = 1000.0
 
 
 @configclass
@@ -349,9 +356,9 @@ def make_env(device="cpu", grip_force=50, contact_bench=False):
         env_cfg_callback(spec.HZ)(cfg)
         # CPU PhysX is selected to test real thin-ring contacts with CCD.
         # Geometry, inertia, proof loads and scoring remain unchanged.
-        cfg.sim.dt = 1 / 480
-        cfg.decimation = 24
-        cfg.sim.render_interval = 24
+        cfg.sim.dt = 1 / 960
+        cfg.decimation = 48
+        cfg.sim.render_interval = 48
         cfg.sim.physics.solver_type = 1
         cfg.sim.physics.enable_ccd = True
         cfg.sim.physics.enable_stabilization = False
