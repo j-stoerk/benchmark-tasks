@@ -18,6 +18,7 @@ class Demo(PolicyBase):
 
     def reset(self, scene):
         self.item, self.phase, self.entered = 0, "approach", 0.0
+        self.clamp_ready_since = None
         if self.variant == "contact-bench":
             self.item = len(spec.PARTS)
 
@@ -31,12 +32,16 @@ class Demo(PolicyBase):
             if self.phase == "park" and np.max(np.abs(q[:3] - command[:3])) < 0.00025:
                 self.phase, self.entered = "clamp", t
             command[4] = float(self.phase in ("clamp", "proof"))
-            if (
-                self.phase == "clamp"
-                and float(observation.state["clamp_force"][0]) >= 300
-                and t - self.entered >= 1.2
-            ):
-                self.phase = "proof"
+            if self.phase == "clamp":
+                heights = np.asarray(observation.state["blade_heights_mm"])
+                ready = float(observation.state["clamp_force"][0]) >= 300
+                ready &= heights.shape == (4,) and np.max(np.abs(heights - 1000 * spec.POSITIONS)) <= 0.05
+                if ready and self.clamp_ready_since is None:
+                    self.clamp_ready_since = t
+                if not ready:
+                    self.clamp_ready_since = None
+                if self.clamp_ready_since is not None and t - self.clamp_ready_since >= 1.0:
+                    self.phase = "proof"
             command[5] = float(self.phase == "proof")
             return ActionChunk(actions=[Action(data=np.array(command, float))], control_hz=spec.HZ)
         part = spec.PARTS[self.item]
