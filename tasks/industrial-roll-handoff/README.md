@@ -37,8 +37,9 @@ internals are not rendered. PhysX's one-DOF prismatic mimic uses its `rotX`
 schema instance, as documented in the engine's single-DOF parser and
 https://github.com/isaac-sim/IsaacSim/issues/731.
 
-Both rigid contact and actuator compliance are simulated. Jaws are 4 kN limited,
-with 5 MN/m position stiffness and 5 kNs/m damping. Axis stiffness is 1.5 MN/m,
+Both rigid contact and actuator compliance are simulated. Jaw drives command
+outward or inward force, limited to 4 kN per channel, with zero position stiffness,
+800 Ns/m damping and a 4 mm/s physical joint-speed limit. Axis stiffness is 1.5 MN/m,
 damping 30 kNs/m; the lift axis is capped at 6 kN. Friction is 0.35 static and
 0.30 dynamic. These are stated fixture parameters, not measured specifications
 of a named commercial machine. Sensitivity and failure-control trials must

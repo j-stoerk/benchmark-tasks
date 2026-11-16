@@ -67,8 +67,8 @@ def generate():
         drive.CreateTypeAttr("force")
         drive.CreateTargetPositionAttr(0.0)
         drive.CreateTargetVelocityAttr(0.0)
-        drive.CreateStiffnessAttr(5_000_000.0 if jaw else 1_500_000.0)
-        drive.CreateDampingAttr(5000.0 if jaw else 30000.0)
+        drive.CreateStiffnessAttr(0.0 if jaw else 1_500_000.0)
+        drive.CreateDampingAttr(800.0 if jaw else 30000.0)
         drive.CreateMaxForceAttr(4000.0 if jaw else 6000.0)
 
     for filename in ("receiver.usda", "donor.usda"):

@@ -30,7 +30,10 @@ World X is the horizontal core axis; Z is up. The roll starts centred at (0,0,1)
 The receiver enters from +X. Receiver nose X = 0.260 - insertion.
 Commands: [insertion_m, lateral_y_m, axis_height_m, expand, donor_withdraw, proof].
 Insertion 0..0.24 m; Y -0.05..0.40 m; Z 0.97..1.15 m; remaining commands 0..1.
-Expand=1 extends three force-limited radial jaws. Donor_withdraw=1 retracts it 0.40 m.
+Expand=1 applies +4 kN to each of three geared radial jaw drives; expand=0 retracts
+with -4 kN per drive. Intermediate commands interpolate the drive force. The
+9 mm mechanical stroke and 4 mm/s joint velocity limits remain physical.
+Donor_withdraw=1 retracts it 0.40 m.
 Proof=1 applies the actual 25 Nm +X torque and 300 N +X pull to the roll.
 Axes slew at X=40, Y=60, Z=25 mm/s; donor=60 mm/s; jaws=4 mm/s.
 Do not withdraw the donor until aligned insertion and expansion are complete.

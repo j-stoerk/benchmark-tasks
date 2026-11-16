@@ -236,9 +236,9 @@ def Xform "Machine" (
         prepend apiSchemas = ["PhysicsDriveAPI:linear"]
     )
     {
-        float drive:linear:physics:damping = 5000
+        float drive:linear:physics:damping = 800
         float drive:linear:physics:maxForce = 4000
-        float drive:linear:physics:stiffness = 5000000
+        float drive:linear:physics:stiffness = 0
         float drive:linear:physics:targetPosition = 0
         float drive:linear:physics:targetVelocity = 0
         uniform token drive:linear:physics:type = "force"
@@ -279,9 +279,9 @@ def Xform "Machine" (
         prepend apiSchemas = ["PhysicsDriveAPI:linear", "PhysxMimicJointAPI:rotX"]
     )
     {
-        float drive:linear:physics:damping = 5000
+        float drive:linear:physics:damping = 800
         float drive:linear:physics:maxForce = 4000
-        float drive:linear:physics:stiffness = 5000000
+        float drive:linear:physics:stiffness = 0
         float drive:linear:physics:targetPosition = 0
         float drive:linear:physics:targetVelocity = 0
         uniform token drive:linear:physics:type = "force"
@@ -325,9 +325,9 @@ def Xform "Machine" (
         prepend apiSchemas = ["PhysicsDriveAPI:linear", "PhysxMimicJointAPI:rotX"]
     )
     {
-        float drive:linear:physics:damping = 5000
+        float drive:linear:physics:damping = 800
         float drive:linear:physics:maxForce = 4000
-        float drive:linear:physics:stiffness = 5000000
+        float drive:linear:physics:stiffness = 0
         float drive:linear:physics:targetPosition = 0
         float drive:linear:physics:targetVelocity = 0
         uniform token drive:linear:physics:type = "force"

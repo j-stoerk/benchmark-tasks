@@ -79,6 +79,11 @@ class MachineAction(ActionTerm):
                 machine.set_joint_position_target_index(target=target, joint_ids=ids)
             else:
                 machine.set_joint_position_target(target, joint_ids=ids)
+        effort = (self._processed[:, 3:6] / spec.EXPAND_TARGET * 2 - 1) * 4000.0
+        if hasattr(self.receiver, "set_joint_effort_target_index"):
+            self.receiver.set_joint_effort_target_index(target=effort, joint_ids=self.ids[3:])
+        else:
+            self.receiver.set_joint_effort_target(effort, joint_ids=self.ids[3:])
         active = (self._processed[:, 7] >= 0.5).float()
         self.force[:] = 0
         self.torque[:] = 0
@@ -136,9 +141,9 @@ def articulation(filename, path, position, initial, lift_force=6000):
         actuators["collet"] = ImplicitActuatorCfg(
             joint_names_expr=["jaw_.*"],
             joint_effort_limit=4000.0,
-            joint_velocity_limit=0.01,
-            stiffness=5_000_000.0,
-            damping=5000.0,
+            joint_velocity_limit=0.004,
+            stiffness=0.0,
+            damping=800.0,
         )
     return ArticulationCfg(
         prim_path=path,

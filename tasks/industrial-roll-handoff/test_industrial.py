@@ -51,7 +51,11 @@ def test_receiver_has_three_physical_prismatic_jaws_and_real_strokes():
     assert sum(p.GetName().startswith("Jaw") for p in stage.Traverse()) == 3
     for joint in joints:
         drive = UsdPhysics.DriveAPI(joint.GetPrim(), "linear")
-        assert drive and drive.GetStiffnessAttr().Get() > 0
+        assert drive
+        if joint.GetPrim().GetName().startswith("jaw_"):
+            assert drive.GetStiffnessAttr().Get() == 0  # Force-driven, not a pose lock.
+        else:
+            assert drive.GetStiffnessAttr().Get() > 0
         assert drive.GetMaxForceAttr().Get() > 0
     for index in (1, 2):
         follower = stage.GetPrimAtPath(f"/Machine/jaw_{index}")
