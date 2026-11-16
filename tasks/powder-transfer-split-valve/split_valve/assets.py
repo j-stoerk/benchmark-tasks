@@ -127,7 +127,7 @@ def generate():
     box("X/rail", (0.30, 0.06, 0.04), (0, 0.15, 1.60))
     box("Y/carriage", (0.08, 0.12, 0.06), (0, 0.15, 1.54))
     box("Y/guide", (0.05, 0.05, 0.4), (0, 0.15, 1.32))
-    body("Upper", (0, 0, 0), 7.675)
+    body("Upper", (0, 0, 0), 7.500)
     arc("Upper/housing", 0.056, 0.060, 0, 2 * math.pi, 0.016, 0.008, steel)
     arc("Upper/neck", 0.052, 0.060, 0, 2 * math.pi, 0.10, 0.066, (0.38, 0.48, 0.56))
     arc("Upper/vessel", 0.085, 0.090, 0, 2 * math.pi, 0.20, 0.216, steel)
@@ -155,16 +155,23 @@ def generate():
     box("Collar/interlock_standoff", (0.02, 0.014, 0.012), (0.04, 0.100, -0.001), steel)
     box("Collar/lever", (0.16, 0.016, 0.012), (0.18, 0, 0.018), (0.85, 0.53, 0.10))
     joint("collar", "base", "Collar", "Z", (0, 0, 1.0), (0, 32), revolute=True)
-    body("Active", (0, 0, 1.0), 0.125)
-    body("Passive", (0, 0, 0), 0.125)
+    body("Active", (0, 0, 1.0), 0.300)
+    body("Passive", (0, 0, 0), 0.300)
     disc("Active", -0.001, (0.22, 0.52, 0.74))
     disc("Passive", 0.001, (0.84, 0.48, 0.16))
+    # Separable external drive dogs transmit rotation through native contact.
+    # At closed/docked pose the two flat faces meet at Z=0. Opposite ends
+    # transmit opening and closing torque; vertical withdrawal disengages them.
+    # The thick dogs sit outside the complete collar/housing sweep, avoiding
+    # dependence on contact between the 2 mm flow discs alone.
+    box("Active/drive_dog", (0.060, 0.012, 0.012), (0, -0.135, -0.006), (0.22, 0.52, 0.74))
+    box("Passive/drive_dog", (0.060, 0.012, 0.012), (0, -0.135, 0.006), (0.84, 0.48, 0.16))
     # The pins belong to the active rotor and physically meet the collar block.
     box("Active/closed_pin", (0.004, 0.004, 0.004), (0.04, 0.125, 0.002), (0.85, 0.2, 0.12))
     box("Active/open_pin", (0.004, 0.004, 0.004), (0, 0.125, 0.04), (0.85, 0.2, 0.12))
     box("Active/shaft", (0.008, 0.26, 0.008), (0, 0, 0), steel, collision=False)
     box("Active/pin_carrier", (0.044, 0.006, 0.044), (0.02, 0.125, 0.02), steel, collision=False)
-    box("Passive/shaft", (0.008, 0.12, 0.008), (0, 0, 0), steel, collision=False)
+    box("Passive/shaft", (0.008, 0.26, 0.004), (0, 0, 0.002), steel, collision=False)
     joint("active", "base", "Active", "Y", (0, 0, 1.0), (0, 90), revolute=True)
     joint("passive", "Upper", "Passive", "Y", (0, 0, 0), (0, 90), revolute=True)
     for half, parent, z in (("lower", "base", 0.999), ("upper", "Upper", 0.001)):

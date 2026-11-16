@@ -66,6 +66,30 @@ class Geometry(unittest.TestCase):
             self.assertEqual(list(disc.GetChildren()), [])
             self.assertEqual(len(disc.GetAttribute("faceVertexCounts").Get()), 34)
 
+    def test_drive_dogs_allow_coupled_sweep_and_vertical_disengagement(self):
+        for angle in range(0, 91, 2):
+            lower = box(self.stage, "Active/drive_dog", "Y", angle)
+            upper = box(self.stage, "Passive/drive_dog", "Y", angle)
+            # Ignore shared boundary contact, checking penetration of solids.
+            lower = (lower[0], lower[1], lower[2] - 1e-7)
+            upper = (upper[0] + [0, 0, 0.0001], upper[1], upper[2] - 1e-7)
+            self.assertFalse(intersects(lower, upper), angle)
+            separated = (upper[0] + [0, 0, 0.1], upper[1], upper[2])
+            self.assertFalse(intersects(lower, separated), angle)
+
+    def test_drive_dogs_physically_block_disc_desynchronization_both_directions(self):
+        for active, passive in ((2, 0), (0, 2), (55, 5), (5, 55), (90, 88), (88, 90)):
+            lower = box(self.stage, "Active/drive_dog", "Y", active)
+            upper = box(self.stage, "Passive/drive_dog", "Y", passive)
+            upper = (upper[0] + [0, 0, 0.0001], upper[1], upper[2])
+            self.assertTrue(intersects(lower, upper), (active, passive))
+
+    def test_drive_dogs_remain_outside_the_collar_and_casing(self):
+        for body in ("Active", "Passive"):
+            for angle in range(0, 91, 2):
+                centre, _, half = box(self.stage, body + "/drive_dog", "Y", angle)
+                self.assertLess(centre[1] + half[1], -0.120)
+
     def test_seal_shoes_clear_the_housings_over_the_whole_radial_stroke(self):
         for housing in ("base/housing", "Upper/housing"):
             clearances = []

@@ -1308,7 +1308,7 @@ def Xform "Machine" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 7.675
+        float physics:mass = 7.5
         double3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 
@@ -4880,7 +4880,7 @@ def Xform "Machine" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.125
+        float physics:mass = 0.3
         double3 xformOp:translate = (0, 0, 1)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 
@@ -4894,6 +4894,17 @@ def Xform "Machine" (
             point3f[] points = [(0.05, 0, -0.002), (0.049039263, 0.009754516, -0.002), (0.046193976, 0.019134171, -0.002), (0.04157348, 0.027778512, -0.002), (0.03535534, 0.03535534, -0.002), (0.027778512, 0.04157348, -0.002), (0.019134171, 0.046193976, -0.002), (0.009754516, 0.049039263, -0.002), (3.061617e-18, 0.05, -0.002), (-0.009754516, 0.049039263, -0.002), (-0.019134171, 0.046193976, -0.002), (-0.027778512, 0.04157348, -0.002), (-0.03535534, 0.03535534, -0.002), (-0.04157348, 0.027778512, -0.002), (-0.046193976, 0.019134171, -0.002), (-0.049039263, 0.009754516, -0.002), (-0.05, 6.123234e-18, -0.002), (-0.049039263, -0.009754516, -0.002), (-0.046193976, -0.019134171, -0.002), (-0.04157348, -0.027778512, -0.002), (-0.03535534, -0.03535534, -0.002), (-0.027778512, -0.04157348, -0.002), (-0.019134171, -0.046193976, -0.002), (-0.009754516, -0.049039263, -0.002), (-9.184851e-18, -0.05, -0.002), (0.009754516, -0.049039263, -0.002), (0.019134171, -0.046193976, -0.002), (0.027778512, -0.04157348, -0.002), (0.03535534, -0.03535534, -0.002), (0.04157348, -0.027778512, -0.002), (0.046193976, -0.019134171, -0.002), (0.049039263, -0.009754516, -0.002), (0.05, 0, 0), (0.049039263, 0.009754516, 0), (0.046193976, 0.019134171, 0), (0.04157348, 0.027778512, 0), (0.03535534, 0.03535534, 0), (0.027778512, 0.04157348, 0), (0.019134171, 0.046193976, 0), (0.009754516, 0.049039263, 0), (3.061617e-18, 0.05, 0), (-0.009754516, 0.049039263, 0), (-0.019134171, 0.046193976, 0), (-0.027778512, 0.04157348, 0), (-0.03535534, 0.03535534, 0), (-0.04157348, 0.027778512, 0), (-0.046193976, 0.019134171, 0), (-0.049039263, 0.009754516, 0), (-0.05, 6.123234e-18, 0), (-0.049039263, -0.009754516, 0), (-0.046193976, -0.019134171, 0), (-0.04157348, -0.027778512, 0), (-0.03535534, -0.03535534, 0), (-0.027778512, -0.04157348, 0), (-0.019134171, -0.046193976, 0), (-0.009754516, -0.049039263, 0), (-9.184851e-18, -0.05, 0), (0.009754516, -0.049039263, 0), (0.019134171, -0.046193976, 0), (0.027778512, -0.04157348, 0), (0.03535534, -0.03535534, 0), (0.04157348, -0.027778512, 0), (0.046193976, -0.019134171, 0), (0.049039263, -0.009754516, 0)]
             color3f[] primvars:displayColor = [(0.22, 0.52, 0.74)]
             uniform token subdivisionScheme = "none"
+        }
+
+        def Cube "drive_dog" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.22, 0.52, 0.74)]
+            double size = 1
+            float3 xformOp:scale = (0.06, 0.012, 0.012)
+            double3 xformOp:translate = (0, -0.135, -0.006)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
 
         def Cube "closed_pin" (
@@ -4941,7 +4952,7 @@ def Xform "Machine" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.125
+        float physics:mass = 0.3
         double3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 
@@ -4957,12 +4968,23 @@ def Xform "Machine" (
             uniform token subdivisionScheme = "none"
         }
 
+        def Cube "drive_dog" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.84, 0.48, 0.16)]
+            double size = 1
+            float3 xformOp:scale = (0.06, 0.012, 0.012)
+            double3 xformOp:translate = (0, -0.135, 0.006)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
         def Cube "shaft"
         {
             color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
             double size = 1
-            float3 xformOp:scale = (0.008, 0.12, 0.008)
-            double3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:scale = (0.008, 0.26, 0.004)
+            double3 xformOp:translate = (0, 0, 0.002)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
     }

@@ -31,7 +31,7 @@ INSTRUCTION = (
     "Dock and mechanically prove the DN100 powder-transfer split-valve fixture. Align the supported 8 kg "
     "upper assembly at X=Y=0, interface height Z=1.000 m, with both discs closed. Turn the retaining collar "
     "to 30 degrees, pass the two-second 100 N net separation proof, then turn proof off. Open the active "
-    "disc to 90 degrees so actual face contact opens the passive disc too. Close both discs, return the "
+    "disc to 90 degrees so actual drive-dog contact opens the passive disc too. Close both discs, return the "
     "collar to zero and raise the upper half to Z=1.100 m. Leave both detached discs seated closed. Do not "
     "open an undocked or unlocked half. This is a mechanical readiness test; it does not certify containment."
 )
@@ -57,8 +57,14 @@ contact can retain it. It is not held by a position drive during the proof.
 Allow four seconds of proof to include settling and the two-second loaded hold.
 Stationarity uses one-second encoder ranges <=0.1 mm and <=0.5 degree; loaded
 baseline changes must remain within those bounds. Stop proof before operating the discs. The active disc is motorized. The upper
-passive disc has only a return spring: native contact between the complementary
-half-thickness discs must transmit rotation. It is not a follower joint.
+passive disc has only a return spring: native contact between separable external
+drive dogs transmits rotation. Each dog is a 60 x 12 x 12 mm steel bar at
+Y=-135 mm. Its mating face meets at the interface plane; opposite ends transmit
+opening and closing torque. Each rotor including dog/stub has mass 0.300 kg.
+The upper body is 7.500 kg and its eight seat units total 0.200 kg, preserving
+the 8 kg upper payload. Dogs disengage on vertical separation. They are a custom
+benchmark coupling, not a reproduction of the cited OEM's proprietary design.
+Neither disc is a follower joint or commanded pose.
 Its 0.5 Nm/rad return spring has a fixed -0.6 rad rest angle, giving 0.3 Nm
 closing preload at the zero-degree hard stop, with 0.8 Nm maximum effort.
 The passive spring target is fixed hardware, never a policy command. Verify
