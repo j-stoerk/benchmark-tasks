@@ -60,6 +60,16 @@ class Geometry(unittest.TestCase):
             self.assertEqual(list(disc.GetChildren()), [])
             self.assertEqual(len(disc.GetAttribute("faceVertexCounts").Get()), 34)
 
+    def test_seal_shoes_clear_the_housings_over_the_whole_radial_stroke(self):
+        for housing in ("base/housing", "Upper/housing"):
+            clearances = []
+            for prim in self.stage.Traverse():
+                if str(prim.GetPath()).startswith("/Machine/" + housing + "/sector_"):
+                    points = np.asarray(prim.GetAttribute("points").Get())
+                    clearances.append(np.linalg.norm((points[0, :2] + points[3, :2]) / 2))
+            self.assertTrue(clearances)
+            self.assertGreater(min(clearances), 0.052 + 0.003 + 0.0001)
+
     def test_pins_clear_the_entire_continuous_rim_and_bridge(self):
         radii = []
         for prim in self.stage.Traverse():
