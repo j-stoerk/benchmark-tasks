@@ -1,1 +1,15 @@
-{"command":{"id":"initial-probe","mode":"probe"},"responses":{}}
+{
+  "command": {
+    "id": "smoke-01",
+    "mode": "run",
+    "sha": "5b64e9b08cc7b7c55ab4a4f601b4bd734aa09f8a",
+    "task": "industrial-roll-handoff",
+    "trial": {
+      "mode": "smoke",
+      "max_steps": 100,
+      "lift_force": 6000,
+      "no_expand": false
+    }
+  },
+  "responses": {}
+}
