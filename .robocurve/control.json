@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "smoke-03",
+    "id": "smoke-04",
     "mode": "run",
-    "sha": "81ac6c24a61fc35f9a77ada922e3995f6335a1b0",
+    "sha": "82e6f91fdface5bc651ff7615686c0a21ecdb497",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "smoke",
-      "max_steps": 100,
+      "max_steps": 180,
       "lift_force": 6000,
       "no_expand": false
     }
