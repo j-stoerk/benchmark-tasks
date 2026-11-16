@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "slit-smoke-03",
+    "id": "slit-demo-04",
     "mode": "run",
     "sha": "b50663d216a739b724ceeb4ca53434e7b3c3ed7d",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
-      "mode": "smoke",
-      "max_steps": 400,
+      "mode": "demo",
+      "max_steps": 2400,
       "variant": "normal"
     }
   },
