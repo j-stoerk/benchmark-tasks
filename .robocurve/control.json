@@ -1,7 +1,7 @@
 {
   "command": {
-    "id": "stop-after-final-review",
-    "mode": "exit"
+    "id": "lab-probe-01",
+    "mode": "probe"
   },
   "responses": {
     "model-final-01:001": {
