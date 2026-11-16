@@ -1,14 +1,14 @@
 {
   "command": {
-    "id": "weak-lift-01",
+    "id": "collapsed-grip-01",
     "mode": "run",
     "sha": "7da097401eefbd46fbe3aaac4fa6f1a4fe718e7c",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "demo",
       "max_steps": 420,
-      "lift_force": 1000,
-      "no_expand": false
+      "lift_force": 6000,
+      "no_expand": true
     }
   },
   "responses": {
