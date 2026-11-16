@@ -267,14 +267,16 @@ class ValveMachine(EmbodimentBase):
         cameras = []
         for name, eye, target in [
             ("overview_cam", (0.8, -1.0, 1.55), (0, 0, 0.95)),
-            ("valve_cam", (0.26, -0.32, 1.17), (0, 0, 1.015)),
+            ("valve_cam", (0.015, -0.020, 1.60), (0, 0, 1.0)),
         ]:
             cfg = CameraCfg(
                 prim_path="{ENV_REGEX_NS}/" + name,
                 height=720,
                 width=1280,
                 data_types=["rgb"],
-                spawn=sim.PinholeCameraCfg(focal_length=20, clipping_range=(0.005, 10)),
+                spawn=sim.PinholeCameraCfg(
+                    focal_length=55 if name == "valve_cam" else 20, clipping_range=(0.005, 10)
+                ),
                 offset=CameraCfg.OffsetCfg(pos=eye, rot=camera_quat(eye, target), convention="world"),
             )
             cameras.append((name, CameraCfg, cfg))

@@ -30,3 +30,5 @@ The seat model provides two native compliance axes per shoe: radial 10 kN/m with
 The eight shoe sectors on each half are centred at 22.5+45*i degrees. Their boundaries coincide with the rotor Y axis, allowing opposite sides of the reduced lip model to deflect in opposite axial directions. No rigid shoe bridges that bending axis. Native full-cycle validation remains required.
 
 The current commissioning experiment resolves articulation contacts last in TGS. Private traces include actual native link poses (wxyz quaternion convention), processed commands, explicit numeric-order seat joint deflections, total and disc-filtered shoe contacts, and available actuator diagnostic values. Only the documented practical encoders/gauges and RGB reach the policy. The earlier full cycle jammed; no successful demo is claimed.
+
+The detailed native camera looks down the open vessel/neck bore from (0.015,-0.020,1.600) m toward (0,0,1.000), with 55 mm focal length. This exposes actual disc motion without hiding or cutting away colliders. The overview camera is unchanged. Camera visibility still needs inspection in fresh native recordings.
