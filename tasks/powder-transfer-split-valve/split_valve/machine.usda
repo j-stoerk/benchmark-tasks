@@ -5012,8 +5012,9 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        double3 xformOp:translate = (0.0509, 0, 0.999)
-        uniform token[] xformOpOrder = ["xformOp:translate"]
+        float xformOp:rotateZ = 22.5
+        double3 xformOp:translate = (0.0470254682048245, 0.01947858670738307, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
         {
@@ -5030,8 +5031,9 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        double3 xformOp:translate = (0.0509, 0, 0.999)
-        uniform token[] xformOpOrder = ["xformOp:translate"]
+        float xformOp:rotateZ = 22.5
+        double3 xformOp:translate = (0.0470254682048245, 0.01947858670738307, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
         {
@@ -5096,9 +5098,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_0>
-        point3f physics:localPos0 = (0.0509, 0, 0.999)
+        point3f physics:localPos0 = (0.04702547, 0.019478587, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot0 = (0.98078525, 0, 0, 0.19509032)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5130,8 +5132,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 45
-        double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.999)
+        float xformOp:rotateZ = 67.5
+        double3 xformOp:translate = (0.01947858670738307, 0.0470254682048245, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5149,8 +5151,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 45
-        double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.999)
+        float xformOp:rotateZ = 67.5
+        double3 xformOp:translate = (0.01947858670738307, 0.0470254682048245, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5216,9 +5218,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_1>
-        point3f physics:localPos0 = (0.035991736, 0.035991736, 0.999)
+        point3f physics:localPos0 = (0.019478587, 0.04702547, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (0.9238795, 0, 0, 0.38268343)
+        quatf physics:localRot0 = (0.8314696, 0, 0, 0.55557024)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5250,8 +5252,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 90
-        double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.999)
+        float xformOp:rotateZ = 112.5
+        double3 xformOp:translate = (-0.019478586707383068, 0.0470254682048245, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5269,8 +5271,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 90
-        double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.999)
+        float xformOp:rotateZ = 112.5
+        double3 xformOp:translate = (-0.019478586707383068, 0.0470254682048245, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5336,9 +5338,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_2>
-        point3f physics:localPos0 = (3.1167262e-18, 0.0509, 0.999)
+        point3f physics:localPos0 = (-0.019478587, 0.04702547, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (0.70710677, 0, 0, 0.70710677)
+        quatf physics:localRot0 = (0.55557024, 0, 0, 0.8314696)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5370,8 +5372,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 135
-        double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.999)
+        float xformOp:rotateZ = 157.5
+        double3 xformOp:translate = (-0.0470254682048245, 0.019478586707383075, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5389,8 +5391,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 135
-        double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.999)
+        float xformOp:rotateZ = 157.5
+        double3 xformOp:translate = (-0.0470254682048245, 0.019478586707383075, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5456,9 +5458,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_3>
-        point3f physics:localPos0 = (-0.035991736, 0.035991736, 0.999)
+        point3f physics:localPos0 = (-0.04702547, 0.019478587, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (0.38268343, 0, 0, 0.9238795)
+        quatf physics:localRot0 = (0.19509032, 0, 0, 0.98078525)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5490,8 +5492,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 180
-        double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.999)
+        float xformOp:rotateZ = 202.5
+        double3 xformOp:translate = (-0.0470254682048245, -0.019478586707383064, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5509,8 +5511,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 180
-        double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.999)
+        float xformOp:rotateZ = 202.5
+        double3 xformOp:translate = (-0.0470254682048245, -0.019478586707383064, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5576,9 +5578,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_4>
-        point3f physics:localPos0 = (-0.0509, 6.2334524e-18, 0.999)
+        point3f physics:localPos0 = (-0.04702547, -0.019478587, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (6.123234e-17, 0, 0, 1)
+        quatf physics:localRot0 = (-0.19509032, 0, 0, 0.98078525)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5610,8 +5612,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 225
-        double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.999)
+        float xformOp:rotateZ = 247.5
+        double3 xformOp:translate = (-0.0194785867073831, -0.047025468204824485, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5629,8 +5631,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 225
-        double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.999)
+        float xformOp:rotateZ = 247.5
+        double3 xformOp:translate = (-0.0194785867073831, -0.047025468204824485, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5696,9 +5698,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_5>
-        point3f physics:localPos0 = (-0.035991736, -0.035991736, 0.999)
+        point3f physics:localPos0 = (-0.019478587, -0.04702547, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (-0.38268343, 0, 0, 0.9238795)
+        quatf physics:localRot0 = (-0.55557024, 0, 0, 0.8314696)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5730,8 +5732,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 270
-        double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.999)
+        float xformOp:rotateZ = 292.5
+        double3 xformOp:translate = (0.019478586707383082, -0.04702546820482449, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5749,8 +5751,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 270
-        double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.999)
+        float xformOp:rotateZ = 292.5
+        double3 xformOp:translate = (0.019478586707383082, -0.04702546820482449, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5816,9 +5818,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_6>
-        point3f physics:localPos0 = (-9.350178e-18, -0.0509, 0.999)
+        point3f physics:localPos0 = (0.019478587, -0.04702547, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (-0.70710677, 0, 0, 0.70710677)
+        quatf physics:localRot0 = (-0.8314696, 0, 0, 0.55557024)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5850,8 +5852,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 315
-        double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.999)
+        float xformOp:rotateZ = 337.5
+        double3 xformOp:translate = (0.047025468204824485, -0.019478586707383103, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -5869,8 +5871,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 315
-        double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.999)
+        float xformOp:rotateZ = 337.5
+        double3 xformOp:translate = (0.047025468204824485, -0.019478586707383103, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -5936,9 +5938,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Guide_lower_7>
-        point3f physics:localPos0 = (0.035991736, -0.035991736, 0.999)
+        point3f physics:localPos0 = (0.04702547, -0.019478587, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (-0.9238795, 0, 0, 0.38268343)
+        quatf physics:localRot0 = (-0.98078525, 0, 0, 0.19509032)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -5970,8 +5972,9 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        double3 xformOp:translate = (0.0509, 0, 0.001)
-        uniform token[] xformOpOrder = ["xformOp:translate"]
+        float xformOp:rotateZ = 22.5
+        double3 xformOp:translate = (0.0470254682048245, 0.01947858670738307, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
         {
@@ -5988,8 +5991,9 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        double3 xformOp:translate = (0.0509, 0, 0.001)
-        uniform token[] xformOpOrder = ["xformOp:translate"]
+        float xformOp:rotateZ = 22.5
+        double3 xformOp:translate = (0.0470254682048245, 0.01947858670738307, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
         {
@@ -6054,9 +6058,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_0>
-        point3f physics:localPos0 = (0.0509, 0, 0.001)
+        point3f physics:localPos0 = (0.04702547, 0.019478587, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot0 = (0.98078525, 0, 0, 0.19509032)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6088,8 +6092,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 45
-        double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.001)
+        float xformOp:rotateZ = 67.5
+        double3 xformOp:translate = (0.01947858670738307, 0.0470254682048245, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6107,8 +6111,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 45
-        double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.001)
+        float xformOp:rotateZ = 67.5
+        double3 xformOp:translate = (0.01947858670738307, 0.0470254682048245, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6174,9 +6178,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_1>
-        point3f physics:localPos0 = (0.035991736, 0.035991736, 0.001)
+        point3f physics:localPos0 = (0.019478587, 0.04702547, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (0.9238795, 0, 0, 0.38268343)
+        quatf physics:localRot0 = (0.8314696, 0, 0, 0.55557024)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6208,8 +6212,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 90
-        double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.001)
+        float xformOp:rotateZ = 112.5
+        double3 xformOp:translate = (-0.019478586707383068, 0.0470254682048245, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6227,8 +6231,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 90
-        double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.001)
+        float xformOp:rotateZ = 112.5
+        double3 xformOp:translate = (-0.019478586707383068, 0.0470254682048245, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6294,9 +6298,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_2>
-        point3f physics:localPos0 = (3.1167262e-18, 0.0509, 0.001)
+        point3f physics:localPos0 = (-0.019478587, 0.04702547, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (0.70710677, 0, 0, 0.70710677)
+        quatf physics:localRot0 = (0.55557024, 0, 0, 0.8314696)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6328,8 +6332,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 135
-        double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.001)
+        float xformOp:rotateZ = 157.5
+        double3 xformOp:translate = (-0.0470254682048245, 0.019478586707383075, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6347,8 +6351,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 135
-        double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.001)
+        float xformOp:rotateZ = 157.5
+        double3 xformOp:translate = (-0.0470254682048245, 0.019478586707383075, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6414,9 +6418,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_3>
-        point3f physics:localPos0 = (-0.035991736, 0.035991736, 0.001)
+        point3f physics:localPos0 = (-0.04702547, 0.019478587, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (0.38268343, 0, 0, 0.9238795)
+        quatf physics:localRot0 = (0.19509032, 0, 0, 0.98078525)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6448,8 +6452,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 180
-        double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.001)
+        float xformOp:rotateZ = 202.5
+        double3 xformOp:translate = (-0.0470254682048245, -0.019478586707383064, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6467,8 +6471,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 180
-        double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.001)
+        float xformOp:rotateZ = 202.5
+        double3 xformOp:translate = (-0.0470254682048245, -0.019478586707383064, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6534,9 +6538,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_4>
-        point3f physics:localPos0 = (-0.0509, 6.2334524e-18, 0.001)
+        point3f physics:localPos0 = (-0.04702547, -0.019478587, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (6.123234e-17, 0, 0, 1)
+        quatf physics:localRot0 = (-0.19509032, 0, 0, 0.98078525)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6568,8 +6572,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 225
-        double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.001)
+        float xformOp:rotateZ = 247.5
+        double3 xformOp:translate = (-0.0194785867073831, -0.047025468204824485, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6587,8 +6591,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 225
-        double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.001)
+        float xformOp:rotateZ = 247.5
+        double3 xformOp:translate = (-0.0194785867073831, -0.047025468204824485, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6654,9 +6658,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_5>
-        point3f physics:localPos0 = (-0.035991736, -0.035991736, 0.001)
+        point3f physics:localPos0 = (-0.019478587, -0.04702547, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (-0.38268343, 0, 0, 0.9238795)
+        quatf physics:localRot0 = (-0.55557024, 0, 0, 0.8314696)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6688,8 +6692,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 270
-        double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.001)
+        float xformOp:rotateZ = 292.5
+        double3 xformOp:translate = (0.019478586707383082, -0.04702546820482449, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6707,8 +6711,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 270
-        double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.001)
+        float xformOp:rotateZ = 292.5
+        double3 xformOp:translate = (0.019478586707383082, -0.04702546820482449, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6774,9 +6778,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_6>
-        point3f physics:localPos0 = (-9.350178e-18, -0.0509, 0.001)
+        point3f physics:localPos0 = (0.019478587, -0.04702547, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (-0.70710677, 0, 0, 0.70710677)
+        quatf physics:localRot0 = (-0.8314696, 0, 0, 0.55557024)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
@@ -6808,8 +6812,8 @@ def Xform "Machine" (
         point3f physics:centerOfMass = (0, 0, 0)
         float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
         float physics:mass = 0.005
-        float xformOp:rotateZ = 315
-        double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.001)
+        float xformOp:rotateZ = 337.5
+        double3 xformOp:translate = (0.047025468204824485, -0.019478586707383103, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def Cube "guide_cover"
@@ -6827,8 +6831,8 @@ def Xform "Machine" (
     )
     {
         float physics:mass = 0.02
-        float xformOp:rotateZ = 315
-        double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.001)
+        float xformOp:rotateZ = 337.5
+        double3 xformOp:translate = (0.047025468204824485, -0.019478586707383103, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
 
         def "shoe"
@@ -6894,9 +6898,9 @@ def Xform "Machine" (
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
         rel physics:body1 = </Machine/Guide_upper_7>
-        point3f physics:localPos0 = (0.035991736, -0.035991736, 0.001)
+        point3f physics:localPos0 = (0.04702547, -0.019478587, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
-        quatf physics:localRot0 = (-0.9238795, 0, 0, 0.38268343)
+        quatf physics:localRot0 = (-0.98078525, 0, 0, 0.19509032)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003

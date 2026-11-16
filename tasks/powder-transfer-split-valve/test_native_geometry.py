@@ -75,6 +75,22 @@ class Geometry(unittest.TestCase):
             self.assertTrue(clearances)
             self.assertGreater(min(clearances), 0.052 + 0.003 + 0.0001)
 
+    def test_no_rigid_lip_segment_bridges_the_rotors_bending_axis(self):
+        for half in ("lower", "upper"):
+            for index in range(8):
+                prim = self.stage.GetPrimAtPath(f"/Machine/Seal_{half}_{index}")
+                centre = np.asarray(prim.GetAttribute("xformOp:translate").Get())
+                angle = prim.GetAttribute("xformOp:rotateZ").Get()
+                matrix = rotation("Z", angle)
+                x_values = []
+                for child in self.stage.Traverse():
+                    if str(child.GetPath()).startswith(str(prim.GetPath()) + "/shoe/sector_"):
+                        x_values.extend(
+                            (np.asarray(child.GetAttribute("points").Get()) @ matrix.T + centre)[:, 0]
+                        )
+                self.assertTrue(x_values)
+                self.assertTrue(min(x_values) >= -1e-8 or max(x_values) <= 1e-8)
+
     def test_pins_clear_the_entire_continuous_rim_and_bridge(self):
         radii = []
         for prim in self.stage.Traverse():

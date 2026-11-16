@@ -3,6 +3,8 @@
 import math
 from pathlib import Path
 
+from . import spec
+
 PACKAGE = Path(__file__).parent
 SECTORS = 48
 
@@ -167,7 +169,10 @@ def generate():
     joint("passive", "Upper", "Passive", "Y", (0, 0, 0), (0, 90), revolute=True)
     for half, parent, z in (("lower", "base", 0.999), ("upper", "Upper", 0.001)):
         for i in range(8):
-            angle = i * math.pi / 4
+            # An elastomer lip deforms in opposite axial directions across
+            # the rotor's Y axis. Put rigid shoe boundaries on that axis so
+            # no single approximation segment must bend both ways at once.
+            angle = i * math.pi / 4 + spec.SEAT_ANGLE_OFFSET
             name = f"Seal_{half}_{i}"
             pos = (0.0509 * math.cos(angle), 0.0509 * math.sin(angle), z)
             guide = f"Guide_{half}_{i}"

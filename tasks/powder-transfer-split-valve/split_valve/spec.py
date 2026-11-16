@@ -22,6 +22,7 @@ FIELDS = (
 )
 JOINTS = ["slide_x", "slide_y", "slide_z", "collar", "active", "passive"]
 PAYLOAD = 8.0
+SEAT_ANGLE_OFFSET = math.pi / 8
 DOCK_Z = 1.0
 INITIAL = np.array([0.008, -0.006, 1.10, 0, 0, 0], float)
 LOW = np.array([-0.025, -0.025, 0.98, 0, 0, 0], float)
@@ -56,6 +57,8 @@ Eight spring-backed seal carriers per half provide measured native seating
 contact. Native 10 kN/m radial springs (32 Ns/m) and 1 kN/m axial flexures
 (9 Ns/m, +/-8 mm) approximate elastomer seating and lip deflection. Each
 25 g seat unit is a 5 g guide plus a 20 g shoe; total upper payload is 8 kg.
+Shoe boundaries lie on the rotor Y axis so opposite sides of the lip can
+deflect in opposite axial directions. Continuous elastomer strain is not modeled.
 After opening BOTH discs to at least 88 degrees, close them to within 2 degrees,
 then unlock and raise the upper half 100 mm. The final detached halves each need
 all eight seal contact gauges above 0.5 N. Leak/particle transport is excluded.
@@ -71,7 +74,7 @@ def radial_force(vector, index):
     force = np.asarray(vector, float)
     if force.shape != (3,) or not np.isfinite(force).all():
         raise ValueError("Expected a finite native contact-force vector")
-    angle = (index % 8) * math.pi / 4
+    angle = (index % 8) * math.pi / 4 + SEAT_ANGLE_OFFSET
     return max(0.0, float(force @ np.array([math.cos(angle), math.sin(angle), 0])))
 
 

@@ -47,7 +47,7 @@ class Contract(unittest.TestCase):
 
     def test_radial_contact_is_measured_in_each_shoes_direction(self):
         for index in range(16):
-            angle = index % 8 * np.pi / 4
+            angle = index % 8 * np.pi / 4 + spec.SEAT_ANGLE_OFFSET
             self.assertAlmostEqual(spec.radial_force([2 * np.cos(angle), 2 * np.sin(angle), 7], index), 2)
 
     def test_full_measured_cycle(self):
