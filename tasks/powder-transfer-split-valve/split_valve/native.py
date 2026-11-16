@@ -298,6 +298,7 @@ def make_env(device="cuda:0", variant="normal"):
         cfg.sim.dt = 1 / 240
         cfg.decimation = 12
         cfg.sim.render_interval = 12
+        cfg.sim.physics.solve_articulation_contact_last = True
         return cfg
 
     environment = IsaacLabArenaEnvironment(
@@ -317,8 +318,10 @@ class Sampler:
         self.robot = env.scene["robot"]
         self.ids = self.robot.find_joints(spec.JOINTS, preserve_order=True)[0]
         self.term = env.action_manager.get_term("machine")
-        self.seal_ids = self.robot.find_joints(["seal_lower_.*", "seal_upper_.*"], preserve_order=True)[0]
-        self.lip_ids = self.robot.find_joints(["lip_lower_.*", "lip_upper_.*"], preserve_order=True)[0]
+        seal_names = [f"seal_{half}_{i}" for half in ("lower", "upper") for i in range(8)]
+        lip_names = [f"lip_{half}_{i}" for half in ("lower", "upper") for i in range(8)]
+        self.seal_ids = self.robot.find_joints(seal_names, preserve_order=True)[0]
+        self.lip_ids = self.robot.find_joints(lip_names, preserve_order=True)[0]
 
     def contact(self, name):
         return array(self.env.scene[name].data.force_matrix_w)[0].reshape(-1, 3).sum(axis=0)
@@ -330,7 +333,7 @@ class Sampler:
         v[3:] *= 180 / math.pi
         forces = [self.contact(f"seal_{half}_{i}") for half in ("lower", "upper") for i in range(8)]
         retaining = self.contact("retaining_contact")
-        return {
+        result = {
             "encoders": q.tolist(),
             "velocities": v.tolist(),
             "seal_deflections_m": array(self.robot.data.joint_pos)[0, self.seal_ids].tolist(),
@@ -341,6 +344,31 @@ class Sampler:
             "retaining_contact_vector_N": retaining.tolist(),
             "net_proof_N": float(array(self.term.net_proof)[0]),
         }
+        # Private commissioning diagnostics: never policy inputs or success
+        # flags. Actual link poses avoid assuming a kinematic reconstruction.
+        data = self.robot.data
+        positions = array(data.body_link_pos_w if hasattr(data, "body_link_pos_w") else data.body_pos_w)[0]
+        quats = array(data.body_link_quat_w if hasattr(data, "body_link_quat_w") else data.body_quat_w)[0]
+        result["body_poses_wxyz"] = {
+            name: {"pos": positions[i].tolist(), "quat": quats[i].tolist()}
+            for i, name in enumerate(self.robot.body_names)
+        }
+        result["processed_targets"] = array(self.term.processed_actions)[0].tolist()
+        result["all_seat_contact_vectors_N"] = [
+            array(self.env.scene[f"seal_{half}_{i}"].data.net_forces_w)[0].reshape(-1, 3).sum(0).tolist()
+            for half in ("lower", "upper")
+            for i in range(8)
+        ]
+        for attribute in (
+            "applied_torque",
+            "computed_torque",
+            "joint_stiffness",
+            "joint_damping",
+            "joint_effort_limits",
+        ):
+            if hasattr(data, attribute):
+                result["diagnostic_" + attribute] = array(getattr(data, attribute))[0, self.ids].tolist()
+        return result
 
     def public(self, reading):
         return {
