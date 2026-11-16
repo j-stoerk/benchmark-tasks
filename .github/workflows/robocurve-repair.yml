@@ -1,0 +1,34 @@
+name: Repair RoboCurve runner dependency path
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  repair:
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Restore the existing environment's uv command
+        env:
+          RECOVERY_KEY: ${{ secrets.ROBOCURVE_RECOVERY_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repair_dir="$RUNNER_TEMP/robocurve-ssh-repair"
+          mkdir -m 700 "$repair_dir"
+          printf '%s\n' "$RECOVERY_KEY" > "$repair_dir/key"
+          chmod 600 "$repair_dir/key"
+          trap 'rm -f -- "$repair_dir/key"' EXIT
+          ssh -o BatchMode=yes -o ConnectTimeout=15 \
+            -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$repair_dir/known_hosts" \
+            -i "$repair_dir/key" -p 30711 ubuntu@global.prd.ga.run.brev.nvidia.com bash -s <<'REMOTE'
+          set -euo pipefail
+          uv_path=/home/ubuntu/.local/bin/uv
+          uv_link=/data/IsaacLab-Arena/.venv/bin/uv
+          test -x "$uv_path"
+          if [ ! -e "$uv_link" ]; then
+            ln -s -- "$uv_path" "$uv_link"
+          fi
+          "$uv_link" --version
+          REMOTE
