@@ -131,22 +131,29 @@ def geometry(readout):
         clamp_z = float(readout["clamp_z"])
         clamp_y = float(readout["clamp_y"])
         finite = all(a.shape == (3,) and np.isfinite(a).all() for a in poses + velocity + angular)
-        valid = finite and q.shape == (6,) and np.isfinite(q).all() and math.isfinite(force + clamp_z + clamp_y)
+        valid = (
+            finite and q.shape == (6,) and np.isfinite(q).all() and math.isfinite(force + clamp_z + clamp_y)
+        )
         valid = valid and all(p[2] > 0.70 and abs(p[0]) < 0.9 and abs(p[1]) < 0.65 for p in poses)
         if not valid:
             return {"valid": False}
         centered = all(np.linalg.norm(p[:2]) <= 0.00015 for p in poses)
         upright = all(r[2, 2] >= math.cos(math.radians(0.2)) for r in rotations)
         intervals = sorted(
-            (p[2] - part["height"] / 2, p[2] + part["height"] / 2) for p, part in zip(poses, PARTS, strict=True)
+            (p[2] - part["height"] / 2, p[2] + part["height"] / 2)
+            for p, part in zip(poses, PARTS, strict=True)
         )
         seated = abs(intervals[0][0] - BASE_Z) <= TOLERANCE
-        seated &= all(abs(a[1] - b[0]) <= TOLERANCE for a, b in zip(intervals[:-1], intervals[1:], strict=True))
+        seated &= all(
+            abs(a[1] - b[0]) <= TOLERANCE for a, b in zip(intervals[:-1], intervals[1:], strict=True)
+        )
         cutting_faces = sorted(
             p[2] - BLADE_H / 2 - BASE_Z for p, part in zip(poses, PARTS, strict=True) if part["blade"]
         )
         recipe = np.max(np.abs(np.asarray(cutting_faces) - POSITIONS)) <= TOLERANCE
-        stable = all(np.linalg.norm(v) < 0.0015 for v in velocity) and all(np.linalg.norm(v) < 0.05 for v in angular)
+        stable = all(np.linalg.norm(v) < 0.0015 for v in velocity) and all(
+            np.linalg.norm(v) < 0.05 for v in angular
+        )
         released = np.linalg.norm(q[:2]) >= 0.18 or q[2] - 0.015 > max(TOP, clamp_z + 0.01) + 0.03
         clamped = force >= 300 and abs(clamp_z - 0.01 - TOP) <= 0.0001 and abs(clamp_y) <= 0.00015
         return {
@@ -175,7 +182,9 @@ class Proof:
         ready = g["assembled"] and g["stable"] and g["released"]
         score = 0.5 if ready and g["clamped"] else (0.25 if ready else 0.0)
         actual = np.asarray(readout.get("applied_proof", []), float)
-        loaded = actual.shape == (2,) and np.isfinite(actual).all() and np.allclose(actual, [100, 2], atol=0.001)
+        loaded = (
+            actual.shape == (2,) and np.isfinite(actual).all() and np.allclose(actual, [100, 2], atol=0.001)
+        )
         if not requested:
             self.failed = False
         if not (requested and loaded and ready and g["clamped"]):

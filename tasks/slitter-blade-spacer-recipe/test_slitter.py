@@ -2,6 +2,7 @@
 
 import copy
 import math
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -12,7 +13,12 @@ from slitter_stack import spec
 def ready():
     return {
         "parts": {
-            p["name"]: {"pos": [0, 0, p["target_z"]], "quat": [0, 0, 0, 1], "lin_vel": [0, 0, 0], "ang_vel": [0, 0, 0]}
+            p["name"]: {
+                "pos": [0, 0, p["target_z"]],
+                "quat": [0, 0, 0, 1],
+                "lin_vel": [0, 0, 0],
+                "ang_vel": [0, 0, 0],
+            }
             for p in spec.PARTS
         },
         "tool": [0, 0, 1.35, 0, 1, 0],
@@ -135,7 +141,9 @@ def test_rotational_slip_breaks_retention():
     assert p.failed
 
 
-@pytest.mark.parametrize("bad", [{}, {"pos": [float("nan"), 0, 1]}, {"pos": [0, 0, 0.5]}, {"quat": [0, 0, 0, 0]}])
+@pytest.mark.parametrize(
+    "bad", [{}, {"pos": [float("nan"), 0, 1]}, {"pos": [0, 0, 0.5]}, {"quat": [0, 0, 0, 0]}]
+)
 def test_invalid_missing_ejected_and_nonfinite_states_latch_zero(bad):
     row = ready()
     if not bad:
@@ -157,11 +165,17 @@ def test_original_native_ring_geometry_and_hollow_open_centre_head():
         assert stage
         assert UsdPhysics.MassAPI(stage.GetDefaultPrim()).GetMassAttr().Get() == pytest.approx(p["mass"])
         meshes = [prim for prim in stage.Traverse() if prim.GetTypeName() == "Mesh"]
-        assert len(meshes) == spec.SEGMENTS
+        assert len(meshes) == 1
         for mesh in meshes:
             xy = np.asarray(mesh.GetAttribute("points").Get())[:, :2]
             assert np.min(np.linalg.norm(xy, axis=1)) >= spec.BORE - 1e-7
             assert mesh.HasAPI(UsdPhysics.CollisionAPI)
+            assert UsdPhysics.MeshCollisionAPI(mesh).GetApproximationAttr().Get() == "sdf"
+            indices = list(mesh.GetAttribute("faceVertexIndices").Get())
+            faces = [indices[i : i + 3] for i in range(0, len(indices), 3)]
+            edges = Counter(tuple(sorted((face[i], face[(i + 1) % 3]))) for face in faces for i in range(3))
+            assert all(count == 2 for count in edges.values())
+            assert mesh.GetAttribute("physxSDFMeshCollision:sdfResolution").Get() == 512
     machine = Usd.Stage.Open(str(root / "machine.usda"))
     assert machine.GetPrimAtPath("/Machine/anchor")
     assert not machine.GetPrimAtPath("/Machine/part_0")  # no task object is attached to the machine
@@ -170,7 +184,10 @@ def test_original_native_ring_geometry_and_hollow_open_centre_head():
         # The offline USD wheel lacks NVIDIA's schema registry. Inspect the
         # authored schema and reference, then confirm the mechanism natively.
         assert "PhysxMimicJointAPI:rotX" in follower.GetMetadata("apiSchemas").GetAddedOrExplicitItems()
-        assert str(follower.GetRelationship("physxMimicJoint:rotX:referenceJoint").GetTargets()[0]) == "/Machine/jaw_0"
+        assert (
+            str(follower.GetRelationship("physxMimicJoint:rotX:referenceJoint").GetTargets()[0])
+            == "/Machine/jaw_0"
+        )
 
 
 def test_retracted_platen_can_traverse_above_the_actual_arbor():

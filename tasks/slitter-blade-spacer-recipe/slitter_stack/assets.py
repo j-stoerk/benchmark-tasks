@@ -60,7 +60,9 @@ def generate():
             mesh = UsdGeom.Mesh.Define(stage, f"{parent}/sector_{index:03d}")
             mesh.CreatePointsAttr(Vt.Vec3fArray([Gf.Vec3f(*p) for p in points]))
             mesh.CreateFaceVertexCountsAttr([4] * 6)
-            mesh.CreateFaceVertexIndicesAttr([0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7])
+            mesh.CreateFaceVertexIndicesAttr(
+                [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+            )
             mesh.CreateSubdivisionSchemeAttr("none")
             style(mesh, (0.78, 0.19, 0.08) if index == 0 else color)
             UsdPhysics.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr("convexHull")
@@ -83,11 +85,62 @@ def generate():
         drive.CreateMaxForceAttr(1000.0)
         drive.CreateTargetPositionAttr(0.0)
 
+    def tooling_ring(stage, parent, radius, bore, height, color):
+        # One watertight annular surface preserves the bore without adding
+        # internal compound faces between every pair of adjacent sectors.
+        count = spec.SEGMENTS
+        points = [
+            (r * math.cos(i * 2 * math.pi / count), r * math.sin(i * 2 * math.pi / count), z)
+            for z in (-height / 2, height / 2)
+            for r in (bore, radius)
+            for i in range(count)
+        ]
+        faces = []
+        for i in range(count):
+            j = (i + 1) % count
+            bi, bj, boi, boj = i, j, count + i, count + j
+            ti, tj, toi, toj = 2 * count + i, 2 * count + j, 3 * count + i, 3 * count + j
+            faces.extend(
+                [
+                    (boi, boj, toj),
+                    (boi, toj, toi),
+                    (bi, tj, bj),
+                    (bi, ti, tj),
+                    (ti, toi, toj),
+                    (ti, toj, tj),
+                    (bi, boj, boi),
+                    (bi, bj, boj),
+                ]
+            )
+        mesh = UsdGeom.Mesh.Define(stage, parent + "/tooling_surface")
+        mesh.CreatePointsAttr(Vt.Vec3fArray([Gf.Vec3f(*point) for point in points]))
+        mesh.CreateFaceVertexCountsAttr([3] * len(faces))
+        mesh.CreateFaceVertexIndicesAttr([index for face in faces for index in face])
+        mesh.CreateSubdivisionSchemeAttr("none")
+        style(mesh, color)
+        UsdPhysics.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr("sdf")
+        prim = mesh.GetPrim()
+        prim.AddAppliedSchema("PhysxSDFMeshCollisionAPI")
+        for name, value in [("sdfResolution", 512), ("sdfSubgridResolution", 6)]:
+            prim.CreateAttribute(
+                "physxSDFMeshCollision:" + name,
+                Sdf.ValueTypeNames.Int,
+                custom=False,
+                variability=Sdf.VariabilityUniform,
+            ).Set(value)
+        for name, value in [("sdfNarrowBandThickness", 0.01), ("sdfMargin", 0.01)]:
+            prim.CreateAttribute(
+                "physxSDFMeshCollision:" + name,
+                Sdf.ValueTypeNames.Float,
+                custom=False,
+                variability=Sdf.VariabilityUniform,
+            ).Set(value)
+
     for part in spec.PARTS:
         stage, root = stage_for("Part")
         UsdPhysics.RigidBodyAPI.Apply(root)
         UsdPhysics.MassAPI.Apply(root).CreateMassAttr(part["mass"])
-        ring(
+        tooling_ring(
             stage,
             "/Part",
             part["radius"],
@@ -140,7 +193,9 @@ def generate():
     for i, side in enumerate((-1, 1)):
         box(stage, f"/Machine/Platen/ear_{i}", (0.12, 0.06, 0.02), (0, side * 0.07, 0))
         for j, x in enumerate((-0.04, 0.04)):
-            cylinder(stage, f"/Machine/Platen/rod_{i}_{j}", 0.005, 0.4, (x, side * 0.09, 0.2), collision=False)
+            cylinder(
+                stage, f"/Machine/Platen/rod_{i}_{j}", 0.005, 0.4, (x, side * 0.09, 0.2), collision=False
+            )
     box(stage, "/Machine/base/press_crosshead", (0.16, 1.22, 0.06), (0, 0, 1.63))
     joint(stage, "press_y", "base", "PressY", "Y", (0, 0, 1.20), (-0.46, 0.01))
     joint(stage, "press", "PressY", "Platen", "Z", (0, 0, 0), (-0.09, 0.05), force=True)

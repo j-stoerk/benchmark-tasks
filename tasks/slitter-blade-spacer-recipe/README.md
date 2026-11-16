@@ -20,7 +20,10 @@ Actual contact must grip each ring, lift it, align its bore with the arbor and
 release it onto the accumulating stack. Every task part is a free rigid body.
 No object follows a prescribed pose and no grasp joint attaches it to the tool.
 The head uses finite-speed, force-limited native joint drives. The annular
-geometry is constructed from 96 convex sectors that preserve the real bore.
+tooling geometry is one watertight 96-sided annular surface per free ring, with
+sparse SDF collision (resolution 512, subgrid 6). The bore stays open. The chuck
+and platen retain their compound convex sectors. This avoids internal compound
+faces throughout the free tooling; actual loaded seating still needs validation.
 Source dimensions, densities, masses, transforms, drives and frame structure
 are explicit in `spec.py`, `assets.py`, `native.py` and `task.json`.
 
@@ -70,6 +73,14 @@ are used instead of claiming CCD protection.
 TGS resolves articulation contacts last to test whether contact ordering corrects
 the observed loaded-stack penetration. That setting requires fresh native
 validation; the package currently has no full-score assembly evidence.
+
+NVIDIA documents [dynamic SDF collision](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/108.1/dev_guide/rigid_bodies_articulations/collision.html)
+and its [collision tuning limits](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/108.0/dev_guide/guides/collision_guide.html).
+The new closed ring meshes have no internal sector faces. Their planar seating
+faces and actual 2 mm thickness are unchanged. Mesh topology and SDF settings
+are checked offline; cooked geometry accuracy and loaded contacts require native
+evidence. The earlier convex-sector stack failed under load even at 255 position
+iterations. That failed diagnostic is retained and is not successful demo evidence.
 
 ```bash
 source /data/IsaacLab-Arena/yam.env
