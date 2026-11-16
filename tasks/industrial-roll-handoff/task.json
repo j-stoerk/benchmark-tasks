@@ -15,5 +15,6 @@
   "run_limit": "30 LLM calls and at most 2,400 control steps (120 simulation seconds at 20 Hz)",
   "reset_notes": "Restore the roll and both shaft assemblies to their specified poses, collapse the receiver jaws, extend the donor and clear the proof/drop history. Physical trials require rated, guarded industrial handling equipment and qualified operators; drop variants are simulation-only.",
   "fidelity": "Full-size 200 kg rigid annulus/open core; force-limited powered axes and geared jaws use native PhysX contact. Normal-force gauges and an ideal imposed 25 Nm/300 N proof wrench verify retention. Ideal encoders and internal gear constraints. Wound-layer slip, core crushing, coating damage, proof-fixture cables and hollow-frame interiors are excluded. Original MIT USDs; no roll attachments or pose teleports.",
-  "scores": "Not yet evaluated. Physics demo and genuine LLM trial must be completed before submission."
+  "scores": "GPT-6 Codex interactive LLM (code-aware, non-blind, through Inspect Robots): 1; scripted native-physics demo: 1. See evaluation.json for measured actions, model decisions and source hashes.",
+  "media": "M-GJ39MC"
 }
