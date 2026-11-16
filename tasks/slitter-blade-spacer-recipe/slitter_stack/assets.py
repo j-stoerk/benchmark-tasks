@@ -153,6 +153,15 @@ def generate():
             part["height"],
             color=(0.32, 0.36, 0.40) if part["blade"] else (0.48, 0.52, 0.56),
         )
+        if part["blade"]:
+            box(
+                stage,
+                "/Part/angular_witness",
+                (0.003, 0.001, 0.00002),
+                (0.045, 0, part["height"] / 2 + 0.00001),
+                (0.85, 0.15, 0.06),
+                collision=False,
+            )
         stage.GetRootLayer().Export(str(PACKAGE / (part["name"] + ".usda")))
 
     stage, root = stage_for("Machine")

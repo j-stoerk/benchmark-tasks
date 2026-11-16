@@ -28,5 +28,14 @@ def Xform "Part" (
         color3f[] primvars:displayColor = [(0.32, 0.36, 0.4)]
         uniform token subdivisionScheme = "none"
     }
+
+    def Cube "angular_witness"
+    {
+        color3f[] primvars:displayColor = [(0.85, 0.15, 0.06)]
+        double size = 1
+        float3 xformOp:scale = (0.003, 0.001, 0.00002)
+        double3 xformOp:translate = (0.045, 0, 0.00101)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
 }
 
