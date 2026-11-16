@@ -71,6 +71,18 @@
       ],
       "steps": 40,
       "rationale": "The donor load fell substantially but remains about 380 N. Increase the receiving height setpoint by another 0.2 mm and check that the donor unloads while all pad contacts remain strong."
+    },
+    "model-final-01:006": {
+      "action": [
+        0.24,
+        0,
+        1.0017,
+        1,
+        1,
+        0
+      ],
+      "steps": 160,
+      "rationale": "The donor gauge now reads zero and every pad retains strong contact. Withdraw the donor through its full stroke while holding the receiver alignment and gripping force."
     }
   }
 }
