@@ -71,7 +71,7 @@ class IndustrialRoll(EmbodimentBase):
 
     def native_action(self, command):
         insert, y, z, clamp, donor, test = command
-        values = [-insert, y, z - 1, *([clamp * 0.0078] * 3), -donor * 0.4, test]
+        values = [-insert, y, z - 1, *([clamp * spec.EXPAND_TARGET] * 3), -donor * 0.4, test]
         return self.torch.tensor([values], device=self.base.device, dtype=self.torch.float32)
 
     def readout(self):
@@ -105,7 +105,7 @@ class IndustrialRoll(EmbodimentBase):
             images[name] = np.ascontiguousarray(numpy(rgb)[0, :, :, :3], dtype=np.uint8)
         q = numpy(self.receiver.data.joint_pos)[0, self.ids]
         d = float(numpy(self.donor.data.joint_pos)[0, self.donor_ids[0]])
-        state = np.array([-q[0], q[1], 1 + q[2], np.mean(q[3:]) / 0.0078, -d / 0.4, self.command[5]])
+        state = np.array([-q[0], q[1], 1 + q[2], np.mean(q[3:]) / spec.EXPAND_TARGET, -d / 0.4, self.command[5]])
         return Observation(
             images=images,
             state={"machine_encoders": state, "jaw_forces": self.jaw_forces()},
