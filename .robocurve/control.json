@@ -59,6 +59,18 @@
       ],
       "steps": 40,
       "rationale": "All three pads carry several kilonewtons, but the donor still supports about 2 kN. Raise the receiving setpoint slightly to preload its support, then recheck the donor gauge before withdrawal."
+    },
+    "model-final-01:005": {
+      "action": [
+        0.24,
+        0,
+        1.0017,
+        1,
+        0,
+        0
+      ],
+      "steps": 40,
+      "rationale": "The donor load fell substantially but remains about 380 N. Increase the receiving height setpoint by another 0.2 mm and check that the donor unloads while all pad contacts remain strong."
     }
   }
 }
