@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "slit-cpu-bench-01",
+    "id": "valve-demo-10",
     "mode": "run",
-    "sha": "85cddf55fac4d1b1a6ef46bfb5bf480b5453c346",
-    "task": "slitter-blade-spacer-recipe",
+    "sha": "96c838a76bfabaf3291e4c952e21856ac307a3e2",
+    "task": "powder-transfer-split-valve",
     "trial": {
-      "mode": "smoke",
-      "max_steps": 400,
-      "variant": "contact-bench"
+      "mode": "demo",
+      "max_steps": 800,
+      "variant": "normal"
     }
   },
   "responses": {
