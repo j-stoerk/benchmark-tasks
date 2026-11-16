@@ -352,7 +352,7 @@ def make_env(device="cpu", grip_force=50, contact_bench=False):
         cfg.sim.dt = 1 / 480
         cfg.decimation = 24
         cfg.sim.render_interval = 24
-        cfg.sim.physics.solver_type = 0
+        cfg.sim.physics.solver_type = 1
         cfg.sim.physics.enable_ccd = True
         cfg.sim.physics.enable_stabilization = False
         return cfg
