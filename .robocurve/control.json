@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "slit-smoke-01",
+    "id": "slit-smoke-02",
     "mode": "run",
-    "sha": "0a2b036fb76770fdcbb036008c59c6bc691d4a41",
+    "sha": "4d53adcf4b5cecf5f52bfab37be27288d6b302ba",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
