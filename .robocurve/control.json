@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "valve-smoke-09",
+    "id": "slit-normal-sdf-03",
     "mode": "run",
-    "sha": "ce1f8fd18605d9e659ad11a13c82b3083869e0ab",
-    "task": "powder-transfer-split-valve",
+    "sha": "94937f3763e3fe13fdf3e18c3f1b9c1cdb67fa31",
+    "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
-      "max_steps": 650,
+      "max_steps": 400,
       "variant": "normal"
     }
   },
