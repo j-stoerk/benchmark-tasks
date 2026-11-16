@@ -1,14 +1,8 @@
 {
   "command": {
-    "id": "valve-smoke-06",
-    "mode": "run",
-    "sha": "93006c531169162475e545c4cd5efd6497148cb0",
-    "task": "powder-transfer-split-valve",
-    "trial": {
-      "mode": "smoke",
-      "max_steps": 700,
-      "variant": "normal"
-    }
+    "id": "cancel-slit-08",
+    "mode": "cancel",
+    "target": "slit-contact-bench-08"
   },
   "responses": {
     "model-final-01:001": {
