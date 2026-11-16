@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robocurve-split-valve"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0"]
+description = "Native DN100 split-valve mechanical docking, retention and coupled-disc cycle."
+
+[project.entry-points."inspect_robots.embodiments"]
+powder_valve = "split_valve.adapter:embodiment"
+
+[project.entry-points."inspect_robots.policies"]
+powder_valve_demo = "split_valve.policy:demo"
+powder_valve_llm = "split_valve.policy:llm"
+
+[tool.setuptools.packages.find]
+include = ["split_valve*"]
+
+[tool.setuptools.package-data]
+split_valve = ["*.usda"]
