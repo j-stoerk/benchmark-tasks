@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "force-05",
+    "id": "demo-final-06",
     "mode": "run",
     "sha": "7da097401eefbd46fbe3aaac4fa6f1a4fe718e7c",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "demo",
-      "max_steps": 500,
+      "max_steps": 1000,
       "lift_force": 6000,
       "no_expand": false
     }
