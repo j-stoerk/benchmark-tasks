@@ -133,6 +133,19 @@ def Xform "Machine" (
             double3 xformOp:translate = (-0.2, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate"]
         }
+
+        def Cylinder "drive_housing" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 0.08
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.16, 0.4, 0.8)]
+            double radius = 0.08
+            double3 xformOp:translate = (0.04, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
     }
 
     def PhysicsPrismaticJoint "slide_x" (
@@ -263,7 +276,7 @@ def Xform "Machine" (
     }
 
     def PhysicsPrismaticJoint "jaw_1" (
-        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+        prepend apiSchemas = ["PhysicsDriveAPI:linear", "PhysxMimicJointAPI:rotX"]
     )
     {
         float drive:linear:physics:damping = 5000
@@ -281,6 +294,9 @@ def Xform "Machine" (
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = 0
         float physics:upperLimit = 0.009
+        custom float physxMimicJoint:rotX:gearing = -1
+        custom float physxMimicJoint:rotX:offset = 0
+        custom rel physxMimicJoint:rotX:referenceJoint = </Machine/jaw_0>
     }
 
     def Xform "Jaw2" (
@@ -306,7 +322,7 @@ def Xform "Machine" (
     }
 
     def PhysicsPrismaticJoint "jaw_2" (
-        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+        prepend apiSchemas = ["PhysicsDriveAPI:linear", "PhysxMimicJointAPI:rotX"]
     )
     {
         float drive:linear:physics:damping = 5000
@@ -324,6 +340,9 @@ def Xform "Machine" (
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = 0
         float physics:upperLimit = 0.009
+        custom float physxMimicJoint:rotX:gearing = -1
+        custom float physxMimicJoint:rotX:offset = 0
+        custom rel physxMimicJoint:rotX:referenceJoint = </Machine/jaw_0>
     }
 }
 

@@ -9,7 +9,7 @@ PACKAGE = Path(__file__).parent
 
 
 def generate():
-    from pxr import Gf, Usd, UsdGeom, UsdPhysics, Vt
+    from pxr import Gf, Sdf, Usd, UsdGeom, UsdPhysics, Vt
 
     def stage_for(name, rootname="Machine"):
         stage = Usd.Stage.CreateInMemory()
@@ -87,6 +87,7 @@ def generate():
             cube(stage, "/Machine/X/rail", (0.1, 0.8, 0.08))
             cube(stage, "/Machine/Y/mast", (0.08, 0.1, 0.5), (0, 0, -0.25))
             cyl(stage, "/Machine/Head/shaft", 0.4, 0.028, (-0.2, 0, 0))
+            cyl(stage, "/Machine/Head/drive_housing", 0.08, 0.08, (0.04, 0, 0))
             joint(stage, "/Machine/slide_x", "/Machine/base", "/Machine/X", "X", (0, 0, 0.4), bounds=(-0.26, 0))
             joint(stage, "/Machine/slide_y", "/Machine/X", "/Machine/Y", "Y", bounds=(-0.06, 0.42))
             joint(stage, "/Machine/slide_z", "/Machine/Y", "/Machine/Head", "Z", bounds=(-0.04, 0.16))
@@ -107,6 +108,16 @@ def generate():
                     angle,
                     (0, 0.009),
                 )
+                if i:
+                    follower = stage.GetPrimAtPath(f"/Machine/jaw_{i}")
+                    # PhysX 6.1 probes rotX for a one-DOF prismatic mimic,
+                    # irrespective of the physical prismatic axis. This is an
+                    # internal ideal scroll/gear coupling, never a roll attach.
+                    follower.AddAppliedSchema("PhysxMimicJointAPI:rotX")
+                    prefix = "physxMimicJoint:rotX:"
+                    follower.CreateRelationship(prefix + "referenceJoint").SetTargets(["/Machine/jaw_0"])
+                    follower.CreateAttribute(prefix + "gearing", Sdf.ValueTypeNames.Float).Set(-1.0)
+                    follower.CreateAttribute(prefix + "offset", Sdf.ValueTypeNames.Float).Set(0.0)
         else:
             body(stage, "/Machine/Shaft", (0, 0, 0.4), 45)
             cyl(stage, "/Machine/Shaft/shaft", 0.56, 0.0379, (0.28, 0, 0), (0.45, 0.48, 0.52))

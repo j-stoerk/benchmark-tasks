@@ -24,11 +24,18 @@ telescoping, web tension control or cart navigation.
 ## What changed after the prior review
 
 The roll now weighs 200 kg and has a 1.96 kN gravity load. A purpose-built
-powered machine has finite reach, velocity and force limits. Three independently
-moving jaws expand against the actual bore; pad-force sensors require real
+powered machine has finite reach, velocity and force limits. Three geared radial
+jaws expand against the actual bore; pad-force sensors require real
 contact. The donor must withdraw and unload. A 25 Nm torque plus 300 N axial
 pull tests the supported roll for two seconds. The scorer cannot substitute
 commanded expansion, a pose, or an attached object for this load path.
+An ideal internal gear constraint keeps the three jaw extensions equal, as in
+a self-centering chuck. The three 4 kN drive channels have 12 kN combined input
+capacity; the linkage redistributes their reactions. A 160 mm diameter,
+80 mm long drive housing is included in the 35 kg head assembly. The geared
+internals are not rendered. PhysX's one-DOF prismatic mimic uses its `rotX`
+schema instance, as documented in the engine's single-DOF parser and
+https://github.com/isaac-sim/IsaacSim/issues/731.
 
 Both rigid contact and actuator compliance are simulated. Jaws are 4 kN limited,
 with 5 MN/m position stiffness and 5 kNs/m damping. Axis stiffness is 1.5 MN/m,

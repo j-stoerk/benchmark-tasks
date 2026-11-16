@@ -53,6 +53,12 @@ def test_receiver_has_three_physical_prismatic_jaws_and_real_strokes():
         drive = UsdPhysics.DriveAPI(joint.GetPrim(), "linear")
         assert drive and drive.GetStiffnessAttr().Get() > 0
         assert drive.GetMaxForceAttr().Get() > 0
+    for index in (1, 2):
+        follower = stage.GetPrimAtPath(f"/Machine/jaw_{index}")
+        # The offline USD wheel lacks NVIDIA's schema registry; inspect the
+        # authored list-op here and verify the actual constraint on the GPU.
+        assert "PhysxMimicJointAPI:rotX" in follower.GetMetadata("apiSchemas").GetAddedOrExplicitItems()
+        assert str(follower.GetRelationship("physxMimicJoint:rotX:referenceJoint").GetTargets()[0]) == "/Machine/jaw_0"
 
 
 def test_full_score_requires_an_entire_two_second_loaded_interval():
