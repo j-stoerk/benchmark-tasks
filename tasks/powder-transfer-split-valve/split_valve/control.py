@@ -31,7 +31,12 @@ class Demo(PolicyBase):
             "undock": [0, 0, 1.10, 0, 0, 0],
         }
         command = np.asarray(goals[self.phase], float)
-        close = np.max(np.abs(q[:3] - command[:3])) < 0.0002 and abs(q[3] - command[3]) < 1
+        observed_goal = command[:3].copy()
+        if self.phase not in ("align", "undock"):
+            # The biased motor setpoint applies seating force. The native
+            # casing/collar determines the actual interface height.
+            observed_goal[2] = spec.DOCK_Z
+        close = np.max(np.abs(q[:3] - observed_goal)) < 0.0002 and abs(q[3] - command[3]) < 1
         close &= abs(q[4] - command[4]) < 1 and abs(q[5] - command[4]) < 1
         advance = close and t - self.entered >= 0.2
         if self.phase in ("close", "unlock"):
