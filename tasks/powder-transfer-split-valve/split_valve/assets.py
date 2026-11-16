@@ -125,7 +125,11 @@ def generate():
         start = math.radians(i * 120 + 10)
         stop = math.radians(i * 120 + 110)
         arc(f"Collar/ledge_{i}", 0.065, 0.085, start, stop, 0.006, 0.0191, (0.22, 0.38, 0.56))
-    box("Collar/interlock", (0.04, 0.018, 0.006), (0.04, 0.085, -0.0031), (0.85, 0.53, 0.10))
+    # Keep the rotor pins outside the complete collar rim/bridge sweep. Their
+    # dedicated block is supported below the interface, clear of the open pin.
+    box("Collar/interlock", (0.06, 0.018, 0.006), (0.04, 0.125, -0.0031), (0.85, 0.53, 0.10))
+    box("Collar/interlock_support", (0.02, 0.04, 0.014), (0.04, 0.115, -0.012), steel)
+    box("Collar/interlock_standoff", (0.02, 0.014, 0.012), (0.04, 0.100, -0.001), steel)
     box("Collar/lever", (0.16, 0.016, 0.012), (0.18, 0, 0.018), (0.85, 0.53, 0.10))
     joint("collar", "base", "Collar", "Z", (0, 0, 1.0), (0, 32), revolute=True)
     body("Active", (0, 0, 1.0), 0.125)
@@ -133,10 +137,10 @@ def generate():
     arc("Active/disc", 0, 0.050, 0, 2 * math.pi, 0.002, -0.001, (0.22, 0.52, 0.74))
     arc("Passive/disc", 0, 0.050, 0, 2 * math.pi, 0.002, 0.001, (0.84, 0.48, 0.16))
     # The pins belong to the active rotor and physically meet the collar block.
-    box("Active/closed_pin", (0.004, 0.004, 0.004), (0.04, 0.085, 0.002), (0.85, 0.2, 0.12))
-    box("Active/open_pin", (0.004, 0.004, 0.004), (0, 0.085, 0.04), (0.85, 0.2, 0.12))
-    box("Active/shaft", (0.008, 0.18, 0.008), (0, 0, 0), steel, collision=False)
-    box("Active/pin_carrier", (0.044, 0.006, 0.044), (0.02, 0.085, 0.02), steel, collision=False)
+    box("Active/closed_pin", (0.004, 0.004, 0.004), (0.04, 0.125, 0.002), (0.85, 0.2, 0.12))
+    box("Active/open_pin", (0.004, 0.004, 0.004), (0, 0.125, 0.04), (0.85, 0.2, 0.12))
+    box("Active/shaft", (0.008, 0.26, 0.008), (0, 0, 0), steel, collision=False)
+    box("Active/pin_carrier", (0.044, 0.006, 0.044), (0.02, 0.125, 0.02), steel, collision=False)
     box("Passive/shaft", (0.008, 0.12, 0.008), (0, 0, 0), steel, collision=False)
     joint("active", "base", "Active", "Y", (0, 0, 1.0), (0, 90), revolute=True)
     joint("passive", "Upper", "Passive", "Y", (0, 0, 0), (0, 90), revolute=True)

@@ -309,6 +309,7 @@ class Sampler:
         self.robot = env.scene["robot"]
         self.ids = self.robot.find_joints(spec.JOINTS, preserve_order=True)[0]
         self.term = env.action_manager.get_term("machine")
+        self.seal_ids = self.robot.find_joints(["seal_lower_.*", "seal_upper_.*"], preserve_order=True)[0]
 
     def normal(self, name):
         return float(np.linalg.norm(array(self.env.scene[name].data.force_matrix_w)[0]))
@@ -321,6 +322,7 @@ class Sampler:
         return {
             "encoders": q.tolist(),
             "velocities": v.tolist(),
+            "seal_deflections_m": array(self.robot.data.joint_pos)[0, self.seal_ids].tolist(),
             "seal_normals": [
                 self.normal(f"seal_{half}_{i}") for half in ("lower", "upper") for i in range(8)
             ],
