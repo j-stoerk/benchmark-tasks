@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "slit-sdf-gravity-01",
+    "id": "slit-sdf-gravity-02",
     "mode": "run",
-    "sha": "91dcd50f7c1b601b76055c5531511f8f30e8a7e2",
+    "sha": "d188c7498b7620f0f4e8cc32097903075708328c",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
