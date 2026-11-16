@@ -47,6 +47,18 @@
       ],
       "steps": 80,
       "rationale": "The insertion encoder is at 240 mm. Expand the geared chuck and wait for actual pad-force readings before changing donor support."
+    },
+    "model-final-01:004": {
+      "action": [
+        0.24,
+        0,
+        1.0015,
+        1,
+        0,
+        0
+      ],
+      "steps": 40,
+      "rationale": "All three pads carry several kilonewtons, but the donor still supports about 2 kN. Raise the receiving setpoint slightly to preload its support, then recheck the donor gauge before withdrawal."
     }
   }
 }
