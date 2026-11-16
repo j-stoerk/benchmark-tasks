@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "slit-contact-bench-08",
+    "id": "valve-smoke-06",
     "mode": "run",
-    "sha": "6afeebdc6b2526c42f403ed1d144f06c013a2264",
-    "task": "slitter-blade-spacer-recipe",
+    "sha": "93006c531169162475e545c4cd5efd6497148cb0",
+    "task": "powder-transfer-split-valve",
     "trial": {
       "mode": "smoke",
-      "max_steps": 400,
-      "variant": "contact-bench"
+      "max_steps": 700,
+      "variant": "normal"
     }
   },
   "responses": {
