@@ -1,7 +1,16 @@
 {
   "command": {
-    "id": "finish-evidence-1116",
-    "mode": "exit"
+    "id": "cal-compliance-01",
+    "mode": "run",
+    "sha": "8be2e4b9be2f9ea4dee0d8f88b2f59f181a5594f",
+    "task": "calender-loaded-nip-parallelism",
+    "trial": {
+      "mode": "demo",
+      "max_steps": 300,
+      "proof_scale": 1,
+      "unloaded_only": false,
+      "calibration_bench": true
+    }
   },
   "responses": {
     "model-final-01:001": {
