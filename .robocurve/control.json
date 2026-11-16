@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "preload-04",
+    "id": "force-05",
     "mode": "run",
-    "sha": "9dd3d797bfe7fc2fc035e0aa5abd37a686da3b6a",
+    "sha": "7da097401eefbd46fbe3aaac4fa6f1a4fe718e7c",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "demo",
-      "max_steps": 900,
+      "max_steps": 500,
       "lift_force": 6000,
       "no_expand": false
     }
