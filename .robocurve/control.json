@@ -117,6 +117,15 @@
       ],
       "steps": 120,
       "rationale": "The unloaded gauges slope from 601.6 to 361.6 um. Extrapolating them to the two bearing stations gives about 631.6 and 331.6 um. Reducing the left rest setting by 431.6 um and the right by 131.6 um should make the measured gap approximately 200 um at both ends while retaining the gravity offset. Keep the proof load off and allow six seconds for the rate-limited motion and settling."
+    },
+    "cal-model-01:002": {
+      "action": [
+        218.4,
+        218.4,
+        1
+      ],
+      "steps": 140,
+      "rationale": "All five unloaded gauges now read 200.0 um. Keep both settings unchanged and turn the separating load on. Seven seconds allows the documented five-second force ramp to finish and gives a settled loaded observation before compensating the measured opening and tilt."
     }
   }
 }
