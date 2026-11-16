@@ -35,6 +35,18 @@
       ],
       "steps": 140,
       "rationale": "The measured receiver height and lateral position are aligned. Insert to the documented depth with the core grip collapsed and donor support maintained."
+    },
+    "model-final-01:003": {
+      "action": [
+        0.24,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "steps": 80,
+      "rationale": "The insertion encoder is at 240 mm. Expand the geared chuck and wait for actual pad-force readings before changing donor support."
     }
   }
 }
