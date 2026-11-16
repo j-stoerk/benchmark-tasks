@@ -89,7 +89,6 @@ class IndustrialRoll(EmbodimentBase):
             "donor_q": d,
             "donor_contact": float(np.linalg.norm(numpy(self.base.scene["donor_contact"].data.net_forces_w)[0])),
             "jaw_forces": self.jaw_forces().tolist(),
-            "axis_effort": numpy(self.receiver.data.applied_torque)[0, self.ids].tolist(),
             "external_pull_N": spec.PROOF_PULL if self.command[5] >= 0.5 else 0,
             "external_torque_Nm": spec.PROOF_TORQUE if self.command[5] >= 0.5 else 0,
         }

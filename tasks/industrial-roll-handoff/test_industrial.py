@@ -144,7 +144,7 @@ def test_a_new_test_after_a_pass_must_also_endure_the_full_interval():
     assert p.update(goal(), True)[0] != 1
 
 
-@pytest.mark.parametrize("field", ["roll_pos", "receiver_q"])
+@pytest.mark.parametrize("field", ["roll_pos", "receiver_q", "roll_lin_vel", "roll_ang_vel", "jaw_forces", "roll_quat"])
 def test_nonfinite_measurements_fail_closed(field):
     r = copy.deepcopy(goal())
     r[field][0] = float("nan")

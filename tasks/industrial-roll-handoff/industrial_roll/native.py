@@ -63,14 +63,25 @@ class MachineAction(ActionTerm):
         self._processed += torch.clamp(actions - self._processed, -step, step)
 
     def apply_actions(self):
-        self.receiver.set_joint_position_target(self._processed[:, :6], joint_ids=self.ids)
-        self.donor.set_joint_position_target(self._processed[:, 6:7], joint_ids=self.donor_ids)
+        for machine, target, ids in (
+            (self.receiver, self._processed[:, :6], self.ids),
+            (self.donor, self._processed[:, 6:7], self.donor_ids),
+        ):
+            if hasattr(machine, "set_joint_position_target_index"):
+                machine.set_joint_position_target_index(target=target, joint_ids=ids)
+            else:
+                machine.set_joint_position_target(target, joint_ids=ids)
         active = (self._processed[:, 7] >= 0.5).float()
         self.force[:] = 0
         self.torque[:] = 0
         self.force[:, 0, 0] = active * spec.PROOF_PULL
         self.torque[:, 0, 0] = active * spec.PROOF_TORQUE
-        self.roll.set_external_force_and_torque(self.force, self.torque, is_global=True)
+        if hasattr(self.roll, "permanent_wrench_composer"):
+            self.roll.permanent_wrench_composer.set_forces_and_torques_index(
+                forces=self.force, torques=self.torque, is_global=True
+            )
+        else:
+            self.roll.set_external_force_and_torque(self.force, self.torque, is_global=True)
 
     def reset(self, env_ids=None):
         self._raw[:] = 0

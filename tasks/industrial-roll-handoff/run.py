@@ -7,6 +7,7 @@ import importlib.metadata as metadata
 import json
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -79,6 +80,8 @@ def main():
     )
     receipt.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps({k: manifest[k] for k in ["policy", "status", "exit_code", "started_utc", "finished_utc"]}))
+    if code == 0:
+        subprocess.run([sys.executable, str(folder / "export.py"), str(out)], check=True)
     return code
 
 

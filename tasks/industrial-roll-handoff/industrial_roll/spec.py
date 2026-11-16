@@ -69,7 +69,23 @@ def quat_matrix(q):
 def geometry(readout):
     p = np.asarray(readout["roll_pos"], float)
     q = np.asarray(readout["receiver_q"], float)
-    finite = p.shape == (3,) and q.shape == (6,) and np.isfinite(p).all() and np.isfinite(q).all()
+    finite = (
+        p.shape == (3,)
+        and q.shape == (6,)
+        and all(
+            np.isfinite(np.asarray(readout[key], float)).all()
+            for key in (
+                "roll_pos",
+                "roll_quat",
+                "roll_lin_vel",
+                "roll_ang_vel",
+                "receiver_q",
+                "donor_q",
+                "donor_contact",
+                "jaw_forces",
+            )
+        )
+    )
     if not finite:
         return {k: False for k in ("valid", "inserted", "clamped", "donor_clear", "at_target", "stable")}
     try:
