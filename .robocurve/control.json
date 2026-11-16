@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "demo-01",
+    "id": "handoff-02",
     "mode": "run",
-    "sha": "663584cdb20ec451d09f489690623d20ceb4f44a",
+    "sha": "14470ff3ca554b885874d077b571a60a4a3c9237",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "demo",
-      "max_steps": 1000,
+      "max_steps": 420,
       "lift_force": 6000,
       "no_expand": false
     }
