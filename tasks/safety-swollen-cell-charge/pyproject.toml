@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "robocurve-safety-swollen-cell-charge"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0", "Pillow>=10.1"]
+description = "Native tool manipulation for an affordable laboratory procedure."
+[project.entry-points."inspect_robots.embodiments"]
+cell_charge_safety = "cell_charge_safety.adapter:embodiment"
+[project.entry-points."inspect_robots.policies"]
+cell_charge_safety_demo = "cell_charge_safety.policy:demo"
+cell_charge_safety_llm = "cell_charge_safety.policy:llm"
+[tool.setuptools.packages.find]
+include = ["cell_charge_safety*"]
+[tool.setuptools.package-data]
+cell_charge_safety = ["*.usda", "*.png", "*.scad"]

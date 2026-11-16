@@ -1,0 +1,361 @@
+#usda 1.0
+(
+    defaultPrim = "Robot"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Robot" (
+    prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+)
+{
+    def Xform "Base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 10
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "post_m0_4" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.3, 0.4, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.025, 1.2)
+            double3 xformOp:translate = (-0.4, 0.38, 0.6)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "post_0_4" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.3, 0.4, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.025, 1.2)
+            double3 xformOp:translate = (0.4, 0.38, 0.6)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "rail" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.3, 0.4, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.85, 0.025, 0.025)
+            double3 xformOp:translate = (0, 0.38, 1.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "X" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.1
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "x_carriage"
+        {
+            color3f[] primvars:displayColor = [(0.3, 0.4, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.04, 0.04, 0.03)
+            double3 xformOp:translate = (0, 0.38, 1.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Y" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.1
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "y_rail"
+        {
+            color3f[] primvars:displayColor = [(0.3, 0.4, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.76, 0.025)
+            double3 xformOp:translate = (0, 0, 1.2)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Z" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.1
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cylinder "vertical_support"
+        {
+            uniform token axis = "Z"
+            double height = 0.15
+            color3f[] primvars:displayColor = [(0.8, 0.8, 0.8)]
+            double radius = 0.008
+            double3 xformOp:translate = (0, 0, 0.1)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def Xform "Yaw" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.05
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "Pitch" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.05
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "Tool" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0.015)
+        float physics:mass = 0.03
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cylinder "tool_mount" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.025
+            color3f[] primvars:displayColor = [(0.12, 0.25, 0.45)]
+            double radius = 0.012
+            double3 xformOp:translate = (0, 0, 0.045)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "probe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.03
+            color3f[] primvars:displayColor = [(0.15, 0.25, 0.4)]
+            double radius = 0.005
+            double3 xformOp:translate = (0, 0, 0.015)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "slide_x" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 250
+        float drive:linear:physics:maxForce = 40
+        float drive:linear:physics:stiffness = 20000
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "X"
+        rel physics:body0 = </Robot/Base>
+        rel physics:body1 = </Robot/X>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -0.35
+        float physics:upperLimit = 0.35
+    }
+
+    def PhysicsPrismaticJoint "slide_y" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 250
+        float drive:linear:physics:maxForce = 40
+        float drive:linear:physics:stiffness = 20000
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Robot/X>
+        rel physics:body1 = </Robot/Y>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -0.35
+        float physics:upperLimit = 0.35
+    }
+
+    def PhysicsPrismaticJoint "slide_z" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 250
+        float drive:linear:physics:maxForce = 40
+        float drive:linear:physics:stiffness = 20000
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Robot/Y>
+        rel physics:body1 = </Robot/Z>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = 0.74
+        float physics:upperLimit = 1.2
+    }
+
+    def PhysicsRevoluteJoint "rotate_z" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 3
+        float drive:angular:physics:maxForce = 2
+        float drive:angular:physics:stiffness = 40
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Robot/Z>
+        rel physics:body1 = </Robot/Yaw>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -180
+        float physics:upperLimit = 180
+    }
+
+    def PhysicsRevoluteJoint "rotate_y" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 3
+        float drive:angular:physics:maxForce = 2
+        float drive:angular:physics:stiffness = 40
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Robot/Yaw>
+        rel physics:body1 = </Robot/Pitch>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -100
+        float physics:upperLimit = 100
+    }
+
+    def PhysicsRevoluteJoint "rotate_x" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 3
+        float drive:angular:physics:maxForce = 2
+        float drive:angular:physics:stiffness = 40
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "X"
+        rel physics:body0 = </Robot/Pitch>
+        rel physics:body1 = </Robot/Tool>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -100
+        float physics:upperLimit = 100
+    }
+
+    def PhysicsFixedJoint "anchor"
+    {
+        rel physics:body1 = </Robot/Base>
+    }
+
+    def Xform "Start" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.002
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0.175, 0.04, 0.7835)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cylinder "face" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.003
+            color3f[] primvars:displayColor = [(0.08, 0.7, 0.12)]
+            double radius = 0.008
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "start_button" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 250
+        float drive:linear:physics:maxForce = 40
+        float drive:linear:physics:stiffness = 20000
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Robot/Base>
+        rel physics:body1 = </Robot/Start>
+        point3f physics:localPos0 = (0.175, 0.04, 0.7835)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -0.003
+        float physics:upperLimit = 0
+    }
+
+    def Xform "Stop" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysxRigidBodyAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.002
+        custom bool physxRigidBody:enableCCD = 1
+        double3 xformOp:translate = (0.105, 0.04, 0.7835)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cylinder "face" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "Z"
+            double height = 0.003
+            color3f[] primvars:displayColor = [(0.8, 0.08, 0.04)]
+            double radius = 0.008
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "stop_button" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 250
+        float drive:linear:physics:maxForce = 40
+        float drive:linear:physics:stiffness = 20000
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Robot/Base>
+        rel physics:body1 = </Robot/Stop>
+        point3f physics:localPos0 = (0.105, 0.04, 0.7835)
+        point3f physics:localPos1 = (0, 0, 0)
+        float physics:lowerLimit = -0.003
+        float physics:upperLimit = 0
+    }
+}
+

@@ -1,0 +1,436 @@
+#usda 1.0
+(
+    defaultPrim = "Fixture"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Fixture"
+{
+    def Cube "charger_base" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.15, 0.1, 0.02)
+        double3 xformOp:translate = (0.14, 0.04, 0.76)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "lid_front" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.15, 0.038, 0.004)
+        double3 xformOp:translate = (0.14, 0.009, 0.778)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "lid_back" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.15, 0.042, 0.004)
+        double3 xformOp:translate = (0.14, 0.074, 0.778)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "lid_left" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.026, 0.024, 0.004)
+        double3 xformOp:translate = (0.078, 0.041, 0.778)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "lid_middle" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.046, 0.024, 0.004)
+        double3 xformOp:translate = (0.14, 0.041, 0.778)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "lid_right" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.026, 0.024, 0.004)
+        double3 xformOp:translate = (0.202, 0.041, 0.778)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "wall_front" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.15, 0.002, 0.01)
+        double3 xformOp:translate = (0.14, -0.009, 0.775)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "wall_back" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.15, 0.002, 0.01)
+        double3 xformOp:translate = (0.14, 0.089, 0.775)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "wall_left" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.002, 0.1, 0.01)
+        double3 xformOp:translate = (0.066, 0.04, 0.775)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "wall_right" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.15, 0.22, 0.3)]
+        double size = 1
+        float3 xformOp:scale = (0.002, 0.1, 0.01)
+        double3 xformOp:translate = (0.214, 0.04, 0.775)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Mesh "start_label" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 2, 3]
+        rel material:binding = </Fixture/start_label_material>
+        point3f[] points = [(0.157, 0.009, 0.7801), (0.193, 0.009, 0.7801), (0.193, 0.019, 0.7801), (0.157, 0.019, 0.7801)]
+        texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+            interpolation = "faceVarying"
+        )
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Material "start_label_material"
+    {
+        token outputs:surface.connect = </Fixture/start_label_material/Surface.outputs:surface>
+
+        def Shader "Surface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor.connect = </Fixture/start_label_material/Texture.outputs:rgb>
+            token outputs:surface
+        }
+
+        def Shader "Texture"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @start.png@
+            float2 inputs:st.connect = </Fixture/start_label_material/UV.outputs:result>
+            color3f outputs:rgb
+        }
+
+        def Shader "UV"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            token inputs:varname = "st"
+            float2 outputs:result
+        }
+    }
+
+    def Mesh "stop_label" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 2, 3]
+        rel material:binding = </Fixture/stop_label_material>
+        point3f[] points = [(0.089, 0.009, 0.7801), (0.121, 0.009, 0.7801), (0.121, 0.019, 0.7801), (0.089, 0.019, 0.7801)]
+        texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+            interpolation = "faceVarying"
+        )
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Material "stop_label_material"
+    {
+        token outputs:surface.connect = </Fixture/stop_label_material/Surface.outputs:surface>
+
+        def Shader "Surface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor.connect = </Fixture/stop_label_material/Texture.outputs:rgb>
+            token outputs:surface
+        }
+
+        def Shader "Texture"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @stop.png@
+            float2 inputs:st.connect = </Fixture/stop_label_material/UV.outputs:result>
+            color3f outputs:rgb
+        }
+
+        def Shader "UV"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            token inputs:varname = "st"
+            float2 outputs:result
+        }
+    }
+
+    def Mesh "charger_label" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 2, 3]
+        rel material:binding = </Fixture/charger_label_material>
+        point3f[] points = [(0.09, 0.066, 0.7801), (0.19, 0.066, 0.7801), (0.19, 0.084, 0.7801), (0.09, 0.084, 0.7801)]
+        texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+            interpolation = "faceVarying"
+        )
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Material "charger_label_material"
+    {
+        token outputs:surface.connect = </Fixture/charger_label_material/Surface.outputs:surface>
+
+        def Shader "Surface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor.connect = </Fixture/charger_label_material/Texture.outputs:rgb>
+            token outputs:surface
+        }
+
+        def Shader "Texture"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @li-ion_3.7_v.png@
+            float2 inputs:st.connect = </Fixture/charger_label_material/UV.outputs:result>
+            color3f outputs:rgb
+        }
+
+        def Shader "UV"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            token inputs:varname = "st"
+            float2 outputs:result
+        }
+    }
+
+    def Cylinder "charge_led"
+    {
+        uniform token axis = "Z"
+        double height = 0.0005
+        color3f[] primvars:displayColor = [(0.06, 0.08, 0.07)]
+        double radius = 0.003
+        double3 xformOp:translate = (0.14, 0.042, 0.7803)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Cube "robot_stop_panel" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.16, 0.22, 0.31)]
+        double size = 1
+        float3 xformOp:scale = (0.07, 0.03, 0.015)
+        double3 xformOp:translate = (0.14, -0.075, 0.7575)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Mesh "robot_stop_label" (
+        prepend apiSchemas = ["MaterialBindingAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4]
+        int[] faceVertexIndices = [0, 1, 2, 3]
+        rel material:binding = </Fixture/robot_stop_label_material>
+        point3f[] points = [(0.1125, -0.086, 0.7651), (0.1675, -0.086, 0.7651), (0.1675, -0.074, 0.7651), (0.1125, -0.074, 0.7651)]
+        texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+            interpolation = "faceVarying"
+        )
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Material "robot_stop_label_material"
+    {
+        token outputs:surface.connect = </Fixture/robot_stop_label_material/Surface.outputs:surface>
+
+        def Shader "Surface"
+        {
+            uniform token info:id = "UsdPreviewSurface"
+            color3f inputs:diffuseColor.connect = </Fixture/robot_stop_label_material/Texture.outputs:rgb>
+            token outputs:surface
+        }
+
+        def Shader "Texture"
+        {
+            uniform token info:id = "UsdUVTexture"
+            asset inputs:file = @stop_ack.png@
+            float2 inputs:st.connect = </Fixture/robot_stop_label_material/UV.outputs:result>
+            color3f outputs:rgb
+        }
+
+        def Shader "UV"
+        {
+            uniform token info:id = "UsdPrimvarReader_float2"
+            token inputs:varname = "st"
+            float2 outputs:result
+        }
+    }
+
+    def Cylinder "robot_stop_led"
+    {
+        uniform token axis = "Z"
+        double height = 0.0005
+        color3f[] primvars:displayColor = [(0.06, 0.08, 0.07)]
+        double radius = 0.003
+        double3 xformOp:translate = (0.14, -0.065, 0.7653)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Cube "pouch_seam" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.64, 0.65, 0.68)]
+        double size = 1
+        float3 xformOp:scale = (0.096, 0.066, 0.002)
+        double3 xformOp:translate = (-0.105, 0.02, 0.751)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Sphere "bulged_foil" (
+        prepend apiSchemas = ["PhysicsCollisionAPI"]
+    )
+    {
+        color3f[] primvars:displayColor = [(0.76, 0.77, 0.8)]
+        double radius = 1
+        float3 xformOp:scale = (0.045, 0.03, 0.014)
+        double3 xformOp:translate = (-0.105, 0.02, 0.765)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "tab_0"
+    {
+        color3f[] primvars:displayColor = [(0.72, 0.67, 0.51)]
+        double size = 1
+        float3 xformOp:scale = (0.01, 0.02, 0.0003)
+        double3 xformOp:translate = (-0.12, 0.061, 0.752)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def Cube "tab_1"
+    {
+        color3f[] primvars:displayColor = [(0.72, 0.67, 0.51)]
+        double size = 1
+        float3 xformOp:scale = (0.01, 0.02, 0.0003)
+        double3 xformOp:translate = (-0.09, 0.061, 0.752)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+
+    def "positive"
+    {
+        def Cylinder "segment_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.031638584039112745
+            color3f[] primvars:displayColor = [(0.75, 0.05, 0.035)]
+            double radius = 0.0014
+            quatf xformOp:orient = (0.7181946, -0.66013396, 0.22004466, 0)
+            double3 xformOp:translate = (-0.11499999999999999, 0.085, 0.7535000000000001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+
+        def Cylinder "segment_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.11045361017187261
+            color3f[] primvars:displayColor = [(0.75, 0.05, 0.035)]
+            double radius = 0.0014
+            quatf xformOp:orient = (0.70710677, -0.06401844, 0.70420283, 0)
+            double3 xformOp:translate = (-0.055, 0.10500000000000001, 0.754)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+
+        def Cylinder "segment_2"
+        {
+            uniform token axis = "Z"
+            double height = 0.07304792947099871
+            color3f[] primvars:displayColor = [(0.75, 0.05, 0.035)]
+            double radius = 0.0014
+            quatf xformOp:orient = (0.7355739, 0.18610832, 0.6513791, -0)
+            double3 xformOp:translate = (0.035, 0.1, 0.757)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def "negative"
+    {
+        def Cylinder "segment_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.018055470085267786
+            color3f[] primvars:displayColor = [(0.035, 0.04, 0.045)]
+            double radius = 0.0014
+            quatf xformOp:orient = (0.7264244, -0.57182354, 0.3812157, 0)
+            double3 xformOp:translate = (-0.08499999999999999, 0.07750000000000001, 0.7535000000000001)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+
+        def Cylinder "segment_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.09
+            color3f[] primvars:displayColor = [(0.035, 0.04, 0.045)]
+            double radius = 0.0014
+            quatf xformOp:orient = (0.70710677, 0, 0.70710677, 0)
+            double3 xformOp:translate = (-0.035, 0.085, 0.754)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+
+        def Cylinder "segment_2"
+        {
+            uniform token axis = "Z"
+            double height = 0.06112282715974451
+            color3f[] primvars:displayColor = [(0.035, 0.04, 0.045)]
+            double radius = 0.0014
+            quatf xformOp:orient = (0.74100035, 0.11039469, 0.6623681, -0)
+            double3 xformOp:translate = (0.04, 0.08, 0.757)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient"]
+        }
+    }
+
+    def Cube "connector"
+    {
+        color3f[] primvars:displayColor = [(0.65, 0.07, 0.04)]
+        double size = 1
+        float3 xformOp:scale = (0.015, 0.012, 0.008)
+        double3 xformOp:translate = (0.073, 0.0825, 0.76)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+    }
+}
+
