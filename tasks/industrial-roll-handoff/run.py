@@ -78,16 +78,22 @@ def main():
     receipt.write_text(json.dumps(manifest, indent=2) + "\n")
     with (out / "console.txt").open("w", encoding="utf-8") as console:
         code = subprocess.call(command, stdout=console, stderr=subprocess.STDOUT)
+    logs = list(out.glob("adhoc_*.json"))
+    valid_trial = False
+    if len(logs) == 1:
+        result = json.loads(logs[0].read_text())["results"]
+        valid_trial = result["errored_trials"] == 0 and result["total_trials"] == 1
     manifest.update(
-        status="finished" if code == 0 else "failed",
+        status="finished" if code == 0 and valid_trial else "failed",
         exit_code=code,
+        valid_trial=valid_trial,
         finished_utc=dt.datetime.now(dt.timezone.utc).isoformat(),
     )
     receipt.write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps({k: manifest[k] for k in ["policy", "status", "exit_code", "started_utc", "finished_utc"]}))
-    if code == 0:
+    if code == 0 and valid_trial:
         subprocess.run([sys.executable, str(folder / "export.py"), str(out)], check=True)
-    return code
+    return code if code != 0 else (0 if valid_trial else 1)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 # Full-size powered electrode-roll handoff
 
-Implementation and local tests are in progress. No physics or LLM score is claimed yet.
+Native implementation and 23 offline checks are complete. GPU and LLM validation
+are in progress; no physics or LLM score is claimed yet.
 This is a new task with a different embodiment and load path, not a resubmission
 of the rejected handheld mock.
 
@@ -35,6 +36,8 @@ damping 30 kNs/m; the lift axis is capped at 6 kN. Friction is 0.35 static and
 0.30 dynamic. These are stated fixture parameters, not measured specifications
 of a named commercial machine. Sensitivity and failure-control trials must
 accompany the nominal demo before a feasibility claim.
+Each fixed support frame is 120 x 800 x 1200 mm and reaches the floor from
+its specified 600 mm centre height.
 
 ## Run
 
@@ -45,6 +48,8 @@ source /data/IsaacLab-Arena/yam.env
 uv pip install --python /data/IsaacLab-Arena/.venv/bin/python --no-deps -e tasks/industrial-roll-handoff
 python tasks/industrial-roll-handoff/run.py demo --output evidence/industrial-demo-01
 python tasks/industrial-roll-handoff/run.py model --bridge /tmp/industrial-llm --output evidence/industrial-model-01
+python tasks/industrial-roll-handoff/run.py demo --lift-force 1000 --output evidence/industrial-weak-lift-01
+python tasks/industrial-roll-handoff/run.py demo --no-expand --output evidence/industrial-no-grip-01
 ```
 
 The embodiment is a powered transfer machine, with no bimanual YAM arms.
@@ -57,6 +62,8 @@ The separate demo controller is explicitly scripted.
 
 `run.py` records source hashes, exact commands, native exit status, trace and
 Inspect Robots logs. The maximum is 30 LLM calls / 2,400 control actions.
+Successful evaluation processes automatically export both complete camera
+streams into one H.264 video, with a display of actual trace readings.
 Geometry assets regenerate with `python -m industrial_roll.assets`.
 
 ## Measurement and physical reproduction

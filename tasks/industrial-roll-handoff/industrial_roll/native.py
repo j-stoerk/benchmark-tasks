@@ -247,7 +247,7 @@ def make_env(device="cuda:0", lift_force=6000):
         [
             _box("floor", (4, 4, 0.1), (0, 0, -0.05), (0.20, 0.22, 0.24)),
             _box("destination", (0.42, 0.02, 0.004), (0, spec.TARGET_Y, 0.003), (0.08, 0.75, 0.25)),
-            DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=3000, color=(1, 1, 1))),
+            DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=3000, color=(1.0, 1.0, 1.0))),
             roll,
         ]
     )
