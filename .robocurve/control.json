@@ -133,6 +133,143 @@
       ],
       "steps": 200,
       "rationale": "The full 8000/12000 N load is present. Gaps are now 620,660,700,740,780 um, so the centre has opened 500 um and the cross-width slope extrapolates to a further 100 um at each bearing. Close the left setting by 400 um and the right by 600 um, retain the proof force, and allow ten seconds for the slower right adjustment, settling, and the three-second loaded hold."
+    },
+    "film-model-04:001": {
+      "rationale": "The observed tool is level above the bead, with no contact and no deposited paint. Move to the bead's approach side, lower the feet gently to the plate using the finite-force servo, then carry the bead forward through most of the rectangle. Keep yaw/pitch/roll level and inspect coverage before finishing.",
+      "sequence": [
+        {
+          "action": [
+            0,
+            -0.115,
+            0.88,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 15
+        },
+        {
+          "action": [
+            0,
+            -0.115,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 45
+        },
+        {
+          "action": [
+            0,
+            -0.105,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 15
+        },
+        {
+          "action": [
+            0,
+            -0.095,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            -0.075,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            -0.055,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            -0.035,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            -0.015,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            0.005,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            0.025,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        },
+        {
+          "action": [
+            0,
+            0.045,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 10
+        }
+      ]
     }
   }
 }
