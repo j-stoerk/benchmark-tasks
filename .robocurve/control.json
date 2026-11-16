@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "slit-cooked-bore-02",
+    "id": "valve-smoke-09",
     "mode": "run",
-    "sha": "b8b23b8199977dbbd6a52354b681e2768cb4a19e",
-    "task": "slitter-blade-spacer-recipe",
+    "sha": "ce1f8fd18605d9e659ad11a13c82b3083869e0ab",
+    "task": "powder-transfer-split-valve",
     "trial": {
       "mode": "smoke",
-      "max_steps": 60,
+      "max_steps": 650,
       "variant": "normal"
     }
   },
