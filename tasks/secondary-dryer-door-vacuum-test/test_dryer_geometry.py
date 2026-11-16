@@ -69,9 +69,11 @@ class Geometry(unittest.TestCase):
 
     def test_door_mass_and_full_size_are_preserved(self):
         door = self.primitive("Door")
-        self.assertAlmostEqual(UsdPhysics.MassAPI(door).GetMassAttr().Get(), 25)
         _, half = self.box("Door/plate")
         self.assertTrue(np.allclose(2 * half, [0.560, 0.013, 0.560]))
+        self.assertAlmostEqual(
+            UsdPhysics.MassAPI(door).GetMassAttr().Get(), np.prod(2 * half) * 7850, places=4
+        )
         self.assertTrue(self.primitive("anchor"))
 
     def test_hard_stops_limit_a_four_mm_seal_to_twenty_percent_squeeze(self):

@@ -1,5 +1,6 @@
 """Original full-size vacuum-readiness fixture geometry; runtime coupling pending."""
 
+import math
 from pathlib import Path
 
 PACKAGE = Path(__file__).parent
@@ -75,10 +76,12 @@ def generate():
     box("Hinge/bearing_cover", (0.050, 0.050, 0.160), (0, 0, 0), collision=False)
     joint("hinge_float", "base", "Hinge", "Y", pivot, (-0.002, 0.002))
     door_dimensions = (0.560, 0.013, 0.560)
+    door_mass = math.prod(door_dimensions) * 7850
     inertia = [
-        25 * (door_dimensions[(i + 1) % 3] ** 2 + door_dimensions[(i + 2) % 3] ** 2) / 12 for i in range(3)
+        door_mass * (door_dimensions[(i + 1) % 3] ** 2 + door_dimensions[(i + 2) % 3] ** 2) / 12
+        for i in range(3)
     ]
-    body("Door", (0, -0.0165, 1.0), 25, inertia)
+    body("Door", (0, -0.0165, 1.0), door_mass, inertia)
     box("Door/plate", door_dimensions, (0, 0, 0), (0.25, 0.42, 0.60))
     box("Door/handle", (0.025, 0.040, 0.180), (0.220, -0.040, 0), collision=False)
     joint("door", "Hinge", "Door", "Z", (0, 0, 0), (-100, 0), rotary=True, child_anchor=(-0.280, 0, 0))

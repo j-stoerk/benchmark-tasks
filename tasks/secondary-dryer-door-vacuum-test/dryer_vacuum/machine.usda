@@ -312,8 +312,8 @@ def Xform "Machine" (
     )
     {
         point3f physics:centerOfMass = (0, 0, 0)
-        float3 physics:diagonalInertia = (0.6536854, 1.3066666, 0.6536854)
-        float physics:mass = 25
+        float3 physics:diagonalInertia = (0.83679265, 1.6726838, 0.83679265)
+        float physics:mass = 32.00288
         double3 xformOp:translate = (0, -0.0165, 1)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 

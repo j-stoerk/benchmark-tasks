@@ -44,7 +44,7 @@ venting, finite sonic flow and time-step convergence. Passing them validates
 these mathematical limits, not real seal calibration or task feasibility.
 
 The original geometry adds six offline checks: the actual500x500 mm pressure
-opening,25 kg full-size door,0.8 mm hard-stop-limited squeeze of a proposed4 mm
+opening,32.003 kg full-size solid steel door,0.8 mm hard-stop-limited squeeze of a proposed4 mm
 seal, parked-clamp clearance through the entire door sweep, swing-before-draw
 clearance and the2.8 mm draw distance to the compressed door. Sixteen contact
 shoes approximate one continuous seal. Their internal pair contacts are filtered;
@@ -56,8 +56,10 @@ applied to this CAD, so it cannot establish a loaded-door success.
 Sources and parameter boundaries:
 
 - [TOB BE-ZK-125L family](https://www.tobmachine.com/512l-vacuum-degassing-oven_p576.html):
-  500 x 500 x 500 mm chamber, 125 L and 130 kg whole unit. Proposed 25 kg door
-  and latch geometry are custom benchmark choices, not TOB specifications.
+  500 x 500 x 500 mm chamber, 125 L and 130 kg whole unit. The custom560x560x13 mm
+  solid steel door is32.003 kg at7850 kg/m3; its dimensions and latch geometry
+  are benchmark choices, not TOB specifications. Fixed-shell collider boxes
+  represent hollow/insulated panel envelopes, not solid20 mm steel walls.
 - [Leybold TRIVAC B](https://www.leybold.com/en/products/vacuum-pumps/oil-sealed-vacuum-pumps/rotary-vane-pumps-trivac-b):
   D16B pumping speed 16.5 m3/hour at 50 Hz is the reference scale. This model
   uses it as a constant chamber-side speed and omits the real pump curve and
