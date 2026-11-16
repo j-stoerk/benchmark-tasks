@@ -50,7 +50,10 @@ clearance and the2.8 mm draw distance to the compressed door. Sixteen contact
 shoes approximate one continuous seal. Their internal pair contacts are filtered;
 actual door contacts remain enabled. Proposed125 kN/m springs per segment,
 1 kN clamps and60 Nm door motor still require calibration and native validation.
-The gas core has13 checks and geometry6,19 total. No pressure force is yet
+The gas core has13 checks, geometry6 and the proposed measurement/scoring
+contract11,30 total. Contract checks reject pressure-only claims, missing native
+load reaction, door-motor support, pump-compensated leakage, a missing seal,
+unsafe opening/unlatching and interrupted holds. No pressure force is yet
 applied to this CAD, so it cannot establish a loaded-door success.
 
 Sources and parameter boundaries:
