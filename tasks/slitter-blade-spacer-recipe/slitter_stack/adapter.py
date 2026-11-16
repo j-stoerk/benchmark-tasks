@@ -149,6 +149,9 @@ class SlitterStack(EmbodimentBase):
         self.start()
         self.instruction = scene.instruction
         self.env.reset(seed=seed)
+        from .collider_audit import verify_cooked_bores
+
+        verify_cooked_bores(self.trace.parent if self.trace else None)
         self.command = spec.INITIAL.copy()
         self.proof = spec.Proof()
         for _ in range(40):

@@ -30,6 +30,7 @@ from isaaclab_physx.sim.schemas import (
     PhysxArticulationRootPropertiesCfg,
     PhysxCollisionPropertiesCfg,
     PhysxRigidBodyPropertiesCfg,
+    PhysxSDFMeshPropertiesCfg,
 )
 from yam_arena.scene import Object, ObjectType, _box, env_cfg_callback
 
@@ -334,7 +335,16 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
                 initial_pose=Pose(position_xyz=(0, 0, part["target_z"]) if contact_bench else (x, y, z)),
                 spawn_cfg_addon={
                     "physics_material": sim.RigidBodyMaterialCfg(static_friction=0.65, dynamic_friction=0.5),
-                    "collision_props": PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),
+                    "collision_props": PhysxCollisionPropertiesCfg(
+                        contact_offset=0.00002,
+                        rest_offset=0,
+                        mesh_collision_property=PhysxSDFMeshPropertiesCfg(
+                            sdf_resolution=512,
+                            sdf_subgrid_resolution=6,
+                            sdf_narrow_band_thickness=0.01,
+                            sdf_margin=0.01,
+                        ),
+                    ),
                     "rigid_props": PhysxRigidBodyPropertiesCfg(
                         disable_gravity=False,
                         max_depenetration_velocity=0.1,

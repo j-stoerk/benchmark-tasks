@@ -115,6 +115,11 @@ An infrastructure error is reported as a failed evaluation, never a model score.
 Reset checks every settling step. Invalid tooling before the policy acts raises
 an environment error and saves `invalid-reset.json`; it cannot become a model
 score. A task's subsequent latched physical workspace failure terminates at zero.
+The native preflight also queries the cooked SDF at the bore centre, shaft
+radius, ring material and outside the tooling. Missing SDF shapes or a filled
+bore raise an environment error and save `native-collider-audit.json`. The
+spawner explicitly requests the same 512-resolution sparse SDF properties as
+the USD. This checks actual cooking rather than trusting authored attributes.
 
 Original code and generated geometry: MIT, see LICENSE. Recheck the board and
 published benchmark objectives before submission; a generic ring-stacking
