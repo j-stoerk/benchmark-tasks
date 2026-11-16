@@ -109,6 +109,13 @@ class Contract(unittest.TestCase):
         proof.update(measurement(net=0), [0, 0, 1, 30, 0, 0])
         self.assertEqual(settle_detached(proof), (0.0, False))
 
+    def test_a_damaged_coupling_erases_partial_credit_and_latches_zero(self):
+        proof = load_proof()
+        result = proof.update(measurement(active=8, passive=5, net=0), [0, 0, 1, 30, 90, 0])
+        self.assertEqual(result, (0.0, False))
+        self.assertTrue(proof.invalid)
+        self.assertEqual(cycle(proof), (0.0, False))
+
     def test_each_half_must_reseat_before_separation(self):
         proof = load_proof()
         proof.update(measurement(active=90, passive=90, net=0), [0, 0, 1, 30, 90, 0])
@@ -176,7 +183,7 @@ class Contract(unittest.TestCase):
         self.assertEqual(spec.INITIAL.shape, (6,))
         self.assertTrue(np.all(spec.INITIAL >= spec.LOW))
         self.assertTrue(np.all(spec.INITIAL <= spec.HIGH))
-        self.assertAlmostEqual(7.675 + 0.125 + 8 * 0.025, spec.PAYLOAD)
+        self.assertAlmostEqual(7.500 + 0.300 + 8 * 0.025, spec.PAYLOAD)
 
 
 if __name__ == "__main__":

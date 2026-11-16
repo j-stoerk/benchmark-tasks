@@ -144,7 +144,10 @@ class Proof:
         # The 20-degree slots clear the 6.6-degree lug footprint only within
         # about 6.7 degrees of zero. At 10 degrees there is positive ledge
         # overlap; the pin interlock blocks unlocking before this boundary.
-        if not discs_closed and not (docked and q[3] >= 10):
+        # With the docked coupling engaged, a large relative rotor angle
+        # implies slipping through or damaging the mechanical drive dogs.
+        damaged_coupling = docked and q[3] >= 10 and abs(q[4] - q[5]) > 2
+        if damaged_coupling or (not discs_closed and not (docked and q[3] >= 10)):
             self.invalid = True
             return 0.0, False
         self.history.append(q.copy())
