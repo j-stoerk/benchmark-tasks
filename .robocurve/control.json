@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "slit-cpu-measured-bench-05",
+    "id": "slit-cpu-press-06",
     "mode": "run",
-    "sha": "bc8406e01c4c8b7af8ea5b9d3df761e5c1dc6c68",
+    "sha": "25490058c3ed9b20906c64a7d241b28faf71b9c3",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
