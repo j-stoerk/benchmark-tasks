@@ -179,10 +179,10 @@ class AssemblyMachine(EmbodimentBase):
                 ),
                 articulation_props=PhysxArticulationRootPropertiesCfg(
                     enabled_self_collisions=True,
-                    solver_position_iteration_count=64,
+                    solver_position_iteration_count=255,
                     solver_velocity_iteration_count=16,
                 ),
-                collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.001, rest_offset=0),
+                collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),
                 physics_material=sim.RigidBodyMaterialCfg(static_friction=0.65, dynamic_friction=0.5),
             ),
             init_state=ArticulationCfg.InitialStateCfg(
@@ -298,7 +298,7 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
             spawner_cfg=sim.CylinderCfg(
                 radius=spec.ARBOR_R,
                 height=0.4,
-                collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.001, rest_offset=0),
+                collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),
                 visual_material=sim.PreviewSurfaceCfg(diffuse_color=(0.48, 0.5, 0.53), roughness=0.35),
             ),
         ),
@@ -321,7 +321,7 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
                 spawner_cfg=sim.CylinderCfg(
                     radius=0.038,
                     height=0.05,
-                    collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.001, rest_offset=0),
+                    collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),
                     visual_material=sim.PreviewSurfaceCfg(diffuse_color=(0.18, 0.28, 0.38)),
                 ),
             )
@@ -334,11 +334,11 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
                 initial_pose=Pose(position_xyz=(0, 0, part["target_z"]) if contact_bench else (x, y, z)),
                 spawn_cfg_addon={
                     "physics_material": sim.RigidBodyMaterialCfg(static_friction=0.65, dynamic_friction=0.5),
-                    "collision_props": PhysxCollisionPropertiesCfg(contact_offset=0.001, rest_offset=0),
+                    "collision_props": PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),
                     "rigid_props": PhysxRigidBodyPropertiesCfg(
                         disable_gravity=False,
                         max_depenetration_velocity=0.1,
-                        solver_position_iteration_count=64,
+                        solver_position_iteration_count=255,
                         solver_velocity_iteration_count=16,
                     ),
                 },
