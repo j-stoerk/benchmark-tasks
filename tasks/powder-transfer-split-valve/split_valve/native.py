@@ -278,10 +278,10 @@ def make_env(device="cuda:0", variant="normal"):
         raise ValueError("Unknown control variant")
     objects = [
         _box("floor", (2, 2, 0.10), (0, 0, -0.05), (0.22, 0.24, 0.26)),
-        DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=800, color=(1, 1, 1))),
+        DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=800, color=(1.0, 1.0, 1.0))),
         DirectionalLight(
             initial_pose=Pose(position_xyz=(0, 0, 3), rotation_xyzw=(0, -0.382683, 0, 0.92388)),
-            spawner_cfg=sim.DistantLightCfg(intensity=500, color=(1, 1, 1)),
+            spawner_cfg=sim.DistantLightCfg(intensity=500, color=(1.0, 1.0, 1.0)),
         ),
     ]
 
