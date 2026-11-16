@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "slit-contact-bench-06",
+    "id": "slit-contact-bench-07",
     "mode": "run",
-    "sha": "cc39f2294a299892d25e457bf7c83c48b0f325d5",
+    "sha": "dbe09c1e3156c88ab3fd5abad38a7a15fe6832bd",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
-      "max_steps": 500,
+      "max_steps": 400,
       "variant": "contact-bench"
     }
   },
