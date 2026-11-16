@@ -39,7 +39,7 @@ only after actual alignment; retract commands raise it before parking. The
 carriage uses the same 3 MN/m, 15 kNs/m, 1 kN limited drive as the handling
 axes. This measured PLC sequence clears the arbor for incoming parts and
 does not handle or seat them. Allow approximately eight seconds for clamping.
-First park the handling head at XYZ=(0.60,-0.40,1.35) m; its upper carriage must
+First park the handling head at XYZ=(0.60,0.40,1.35) m; its upper carriage must
 also clear the pressure carriage's lateral route. Raising the tool alone does
 not clear those upper rails. The controller must select this parking motion.
 After assembly and release, the force-driven annular platen applies 500 N downward.

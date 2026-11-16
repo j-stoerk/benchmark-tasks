@@ -25,7 +25,7 @@ class Demo(PolicyBase):
         t = observation.state_time
         q = np.asarray(observation.state["machine_encoders"])
         if self.item >= len(spec.PARTS):
-            command = [0.60, -0.40, 1.35, 0, 0, 0]
+            command = [0.60, 0.40, 1.35, 0, 0, 0]
             if self.phase not in ("park", "clamp", "proof"):
                 self.phase, self.entered = "park", t
             if self.phase == "park" and np.max(np.abs(q[:3] - command[:3])) < 0.00025:
