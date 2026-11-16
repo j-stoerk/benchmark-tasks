@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "slit-demo-04",
+    "id": "valve-smoke-01",
     "mode": "run",
-    "sha": "b50663d216a739b724ceeb4ca53434e7b3c3ed7d",
-    "task": "slitter-blade-spacer-recipe",
+    "sha": "16d46fc16150f92e1ce1198a140f9d0d2ee41d1a",
+    "task": "powder-transfer-split-valve",
     "trial": {
-      "mode": "demo",
-      "max_steps": 2400,
+      "mode": "smoke",
+      "max_steps": 400,
       "variant": "normal"
     }
   },
