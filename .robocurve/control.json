@@ -1,7 +1,14 @@
 {
   "command": {
-    "id": "cancel-clarity-keep-original",
-    "mode": "exit"
+    "id": "slit-smoke-01",
+    "mode": "run",
+    "sha": "0a2b036fb76770fdcbb036008c59c6bc691d4a41",
+    "task": "slitter-blade-spacer-recipe",
+    "trial": {
+      "mode": "smoke",
+      "max_steps": 200,
+      "variant": "normal"
+    }
   },
   "responses": {
     "model-final-01:001": {
