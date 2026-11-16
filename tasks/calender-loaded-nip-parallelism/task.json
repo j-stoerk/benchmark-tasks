@@ -1,0 +1,20 @@
+{
+  "title": "Set a laboratory calender nip under a 20 kN separating load",
+  "category": "Impact on jobs",
+  "keywords": [
+    "battery electrodes",
+    "calender commissioning",
+    "loaded parallelism",
+    "gap metrology",
+    "compliance"
+  ],
+  "instruction": "Commission the laboratory calender's loaded nip. Using the left and right bearing adjustments and the five gap gauges, set all five gaps to 200 +/-10 micrometres. Turn on the separating proof load (8 kN left, 12 kN right), compensate the resulting gap and tilt changes, and hold all five gaps in range under the full load for 3 uninterrupted seconds. Leave the proof load on. Avoid roll contact.",
+  "context": "Battery electrode calenders need independently adjusted end gaps under load. This commissioning fixture tests measured gap compensation and parallelism; it does not test electrode density or porosity.",
+  "setup": "World Z up, Y along the roll axes; units m unless stated. Steel, rotation-locked lower and upper rolls are each diameter 0.200, face 0.300 and nominal roll mass 73.985 kg. Lower centre (0,0,0.300), upper reference centre (0,0,0.500). Floor 3x3x0.1 at Z=-0.05; anchored steel frame 250 kg plus lower roll, foot 0.6x0.65x0.08 at Z=0.04, two 0.16x0.07x0.7 posts at Y=+/-0.235,Z=0.43 and 0.18x0.53x0.08 crosshead at Z=0.78. Lower bearing blocks 0.14x0.06x0.12 at Y=+/-0.175,Z=0.30; upper blocks 0.14x0.04x0.10 at the matching upper axis. A 1 kg vertical guide carriage supports the upper tilt link, whose specified mass includes its bearing housings. Two equivalent bearing springs each have 20 MN/m stiffness and 30 kNs/m damping at Y=+/-0.175. Initial rest gaps left/right 650/350 micrometres; gravity acts during the two-second reset settling. Servo rest settings range -1200..2000 micrometres at 100 micrometres/s. Five ideal paired gap probes at Y=-0.14,-0.07,0,0.07,0.14 have 0.1 micrometre resolution, 4x12x0.9 mm heads at X=0.025,Z=0.4 and 160x6x1 mm arms to X=0.187. A red 8x300x8 mm upper-roll witness sits at local X=0.101. Ideal hydraulic service spreaders apply 8 kN left and 12 kN right upward at the upper bearings, ramping in five seconds. Their cylinder geometry is omitted; the native forces and moments are retained. Two cameras at (1.10,-0.95,1.0) and (0.45,0.55,0.55) look at (0,0,0.4). Gauge, applied-force and rest-setting readouts accompany RGB.",
+  "scoring": "Primary score is the final current outcome, never accumulated partial credit. 0.25: no proof force (both <10 N), stable upper roll and centre gap 200 +/-10 um. 0.5: the same with all five gaps 200 +/-10 um. 1.0: proof requested, actual left/right separating forces within 1% of 8000/12000 N, all five measured gaps 200 +/-10 um and vertical/angular speeds <5 um/s and 30 urad/s continuously for 3 s; leave the load on. Loss of any hold condition resets the interval. Any gap <=0 um, nonfinite/malformed state, vertical displacement outside +/-2.9 mm or tilt outside +/-9 mrad invalidates the whole trial until reset. Other outcomes score 0. Gaps are actual native cylinder separation, rounded to the 0.1 um instrument resolution. A real fixture uses calibrated paired gap/displacement probes, bearing load cells and a timer.",
+  "run_limit": "1200 control steps (60 s at 20 Hz); model additionally limited to 30 LLM calls with chunks of 1..200 steps",
+  "reset_notes": "Restore the initial rest settings, remove the proof force, reset both native joints and zero velocities, clear the scorer latch, then settle under gravity for 2 s. No consumables.",
+  "fidelity": "Native rigid full-size lab rolls, gravity, contact, finite spring drives and real applied proof wrench. Two 20 MN/m equivalent bearing springs are benchmark parameters, not OEM calibration. Rotation is locked. Ideal 0.1 um gauges derive actual cylinder separation. Hydraulic geometry, roll/frame bending, backlash, thermal crown, foil and densification are omitted. Claims cover commissioning this declared compliant fixture only.",
+  "scores": "Not yet evaluated; no model or physics success is claimed.",
+  "media": null
+}
