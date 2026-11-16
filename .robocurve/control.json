@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "slit-sdf-gravity-02",
+    "id": "slit-contact-bench-10",
     "mode": "run",
-    "sha": "d188c7498b7620f0f4e8cc32097903075708328c",
+    "sha": "f7efc2c415e3fc06f49282bed08f3aabf28740c1",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
-      "max_steps": 100,
-      "variant": "normal"
+      "max_steps": 400,
+      "variant": "contact-bench"
     }
   },
   "responses": {
