@@ -1,7 +1,14 @@
 {
   "command": {
-    "id": "lab-probe-01",
-    "mode": "probe"
+    "id": "film-smoke-01",
+    "mode": "run",
+    "sha": "bc50bd14ea89719b795a2fee17600173ef8f71c4",
+    "task": "lab-film-drawdown",
+    "trial": {
+      "mode": "smoke",
+      "max_steps": 200,
+      "variant": "normal"
+    }
   },
   "responses": {
     "model-final-01:001": {
