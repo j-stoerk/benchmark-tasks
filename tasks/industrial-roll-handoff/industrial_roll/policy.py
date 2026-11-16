@@ -17,23 +17,36 @@ class Demo(PolicyBase):
         self.expand = bool(expand)
 
     def reset(self, scene):
-        pass
+        self.z = 1.0
+        self.unloaded_seconds = 0.0
+        self.withdraw_at = None
 
     def act(self, observation):
         t = observation.state_time
-        command = [0, 0, 1, 0, 0, 0]
+        command = [0, 0, self.z, 0, 0, 0]
         if t >= 2:
             command[0] = 0.24
         if t >= 9 and self.expand:
             command[3] = 1
-        if t >= 12:
+        if t >= 12 and self.withdraw_at is None:
+            load = float(observation.state["donor_support"][0])
+            if load < 200 and np.min(observation.state["jaw_forces"]) >= 500:
+                self.unloaded_seconds += 1 / spec.HZ
+            else:
+                self.unloaded_seconds = 0.0
+                self.z = min(1.004, self.z + 0.000025)
+            command[2] = self.z
+            if self.unloaded_seconds >= 0.30:
+                self.withdraw_at = t
+        if self.withdraw_at is not None:
+            elapsed = t - self.withdraw_at
             command[4] = 1
-        if t >= 20:
-            command[2] = 1.08
-        if t >= 25:
-            command[1] = 0.35
-        if t >= 36:
-            command[5] = 1
+            if elapsed >= 8:
+                command[2] = 1.082
+            if elapsed >= 12:
+                command[1] = 0.35
+            if elapsed >= 19:
+                command[5] = 1
         return ActionChunk(actions=[Action(data=np.array(command, float))], control_hz=spec.HZ)
 
 
@@ -73,6 +86,7 @@ class ExternalLLM(PolicyBase):
             "operating_notes": spec.DOCS,
             "machine_encoders": np.asarray(observation.state["machine_encoders"]).tolist(),
             "jaw_forces": np.asarray(observation.state["jaw_forces"]).tolist(),
+            "donor_support": np.asarray(observation.state["donor_support"]).tolist(),
             "images": images,
             "response_schema": {
                 "action": "six numbers per operating notes",

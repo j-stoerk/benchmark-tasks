@@ -20,7 +20,8 @@ INITIAL = np.array([0, 0.012, 0.985, 0, 0, 0], float)
 JOINT_NAMES = ["slide_x", "slide_y", "slide_z", "jaw_0", "jaw_1", "jaw_2"]
 INSTRUCTION = (
     "Transfer the full 200 kg electrode roll from the donor shaft to the powered receiving chuck. "
-    "Align and insert the receiver, expand its core grip, then withdraw the donor. Lift and move the supported "
+    "Align and insert the receiver, expand its core grip, and use the force gauges to transfer support "
+    "before withdrawing the donor. Lift and move the supported "
     "roll to y=350 mm, axis height 1080 mm. Stop the carriage and pass the two-second retention test "
     "under 25 N m torque and 300 N axial pull. Do not drop the roll or rely on the donor during the test."
 )
@@ -38,6 +39,8 @@ axis Z, mean normalized jaw extension, donor withdrawal fraction, last proof com
 No roll pose, scoring flags or success oracle is given to the policy.
 Three ideal pad-force gauges report actual contact-force magnitudes in N;
 all three must exceed 500 N before the donor is withdrawn.
+donor_support is the actual donor normal-force resultant in N. Use this physical
+gauge to preload the receiver and unload the donor before axial withdrawal.
 """
 
 

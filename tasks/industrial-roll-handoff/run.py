@@ -8,6 +8,7 @@ import json
 import shutil
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -77,7 +78,30 @@ def main():
     receipt = out / "run_manifest.json"
     receipt.write_text(json.dumps(manifest, indent=2) + "\n")
     with (out / "console.txt").open("w", encoding="utf-8") as console:
-        code = subprocess.call(command, stdout=console, stderr=subprocess.STDOUT)
+        process = subprocess.Popen(command, stdout=console, stderr=subprocess.STDOUT)
+        while process.poll() is None:
+            time.sleep(10)
+            trace = out / "physics.jsonl"
+            if trace.exists():
+                try:
+                    with trace.open("rb") as stream:
+                        stream.seek(max(0, trace.stat().st_size - 8000))
+                        last = json.loads(stream.read().splitlines()[-1])
+                    info = last["info"]
+                    print(
+                        json.dumps(
+                            {
+                                "simulation_s": last["t"],
+                                "score": info["score"],
+                                "proof_s": info["proof_seconds"],
+                                "physics": info["physics"],
+                            }
+                        ),
+                        flush=True,
+                    )
+                except (IndexError, json.JSONDecodeError):
+                    pass  # A concurrent write is retried on the next progress tick.
+        code = process.wait()
     logs = list(out.glob("adhoc_*.json"))
     valid_trial = False
     if len(logs) == 1:

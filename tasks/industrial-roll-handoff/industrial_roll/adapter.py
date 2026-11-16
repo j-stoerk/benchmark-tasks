@@ -29,7 +29,11 @@ class IndustrialRoll(EmbodimentBase):
             observation_space=ObservationSpace(
                 cameras=tuple(CameraSpec(name, 360, 640) for name in ("overview_cam", "core_cam")),
                 state=StateSpec(
-                    fields=(StateField("machine_encoders", (6,), "m+normalized"), StateField("jaw_forces", (3,), "N"))
+                    fields=(
+                        StateField("machine_encoders", (6,), "m+normalized"),
+                        StateField("jaw_forces", (3,), "N"),
+                        StateField("donor_support", (1,), "N"),
+                    )
                 ),
             ),
             control_hz=spec.HZ,
@@ -108,7 +112,13 @@ class IndustrialRoll(EmbodimentBase):
         state = np.array([-q[0], q[1], 1 + q[2], np.mean(q[3:]) / spec.EXPAND_TARGET, -d / 0.4, self.command[5]])
         return Observation(
             images=images,
-            state={"machine_encoders": state, "jaw_forces": self.jaw_forces()},
+            state={
+                "machine_encoders": state,
+                "jaw_forces": self.jaw_forces(),
+                "donor_support": np.array(
+                    [np.linalg.norm(numpy(self.base.scene["donor_contact"].data.net_normal_forces_w)[0])]
+                ),
+            },
             instruction=self.instruction,
             state_time=self.t,
             image_times=dict.fromkeys(images, self.t),
