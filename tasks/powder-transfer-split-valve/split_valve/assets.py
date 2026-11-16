@@ -4,7 +4,7 @@ import math
 from pathlib import Path
 
 PACKAGE = Path(__file__).parent
-SECTORS = 96
+SECTORS = 48
 
 
 def generate():
@@ -160,7 +160,7 @@ def generate():
                 0,
                 (0.18, 0.20, 0.22),
                 (0.0509, 0),
-                12,
+                6,
             )
             joint(f"seal_{half}_{i}", parent, name, "X", pos, (-0.001, 0.003), angle=angle)
     fixed = UsdPhysics.FixedJoint.Define(stage, "/Machine/anchor")

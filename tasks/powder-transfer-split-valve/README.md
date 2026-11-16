@@ -2,7 +2,7 @@
 
 Dock an 8 kg supported container half, lock three real lugs, retain a net 100 N separation load with the vertical positioning drive disabled, open both complementary discs through native face contact, reseat, unlock and undock. This is a custom mechanical fixture for battery-ingredient handling; it does not test powder transfer or certify containment.
 
-GEA BUCK describes two independently sealing halves, a central locking/operating ring and DN100–250 sizes: https://www.gea.com/en/products/pumps-valves-flow-components/powder-valves-airlocks/containment-valves/buck-containment-valve/ . DN100 is representative. The 8 kg payload, lug dimensions, loads, springs and tolerances are explicitly specified fixture parameters, not asserted OEM specifications. Do not extrapolate dry contact success to contamination control.
+GEA BUCK describes two independently sealing halves, a central locking/operating ring and DN100â€“250 sizes: https://www.gea.com/en/products/pumps-valves-flow-components/powder-valves-airlocks/containment-valves/buck-containment-valve/ . DN100 is representative. The 8 kg payload, lug dimensions, loads, springs and tolerances are explicitly specified fixture parameters, not asserted OEM specifications. Do not extrapolate dry contact success to contamination control.
 
 ## Runtime
 
@@ -20,4 +20,6 @@ Every trial uses a fresh output directory and seed zero. `run.py` launches Inspe
 
 `task.json` defines the complete fixed setup and rubric. `split_valve/spec.py` evaluates actual measurements, `assets.py` reproducibly authors `machine.usda`, and `native.py` builds the Arena articulation. `adapter.py` exposes only practical readouts, not success flags. `export.py` exports full recorded frames at their native rate with trace-derived instrument captions. During the load proof, vertical effort is exactly upper payload weight plus 100 N; stiffness and damping are zero, so an unlocked upper half can physically separate. The `unlocked-proof` negative demonstration deliberately omits collar locking. The seal sensors filter contacts against their own disc, and the retention sensor filters against the collar.
 
-The sixteen 10 kN/m seal-carrier springs are a reduced seating model; leakage, dust, wear and chemical compatibility are excluded. The discrete 480 Hz solver and 96-sector geometry need native validation against the specified tolerances. A full native demo, real LLM recording and negative control must precede submission.
+The sixteen 10 kN/m seal-carrier springs are a reduced seating model; leakage, dust, wear and chemical compatibility are excluded. The discrete 240 Hz solver and 48-sector geometry need native validation against the specified tolerances. A full native demo, real LLM recording and negative control must precede submission.
+
+The 48-sided disc boundary has at most 0.11 mm radial faceting error. The eight seal shoes use the same angular discretization. This reduced mechanical model does not resolve microscopic seal leakage. The 240 Hz step and specified 25 mm/s translation / 30 deg/s rotor speeds keep substep motion below 0.12 mm at the disc edge; native contact, retention and negative-control validation remain required.

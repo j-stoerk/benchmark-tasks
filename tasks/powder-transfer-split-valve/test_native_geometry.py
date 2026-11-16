@@ -1,0 +1,91 @@
+"""Check the authored solids' swept clearance and interlock engagement offline."""
+
+import math
+import unittest
+from pathlib import Path
+
+import numpy as np
+from pxr import Usd, UsdPhysics
+
+
+def rotation(axis, angle):
+    c, s = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+    if axis == "Y":
+        return np.array([[c, 0, s], [0, 1, 0], [-s, 0, c]])
+    return np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
+
+
+def box(stage, path, axis, angle):
+    prim = stage.GetPrimAtPath("/Machine/" + path)
+    matrix = rotation(axis, angle)
+    centre = matrix @ np.asarray(prim.GetAttribute("xformOp:translate").Get(), float)
+    half = np.asarray(prim.GetAttribute("xformOp:scale").Get(), float) / 2
+    return centre, matrix, half
+
+
+def intersects(first, second):
+    a, ra, ha = first
+    b, rb, hb = second
+    axes = [*ra.T, *rb.T, *[np.cross(x, y) for x in ra.T for y in rb.T]]
+    for vector in axes:
+        if np.linalg.norm(vector) < 1e-10:
+            continue
+        vector = vector / np.linalg.norm(vector)
+        radius_a = sum(abs(vector @ ra[:, i]) * ha[i] for i in range(3))
+        radius_b = sum(abs(vector @ rb[:, i]) * hb[i] for i in range(3))
+        if abs(vector @ (b - a)) > radius_a + radius_b:
+            return False
+    return True
+
+
+class Geometry(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.stage = Usd.Stage.Open(str(Path(__file__).parent / "split_valve/machine.usda"))
+
+    def test_detached_upper_payload_mass_is_representative(self):
+        names = ["Upper", "Passive", *[f"Seal_upper_{i}" for i in range(8)]]
+        total = sum(
+            UsdPhysics.MassAPI(self.stage.GetPrimAtPath("/Machine/" + name)).GetMassAttr().Get()
+            for name in names
+        )
+        self.assertAlmostEqual(total, 8, places=5)
+
+    def test_pins_clear_the_entire_continuous_rim_and_bridge(self):
+        radii = []
+        for prim in self.stage.Traverse():
+            if str(prim.GetPath()).startswith(("/Machine/Collar/rim/", "/Machine/Collar/bridge/")):
+                points = prim.GetAttribute("points").Get()
+                if points:
+                    radii.extend(np.linalg.norm(np.asarray(points)[:, :2], axis=1))
+        self.assertTrue(radii)
+        for pin in ("closed_pin", "open_pin"):
+            centre, _, half = box(self.stage, "Active/" + pin, "Y", 0)
+            self.assertGreater(centre[1] - half[1] - max(radii), 0.010)
+
+    def test_unlocked_block_physically_prevents_opening(self):
+        block = box(self.stage, "Collar/interlock", "Z", 0)
+        self.assertFalse(intersects(box(self.stage, "Active/closed_pin", "Y", 0), block))
+        self.assertTrue(intersects(box(self.stage, "Active/closed_pin", "Y", 5), block))
+
+    def test_locked_collar_allows_the_full_disc_sweep(self):
+        obstacles = ["interlock", "interlock_support", "interlock_standoff"]
+        for angle in range(0, 91, 2):
+            for pin in ("closed_pin", "open_pin"):
+                for obstacle in obstacles:
+                    self.assertFalse(
+                        intersects(
+                            box(self.stage, "Active/" + pin, "Y", angle),
+                            box(self.stage, "Collar/" + obstacle, "Z", 30),
+                        ),
+                        (angle, pin, obstacle),
+                    )
+
+    def test_open_pin_blocks_before_the_retaining_overlap_is_lost(self):
+        pin = box(self.stage, "Active/open_pin", "Y", 90)
+        self.assertTrue(intersects(pin, box(self.stage, "Collar/interlock", "Z", 10)))
+        self.assertFalse(intersects(pin, box(self.stage, "Collar/interlock", "Z", 30)))
+
+
+if __name__ == "__main__":
+    unittest.main()

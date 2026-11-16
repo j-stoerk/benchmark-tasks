@@ -287,9 +287,9 @@ def make_env(device="cuda:0", variant="normal"):
 
     def configure(cfg):
         env_cfg_callback(spec.HZ)(cfg)
-        cfg.sim.dt = 1 / 480
-        cfg.decimation = 24
-        cfg.sim.render_interval = 24
+        cfg.sim.dt = 1 / 240
+        cfg.decimation = 12
+        cfg.sim.render_interval = 12
         return cfg
 
     environment = IsaacLabArenaEnvironment(
