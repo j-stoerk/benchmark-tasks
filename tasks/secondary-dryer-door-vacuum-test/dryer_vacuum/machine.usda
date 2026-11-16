@@ -1,0 +1,1553 @@
+#usda 1.0
+(
+    defaultPrim = "Machine"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Machine" (
+    prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+)
+{
+    def Xform "base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 100
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "left" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.02, 0.5, 0.54)
+            double3 xformOp:translate = (-0.26, 0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "right" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.02, 0.5, 0.54)
+            double3 xformOp:translate = (0.26, 0.25, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "top" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.54, 0.5, 0.02)
+            double3 xformOp:translate = (0, 0.25, 1.26)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "bottom" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.54, 0.5, 0.02)
+            double3 xformOp:translate = (0, 0.25, 0.74)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "back" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.54, 0.02, 0.54)
+            double3 xformOp:translate = (0, 0.51, 1)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "leg_0_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.05, 0.05, 0.72)
+            double3 xformOp:translate = (-0.23, 0.05, 0.36)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "foot_0_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.12, 0.02)
+            double3 xformOp:translate = (-0.23, 0.05, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "leg_0_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.05, 0.05, 0.72)
+            double3 xformOp:translate = (-0.23, 0.45, 0.36)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "foot_0_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.12, 0.02)
+            double3 xformOp:translate = (-0.23, 0.45, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "leg_1_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.05, 0.05, 0.72)
+            double3 xformOp:translate = (0.23, 0.05, 0.36)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "foot_1_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.12, 0.02)
+            double3 xformOp:translate = (0.23, 0.05, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "leg_1_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.05, 0.05, 0.72)
+            double3 xformOp:translate = (0.23, 0.45, 0.36)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "foot_1_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.12, 0.02)
+            double3 xformOp:translate = (0.23, 0.45, 0.01)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "stop_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.75, 0.58, 0.15)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.02, 0.025)
+            double3 xformOp:translate = (-0.2725, 0.0008, 0.7275)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "stop_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.75, 0.58, 0.15)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.02, 0.025)
+            double3 xformOp:translate = (0.2725, 0.0008, 0.7275)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "stop_2" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.75, 0.58, 0.15)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.02, 0.025)
+            double3 xformOp:translate = (-0.2725, 0.0008, 1.2725)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "stop_3" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.75, 0.58, 0.15)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.02, 0.025)
+            double3 xformOp:translate = (0.2725, 0.0008, 1.2725)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "clamp_bracket_0" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.1, 0.12, 0.06)
+            double3 xformOp:translate = (0.305, 0.07, 0.82)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "clamp_bracket_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.1, 0.12, 0.06)
+            double3 xformOp:translate = (0.305, 0.07, 1.18)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "valve_manifold" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.1, 0.1, 0.3)
+            double3 xformOp:translate = (-0.335, 0.2, 1.12)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "manifold_bracket" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.1, 0.15, 0.04)
+            double3 xformOp:translate = (-0.3, 0.2, 0.95)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "PumpValve_stem"
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.012, 0.1, 0.012)
+            double3 xformOp:translate = (-0.35, 0.15, 1.22)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "VentValve_stem"
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.012, 0.1, 0.012)
+            double3 xformOp:translate = (-0.35, 0.15, 1.02)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Hinge" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+        float physics:mass = 2
+        double3 xformOp:translate = (-0.28, -0.0165, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "bearing_cover"
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.05, 0.05, 0.16)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "hinge_float" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Hinge>
+        point3f physics:localPos0 = (-0.28, -0.0165, 1)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.002
+        float physics:upperLimit = 0.002
+    }
+
+    def Xform "Door" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.6536854, 1.3066666, 0.6536854)
+        float physics:mass = 25
+        double3 xformOp:translate = (0, -0.0165, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "plate" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.25, 0.42, 0.6)]
+            double size = 1
+            float3 xformOp:scale = (0.56, 0.013, 0.56)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "handle"
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.025, 0.04, 0.18)
+            double3 xformOp:translate = (0.22, -0.04, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsRevoluteJoint "door" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 0
+        float drive:angular:physics:maxForce = 1000
+        float drive:angular:physics:stiffness = 0
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Hinge>
+        rel physics:body1 = </Machine/Door>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (-0.28, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -100
+        float physics:upperLimit = 0
+    }
+
+    def Xform "Seal_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.1875, -0.008, 0.75)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_0" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_0>
+        point3f physics:localPos0 = (-0.1875, -0.008, 0.75)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.0625, -0.008, 0.75)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_1" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_1>
+        point3f physics:localPos0 = (-0.0625, -0.008, 0.75)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_2" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.0625, -0.008, 0.75)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_2" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_2>
+        point3f physics:localPos0 = (0.0625, -0.008, 0.75)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_3" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.1875, -0.008, 0.75)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_3" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_3>
+        point3f physics:localPos0 = (0.1875, -0.008, 0.75)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_4" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.25, -0.008, 0.8125)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_4" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_4>
+        point3f physics:localPos0 = (0.25, -0.008, 0.8125)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_5" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.25, -0.008, 0.9375)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_5" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_5>
+        point3f physics:localPos0 = (0.25, -0.008, 0.9375)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_6" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.25, -0.008, 1.0625)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_6" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_6>
+        point3f physics:localPos0 = (0.25, -0.008, 1.0625)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_7" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.25, -0.008, 1.1875)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_7" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_7>
+        point3f physics:localPos0 = (0.25, -0.008, 1.1875)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_8" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.1875, -0.008, 1.25)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_8" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_8>
+        point3f physics:localPos0 = (-0.1875, -0.008, 1.25)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_9" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.0625, -0.008, 1.25)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_9" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_9>
+        point3f physics:localPos0 = (-0.0625, -0.008, 1.25)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_10" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.0625, -0.008, 1.25)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_10" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_10>
+        point3f physics:localPos0 = (0.0625, -0.008, 1.25)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_11" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (3.3333333e-7, 0.000065370834, 0.00006517083)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (0.1875, -0.008, 1.25)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.125, 0.004, 0.008)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_11" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_11>
+        point3f physics:localPos0 = (0.1875, -0.008, 1.25)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_12" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.25, -0.008, 0.8125)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_12" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_12>
+        point3f physics:localPos0 = (-0.25, -0.008, 0.8125)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_13" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_14>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.25, -0.008, 0.9375)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_13" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_13>
+        point3f physics:localPos0 = (-0.25, -0.008, 0.9375)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_14" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_15>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.25, -0.008, 1.0625)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_14" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_14>
+        point3f physics:localPos0 = (-0.25, -0.008, 1.0625)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Seal_15" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI", "PhysicsFilteredPairsAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.00006517083, 0.000065370834, 3.3333333e-7)
+        rel physics:filteredPairs = [
+            </Machine/Seal_0>,
+            </Machine/Seal_1>,
+            </Machine/Seal_2>,
+            </Machine/Seal_3>,
+            </Machine/Seal_4>,
+            </Machine/Seal_5>,
+            </Machine/Seal_6>,
+            </Machine/Seal_7>,
+            </Machine/Seal_8>,
+            </Machine/Seal_9>,
+            </Machine/Seal_10>,
+            </Machine/Seal_11>,
+            </Machine/Seal_12>,
+            </Machine/Seal_13>,
+            </Machine/Seal_14>,
+        ]
+        float physics:mass = 0.05
+        double3 xformOp:translate = (-0.25, -0.008, 1.1875)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "shoe" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.1, 0.11, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.008, 0.004, 0.125)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "seal_15" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Seal_15>
+        point3f physics:localPos0 = (-0.25, -0.008, 1.1875)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.0005
+        float physics:upperLimit = 0.0012
+    }
+
+    def Xform "Draw_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+        float physics:mass = 2
+        double3 xformOp:translate = (0.335, -0.05, 0.82)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.06, 0.12, 0.06)
+            double3 xformOp:translate = (0, 0.02, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "draw_0" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Draw_0>
+        point3f physics:localPos0 = (0.335, -0.05, 0.82)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 0.01
+    }
+
+    def Xform "Clamp_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.5
+        double3 xformOp:translate = (0.335, -0.05, 0.82)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "arm" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.7, 0.53, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.02, 0.02, 0.14)
+            double3 xformOp:translate = (0, 0, -0.06)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "pad" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.026, 0.02, 0.03)
+            double3 xformOp:translate = (0, 0.015, -0.12)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsRevoluteJoint "swing_0" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 0
+        float drive:angular:physics:maxForce = 1000
+        float drive:angular:physics:stiffness = 0
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/Draw_0>
+        rel physics:body1 = </Machine/Clamp_0>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 90
+    }
+
+    def Xform "Draw_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (0.001, 0.001, 0.001)
+        float physics:mass = 2
+        double3 xformOp:translate = (0.335, -0.05, 1.18)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.06, 0.12, 0.06)
+            double3 xformOp:translate = (0, 0.02, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "draw_1" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Draw_1>
+        point3f physics:localPos0 = (0.335, -0.05, 1.18)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 0.01
+    }
+
+    def Xform "Clamp_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.5
+        double3 xformOp:translate = (0.335, -0.05, 1.18)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "arm" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.7, 0.53, 0.12)]
+            double size = 1
+            float3 xformOp:scale = (0.02, 0.02, 0.14)
+            double3 xformOp:translate = (0, 0, -0.06)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "pad" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.42, 0.46, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.026, 0.02, 0.03)
+            double3 xformOp:translate = (0, 0.015, -0.12)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsRevoluteJoint "swing_1" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 0
+        float drive:angular:physics:maxForce = 1000
+        float drive:angular:physics:stiffness = 0
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/Draw_1>
+        rel physics:body1 = </Machine/Clamp_1>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 90
+    }
+
+    def Xform "PumpValve" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.1
+        double3 xformOp:translate = (-0.35, 0.1, 1.22)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "lever" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.2, 0.45, 0.75)]
+            double size = 1
+            float3 xformOp:scale = (0.015, 0.08, 0.015)
+            double3 xformOp:translate = (0, -0.04, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsRevoluteJoint "pump_valve" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 0
+        float drive:angular:physics:maxForce = 1000
+        float drive:angular:physics:stiffness = 0
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "X"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/PumpValve>
+        point3f physics:localPos0 = (-0.35, 0.1, 1.22)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 90
+    }
+
+    def Xform "VentValve" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float physics:mass = 0.1
+        double3 xformOp:translate = (-0.35, 0.1, 1.02)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "lever" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            color3f[] primvars:displayColor = [(0.75, 0.35, 0.18)]
+            double size = 1
+            float3 xformOp:scale = (0.015, 0.08, 0.015)
+            double3 xformOp:translate = (0, -0.04, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsRevoluteJoint "vent_valve" (
+        prepend apiSchemas = ["PhysicsDriveAPI:angular"]
+    )
+    {
+        float drive:angular:physics:damping = 0
+        float drive:angular:physics:maxForce = 1000
+        float drive:angular:physics:stiffness = 0
+        uniform token drive:angular:physics:type = "force"
+        uniform token physics:axis = "X"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/VentValve>
+        point3f physics:localPos0 = (-0.35, 0.1, 1.02)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 90
+    }
+
+    def PhysicsFixedJoint "anchor"
+    {
+        rel physics:body1 = </Machine/base>
+    }
+}
+

@@ -1,13 +1,15 @@
 # Secondary-dryer vacuum-readiness fixture: partial implementation
 
-This folder currently implements the reduced gas model and its verification.
-It has no native door, hinge, gasket, clamp or valve scene, no demonstrated
-full-score trial, and no model evaluation. It is not ready for submission.
+This folder contains the reduced gas model and original articulated USD geometry
+for a full-size door, floating hinge, seal carriers, swing/screw clamps and valves.
+It has not been loaded and controlled in Isaac, has no native pressure coupling,
+no demonstrated full-score trial and no model evaluation. It is not ready for submission.
 
 Run the offline checks from this folder:
 
 ```sh
 python -m unittest discover -s . -p 'test_*.py'
+python -m dryer_vacuum.assets
 ```
 
 The intended scope is closure and mechanical vacuum readiness of a full-size
@@ -40,6 +42,16 @@ The checks cover analytical pump-down, mass and pV conservation, pressure-force
 sign and magnitude, an individual hidden seal gap, an open door, isolation,
 venting, finite sonic flow and time-step convergence. Passing them validates
 these mathematical limits, not real seal calibration or task feasibility.
+
+The original geometry adds six offline checks: the actual500x500 mm pressure
+opening,25 kg full-size door,0.8 mm hard-stop-limited squeeze of a proposed4 mm
+seal, parked-clamp clearance through the entire door sweep, swing-before-draw
+clearance and the2.8 mm draw distance to the compressed door. Sixteen contact
+shoes approximate one continuous seal. Their internal pair contacts are filtered;
+actual door contacts remain enabled. Proposed125 kN/m springs per segment,
+1 kN clamps and60 Nm door motor still require calibration and native validation.
+The gas core has13 checks and geometry6,19 total. No pressure force is yet
+applied to this CAD, so it cannot establish a loaded-door success.
 
 Sources and parameter boundaries:
 
