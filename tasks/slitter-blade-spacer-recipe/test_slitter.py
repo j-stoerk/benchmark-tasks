@@ -56,6 +56,19 @@ def test_unclamped_stack_only_gets_preparation_credit():
         assert p.update(row, True) == (0.25, False)
 
 
+def test_initial_magazine_layout_is_valid_without_being_assembled():
+    row = ready()
+    for part in spec.PARTS:
+        row["parts"][part["name"]]["pos"] = part["source"]
+    row["tool"] = spec.INITIAL.tolist()
+    row["clamp_contact_N"] = 0
+    row["clamp_y"] = -0.45
+    row["clamp_z"] = 1.25
+    result = spec.geometry(row)
+    assert result["valid"]
+    assert not result["assembled"]
+
+
 def test_clamped_without_proof_only_half_credit():
     row = ready()
     row["applied_proof"] = [0, 0]

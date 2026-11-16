@@ -112,6 +112,9 @@ The full-score demo and model run must match the submitted package. Videos
 contain all recorded native RGB frames at 20 fps, with a measurement overlay
 derived from the trace. New evidence directories are required for each run.
 An infrastructure error is reported as a failed evaluation, never a model score.
+Reset checks every settling step. Invalid tooling before the policy acts raises
+an environment error and saves `invalid-reset.json`; it cannot become a model
+score. A task's subsequent latched physical workspace failure terminates at zero.
 
 Original code and generated geometry: MIT, see LICENSE. Recheck the board and
 published benchmark objectives before submission; a generic ring-stacking

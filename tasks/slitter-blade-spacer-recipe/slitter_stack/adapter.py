@@ -153,6 +153,16 @@ class SlitterStack(EmbodimentBase):
         self.proof = spec.Proof()
         for _ in range(40):
             self.env.step(self.native_action(self.command))
+            reading = self.readout()
+            if not spec.geometry(reading)["valid"]:
+                if self.trace:
+                    self.trace.parent.mkdir(parents=True, exist_ok=True)
+                    (self.trace.parent / "invalid-reset.json").write_text(
+                        json.dumps(reading, indent=2) + "\n", encoding="utf-8"
+                    )
+                raise RuntimeError(
+                    "Native reset produced invalid tooling before the policy acted; this is an environment error, not a model task score"
+                )
         for _ in range(4):
             self.base.sim.render()
         self.t = 0.0
@@ -184,8 +194,8 @@ class SlitterStack(EmbodimentBase):
                 stream.write(json.dumps({"t": self.t, "info": info}) + "\n")
         return StepResult(
             observation=self.observation(),
-            terminated=success,
-            termination_reason="success" if success else None,
+            terminated=success or self.proof.invalid,
+            termination_reason="success" if success else ("hard_failure" if self.proof.invalid else None),
             info=info,
         )
 
