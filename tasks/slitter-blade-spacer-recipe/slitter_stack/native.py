@@ -54,6 +54,7 @@ class AssemblyAction(ActionTerm):
         self.force = torch.zeros((env.num_envs, 1, 3), device=self.device)
         self.torque = self.force.clone()
         self.applied_proof = torch.zeros((env.num_envs, 2), device=self.device)
+        self.lateral_target = torch.full((env.num_envs, 1), -0.45, device=self.device)
 
     @property
     def action_dim(self):
@@ -86,7 +87,8 @@ class AssemblyAction(ActionTerm):
         park = torch.full_like(press_y, -0.45)
         raised = press_z > 0.0495
         desired_lateral = torch.where(requested, torch.zeros_like(press_y), park)
-        lateral = torch.where(raised, desired_lateral, press_y)
+        self.lateral_target[:] = torch.where(raised, desired_lateral, self.lateral_target)
+        lateral = self.lateral_target
         if hasattr(self.robot, "set_joint_position_target_index"):
             self.robot.set_joint_position_target_index(target=xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target_index(target=jaws, joint_ids=self.ids[3:])
@@ -121,6 +123,7 @@ class AssemblyAction(ActionTerm):
         self._raw[:] = torch.tensor(spec.INITIAL.tolist(), device=self.device)
         self._processed[:] = self._raw
         self.applied_proof[:] = 0
+        self.lateral_target[:] = -0.45
 
 
 @configclass
