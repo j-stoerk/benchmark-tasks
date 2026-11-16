@@ -57,6 +57,19 @@ def generate():
     upper = body("Upper", (0, 0, 0.5), spec.ROLLER_MASS)
     cylinder("Upper/roll", (0, 0, 0))
     box("Upper/witness", (0.008, 0.30, 0.008), (0.101, 0, 0), (0.85, 0.20, 0.10))
+    # Show the native spring-drive support path. These telescoping housings are
+    # visual geometry, so they neither alter inertia nor add a parallel load path.
+    for i, side in enumerate((-1, 1)):
+        for parent, part, z, length, radius, color in [
+            ("base", "spring_housing", 0.65, 0.18, 0.025, (0.18, 0.30, 0.45)),
+            ("Upper", "piston_rod", 0.12, 0.14, 0.0125, (0.55, 0.58, 0.62)),
+        ]:
+            shape = UsdGeom.Cylinder.Define(stage, f"/Calender/{parent}/{part}_{i}")
+            shape.CreateAxisAttr("Z")
+            shape.CreateHeightAttr(length)
+            shape.CreateRadiusAttr(radius)
+            shape.AddTranslateOp().Set(Gf.Vec3d(0, side * spec.BEARING_HALF_SPAN, z))
+            style(shape, color, collision=False)
     for i, y in enumerate(spec.STATIONS):
         # 0.9 mm fixed paired-sensor head in the widening entry wedge at x=25 mm.
         box(f"base/probe_{i}", (0.004, 0.012, 0.0009), (0.025, float(y), 0.4), (0.95, 0.63, 0.08))

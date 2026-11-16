@@ -232,7 +232,7 @@ def make_env(device="cuda:0", proof_scale=1.0):
     scene = Scene(
         [
             _box("floor", (3, 3, 0.1), (0, 0, -0.05), (0.2, 0.22, 0.24)),
-            DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=3000, color=(1.0, 1.0, 1.0))),
+        DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=800, color=(1.0, 1.0, 1.0))),
         ]
     )
     environment = IsaacLabArenaEnvironment(

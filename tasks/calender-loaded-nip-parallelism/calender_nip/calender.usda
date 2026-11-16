@@ -95,6 +95,26 @@ def Xform "Calender" (
             uniform token[] xformOpOrder = ["xformOp:translate"]
         }
 
+        def Cylinder "spring_housing_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.18
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.45)]
+            double radius = 0.025
+            double3 xformOp:translate = (0, -0.175, 0.65)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "spring_housing_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.18
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.45)]
+            double radius = 0.025
+            double3 xformOp:translate = (0, 0.175, 0.65)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
         def Cube "probe_0" (
             prepend apiSchemas = ["PhysicsCollisionAPI"]
         )
@@ -257,6 +277,26 @@ def Xform "Calender" (
             float3 xformOp:scale = (0.008, 0.3, 0.008)
             double3 xformOp:translate = (0.101, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cylinder "piston_rod_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.14
+            color3f[] primvars:displayColor = [(0.55, 0.58, 0.62)]
+            double radius = 0.0125
+            double3 xformOp:translate = (0, -0.175, 0.12)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "piston_rod_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.14
+            color3f[] primvars:displayColor = [(0.55, 0.58, 0.62)]
+            double radius = 0.0125
+            double3 xformOp:translate = (0, 0.175, 0.12)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
         }
     }
 

@@ -27,6 +27,11 @@ native generalized drives: vertical stiffness 2k=40 MN/m and tilt stiffness
 2ka^2=1.225 MN m/rad, k=20 MN/m, a=175 mm. Damping transforms in the same way.
 This reduced support model is valid for the small angles used here; the springs
 are fixture definitions, not empirically identified OEM properties.
+Two non-colliding telescoping housings show the support path from the crosshead
+to the upper bearing blocks. They visualize the native drives and add neither
+mass nor another load path. Each fixed housing is diameter 50 mm, length 180 mm,
+centre Z=650 mm; each rod is diameter 25 mm, length 140 mm, centre 120 mm above
+the upper axis. Both lie at Y=+/-175 mm.
 
 Actions change the spring-rest targets with a finite slew rate. They never
 write roll poses, teleport objects or impose a measured-gap value. Ideal service
