@@ -309,9 +309,9 @@ def make_env(device="cuda:0", variant="normal"):
 
     def configure(cfg):
         env_cfg_callback(spec.HZ)(cfg)
-        cfg.sim.dt = 1 / 240
-        cfg.decimation = 12
-        cfg.sim.render_interval = 12
+        cfg.sim.dt = 1 / 960
+        cfg.decimation = 48
+        cfg.sim.render_interval = 48
         cfg.sim.physics.solve_articulation_contact_last = True
         return cfg
 
