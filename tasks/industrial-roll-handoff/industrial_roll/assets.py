@@ -144,6 +144,9 @@ def generate():
         collide(mesh.GetPrim(), (0.85, 0.15, 0.10) if i == 0 else (0.22, 0.25, 0.27))
         UsdPhysics.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr("convexHull")
     stage.GetRootLayer().Export(str(PACKAGE / "roll.usda"))
+    from .visual_guides import add_visible_guides
+
+    add_visible_guides()
 
 
 if __name__ == "__main__":

@@ -64,6 +64,264 @@ def Xform "Machine" (
             double3 xformOp:translate = (0, 0, 0.56)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
+
+        def Cube "visual_bearing_crossmember"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float3 xformOp:scale = (0.16, 0.8, 0.06)
+            double3 xformOp:translate = (0, 0, 0.26)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_pedestal"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.12, 0.08)
+            double3 xformOp:translate = (0, 0, 0.29)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_0"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 7.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.054033744944872675, 0.4071136774759928)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_1"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 22.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.050351434521865135, 0.4208562470638974)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_2"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 37.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.04323775704587232, 0.4331774978809753)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_3"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 52.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.03317749788097528, 0.4432377570458723)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_4"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 67.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.0208562470638974, 0.45035143452186516)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_5"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 82.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.0071136774759928195, 0.4540337449448727)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_6"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 97.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.007113677475992813, 0.4540337449448727)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_7"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 112.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.020856247063897382, 0.45035143452186516)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_8"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 127.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.03317749788097528, 0.4432377570458723)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_9"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 142.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.043237757045872315, 0.4331774978809753)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_10"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 157.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.050351434521865135, 0.4208562470638974)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_11"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 172.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.054033744944872675, 0.40711367747599286)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_12"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 187.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.054033744944872675, 0.3928863225240072)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_13"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 202.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.05035143452186514, 0.37914375293610264)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_14"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 217.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.04323775704587232, 0.36682250211902473)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_15"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 232.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.03317749788097529, 0.35676224295412773)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_16"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 247.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.020856247063897382, 0.3496485654781349)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_17"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 262.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, -0.007113677475992814, 0.34596625505512735)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_18"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 277.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.007113677475992795, 0.34596625505512735)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_19"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 292.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.02085624706389736, 0.3496485654781349)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_20"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 307.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.03317749788097524, 0.3567622429541277)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_21"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 322.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.04323775704587231, 0.36682250211902473)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_22"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 337.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.05035143452186514, 0.37914375293610264)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
+
+        def Cube "visual_bearing_segment_23"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float xformOp:rotateX = 352.5
+            float3 xformOp:scale = (0.1, 0.031, 0.014227355)
+            double3 xformOp:translate = (0, 0.054033744944872675, 0.3928863225240072)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX", "xformOp:scale"]
+        }
     }
 
     def PhysicsFixedJoint "root_joint"

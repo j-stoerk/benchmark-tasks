@@ -243,13 +243,13 @@ class TransferMachine(EmbodimentBase):
         )()
         cams = []
         for name, eye, target in [
-            ("overview_cam", (1.45, -1.65, 1.9), (0, 0.12, 0.85)),
-            ("core_cam", (0.95, -0.42, 1.35), (0.05, 0, 1.0)),
+            ("overview_cam", (1.55, -1.6, 1.25), (0.05, 0.12, 0.92)),
+            ("core_cam", (-0.45, 0.35, 1.08), (0.05, 0.35, 1.08)),
         ]:
             cfg = CameraCfg(
                 prim_path="{ENV_REGEX_NS}/" + name,
-                height=360,
-                width=640,
+                height=720,
+                width=1280,
                 data_types=["rgb"],
                 spawn=sim.PinholeCameraCfg(focal_length=18, clipping_range=(0.02, 20)),
                 offset=CameraCfg.OffsetCfg(pos=eye, rot=camera_quat(eye, target), convention="world"),
@@ -279,7 +279,7 @@ def make_env(device="cuda:0", lift_force=6000):
         [
             _box("floor", (4, 4, 0.1), (0, 0, -0.05), (0.20, 0.22, 0.24)),
             _box("destination", (0.42, 0.02, 0.004), (0, spec.TARGET_Y, 0.003), (0.08, 0.75, 0.25)),
-            DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=3000, color=(1.0, 1.0, 1.0))),
+            DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=800, color=(1.0, 1.0, 1.0))),
             roll,
         ]
     )

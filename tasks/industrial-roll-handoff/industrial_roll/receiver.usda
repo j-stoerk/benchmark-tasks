@@ -64,6 +64,24 @@ def Xform "Machine" (
             double3 xformOp:translate = (0, 0, 0.56)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
+
+        def Cube "visual_x_guide_0"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float3 xformOp:scale = (0.4, 0.04, 0.04)
+            double3 xformOp:translate = (-0.12, -0.37, 0.34)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "visual_x_guide_1"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float3 xformOp:scale = (0.4, 0.04, 0.04)
+            double3 xformOp:translate = (-0.12, 0.37, 0.34)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
     }
 
     def PhysicsFixedJoint "root_joint"
@@ -111,6 +129,35 @@ def Xform "Machine" (
             double3 xformOp:translate = (0, 0, -0.25)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
+
+        def Cylinder "visual_z_guide_0"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            color3f[] primvars:displayColor = [(0.55, 0.58, 0.62)]
+            double radius = 0.014
+            double3 xformOp:translate = (0.12, -0.07, -0.03)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cylinder "visual_z_guide_1"
+        {
+            uniform token axis = "Z"
+            double height = 0.5
+            color3f[] primvars:displayColor = [(0.55, 0.58, 0.62)]
+            double radius = 0.014
+            double3 xformOp:translate = (0.12, 0.07, -0.03)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cube "visual_guide_foundation"
+        {
+            color3f[] primvars:displayColor = [(0.12, 0.22, 0.34)]
+            double size = 1
+            float3 xformOp:scale = (0.18, 0.22, 0.06)
+            double3 xformOp:translate = (0.06, 0, -0.28)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
     }
 
     def Xform "Head" (
@@ -145,6 +192,15 @@ def Xform "Machine" (
             double radius = 0.08
             double3 xformOp:translate = (0.04, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+
+        def Cube "visual_bearing_carriage"
+        {
+            color3f[] primvars:displayColor = [(0.18, 0.29, 0.42)]
+            double size = 1
+            float3 xformOp:scale = (0.08, 0.2, 0.1)
+            double3 xformOp:translate = (0.1, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
     }
 

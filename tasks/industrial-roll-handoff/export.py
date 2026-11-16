@@ -20,13 +20,13 @@ def gauges(trial, trace):
     lines = [
         "[Script Info]",
         "ScriptType: v4.00+",
-        "PlayResX: 640",
-        "PlayResY: 820",
+        "PlayResX: 1280",
+        "PlayResY: 1620",
         "[V4+ Styles]",
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, "
         "Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, "
         "MarginL, MarginR, MarginV, Encoding",
-        "Style: Default,DejaVu Sans Mono,15,&H0014243B,&H0014243B,&H00FFFFFF,&H00FFFFFF,"
+        "Style: Default,DejaVu Sans Mono,27,&H0014243B,&H0014243B,&H00FFFFFF,&H00FFFFFF,"
         "0,0,0,0,100,100,0,0,1,0,0,7,8,8,8,1",
         "[Events]",
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
@@ -89,7 +89,7 @@ def main():
             "-y",
             *inputs,
             "-filter_complex",
-            f"[0:v][1:v]vstack=inputs=2,pad=640:820:0:100:color=white,subtitles={overlay}[all]",
+            f"[0:v][1:v]vstack=inputs=2,pad=1280:1620:0:180:color=white,subtitles={overlay}[all]",
             "-map",
             "[all]",
             "-c:v",

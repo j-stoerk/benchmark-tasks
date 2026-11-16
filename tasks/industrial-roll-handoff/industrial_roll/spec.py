@@ -37,7 +37,9 @@ Donor_withdraw=1 retracts it 0.40 m.
 Proof=1 applies the actual 25 Nm +X torque and 300 N +X pull to the roll.
 Axes slew at X=40, Y=60, Z=25 mm/s; donor=60 mm/s; jaws=4 mm/s.
 Do not withdraw the donor until aligned insertion and expansion are complete.
-Images: overview and core view. State machine_encoders is measured insertion, Y,
+Images: overview shows the full support path. The axial core close-up is aimed
+at the final Y=350 mm, Z=1080 mm position; initially it looks beside the roll.
+State machine_encoders is measured insertion, Y,
 axis Z, mean normalized jaw extension, donor withdrawal fraction, last proof command.
 No roll pose, scoring flags or success oracle is given to the policy.
 Three ideal pad-force gauges report actual contact-force magnitudes in N;

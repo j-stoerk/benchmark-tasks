@@ -1,9 +1,10 @@
 # Full-size powered electrode-roll handoff
 
-Native physics, model evaluation and 23 offline checks are complete. This task
-uses a powered transfer machine and a full 200 kg roll. See `task.json` for the
-complete starting layout/rubric and `evaluation.json` for measured results,
-source hashes, runtime revisions and failure controls.
+This is a separate visibility revision. Fresh native demo/model recordings are
+pending; previous video scores are not claimed for this revision. The 200 kg
+mechanism, collision geometry, physical transforms, limits and scorer are
+unchanged, verified by a structural physics audit and 23 offline checks.
+The pending submission is preserved while this revision is validated.
 
 ## Production basis and scope
 
@@ -43,7 +44,7 @@ outward or inward force, limited to 4 kN per channel, with zero position stiffne
 damping 30 kNs/m; the lift axis is capped at 6 kN. Friction is 0.35 static and
 0.30 dynamic. These are stated fixture parameters, not measured specifications
 of a named commercial machine. The force-limit and collapsed-grip controls
-accompany the nominal demo in `evaluation.json`.
+are supplied as independent scripted controls; fresh measured results are pending.
 Each open support frame has two 80 x 60 x 1200 mm posts at local Y=+/-370 mm,
 an 80 x 800 x 80 mm crossbeam and a 320 x 800 x 80 mm foot. It reaches the
 floor from its specified 600 mm centre height. Contact gauges report normal
@@ -71,11 +72,9 @@ must be reported with the resulting score; it is not a blind benchmark estimate.
 The separate demo controller is explicitly scripted.
 
 The demo uses the measured donor gauge to preload the receiver before it
-withdraws the donor. Failed development trials that pulled before an adequate
-grip/load transfer slipped axially and earned zero. The force-controlled,
-geared chuck subsequently completed the native rubric in 723 actions
-(36.15 simulated seconds). The interactive LLM trial used that same package
-revision and completed the rubric in 740 actions (37 simulated seconds).
+withdraws the donor. The new close-up looks along X into the core at the final
+destination. Before the roll arrives there, this view intentionally shows the
+empty destination; the overview retains the complete transfer.
 
 `run.py` records source hashes, exact commands, native exit status, trace and
 Inspect Robots logs. The maximum is 30 LLM calls / 2,400 control actions.
@@ -98,51 +97,19 @@ without supporting the roll's weight; cable geometry is excluded. Physics runs
 at 240 Hz and the rubric evaluates 20 Hz measurements over an uninterrupted
 two-second proof request.
 
-## Recorded validation
+## Visibility and validation
 
-| Trial | Final score | Actions | Simulation time | Wall time |
-|---|---:|---:|---:|---:|
-| Scripted force-feedback demo | 1.0 | 723 | 36.15 s | 190.01 s |
-| GPT-6 Codex interactive LLM | 1.0 | 740 | 37.00 s | 620.03 s |
-| Demo with lift limited to 1 kN | 0.25 | 420 | 21.00 s | 130.01 s |
-| Demo with expansion disabled | 0.25 | 420 | 21.00 s | 130.01 s |
+Both native RGB views are 1280x720, exported without cuts or acceleration into
+one H.264 video with actual measured force readouts. The overview is lower and
+shows the frame-to-carriage support path. The axial close-up reveals the core
+grip once the roll reaches Y=350 mm, Z=1080 mm. Reduced lighting avoids washed
+out geometry. Guide covers and a hollow donor bearing cover make the ideal
+native guide constraints legible. Those covers have no collision or mass API;
+they carry no additional force and cannot prevent a drop. Exact dimensions and
+offsets appear in `task.json` and `visual_guides.py`.
 
-All trials use seed 0. The LLM made eight actual observation/decision exchanges
-through the Inspect Robots policy bridge. It had source and development-run
-knowledge, so this is explicitly a code-aware, non-blind interactive evaluation.
-It is not an independent API-checkpoint or blind benchmark estimate. The model
-received RGB views, machine encoders, pad gauges and the donor gauge; it received
-no live roll-pose or scoring fields. Every decision required a new response;
-the policy has no scripted fallback.
-
-The two controls earned preparation credit only. The conservative demo
-interlock did not complete a handoff without adequate lift capacity or grip.
-These runs complement the adversarial scorer checks; they are not a claim that
-every possible policy has been exhaustively tested.
-
-Both submitted H.264 videos contain every recorded frame at 20 fps: 724 demo
-frames and 741 model frames, including the initial observation. A readable
-display reports actual trace measurements. Both complete files decode locally;
-their sizes are below 1 MB each. The setup image is the model's initial native
-overview frame. Media ID: `M-GJ39MC`. No historical recording was reused.
-
-Measured runtime: NVIDIA L40S, driver 565.57.01, Python 3.12.16, Isaac Sim
-6.1.0.0, Inspect Robots 1.0.0, inspect-robots-yam 0.38.0 and NumPy 2.3.1.
-The Arena package reports version 0.3.0; the actual source pins are:
-
-| Repository | Commit |
-|---|---|
-| IsaacLab-Arena | `c7edf3a9d5d8276565208f72422f8f8a0806d6cf` |
-| Its IsaacLab submodule | `91a0906f93802eb859192dcb0bca879f891e92d6` |
-| yam-isaac-lab-arena | `0059d02a1a91bc6834c1d0846022891df0c78730` |
-| inspect-robots | `fc5ace923ce85117f9c86f35274122212fbcfe2c` |
-| YAM-inspect-Isaac setup | `25a2963d10451265dd2a6cbddea69d6a3b3b9b0d` |
-
-Use the program environment and the commands above. Interactive wall time
-depends on the external controller's response latency. The scene and scorer
-package hashes agree between both successful recordings and the submitted
-package. `evaluation.json` records the measured results, model protocol and
-validation controls.
+New demo, model and media receipts will be added after successful native trials.
+No existing recording is relabelled as evidence for this revision.
 
 ## Novelty comparison
 

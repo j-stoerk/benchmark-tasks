@@ -27,7 +27,7 @@ class IndustrialRoll(EmbodimentBase):
             name="industrial_roll",
             action_space=spec.action_space(),
             observation_space=ObservationSpace(
-                cameras=tuple(CameraSpec(name, 360, 640) for name in ("overview_cam", "core_cam")),
+                cameras=tuple(CameraSpec(name, 720, 1280) for name in ("overview_cam", "core_cam")),
                 state=StateSpec(
                     fields=(
                         StateField("machine_encoders", (6,), "m+normalized"),
