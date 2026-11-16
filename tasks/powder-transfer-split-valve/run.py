@@ -12,6 +12,26 @@ import time
 from pathlib import Path
 
 
+def latest_trace_row(path, max_bytes=1_048_576):
+    """Read the last complete JSON row, including large native diagnostics."""
+    with path.open("rb") as stream:
+        position = stream.seek(0, 2)
+        buffer = b""
+        while position > 0 and buffer.count(b"\n") < 2 and len(buffer) < max_bytes:
+            count = min(16384, position, max_bytes - len(buffer))
+            position -= count
+            stream.seek(position)
+            buffer = stream.read(count) + buffer
+    for line in reversed(buffer.splitlines()):
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(row, dict) and "t" in row and "info" in row:
+            return row
+    return None
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=["smoke", "demo", "model"])
@@ -85,9 +105,9 @@ def main():
             trace = out / "physics.jsonl"
             if trace.exists():
                 try:
-                    with trace.open("rb") as stream:
-                        stream.seek(max(0, trace.stat().st_size - 8000))
-                        last = json.loads(stream.read().splitlines()[-1])
+                    last = latest_trace_row(trace)
+                    if last is None:
+                        continue
                     info = last["info"]
                     print(
                         json.dumps(
