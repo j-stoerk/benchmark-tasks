@@ -126,6 +126,15 @@
       ],
       "steps": 140,
       "rationale": "All five unloaded gauges now read 200.0 um. Keep both settings unchanged and turn the separating load on. Seven seconds allows the documented five-second force ramp to finish and gives a settled loaded observation before compensating the measured opening and tilt."
+    },
+    "cal-model-01:003": {
+      "action": [
+        -181.6,
+        -381.6,
+        1
+      ],
+      "steps": 200,
+      "rationale": "The full 8000/12000 N load is present. Gaps are now 620,660,700,740,780 um, so the centre has opened 500 um and the cross-width slope extrapolates to a further 100 um at each bearing. Close the left setting by 400 um and the right by 600 um, retain the proof force, and allow ten seconds for the slower right adjustment, settling, and the three-second loaded hold."
     }
   }
 }
