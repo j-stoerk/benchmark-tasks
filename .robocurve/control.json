@@ -11,5 +11,18 @@
       "no_expand": false
     }
   },
-  "responses": {}
+  "responses": {
+    "model-final-01:001": {
+      "action": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "steps": 40,
+      "rationale": "Align the receiving shaft with the roll axis while keeping the jaws retracted and the loaded donor extended."
+    }
+  }
 }
