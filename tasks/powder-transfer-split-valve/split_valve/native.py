@@ -243,6 +243,23 @@ class ValveMachine(EmbodimentBase):
                 ),
             )
         ]
+        for name, rotor, obstacle in (
+            ("active_frame", "Active", "base"),
+            ("active_collar", "Active", "Collar"),
+            ("active_passive", "Active", "Passive"),
+            ("passive_housing", "Passive", "Upper"),
+        ):
+            sensors.append(
+                (
+                    name,
+                    ContactSensorCfg,
+                    ContactSensorCfg(
+                        prim_path="{ENV_REGEX_NS}/Machine/" + rotor,
+                        filter_prim_paths_expr=["{ENV_REGEX_NS}/Machine/" + obstacle],
+                        history_length=1,
+                    ),
+                )
+            )
         for half in ("lower", "upper"):
             for i in range(8):
                 name = f"seal_{half}_{i}"
@@ -376,6 +393,10 @@ class Sampler:
             for half in ("lower", "upper")
             for i in range(8)
         ]
+        result["diagnostic_rotor_contacts_N"] = {
+            name: self.contact(name).tolist()
+            for name in ("active_frame", "active_collar", "active_passive", "passive_housing")
+        }
         for attribute in (
             "applied_torque",
             "computed_torque",
