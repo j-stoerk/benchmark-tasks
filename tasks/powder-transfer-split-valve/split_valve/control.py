@@ -19,14 +19,15 @@ class Demo(PolicyBase):
     def act(self, observation):
         q = np.asarray(observation.state["encoders"])
         t = observation.state_time
+        seating_z = spec.DOCK_Z - 0.0002
         goals = {
             "align": [0, 0, 1.10, 0, 0, 0],
-            "dock": [0, 0, 1.0, 0, 0, 0],
-            "lock": [0, 0, 1.0, 30, 0, 0],
-            "proof": [0, 0, 1.0, 30, 0, 1],
-            "open": [0, 0, 1.0, 30, 90, 0],
-            "close": [0, 0, 1.0, 30, 0, 0],
-            "unlock": [0, 0, 1.0, 0, 0, 0],
+            "dock": [0, 0, seating_z, 0, 0, 0],
+            "lock": [0, 0, seating_z, 30, 0, 0],
+            "proof": [0, 0, seating_z, 30, 0, 1],
+            "open": [0, 0, seating_z, 30, 90, 0],
+            "close": [0, 0, seating_z, 30, 0, 0],
+            "unlock": [0, 0, seating_z, 0, 0, 0],
             "undock": [0, 0, 1.10, 0, 0, 0],
         }
         command = np.asarray(goals[self.phase], float)

@@ -40,9 +40,14 @@ XYZ ranges: +/-25 mm laterally, Z=0.98..1.12 m. Collar 0..32 degrees; active
 disc 0..90 degrees; proof 0/1. XY slew 20 mm/s, Z 25 mm/s, collar 20 deg/s,
 disc 30 deg/s. The upper payload including disc and seal carriers is 8 kg.
 Active-disc effort is limited to 10 Nm; the collar remains limited to 5 Nm.
-The lower half is fixed at Z=1.000 m. Dock with XYZ=(0,0,1.000), discs closed,
-and collar zero so the three upper lugs pass the actual collar slots. Rotate
-the collar to 30 only after seating. Its native ledges then resist separation.
+The lower half is fixed at Z=1.000 m. Start with both discs closed and collar
+zero so the three upper lugs can pass the collar slots. Set X=Y=0 and command
+Z=0.9998 m for approximately 20 N seating bias against the native casing stop.
+The actual interface stays at 1.000 m; this is a force-limited position setpoint,
+never a prescribed payload pose. Rotate the collar to 30 only after seating.
+Its native ledges then resist separation. During proof all Z position feedback
+is disabled. After proof, restore seating bias before cycling/reseating and
+verify actual closed/seated feedback before separation.
 The native lever pins/collar block mechanically inhibit opening while unlocked
 and inhibit unlocking while open. An attempt is not penalized unless the actual
 mechanism opens an undocked/unlocked vessel or loses its specified support.
