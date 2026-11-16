@@ -21,7 +21,7 @@ def numpy(value):
 
 class SlitterStack(EmbodimentBase):
     def __init__(self, trace_file=None, device="cuda:0", variant="normal", **kwargs):
-        if kwargs or variant not in ["normal", "no-grip", "unclamped"]:
+        if kwargs or variant not in ["normal", "no-grip", "unclamped", "contact-bench"]:
             raise ValueError("Unknown assembly embodiment option or control variant")
         self.info = EmbodimentInfo(
             name="slitter_stack",
@@ -67,7 +67,11 @@ class SlitterStack(EmbodimentBase):
         from .native import make_env
 
         self.torch = torch
-        self.env = make_env(self.device, grip_force=0 if self.variant == "no-grip" else 50)
+        self.env = make_env(
+            self.device,
+            grip_force=0 if self.variant == "no-grip" else 50,
+            contact_bench=self.variant == "contact-bench",
+        )
         self.base = self.env.unwrapped
         self.robot = self.base.scene["robot"]
         self.ids = self.robot.find_joints(spec.JOINT_NAMES, preserve_order=True)[0]
@@ -96,7 +100,8 @@ class SlitterStack(EmbodimentBase):
             },
             "tool": tool,
             "jaw_forces": [
-                float(np.linalg.norm(numpy(self.base.scene[f"pad_{i}"].data.net_normal_forces_w)[0])) for i in range(3)
+                float(np.linalg.norm(numpy(self.base.scene[f"pad_{i}"].data.net_normal_forces_w)[0]))
+                for i in range(3)
             ],
             "clamp_contact_N": float(
                 np.linalg.norm(numpy(self.base.scene["platen_contact"].data.net_normal_forces_w)[0])

@@ -33,7 +33,13 @@ blade heights in ascending order at 5 um resolution. It does not supply object
 poses or a successful-grasp flag. RGB, native head encoders, three pad normal
 forces and platen normal contact complete the policy observations.
 
-After release, the actual force-driven annular platen applies 500 N downward.
+During loading, the platen is raised and parked at Y=-0.45 m on a native
+3 kg lateral carriage. Clamp commands move it to Y=0 at 0.10 m/s and lower it
+only after actual alignment; retract commands raise it before parking. The
+carriage uses the same 3 MN/m, 15 kNs/m, 1 kN limited drive as the handling
+axes. This measured PLC sequence clears the arbor for incoming parts and
+does not handle or seat them. Allow approximately eight seconds for clamping.
+After assembly and release, the force-driven annular platen applies 500 N downward.
 The proof applies 25 N upward and 0.5 Nm Z torque to each free blade, totaling
 100 N and 2 Nm. Its force supplies no weight support during assembly. Three
 seconds of retained geometry and limited translation/rotation are required.
@@ -65,7 +71,13 @@ python run.py demo --output results/demo
 python run.py model --output results/model --bridge results/model-bridge
 python run.py demo --variant no-grip --output results/no-grip --max-steps 400
 python run.py demo --variant unclamped --output results/unclamped
+python run.py smoke --variant contact-bench --output results/contact-bench --max-steps 400
 ```
+
+The contact bench is a separate diagnostic layout with tooling initially
+preassembled. It checks actual face contacts under the same clamp/proof loads;
+its results never establish assembly success and cannot be used as the task's
+demo or model evidence. The runner permits this variant only in smoke mode.
 
 The scripted demo follows the known fixture layout and uses actual encoders
 and pad-force feedback. The genuine external LLM bridge saves each observation,

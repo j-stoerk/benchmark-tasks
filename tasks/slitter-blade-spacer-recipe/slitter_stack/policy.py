@@ -12,11 +12,14 @@ from . import spec
 
 
 class Demo(PolicyBase):
-    def __init__(self):
+    def __init__(self, variant="normal"):
         self.info = PolicyInfo(name="slitter_demo", action_space=spec.action_space())
+        self.variant = variant
 
     def reset(self, scene):
         self.item, self.phase, self.entered = 0, "approach", 0.0
+        if self.variant == "contact-bench":
+            self.item = len(spec.PARTS)
 
     def act(self, observation):
         t = observation.state_time

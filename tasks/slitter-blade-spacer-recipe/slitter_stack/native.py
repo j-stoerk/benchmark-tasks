@@ -84,7 +84,9 @@ class AssemblyAction(ActionTerm):
         # PLC sequencing uses actual joint feedback: retract before parking,
         # and align the crosshead before applying its downward force.
         park = torch.full_like(press_y, -0.45)
-        lateral = torch.where(requested, torch.zeros_like(press_y), torch.where(press_z > 0.0095, park, press_y))
+        lateral = torch.where(
+            requested, torch.zeros_like(press_y), torch.where(press_z > 0.0095, park, press_y)
+        )
         if hasattr(self.robot, "set_joint_position_target_index"):
             self.robot.set_joint_position_target_index(target=xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target_index(target=jaws, joint_ids=self.ids[3:])
@@ -169,7 +171,9 @@ class AssemblyMachine(EmbodimentBase):
                 usd_path=str(PACKAGE / "machine.usda"),
                 ensure_drives_exist=True,
                 activate_contact_sensors=True,
-                rigid_props=PhysxRigidBodyPropertiesCfg(disable_gravity=False, max_depenetration_velocity=0.1),
+                rigid_props=PhysxRigidBodyPropertiesCfg(
+                    disable_gravity=False, max_depenetration_velocity=0.1
+                ),
                 articulation_props=PhysxArticulationRootPropertiesCfg(
                     enabled_self_collisions=True,
                     solver_position_iteration_count=64,
@@ -275,7 +279,7 @@ class AssemblyMachine(EmbodimentBase):
         self.camera_config = make_configclass("AssemblyCameras", cameras, bases=(ArenaCameraCfg,))()
 
 
-def make_env(device="cuda:0", grip_force=50):
+def make_env(device="cuda:0", grip_force=50, contact_bench=False):
     objects = [
         _box("floor", (3, 3, 0.1), (0, 0, -0.05), (0.22, 0.24, 0.26)),
         _box("bench", (1.10, 1.1, 0.06), (0.25, 0, 0.72), (0.22, 0.25, 0.28)),
@@ -320,7 +324,7 @@ def make_env(device="cuda:0", grip_force=50):
                 name=part["name"],
                 usd_path=str(PACKAGE / (part["name"] + ".usda")),
                 object_type=ObjectType.RIGID,
-                initial_pose=Pose(position_xyz=(x, y, z)),
+                initial_pose=Pose(position_xyz=(0, 0, part["target_z"]) if contact_bench else (x, y, z)),
                 spawn_cfg_addon={
                     "physics_material": sim.RigidBodyMaterialCfg(static_friction=0.65, dynamic_friction=0.5),
                     "collision_props": PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),

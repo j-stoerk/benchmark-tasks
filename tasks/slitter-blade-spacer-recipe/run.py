@@ -18,12 +18,16 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--bridge", type=Path)
     parser.add_argument("--max-steps", type=int, default=2400)
-    parser.add_argument("--variant", choices=["normal", "no-grip", "unclamped"], default="normal")
+    parser.add_argument(
+        "--variant", choices=["normal", "no-grip", "unclamped", "contact-bench"], default="normal"
+    )
     args = parser.parse_args()
     if not 1 <= args.max_steps <= 2400:
         parser.error("--max-steps must be 1..2400")
     if args.mode == "model" and args.variant != "normal":
         parser.error("Control variants are scripted experiments, not model trials")
+    if args.variant == "contact-bench" and args.mode != "smoke":
+        parser.error("The preassembled contact bench is diagnostic only, never a task demo/model")
     folder = Path(__file__).resolve().parent
     spec = json.loads((folder / "task.json").read_text(encoding="utf-8"))
     out = args.output.resolve()
@@ -57,6 +61,8 @@ def main():
         if args.bridge is None:
             parser.error("model needs --bridge directory for actual LLM decisions")
         command += ["-P", f"directory={args.bridge.resolve()}"]
+    else:
+        command += ["-P", f"variant={args.variant}"]
     manifest = {
         "started_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "command": command,
@@ -113,7 +119,9 @@ def main():
         finished_utc=dt.datetime.now(dt.timezone.utc).isoformat(),
     )
     receipt.write_text(json.dumps(manifest, indent=2) + "\n")
-    print(json.dumps({k: manifest[k] for k in ["policy", "status", "exit_code", "started_utc", "finished_utc"]}))
+    print(
+        json.dumps({k: manifest[k] for k in ["policy", "status", "exit_code", "started_utc", "finished_utc"]})
+    )
     if code == 0 and valid_trial:
         subprocess.run([sys.executable, str(folder / "export.py"), str(out)], check=True)
     return code if code != 0 else (0 if valid_trial else 1)
