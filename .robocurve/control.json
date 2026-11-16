@@ -1,14 +1,15 @@
 {
   "command": {
-    "id": "roll-clear-demo-01",
+    "id": "cal-no-force-01",
     "mode": "run",
-    "sha": "67caaea89346b2ef2ee69858e44b669183e22f78",
-    "task": "industrial-roll-handoff",
+    "sha": "8be2e4b9be2f9ea4dee0d8f88b2f59f181a5594f",
+    "task": "calender-loaded-nip-parallelism",
     "trial": {
       "mode": "demo",
-      "max_steps": 2400,
-      "lift_force": 6000,
-      "no_expand": false
+      "max_steps": 400,
+      "proof_scale": 0,
+      "unloaded_only": false,
+      "calibration_bench": false
     }
   },
   "responses": {
