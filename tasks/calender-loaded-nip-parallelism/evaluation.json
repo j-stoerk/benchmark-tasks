@@ -1,0 +1,355 @@
+{
+  "trials": {
+    "demo": {
+      "score": 1.0,
+      "policy": "calender_demo",
+      "steps": 288,
+      "frame_counts": {
+        "overview_cam": 289,
+        "nip_cam": 289
+      },
+      "final": {
+        "t": 14.40000000000007,
+        "info": {
+          "score": 1.0,
+          "success": true,
+          "invalid": false,
+          "proof_seconds": 2.9999999999999973,
+          "physics": {
+            "joint_positions": [
+              0.0002000348613364622,
+              3.850895069490434e-08
+            ],
+            "joint_velocities": [
+              -3.8206144381547347e-07,
+              2.087728717015125e-05
+            ],
+            "gaps_um": [
+              200.0,
+              200.0,
+              200.0,
+              200.0,
+              200.0
+            ],
+            "applied_proof_forces_N": [
+              8000.0,
+              12000.0
+            ],
+            "rest_settings": [
+              -181.5843505859375,
+              -381.5654296875,
+              1.0
+            ]
+          }
+        }
+      },
+      "video_bytes": 381613,
+      "video_sha256": "9ea3442acd8ec9b0ff0bf89f255f53457eaed9529432c9945b634e81a53a75b4",
+      "eval_log_sha256": "8d73677a260c41a5043d0897aa04ad5d61f447a0c8e3451780d7345ab79f1fc5",
+      "source_hashes": {
+        "test_calender.py": "4406e031acc9f35cfc81a0f96f1ceb743da8e5689642da07aac3bd14c44c3f9b",
+        "pyproject.toml": "d883937f414a965aa41c4889f9f9c7253d897d8c0fa36e2777cc9311d2036d13",
+        "task.json": "a9982e0f50b2016a20cfea4b2d1d993764cff76d43a8775d1b932336169079bf",
+        "run.py": "da8dd510251f424c1d11d3e9e3ce3d7243eca96bab404e647229da5f6a11d094",
+        "export.py": "20e83aa59c2ad8a17d1096a8c2995565262cc746db7b892fc8088b6bc1573d99",
+        "calender_nip/adapter.py": "d4d52a7348e824269115d02eb25290db062f145fe6dcc9aab08bb1bc60de72e9",
+        "calender_nip/calender.usda": "97958926d4ee9a127a137d84a6ca692d61c5af44b297517a3e8d45d296db61d2",
+        "calender_nip/spec.py": "a7985791cd7e5cd63574a05b9a2acae2ca35d68650c65a52b7b34a38637a0072",
+        "calender_nip/assets.py": "eae1fb1302341aaca87623a120a88491eaa43aa01fb7f42511b499eeb16f7c0d",
+        "calender_nip/__init__.py": "1e12027341ab3d3ace6e2821ae1b003cff9c8bce03ff6bc3a032f227b943df84",
+        "calender_nip/native.py": "2277eaec92b87be424dbb4e03fa634ad3184fe8804d89db265c1dbb9c94da185",
+        "calender_nip/policy.py": "95b47ba378ea043b03a02fc32e9ed3ca11fef5582e534642e9057b8617a23a42"
+      },
+      "versions": {
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0",
+        "isaacsim": "6.1.0.0",
+        "isaaclab-arena": "0.3.0",
+        "numpy": "2.3.1"
+      },
+      "started_utc": "2026-11-16T17:21:49.851623+00:00",
+      "finished_utc": "2026-11-16T17:22:29.860484+00:00",
+      "simulation_seconds": 14.40000000000007,
+      "video_decode": {
+        "codec": "h264",
+        "fps": 20.0,
+        "frames": 289
+      }
+    },
+    "model": {
+      "score": 1.0,
+      "policy": "calender_llm",
+      "steps": 437,
+      "frame_counts": {
+        "overview_cam": 438,
+        "nip_cam": 438
+      },
+      "final": {
+        "t": 21.850000000000176,
+        "info": {
+          "score": 1.0,
+          "success": true,
+          "invalid": false,
+          "proof_seconds": 2.9999999999999973,
+          "physics": {
+            "joint_positions": [
+              0.00020000970107503235,
+              -1.563988938357852e-08
+            ],
+            "joint_velocities": [
+              -3.976949756179238e-07,
+              2.0907074940623716e-05
+            ],
+            "gaps_um": [
+              200.0,
+              200.0,
+              200.0,
+              200.0,
+              200.0
+            ],
+            "applied_proof_forces_N": [
+              8000.0,
+              12000.0
+            ],
+            "rest_settings": [
+              -181.60000610351562,
+              -381.6000061035156,
+              1.0
+            ]
+          }
+        }
+      },
+      "video_bytes": 522758,
+      "video_sha256": "40806682aaa76ba046c29baebdb70d329cce44c6efd50f89d9d54a488ef9b3be",
+      "eval_log_sha256": "3c1e8b43d3800c787b9b1bba2260fb4e8733cb212e6e00c846e409568e88b20e",
+      "source_hashes": {
+        "test_calender.py": "4406e031acc9f35cfc81a0f96f1ceb743da8e5689642da07aac3bd14c44c3f9b",
+        "pyproject.toml": "d883937f414a965aa41c4889f9f9c7253d897d8c0fa36e2777cc9311d2036d13",
+        "task.json": "a9982e0f50b2016a20cfea4b2d1d993764cff76d43a8775d1b932336169079bf",
+        "run.py": "da8dd510251f424c1d11d3e9e3ce3d7243eca96bab404e647229da5f6a11d094",
+        "export.py": "20e83aa59c2ad8a17d1096a8c2995565262cc746db7b892fc8088b6bc1573d99",
+        "calender_nip/adapter.py": "d4d52a7348e824269115d02eb25290db062f145fe6dcc9aab08bb1bc60de72e9",
+        "calender_nip/calender.usda": "97958926d4ee9a127a137d84a6ca692d61c5af44b297517a3e8d45d296db61d2",
+        "calender_nip/spec.py": "a7985791cd7e5cd63574a05b9a2acae2ca35d68650c65a52b7b34a38637a0072",
+        "calender_nip/assets.py": "eae1fb1302341aaca87623a120a88491eaa43aa01fb7f42511b499eeb16f7c0d",
+        "calender_nip/__init__.py": "1e12027341ab3d3ace6e2821ae1b003cff9c8bce03ff6bc3a032f227b943df84",
+        "calender_nip/native.py": "2277eaec92b87be424dbb4e03fa634ad3184fe8804d89db265c1dbb9c94da185",
+        "calender_nip/policy.py": "95b47ba378ea043b03a02fc32e9ed3ca11fef5582e534642e9057b8617a23a42"
+      },
+      "versions": {
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0",
+        "isaacsim": "6.1.0.0",
+        "isaaclab-arena": "0.3.0",
+        "numpy": "2.3.1"
+      },
+      "started_utc": "2026-11-16T17:23:15.714148+00:00",
+      "finished_utc": "2026-11-16T17:31:15.736688+00:00",
+      "simulation_seconds": 21.850000000000176,
+      "video_decode": {
+        "codec": "h264",
+        "fps": 20.0,
+        "frames": 438
+      }
+    },
+    "cal-no-force-01": {
+      "score": 0.5,
+      "policy": "calender_demo",
+      "steps": 400,
+      "frame_counts": {
+        "overview_cam": 401,
+        "nip_cam": 401
+      },
+      "final": {
+        "t": 20.00000000000015,
+        "info": {
+          "score": 0.5,
+          "success": false,
+          "invalid": false,
+          "proof_seconds": 0.0,
+          "physics": {
+            "joint_positions": [
+              0.0002000492240767926,
+              -8.004322182841861e-08
+            ],
+            "joint_velocities": [
+              -1.2665614335105602e-08,
+              -8.351754075645867e-13
+            ],
+            "gaps_um": [
+              200.1,
+              200.1,
+              200.0,
+              200.0,
+              200.0
+            ],
+            "applied_proof_forces_N": [
+              0.0,
+              0.0
+            ],
+            "rest_settings": [
+              218.4531707763672,
+              218.42515563964844,
+              1.0
+            ]
+          }
+        }
+      },
+      "video_bytes": 394106,
+      "video_sha256": "b4c9dac871e0b52c3629f2d2768cec9ff4ffc27e9a73417cb33a6327031faa68",
+      "eval_log_sha256": "2c83884e294cccf057b76b6d064b3ae4f5a69fd0ef68959f3c4be3c97bc5e80b",
+      "source_hashes": {
+        "test_calender.py": "4406e031acc9f35cfc81a0f96f1ceb743da8e5689642da07aac3bd14c44c3f9b",
+        "pyproject.toml": "d883937f414a965aa41c4889f9f9c7253d897d8c0fa36e2777cc9311d2036d13",
+        "task.json": "a9982e0f50b2016a20cfea4b2d1d993764cff76d43a8775d1b932336169079bf",
+        "run.py": "da8dd510251f424c1d11d3e9e3ce3d7243eca96bab404e647229da5f6a11d094",
+        "export.py": "20e83aa59c2ad8a17d1096a8c2995565262cc746db7b892fc8088b6bc1573d99",
+        "calender_nip/adapter.py": "d4d52a7348e824269115d02eb25290db062f145fe6dcc9aab08bb1bc60de72e9",
+        "calender_nip/calender.usda": "97958926d4ee9a127a137d84a6ca692d61c5af44b297517a3e8d45d296db61d2",
+        "calender_nip/spec.py": "a7985791cd7e5cd63574a05b9a2acae2ca35d68650c65a52b7b34a38637a0072",
+        "calender_nip/assets.py": "eae1fb1302341aaca87623a120a88491eaa43aa01fb7f42511b499eeb16f7c0d",
+        "calender_nip/__init__.py": "1e12027341ab3d3ace6e2821ae1b003cff9c8bce03ff6bc3a032f227b943df84",
+        "calender_nip/native.py": "2277eaec92b87be424dbb4e03fa634ad3184fe8804d89db265c1dbb9c94da185",
+        "calender_nip/policy.py": "95b47ba378ea043b03a02fc32e9ed3ca11fef5582e534642e9057b8617a23a42"
+      },
+      "versions": {
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0",
+        "isaacsim": "6.1.0.0",
+        "isaaclab-arena": "0.3.0",
+        "numpy": "2.3.1"
+      },
+      "started_utc": "2026-11-16T17:34:57.648416+00:00",
+      "finished_utc": "2026-11-16T17:35:47.657814+00:00",
+      "simulation_seconds": 20.00000000000015,
+      "video_decode": {
+        "codec": "h264",
+        "fps": 20.0,
+        "frames": 401
+      }
+    }
+  },
+  "controller": {
+    "name": "GPT-6 Codex interactive controller",
+    "decisions": 3,
+    "protocol": "Actual LLM observation/response exchanges through Inspect Robots; no scripted fallback",
+    "access": "Code-aware, non-blind interactive evaluation; no independent API checkpoint claimed"
+  },
+  "verified_current_package_sha256": {
+    "calender_nip/__init__.py": "1e12027341ab3d3ace6e2821ae1b003cff9c8bce03ff6bc3a032f227b943df84",
+    "calender_nip/adapter.py": "d4d52a7348e824269115d02eb25290db062f145fe6dcc9aab08bb1bc60de72e9",
+    "calender_nip/assets.py": "eae1fb1302341aaca87623a120a88491eaa43aa01fb7f42511b499eeb16f7c0d",
+    "calender_nip/calender.usda": "97958926d4ee9a127a137d84a6ca692d61c5af44b297517a3e8d45d296db61d2",
+    "calender_nip/native.py": "2277eaec92b87be424dbb4e03fa634ad3184fe8804d89db265c1dbb9c94da185",
+    "calender_nip/policy.py": "95b47ba378ea043b03a02fc32e9ed3ca11fef5582e534642e9057b8617a23a42",
+    "calender_nip/spec.py": "a7985791cd7e5cd63574a05b9a2acae2ca35d68650c65a52b7b34a38637a0072"
+  },
+  "offline_checks": {
+    "passed": 24,
+    "scope": "Offline geometry/scoring checks; native trials separately establish feasibility"
+  },
+  "runtime_sources": {
+    "source_revisions": {
+      "IsaacLab-Arena": "c7edf3a9d5d8276565208f72422f8f8a0806d6cf",
+      "IsaacLab-Arena/submodules/IsaacLab": "91a0906f93802eb859192dcb0bca879f891e92d6",
+      "yam-isaac-lab-arena": "0059d02a1a91bc6834c1d0846022891df0c78730",
+      "inspect-robots": "fc5ace923ce85117f9c86f35274122212fbcfe2c",
+      "YAM-inspect-Isaac": "25a2963d10451265dd2a6cbddea69d6a3b3b9b0d"
+    },
+    "python": "3.12.16",
+    "isaacsim": "6.1.0.0",
+    "inspect_robots": "1.0.0",
+    "inspect_robots_yam": "0.38.0",
+    "isaaclab_arena_package_version": "0.3.0",
+    "numpy": "2.3.1",
+    "gpu": "NVIDIA L40S",
+    "driver": "565.57.01",
+    "physics_hz": 240,
+    "control_and_scoring_hz": 20,
+    "source": "Read-only SSH diagnostics from the same Brev worker; initial-probe-result for package/driver versions.",
+    "diagnostic_note": "Source revisions collected successfully; optional ffprobe executable was absent. Completed media is separately decoded and checked locally with OpenCV."
+  },
+  "native_compliance_check": {
+    "unloaded": {
+      "t": 2.9999999999999973,
+      "reading": {
+        "joint_positions": [
+          0.00048160963342525065,
+          -0.0008571426733396947
+        ],
+        "joint_velocities": [
+          4.8279673592332983e-08,
+          1.710444119673582e-09
+        ],
+        "gaps_um": [
+          601.6,
+          541.6,
+          481.6,
+          421.6,
+          361.6
+        ],
+        "applied_proof_forces_N": [
+          0.0,
+          0.0
+        ],
+        "rest_settings": [
+          650.0,
+          350.0,
+          0.0
+        ]
+      },
+      "invalid": false,
+      "predicted_q": [
+        0.0004816100496602023,
+        -0.0008571426472304132
+      ],
+      "position_residual_um": -0.0004162349516705771,
+      "angle_residual_urad": -2.6109281511983717e-05
+    },
+    "loaded": {
+      "t": 15.000000000000078,
+      "reading": {
+        "joint_positions": [
+          0.000981608871370554,
+          -0.00028572900919243693
+        ],
+        "joint_velocities": [
+          2.1889837853450445e-07,
+          2.1259907953208312e-05
+        ],
+        "gaps_um": [
+          1021.6,
+          1001.6,
+          981.6,
+          961.6,
+          941.6
+        ],
+        "applied_proof_forces_N": [
+          8000.0,
+          12000.0
+        ],
+        "rest_settings": [
+          650.0,
+          350.0,
+          1.0
+        ]
+      },
+      "invalid": false,
+      "predicted_q": [
+        0.0009816100496602023,
+        -0.00028571407580184165
+      ],
+      "position_residual_um": -0.0011782896483601007,
+      "angle_residual_urad": -0.014933390595286977
+    },
+    "shift": [
+      0.0004999992379453033,
+      0.0005714136641472578
+    ]
+  },
+  "pre_submission_board_refresh": {
+    "at_utc": "2026-11-16T18:13:31.927383+00:00",
+    "records": 651,
+    "source": "https://tasks.robocurve.org/board"
+  }
+}

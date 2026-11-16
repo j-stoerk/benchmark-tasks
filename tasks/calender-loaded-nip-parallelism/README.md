@@ -1,8 +1,9 @@
 # Loaded nip commissioning on a full-size laboratory calender
 
-This is an unsubmitted implementation candidate. Native success and model
-evidence have not yet been established. `task.json` scores and media remain
-explicitly pending until genuine runs are recorded.
+The native scripted demo and genuine interactive LLM run both scored 1.0.
+Twenty-four offline geometry/scoring checks pass. `evaluation.json` binds the
+recordings to the actual package and records the measured outcome. The model
+evaluation is explicitly code-aware and non-blind.
 
 The objective is to compensate independently adjusted bearing gaps as a
 20 kN service proof load opens and tilts the nip. The full-size 200 mm diameter,
@@ -40,8 +41,9 @@ equivalent to +20 kN Z force and +700 N m X torque on the upper roll. The
 native integrator resolves displacement against the finite spring drives.
 The omitted hydraulic cylinder geometry supplies no additional positional
 constraint. With unchanged settings, the declared springs predict about
-500 um opening and 571.4 urad additional tilt. A native load sweep must confirm
-these predictions before submission.
+500 um opening and 571.4 urad additional tilt. The native load sweep measured
+499.999 um opening and 571.414 urad tilt change at unchanged settings. These
+are simulator measurements of the declared fixture, not hardware calibration.
 
 At five Y stations, the paired probe model measures cylinder-surface separation.
 For elevation q and tilt t, `gap(y)=q+y*tan(t)-R*(sec(t)-1)` at X=0.
@@ -98,3 +100,54 @@ against the declared spring constants. Native gap/load stability, source-matched
 genuine model attempt, current board novelty review and new media are required
 before opening a PR. All geometry and code are original and released under the
 included MIT license. No manufacturer asset is redistributed.
+
+## Recorded validation
+
+All runs used seed 0 and the same scene/scorer package. Later changes add only
+documentation, scores, media and this evidence receipt.
+
+| Trial | Score | Actions | Simulated time | Wall time |
+|---|---:|---:|---:|---:|
+| Native gauge-feedback demo | 1.0 | 288 | 14.40 s | 40.01 s |
+| GPT-6 Codex interactive LLM | 1.0 | 437 | 21.85 s | 480.02 s |
+| Proof actuator disabled, command still on | 0.5 | 400 | 20.00 s | 50.01 s |
+
+The LLM made three actual observation/response exchanges through Inspect Robots.
+It received RGB and the documented instrument readings. It knew the source and
+development results, so this is a code-aware interactive controller evaluation;
+no independent API checkpoint or blind benchmark estimate is claimed. Every
+action chunk required an actual LLM response and there was no scripted fallback.
+Wall time includes waiting for those responses.
+
+The disabled-force control reached unloaded setup credit only: a proof command
+without an applied force never earned a loaded hold. This is not a claim that
+all possible failure policies have been exhaustively tested. The separate
+compliance run kept the settings unchanged while the native load opened and
+tilted the roll by the predicted amounts.
+
+Both submitted videos contain every recorded frame at 20 fps, including the
+initial observation: 289 demo frames and 438 model frames. Full H.264 decoding
+passed; each file is smaller than 1 MB. The screenshot is the actual initial
+model overview. The measured-gauge overlay uses recorded trace samples.
+
+Runtime: NVIDIA L40S; Python 3.12.16; Isaac Sim 6.1.0.0; Inspect Robots 1.0.0;
+inspect-robots-yam 0.38.0; NumPy 2.3.1. The Arena package reports 0.3.0.
+Physics runs at 240 Hz and actions/scoring at 20 Hz. Exact source pins are
+included in `evaluation.json`. The run limit is 1200 actions or 30 LLM calls.
+
+## Novelty and physical scope
+
+The board was refreshed immediately before submission. Nearby objectives
+include a local proximity-sensor gap with a feeler leaf, camera/tool calibration,
+and generic machine setup. This task instead requires two-end nip adjustment
+against a measured separating load and a continuous loaded cross-width hold.
+Changing the number of dials alone would not establish that distinction.
+The prior search also covered names in 13 established benchmark families;
+catalog names are screening evidence rather than a guarantee of novelty.
+
+For physical reproduction, use a rated rotation-locked laboratory roll fixture,
+independently adjustable compliant supports, calibrated displacement/load
+instruments and a guarded service spreader. The fixed frame represents floor
+anchoring; anchor strength and structural failure are not evaluated. No physical
+hardware trial is claimed. The stated spring constants and proof recipe define
+the benchmark and are not identified OEM properties or an electrode process.
