@@ -1,12 +1,12 @@
 {
   "command": {
-    "id": "film-demo-03",
+    "id": "film-model-04",
     "mode": "run",
     "sha": "0fb9f5fb1a9a07fce51ca0a23633f7ff864735fd",
     "task": "lab-film-drawdown",
     "trial": {
-      "mode": "demo",
-      "max_steps": 600,
+      "mode": "model",
+      "max_steps": 1200,
       "variant": "normal"
     }
   },
