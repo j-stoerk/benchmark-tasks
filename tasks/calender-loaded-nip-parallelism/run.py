@@ -24,6 +24,10 @@ def main():
         "--unloaded-only", action="store_true", help="Scripted negative control: leave the physical proof load off"
     )
     args = parser.parse_args()
+    if not 1 <= args.max_steps <= 1200:
+        parser.error("--max-steps must be 1..1200")
+    if args.unloaded_only and args.calibration_bench:
+        parser.error("Choose one scripted control at a time")
     folder = Path(__file__).resolve().parent
     spec = json.loads((folder / "task.json").read_text(encoding="utf-8"))
     out = args.output.resolve()

@@ -84,9 +84,12 @@ Negative controls:
 ```bash
 python run.py demo --output results/unloaded --unloaded-only --max-steps 500
 python run.py demo --output results/no-force --proof-scale 0 --max-steps 500
+python run.py demo --output results/compliance --calibration-bench --max-steps 300
 ```
 
-Neither control may reach 1.0. Native gap/load stability, source-matched demo,
+The first two controls may not reach 1.0. The compliance run holds the initial
+settings fixed, then ramps the load, allowing comparison of the measured shift
+against the declared spring constants. Native gap/load stability, source-matched demo,
 genuine model attempt, current board novelty review and new media are required
 before opening a PR. All geometry and code are original and released under the
 included MIT license. No manufacturer asset is redistributed.
