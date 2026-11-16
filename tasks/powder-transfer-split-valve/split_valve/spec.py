@@ -106,7 +106,10 @@ class Proof:
         seals_seated = np.min(seals) >= 0.5
         # Actual exposure is a failure; an interlock successfully blocking an
         # attempted motion is not itself a failure.
-        if not discs_closed and not (docked and q[3] >= 20):
+        # The 20-degree slots clear the 6.6-degree lug footprint only within
+        # about 6.7 degrees of zero. At 10 degrees there is positive ledge
+        # overlap; the pin interlock blocks unlocking before this boundary.
+        if not discs_closed and not (docked and q[3] >= 10):
             self.invalid = True
             return 0.0, False
         still = np.max(np.abs(v[:3])) < 0.001 and np.max(np.abs(v[3:])) < 2
