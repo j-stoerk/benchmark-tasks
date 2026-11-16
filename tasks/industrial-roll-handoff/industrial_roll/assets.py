@@ -12,7 +12,7 @@ def generate():
     from pxr import Gf, Usd, UsdGeom, UsdPhysics, Vt
 
     def stage_for(name, rootname="Machine"):
-        stage = Usd.Stage.CreateNew(str(PACKAGE / name))
+        stage = Usd.Stage.CreateInMemory()
         UsdGeom.SetStageMetersPerUnit(stage, 1)
         UsdGeom.SetStageUpAxis(stage, UsdGeom.Tokens.z)
         root = UsdGeom.Xform.Define(stage, "/" + rootname)
@@ -72,14 +72,11 @@ def generate():
         drive.CreateMaxForceAttr(4000.0 if jaw else 6000.0)
 
     for filename in ("receiver.usda", "donor.usda"):
-        p = PACKAGE / filename
-        if p.exists():
-            p.unlink()
         stage, root = stage_for(filename)
         UsdPhysics.ArticulationRootAPI.Apply(root.GetPrim())
         body(stage, "/Machine/base", (0, 0, 0), 150)
-        for side in (-1, 1):
-            cube(stage, f"/Machine/base/post_{side}", (0.08, 0.06, 1.2), (0, side * 0.37, 0))
+        for index, side in enumerate((-1, 1)):
+            cube(stage, f"/Machine/base/post_{index}", (0.08, 0.06, 1.2), (0, side * 0.37, 0))
         cube(stage, "/Machine/base/foot", (0.32, 0.8, 0.08), (0, 0, -0.56))
         cube(stage, "/Machine/base/crossbeam", (0.08, 0.8, 0.08), (0, 0, 0.56))
         fix = UsdPhysics.FixedJoint.Define(stage, "/Machine/root_joint")
@@ -114,11 +111,8 @@ def generate():
             body(stage, "/Machine/Shaft", (0, 0, 0.4), 45)
             cyl(stage, "/Machine/Shaft/shaft", 0.56, 0.0379, (0.28, 0, 0), (0.45, 0.48, 0.52))
             joint(stage, "/Machine/withdraw", "/Machine/base", "/Machine/Shaft", "X", (0, 0, 0.4), bounds=(-0.42, 0))
-        stage.GetRootLayer().Save()
+        stage.GetRootLayer().Export(str(PACKAGE / filename))
 
-    p = PACKAGE / "roll.usda"
-    if p.exists():
-        p.unlink()
     stage, root = stage_for("roll.usda", "Roll")
     UsdPhysics.RigidBodyAPI.Apply(root.GetPrim())
     UsdPhysics.MassAPI.Apply(root.GetPrim()).CreateMassAttr(spec.MASS)
@@ -138,7 +132,7 @@ def generate():
         mesh.CreateSubdivisionSchemeAttr("none")
         collide(mesh.GetPrim(), (0.85, 0.15, 0.10) if i == 0 else (0.22, 0.25, 0.27))
         UsdPhysics.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr("convexHull")
-    stage.GetRootLayer().Save()
+    stage.GetRootLayer().Export(str(PACKAGE / "roll.usda"))
 
 
 if __name__ == "__main__":

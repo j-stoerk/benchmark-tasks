@@ -49,6 +49,10 @@ def test_receiver_has_three_physical_prismatic_jaws_and_real_strokes():
     assert len(joints) == 6
     assert {j.GetPrim().GetName() for j in joints} == set(spec.JOINT_NAMES)
     assert sum(p.GetName().startswith("Jaw") for p in stage.Traverse()) == 3
+    for joint in joints:
+        drive = UsdPhysics.DriveAPI(joint.GetPrim(), "linear")
+        assert drive and drive.GetStiffnessAttr().Get() > 0
+        assert drive.GetMaxForceAttr().Get() > 0
 
 
 def test_full_score_requires_an_entire_two_second_loaded_interval():

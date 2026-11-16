@@ -17,15 +17,51 @@ def Xform "Machine" (
         double3 xformOp:translate = (0, 0, 0)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 
-        def Cube "frame" (
+        def Cube "post_0" (
             prepend apiSchemas = ["PhysicsCollisionAPI"]
         )
         {
             custom float physxCollision:contactOffset = 0.0002
             color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
             double size = 1
-            float3 xformOp:scale = (0.12, 0.8, 1.2)
-            double3 xformOp:translate = (0, 0, 0)
+            float3 xformOp:scale = (0.08, 0.06, 1.2)
+            double3 xformOp:translate = (0, -0.37, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "post_1" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.08, 0.06, 1.2)
+            double3 xformOp:translate = (0, 0.37, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "foot" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.32, 0.8, 0.08)
+            double3 xformOp:translate = (0, 0, -0.56)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+
+        def Cube "crossbeam" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.08, 0.8, 0.08)
+            double3 xformOp:translate = (0, 0, 0.56)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }
     }
@@ -57,8 +93,16 @@ def Xform "Machine" (
         }
     }
 
-    def PhysicsPrismaticJoint "withdraw"
+    def PhysicsPrismaticJoint "withdraw" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
     {
+        float drive:linear:physics:damping = 30000
+        float drive:linear:physics:maxForce = 6000
+        float drive:linear:physics:stiffness = 1500000
+        float drive:linear:physics:targetPosition = 0
+        float drive:linear:physics:targetVelocity = 0
+        uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
         rel physics:body1 = </Machine/Shaft>
