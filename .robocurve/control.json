@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "film-smoke-01",
+    "id": "film-smoke-02",
     "mode": "run",
-    "sha": "bc50bd14ea89719b795a2fee17600173ef8f71c4",
+    "sha": "0fb9f5fb1a9a07fce51ca0a23633f7ff864735fd",
     "task": "lab-film-drawdown",
     "trial": {
       "mode": "smoke",
