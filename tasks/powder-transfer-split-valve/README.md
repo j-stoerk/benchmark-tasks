@@ -1,46 +1,98 @@
-# DN100 powder-transfer split-valve mechanical service fixture
+# DN100 split-valve dry commissioning fixture
 
-Dock an 8 kg supported container half, lock three real lugs, retain a net 100 N separation load with the vertical positioning drive disabled, open both complementary discs through native face contact, reseat, unlock and undock. This is a custom mechanical fixture for battery-ingredient handling; it does not test powder transfer or certify containment.
+Align a supported 8 kg upper assembly, lock three lugs, retain a measured net
+100 N separation load with the vertical position drive disabled, cycle the
+mechanically coupled discs, reseat both halves and separate them safely.
+The custom fixture tests mechanical readiness before battery-ingredient powder
+transfer. It has no powder and does not test filled-container handling or certify
+containment. Native feasibility and a genuine model run are still pending.
 
-GEA BUCK describes two independently sealing halves, a central locking/operating ring and DN100-250 sizes: https://www.gea.com/en/products/pumps-valves-flow-components/powder-valves-airlocks/containment-valves/buck-containment-valve/ . DN100 is representative. The 8 kg payload, lug dimensions, loads, springs and tolerances are explicitly specified fixture parameters, not asserted OEM specifications. Do not extrapolate dry contact success to contamination control.
+## Run and score
 
-## Runtime
-
-Use the pinned IsaacLab-Arena/YAM environment (`yam-arena==0.1.0`, Isaac Sim 6.1, Python 3.12, NVIDIA GPU). Install this task editable inside it; the external `uv` executable must be available on PATH.
+Use the pinned launchable environment: Python 3.12, Isaac Sim 6.1,
+Isaac Lab-Arena, Inspect Robots and `yam-arena==0.1.0`, with an NVIDIA GPU.
+The external `uv` executable must be on PATH.
 
 ```sh
 uv pip install -e tasks/powder-transfer-split-valve --no-deps
 python tasks/powder-transfer-split-valve/run.py demo --output /tmp/valve-demo
 python tasks/powder-transfer-split-valve/run.py model --bridge /tmp/valve-decisions --output /tmp/valve-model
 python tasks/powder-transfer-split-valve/run.py smoke --variant unlocked-proof --max-steps 300 --output /tmp/valve-negative
-python tasks/powder-transfer-split-valve/test_valve.py
+python -m unittest discover -s tasks/powder-transfer-split-valve -p 'test_*.py'
 ```
 
-Every trial uses a fresh output directory and seed zero. `run.py` launches Inspect Robots with the registered custom embodiment and genuine external LLM policy or the separately named demonstration. The model bridge waits for actual JSON decisions; it has no scripted fallback. Each request contains two native RGB frames, encoder/contact readings and the operating contract. Respond with `response-NNN.json` containing a rationale and `sequence` of explicit `{action:[x,y,z,collar_deg,active_deg,proof],steps:N}` entries, totaling at most 400 steps. At most 30 calls and 1600 actions are allowed. The passive disc is never commandable. Trial wall time and model decisions will be reported after native validation.
+Use fresh output directories and seed0. Inspect Robots uses the registered
+custom embodiment and `task_score`; the passive rotor is never commandable.
+The run limit is 30 LLM calls and 1,600 actions at20 Hz. Each actual model request
+contains two native RGB frames, practical encoder/force readings and operating
+notes. Write `response-NNN.json` with `rationale` and a `sequence` of explicit
+`{action:[x,y,z,collar_deg,active_deg,proof],steps:N}` waypoints. Each response
+may supply at most400 actions. There is no scripted model fallback. The
+separately named demonstration uses only public encoders and contact gauges.
 
-`task.json` defines the complete fixed setup and rubric. `split_valve/spec.py` evaluates actual measurements, `assets.py` reproducibly authors `machine.usda`, and `native.py` builds the Arena articulation. `adapter.py` exposes only practical readouts, not success flags. `export.py` exports full recorded frames at their native rate with trace-derived instrument captions. During the load proof, vertical effort is exactly upper payload weight plus 100 N; stiffness and damping are zero, so an unlocked upper half can physically separate. The `unlocked-proof` negative demonstration deliberately omits collar locking. The seal sensors filter contacts against their own disc, and the retention sensor filters against the collar.
+Wall time, actual scores and decision count will be reported from completed
+current-source recordings. Offline checks alone do not establish feasibility.
 
-The sixteen 10 kN/m seal-carrier springs are a reduced seating model; leakage, dust, wear and chemical compatibility are excluded. The discrete 240 Hz solver and 48-sector geometry need native validation against the specified tolerances. A full native demo, real LLM recording and negative control must precede submission.
+## Mechanics and measurements
 
+`task.json` specifies the fixed layout, dimensions, materials and complete rubric.
+`assets.py` regenerates the supplied original `machine.usda`; `native.py` builds
+the Arena articulation. GPU TGS uses960 Hz physics,64 position/1 velocity
+iteration and articulation contacts last. Control and video remain20 Hz.
 
-Each solid disc uses one closed 32-sided convex collider (64 vertices), with a maximum 0.25 mm radial faceting error. Annular housings use 48 sectors; each shoe uses four sectors matching the disc facets. The reduced model excludes microscopic leakage. Seal gauges project actual disc-contact force onto the shoe radial axis; axial forces do not establish radial seating. The retaining gauge measures the actual downward collar force. Full force vectors and seal deflections are retained in the private physics trace for calibration. The 240 Hz step keeps disc-edge substep motion below 0.12 mm at the specified speed. Fresh native contact and load-control validation is required.
+The 8 kg payload comprises7.500 kg body,0.300 kg passive rotor and eight25 g seat
+units. Each rotor has a60x12x12 mm steel dog atY=-135 mm, outside the casing and
+collar. The lower and upper faces meet at the interface; opposite ends transmit
+opening/closing torque through native contact. Lifting disengages them. The
+passive rotor has only a preloaded return spring,0.5 Nm/rad and0.1 Nms/rad,
+fixed rest-0.6 rad,0.8 Nm cap. It has no following motor, attachment or commanded
+pose. Docked relative angle over2 degrees latches zero as coupling failure.
 
-The seat model provides three native compliance axes per shoe: radial 10 kN/m with 32 Ns/m damping, and axial 1 kN/m with 9 Ns/m damping over +/-8 mm. This represents compliant lip motion rather than a rigid ring blocking the butterfly disc. Each seat is a 3 g radial guide, 2 g tangential guide and 20 g shoe, so the upper aggregate remains 8 kg. The active-disc position drive uses 600 Nm/rad stiffness with the same 5 Nm effort cap. Stationarity is measured from a full second of encoder positions (0.1 mm /0.5 degree range), followed by a two-second loaded hold with the same baseline excursion limits. The demo allows four seconds of proof for settling; instantaneous solver velocity is recorded for diagnostics. Opening credit and final success require actual proof effort to be removed.
+The active drive is limited to10 Nm and30 deg/s; collar5 Nm and20 deg/s. Normal
+Z positioning has1 kN cap,100 kN/m stiffness and1 kNs/m damping, plus gravity
+compensation. A Z=0.9998 m setpoint supplies about20 N seating bias against the
+actual Z=1.000 m casing stop. The demo compares measured height with the physical
+stop, rather than expecting the biased motor setpoint to be reached. During
+proof, every Z position/damping term is removed. Upward effort is exactly
+payload weight plus100 N; actual lug/collar contact must retain the payload.
 
-The eight shoe sectors on each half are centred at 22.5+45*i degrees. Their boundaries coincide with the rotor Y axis, allowing opposite sides of the reduced lip model to deflect in opposite axial directions. No rigid shoe bridges that bending axis. Native full-cycle validation remains required.
+Three native compliance axes per seat approximate a deformable lip: radial
+10 kN/m,32 Ns/m,-1..+3 mm; axial1 kN/m,9 Ns/m,+/-8 mm; tangential1 kN/m,
+9 Ns/m,+/-2 mm. Each unit is3 g radial guide,2 g tangential guide and20 g shoe.
+The eight shoe boundaries align with the rotor bending axis. Each solid
+100x2 mm disc has one32-sided convex mesh; each shoe has four matching facets.
+No continuous elastomer constitutive law or microscopic leakage is modeled.
 
-The current commissioning experiment resolves articulation contacts last in TGS. Private traces include actual native link poses (xyzw quaternion convention, verified against the rotary encoders), processed commands, explicit numeric-order seat joint deflections, total and disc-filtered shoe contacts, and available actuator diagnostic values. Only the documented practical encoders/gauges and RGB reach the policy. The earlier full cycle jammed; no successful demo is claimed.
+Each shoe gauge projects contact with its own disc onto the outward radial
+axis. Axial force and contact with unrelated parts cannot credit seating.
+The retaining gauge measures only downward collar force on the upper assembly.
+The scorer uses actual encoders, those contact readings and applied proof effort.
+One-second encoder windows establish stationarity; the load hold is two seconds.
+Both discs must open, reseat and remain independently seated after separation.
 
-The detailed native camera looks down the open vessel/neck bore from (0,-0.065,1.600) m toward (0,0,1.000), with 55 mm focal length. This exposes actual disc motion without hiding or cutting away colliders. The overview camera is unchanged. Camera visibility still needs inspection in fresh native recordings.
+The `unlocked-proof` control omits collar locking and requests the same force-only
+separation load. It must physically separate and cannot establish retention.
+Native interlock pins also inhibit opening while unlocked and unlocking while
+open. The demo observes both closed angles and all sixteen seated gauges for
+one continuous second before unlocking/lifting.
 
-The third seat axis provides tangential compliance: 1 kN/m, 9 Ns/m, +/-2 mm and 5 N cap. It permits circumferential lip deformation instead of enforcing a rigid tangential constraint between contacting halves. The 112 mm housing bore clears combined radial/tangential strokes; the disc aperture remains DN100. TGS now requests 64 position and one velocity iteration. The previous native contact-order experiment completed at 0.5 and jammed near 9 degrees despite the full 5 Nm active drive; no complete-cycle demo has passed. These fixture spring choices require fresh native and physical calibration; they are not measured elastomer properties.
+The overview shows the supported rig; the second camera looks down the actual
+open bore from(0,-0.065,1.60) m. No colliders are hidden or cut away. Private
+traces preserve actual link poses, XYZW quaternions, contact vectors, seat
+deflections and actuator diagnostics for contact-integrity review. These private
+diagnostics and score flags are not model inputs. `export.py` retains every
+recorded frame and adds trace-derived captions.
 
-The active-disc drive is now capped at 10 Nm; the collar remains capped at 5 Nm. This is a fixture actuator choice, within the documented 10 Nm theoretical output of a Festo DRVS-32 quarter-turn drive at 6 bar, not an OEM GEA torque curve or a pneumatic-actuator digital twin. The native position servo remains 600 Nm/rad and 2 Nms/rad, with 30 deg/s speed limit. Native contact penetration and the complete cycle require fresh validation. The fixture uses an empty supported upper vessel for dry mechanical commissioning; filled-container transfer and powder containment are outside the task.
+## Provenance and limits
 
-[Festo DRVS manufacturer data](https://ftp.festo.com/Public/PNEUMATIC/SOFTWARE_SERVICE/Documentation/2025/DE/DRVS_DE.PDF) establish that a 10 Nm quarter-turn drive is available; they do not validate this custom valve geometry or material model. The detailed camera is shifted toward negative Y to clear the support arm in the native image.
+[GEA BUCK](https://www.gea.com/en/products/pumps-valves-flow-components/powder-valves-airlocks/containment-valves/buck-containment-valve/)
+documents independently sealing halves, a locking/actuating ring, coupled
+operation and DN100-250 sizes. It establishes the application and scale, not
+the internals of this fixture. The8 kg payload, drive dogs, lugs, proof load,
+spring values and tolerances are explicit custom benchmark choices.
 
-The passive disc has a fixed -0.6 rad torsion-spring rest angle: stiffness 0.5 Nm/rad gives 0.3 Nm closing preload against the zero-degree stop, with 0.1 Nms/rad damping and 0.8 Nm effort cap. This is passive hardware, not a commandable follower. Before unlocking/lifting, the demo verifies both discs within 1 degree closed and every radial contact gauge >=0.5 N continuously for one second. The numeric scorer remains unchanged. Latched physical exposure/workspace failures terminate immediately at zero. The previous 10 Nm trial achieved a full open/close but failed because the unpreloaded passive half opened about 4.19 degrees during undocking.
-
-Outside the proof, the demo commands Z=0.9998 m to provide about 20 N seating bias through the existing 100 kN/m force-limited servo against the actual Z=1.000 m casing stop. This restores contact after the 0.1 mm upward lug clearance is taken up during proof. It does not prescribe or attach the payload pose. Proof still completely disables the Z servo and applies exactly payload weight plus 100 N; actual collar contact must carry the load.
-
-The commissioning fixture uses separable external drive dogs: each steel bar is 60 x 12 x 12 mm at Y=-135 mm. Flat faces meet at the closed interface plane; opposite ends transmit opening and closing torque through native contact. The thick coupling avoids relying on the thin flow discs alone. Each rotor assembly is 0.300 kg; upper body 7.500 kg and seats 0.200 kg preserve the 8 kg payload. This custom coupling is not an OEM reconstruction. Its native coupled cycle has not yet been validated.
+[Festo DRVS data](https://ftp.festo.com/Public/PNEUMATIC/SOFTWARE_SERVICE/Documentation/2025/DE/DRVS_DE.PDF)
+show that a10 Nm quarter-turn actuator is available. This servo is not a GEA
+torque curve or a pneumatic-actuator digital twin. Native load/contact
+validation and physical spring/seat calibration remain necessary. Original
+assets and code are distributed under the included MIT license.
