@@ -2,7 +2,7 @@
 
 import math
 
-from pxr import Gf, UsdGeom, UsdPhysics, Vt
+from pxr import Gf, Sdf, UsdGeom, UsdPhysics, UsdShade, Vt
 
 from .assets import (
     PACKAGE,
@@ -16,6 +16,13 @@ from .assets import (
 
 
 def cone_wall(stage, parent, lower_ro, lower_ri, upper_ro, upper_ri, z0, z1, segments=48):
+    material=UsdShade.Material.Define(stage,'/Fixture/ClearGlass')
+    shader=UsdShade.Shader.Define(stage,'/Fixture/ClearGlass/Shader')
+    shader.CreateIdAttr('UsdPreviewSurface')
+    shader.CreateInput('diffuseColor',Sdf.ValueTypeNames.Color3f).Set(Gf.Vec3f(.65,.80,.90))
+    shader.CreateInput('opacity',Sdf.ValueTypeNames.Float).Set(.12)
+    shader.CreateInput('roughness',Sdf.ValueTypeNames.Float).Set(.15)
+    material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(),'surface')
     for i in range(segments):
         a, b = i * 2 * math.pi / segments, (i + 1) * 2 * math.pi / segments
         points = []
@@ -28,6 +35,7 @@ def cone_wall(stage, parent, lower_ro, lower_ri, upper_ro, upper_ri, z0, z1, seg
         m.CreateSubdivisionSchemeAttr("none")
         style(m, (0.63, 0.79, 0.88))
         m.CreateDisplayOpacityAttr(Vt.FloatArray([0.25]))
+        UsdShade.MaterialBindingAPI.Apply(m.GetPrim()).Bind(material)
         UsdPhysics.MeshCollisionAPI.Apply(m.GetPrim()).CreateApproximationAttr("convexHull")
 
 

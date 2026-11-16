@@ -28,7 +28,7 @@ BAR_RADIUS = 0.0035
 CALL_LIMIT = 30
 CAMERA_VIEWS = [
     ("overview_cam", (0.36, -0.45, 1.06), (0.0, 0.0, 0.86), 30),
-    ("detail_cam", (0.10, -0.16, 0.94), (0.0, 0.0, 0.805), 55),
+    ("detail_cam", (0.15, -0.25, 1.03), (0.0, 0.0, 0.85), 45),
 ]
 INSTRUCTION = (
     "Recover the white magnetic stirring bar from the empty flask using the "
@@ -50,7 +50,7 @@ the centre of the floor, approximately alongX. You must lower the magnet to
 capture it and lift/reorient it through the neck. Pulling a transverse bar
 against the neck does not count as extraction. Let gravity and the finite
 magnetic force reorient it, or adjust the tool pose. The actual field model
-acts at the nearer end of the bar and supplies equal/opposite robot reaction.
+uses two poles in each magnet, including orientation torque and balanced robot reaction.
 It is a bounded short-range approximation, not a measured OEM field curve.
 Only native RGB, joint encoders and tool contactN are policy observations.
 Success is judged from video/ruler: the entire bar>=25mm above the rim,

@@ -5,23 +5,34 @@ import numpy as np
 from .spec import matrix
 
 
-def attraction(tool, bar, quat, enabled=True):
-    """Return endpoint force/torque. No distance-based attachment is created."""
+def attraction(tool, bar, quat, enabled=True, tool_quat=(0,0,0,1)):
+    """Four softened magnetic-pole interactions with orientation torque.
+
+    Each radial pair force is bounded. No nearest-pole switching, artificial
+    capture joint, pose tracking or forced alignment is used.
+    """
     tool = np.asarray(tool, float)
     bar = np.asarray(bar, float)
     axis = matrix(quat)[:, 0]
-    offsets = [sign * 0.010 * axis for sign in (-1, 1)]
-    offset = min(offsets, key=lambda off: np.linalg.norm(tool - bar - off))
-    displacement = tool - bar - offset
-    distance = float(np.linalg.norm(displacement))
+    tool_axis=matrix(tool_quat)[:,2]
+    offsets=[sign*.008*axis for sign in (-1,1)]
+    tool_offsets=[sign*.004*tool_axis for sign in (-1,1)]
+    distance=min(float(np.linalg.norm(tool+t-bar-b)) for t in tool_offsets for b in offsets)
     force = np.zeros(3)
-    if enabled and 1e-6 < distance < 0.030:
-        # 0.2N near contact (~8.5mm centre separation), inverse-fourth-power
-        # falloff. This is a declared approximation requiring bench calibration
-        # for a chosen commercial retriever, not manufacturer force data.
-        magnitude = min(0.20, 0.20 * (0.0085 / max(distance, 0.0085)) ** 4)
-        force = magnitude * displacement / distance
-    return force, np.cross(offset, force), distance
+    torque=np.zeros(3)
+    if enabled:
+        for sign_b,offset in zip((-1,1),offsets):
+            for sign_t,toffset in zip((-1,1),tool_offsets):
+                delta=bar+offset-tool-toffset
+                d=float(np.linalg.norm(delta))
+                if d>=.030 or d<1e-9:
+                    continue
+                magnitude=min(.10,3.6e-6*d/(d*d+.002**2)**1.5)
+                taper=1. if d<=.025 else .5*(1+np.cos(np.pi*(d-.025)/.005))
+                pair=sign_b*sign_t*magnitude*taper*delta/d
+                force+=pair
+                torque+=np.cross(offset,pair)
+    return force,torque,distance
 
 
 class Process:
@@ -38,16 +49,17 @@ class Process:
 
         from .native import tool_pose, wrench
 
-        p, R, _ = tool_pose(self.env)
+        p, R, q = tool_pose(self.env)
         bar = object_states(self.env, ["stirbar"])["stirbar"]
-        f, t, d = attraction(p, bar.pos, bar.quat_xyzw, self.variant == "normal")
+        f, t, d = attraction(p, bar.pos, bar.quat_xyzw, self.variant == "normal",q)
         self.force = f
         self.distance = d
         wrench(self.env.scene["stirbar"], f.tolist(), t.tolist())
         robot = self.env.scene["robot"]
         reaction = -f
         # The magnetic force acts at the magnet head, not at the rod COM.
-        torque = np.cross(-(R @ np.array([0.0, 0.0, 0.15])), reaction)
+        tool_com=p+R@np.array([0.,0.,.15])
+        torque=-t-np.cross(np.asarray(bar.pos)-tool_com,f)
         wrench(robot, reaction.tolist(), torque.tolist(), robot.body_names.index("Tool"))
 
     def readout(self):
