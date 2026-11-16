@@ -101,9 +101,10 @@ two-second proof request.
 
 Both native RGB views are 1280x720, exported without cuts or acceleration into
 one H.264 video with actual measured force readouts. The overview is lower and
-shows the frame-to-carriage support path. The axial close-up reveals the core
+shows the entire frame, feet and carriage support path. The axial close-up reveals the core
 grip once the roll reaches Y=350 mm, Z=1080 mm. Reduced lighting avoids washed
-out geometry. Guide covers and a hollow donor bearing cover make the ideal
+out geometry; a 600-intensity parallel inspection light shines along +X into
+the bore without adding any mechanical part. Guide covers and a hollow donor bearing cover make the ideal
 native guide constraints legible. Those covers have no collision or mass API;
 they carry no additional force and cannot prevent a drop. Exact dimensions and
 offsets appear in `task.json` and `visual_guides.py`.

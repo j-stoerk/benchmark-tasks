@@ -243,7 +243,7 @@ class TransferMachine(EmbodimentBase):
         )()
         cams = []
         for name, eye, target in [
-            ("overview_cam", (1.55, -1.6, 1.25), (0.05, 0.12, 0.92)),
+            ("overview_cam", (1.45, -1.65, 1.9), (0, 0.12, 0.85)),
             ("core_cam", (-0.45, 0.35, 1.08), (0.05, 0.35, 1.08)),
         ]:
             cfg = CameraCfg(
@@ -273,13 +273,18 @@ def make_env(device="cuda:0", lift_force=6000):
             ),
         },
     )
-    from isaaclab_arena.assets.object_library import DomeLight
+    from isaaclab_arena.assets.object_library import DirectionalLight, DomeLight
 
     scene = Scene(
         [
             _box("floor", (4, 4, 0.1), (0, 0, -0.05), (0.20, 0.22, 0.24)),
             _box("destination", (0.42, 0.02, 0.004), (0, spec.TARGET_Y, 0.003), (0.08, 0.75, 0.25)),
             DomeLight(spawner_cfg=sim.DomeLightCfg(intensity=800, color=(1.0, 1.0, 1.0))),
+            DirectionalLight(
+                instance_name="core_inspection_light",
+                initial_pose=Pose(position_xyz=(0, 0, 3), rotation_xyzw=(0, -0.70710678, 0, 0.70710678)),
+                spawner_cfg=sim.DistantLightCfg(intensity=600, color=(1.0, 1.0, 1.0)),
+            ),
             roll,
         ]
     )
