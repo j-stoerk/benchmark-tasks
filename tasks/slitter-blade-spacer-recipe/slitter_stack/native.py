@@ -278,7 +278,7 @@ class AssemblyMachine(EmbodimentBase):
         )()
         cameras = []
         for name, eye, target in [
-            ("overview_cam", (1.3, -1.5, 1.9), (0.20, 0, 0.85)),
+            ("overview_cam", (0.85, -1.8, 1.30), (0.20, 0, 1.0)),
             ("arbor_cam", (0.35, -0.45, 1.30), (0, 0, 1.0)),
         ]:
             cfg = CameraCfg(
