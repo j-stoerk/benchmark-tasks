@@ -1,0 +1,245 @@
+#usda 1.0
+(
+    defaultPrim = "Machine"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Machine" (
+    prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+)
+{
+    def Xform "base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 150
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "frame" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.8, 0.8)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsFixedJoint "root_joint"
+    {
+        rel physics:body1 = </Machine/base>
+    }
+
+    def Xform "X" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 20
+        double3 xformOp:translate = (0, 0, 0.4)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "rail" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.1, 0.8, 0.08)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Y" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 20
+        double3 xformOp:translate = (0, 0, 0.4)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "mast" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.08, 0.1, 0.5)
+            double3 xformOp:translate = (0, 0, -0.25)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def Xform "Head" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 35
+        double3 xformOp:translate = (0, 0, 0.4)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cylinder "shaft" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 0.4
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.16, 0.4, 0.8)]
+            double radius = 0.028
+            double3 xformOp:translate = (-0.2, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "slide_x"
+    {
+        uniform token physics:axis = "X"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/X>
+        point3f physics:localPos0 = (0, 0, 0.4)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.26
+        float physics:upperLimit = 0
+    }
+
+    def PhysicsPrismaticJoint "slide_y"
+    {
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/X>
+        rel physics:body1 = </Machine/Y>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.06
+        float physics:upperLimit = 0.42
+    }
+
+    def PhysicsPrismaticJoint "slide_z"
+    {
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Y>
+        rel physics:body1 = </Machine/Head>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.04
+        float physics:upperLimit = 0.16
+    }
+
+    def Xform "Jaw0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 0.5
+        double3 xformOp:translate = (-0.315, 0.025, 0.4)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "lug" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.9, 0.55, 0.08)]
+            double size = 1
+            float3 xformOp:scale = (0.15, 0.012, 0.016)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "jaw_0"
+    {
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/Head>
+        rel physics:body1 = </Machine/Jaw0>
+        point3f physics:localPos0 = (-0.315, 0.025, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 0.009
+    }
+
+    def Xform "Jaw1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 0.5
+        float xformOp:rotateX = 120
+        double3 xformOp:translate = (-0.315, -0.012499999999999995, 0.421650635094611)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX"]
+
+        def Cube "lug" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.9, 0.55, 0.08)]
+            double size = 1
+            float3 xformOp:scale = (0.15, 0.012, 0.016)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "jaw_1"
+    {
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/Head>
+        rel physics:body1 = </Machine/Jaw1>
+        point3f physics:localPos0 = (-0.315, -0.0125, 0.021650635)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (0.5, 0.8660254, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 0.009
+    }
+
+    def Xform "Jaw2" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 0.5
+        float xformOp:rotateX = 240
+        double3 xformOp:translate = (-0.315, -0.012500000000000011, 0.37834936490538906)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateX"]
+
+        def Cube "lug" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.9, 0.55, 0.08)]
+            double size = 1
+            float3 xformOp:scale = (0.15, 0.012, 0.016)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "jaw_2"
+    {
+        uniform token physics:axis = "Y"
+        rel physics:body0 = </Machine/Head>
+        rel physics:body1 = </Machine/Jaw2>
+        point3f physics:localPos0 = (-0.315, -0.0125, -0.021650635)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (-0.5, 0.8660254, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = 0
+        float physics:upperLimit = 0.009
+    }
+}
+

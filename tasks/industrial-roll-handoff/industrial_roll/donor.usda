@@ -1,0 +1,73 @@
+#usda 1.0
+(
+    defaultPrim = "Machine"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Machine" (
+    prepend apiSchemas = ["PhysicsArticulationRootAPI"]
+)
+{
+    def Xform "base" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 150
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "frame" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
+            double size = 1
+            float3 xformOp:scale = (0.12, 0.8, 0.8)
+            double3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
+    def PhysicsFixedJoint "root_joint"
+    {
+        rel physics:body1 = </Machine/base>
+    }
+
+    def Xform "Shaft" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        float physics:mass = 45
+        double3 xformOp:translate = (0, 0, 0.4)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cylinder "shaft" (
+            prepend apiSchemas = ["PhysicsCollisionAPI"]
+        )
+        {
+            uniform token axis = "X"
+            double height = 0.56
+            custom float physxCollision:contactOffset = 0.0002
+            color3f[] primvars:displayColor = [(0.45, 0.48, 0.52)]
+            double radius = 0.0379
+            double3 xformOp:translate = (0.28, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate"]
+        }
+    }
+
+    def PhysicsPrismaticJoint "withdraw"
+    {
+        uniform token physics:axis = "X"
+        rel physics:body0 = </Machine/base>
+        rel physics:body1 = </Machine/Shaft>
+        point3f physics:localPos0 = (0, 0, 0.4)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.42
+        float physics:upperLimit = 0
+    }
+}
+

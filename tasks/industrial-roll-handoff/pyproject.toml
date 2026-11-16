@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robocurve-industrial-roll"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0"]
+description = "Full-size powered electrode-roll handoff with physical expanding core grip."
+
+[project.entry-points."inspect_robots.embodiments"]
+industrial_roll = "industrial_roll.adapter:industrial_roll"
+
+[project.entry-points."inspect_robots.policies"]
+industrial_demo = "industrial_roll.policy:industrial_demo"
+industrial_llm = "industrial_roll.policy:industrial_llm"
+
+[tool.setuptools.packages.find]
+include = ["industrial_roll*"]
+
+[tool.setuptools.package-data]
+industrial_roll = ["*.usda"]

@@ -1,0 +1,638 @@
+#usda 1.0
+(
+    defaultPrim = "Roll"
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "Roll" (
+    prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+)
+{
+    float physics:mass = 200
+
+    def Mesh "sector_00" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.0381, 0), (-0.185, 0.3, 0), (-0.185, 0.29743347, 0.039157856), (-0.185, 0.03777405, 0.004973048), (0.185, 0.0381, 0), (0.185, 0.3, 0), (0.185, 0.29743347, 0.039157856), (0.185, 0.03777405, 0.004973048)]
+        color3f[] primvars:displayColor = [(0.85, 0.15, 0.1)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_01" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.03777405, 0.004973048), (-0.185, 0.29743347, 0.039157856), (-0.185, 0.28977776, 0.07764571), (-0.185, 0.036801774, 0.0098610055), (0.185, 0.03777405, 0.004973048), (0.185, 0.29743347, 0.039157856), (0.185, 0.28977776, 0.07764571), (0.185, 0.036801774, 0.0098610055)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_02" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.036801774, 0.0098610055), (-0.185, 0.28977776, 0.07764571), (-0.185, 0.27716386, 0.11480503), (-0.185, 0.03519981, 0.014580239), (0.185, 0.036801774, 0.0098610055), (0.185, 0.28977776, 0.07764571), (0.185, 0.27716386, 0.11480503), (0.185, 0.03519981, 0.014580239)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_03" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.03519981, 0.014580239), (-0.185, 0.27716386, 0.11480503), (-0.185, 0.25980762, 0.15), (-0.185, 0.032995567, 0.01905), (0.185, 0.03519981, 0.014580239), (0.185, 0.27716386, 0.11480503), (0.185, 0.25980762, 0.15), (0.185, 0.032995567, 0.01905)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_04" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.032995567, 0.01905), (-0.185, 0.25980762, 0.15), (-0.185, 0.238006, 0.18262842), (-0.185, 0.030226761, 0.02319381), (0.185, 0.032995567, 0.01905), (0.185, 0.25980762, 0.15), (0.185, 0.238006, 0.18262842), (0.185, 0.030226761, 0.02319381)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_05" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.030226761, 0.02319381), (-0.185, 0.238006, 0.18262842), (-0.185, 0.21213204, 0.21213204), (-0.185, 0.026940769, 0.026940769), (0.185, 0.030226761, 0.02319381), (0.185, 0.238006, 0.18262842), (0.185, 0.21213204, 0.21213204), (0.185, 0.026940769, 0.026940769)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_06" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.026940769, 0.026940769), (-0.185, 0.21213204, 0.21213204), (-0.185, 0.18262842, 0.238006), (-0.185, 0.02319381, 0.030226761), (0.185, 0.026940769, 0.026940769), (0.185, 0.21213204, 0.21213204), (0.185, 0.18262842, 0.238006), (0.185, 0.02319381, 0.030226761)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_07" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.02319381, 0.030226761), (-0.185, 0.18262842, 0.238006), (-0.185, 0.15, 0.25980762), (-0.185, 0.01905, 0.032995567), (0.185, 0.02319381, 0.030226761), (0.185, 0.18262842, 0.238006), (0.185, 0.15, 0.25980762), (0.185, 0.01905, 0.032995567)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_08" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.01905, 0.032995567), (-0.185, 0.15, 0.25980762), (-0.185, 0.11480503, 0.27716386), (-0.185, 0.014580239, 0.03519981), (0.185, 0.01905, 0.032995567), (0.185, 0.15, 0.25980762), (0.185, 0.11480503, 0.27716386), (0.185, 0.014580239, 0.03519981)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_09" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.014580239, 0.03519981), (-0.185, 0.11480503, 0.27716386), (-0.185, 0.07764571, 0.28977776), (-0.185, 0.0098610055, 0.036801774), (0.185, 0.014580239, 0.03519981), (0.185, 0.11480503, 0.27716386), (0.185, 0.07764571, 0.28977776), (0.185, 0.0098610055, 0.036801774)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_10" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.0098610055, 0.036801774), (-0.185, 0.07764571, 0.28977776), (-0.185, 0.039157856, 0.29743347), (-0.185, 0.004973048, 0.03777405), (0.185, 0.0098610055, 0.036801774), (0.185, 0.07764571, 0.28977776), (0.185, 0.039157856, 0.29743347), (0.185, 0.004973048, 0.03777405)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_11" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.004973048, 0.03777405), (-0.185, 0.039157856, 0.29743347), (-0.185, 1.8369703e-17, 0.3), (-0.185, 2.332952e-18, 0.0381), (0.185, 0.004973048, 0.03777405), (0.185, 0.039157856, 0.29743347), (0.185, 1.8369703e-17, 0.3), (0.185, 2.332952e-18, 0.0381)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_12" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 2.332952e-18, 0.0381), (-0.185, 1.8369703e-17, 0.3), (-0.185, -0.039157856, 0.29743347), (-0.185, -0.004973048, 0.03777405), (0.185, 2.332952e-18, 0.0381), (0.185, 1.8369703e-17, 0.3), (0.185, -0.039157856, 0.29743347), (0.185, -0.004973048, 0.03777405)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_13" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.004973048, 0.03777405), (-0.185, -0.039157856, 0.29743347), (-0.185, -0.07764571, 0.28977776), (-0.185, -0.0098610055, 0.036801774), (0.185, -0.004973048, 0.03777405), (0.185, -0.039157856, 0.29743347), (0.185, -0.07764571, 0.28977776), (0.185, -0.0098610055, 0.036801774)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_14" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.0098610055, 0.036801774), (-0.185, -0.07764571, 0.28977776), (-0.185, -0.11480503, 0.27716386), (-0.185, -0.014580239, 0.03519981), (0.185, -0.0098610055, 0.036801774), (0.185, -0.07764571, 0.28977776), (0.185, -0.11480503, 0.27716386), (0.185, -0.014580239, 0.03519981)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_15" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.014580239, 0.03519981), (-0.185, -0.11480503, 0.27716386), (-0.185, -0.15, 0.25980762), (-0.185, -0.01905, 0.032995567), (0.185, -0.014580239, 0.03519981), (0.185, -0.11480503, 0.27716386), (0.185, -0.15, 0.25980762), (0.185, -0.01905, 0.032995567)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_16" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.01905, 0.032995567), (-0.185, -0.15, 0.25980762), (-0.185, -0.18262842, 0.238006), (-0.185, -0.02319381, 0.030226761), (0.185, -0.01905, 0.032995567), (0.185, -0.15, 0.25980762), (0.185, -0.18262842, 0.238006), (0.185, -0.02319381, 0.030226761)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_17" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.02319381, 0.030226761), (-0.185, -0.18262842, 0.238006), (-0.185, -0.21213204, 0.21213204), (-0.185, -0.026940769, 0.026940769), (0.185, -0.02319381, 0.030226761), (0.185, -0.18262842, 0.238006), (0.185, -0.21213204, 0.21213204), (0.185, -0.026940769, 0.026940769)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_18" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.026940769, 0.026940769), (-0.185, -0.21213204, 0.21213204), (-0.185, -0.238006, 0.18262842), (-0.185, -0.030226761, 0.02319381), (0.185, -0.026940769, 0.026940769), (0.185, -0.21213204, 0.21213204), (0.185, -0.238006, 0.18262842), (0.185, -0.030226761, 0.02319381)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_19" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.030226761, 0.02319381), (-0.185, -0.238006, 0.18262842), (-0.185, -0.25980762, 0.15), (-0.185, -0.032995567, 0.01905), (0.185, -0.030226761, 0.02319381), (0.185, -0.238006, 0.18262842), (0.185, -0.25980762, 0.15), (0.185, -0.032995567, 0.01905)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_20" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.032995567, 0.01905), (-0.185, -0.25980762, 0.15), (-0.185, -0.27716386, 0.11480503), (-0.185, -0.03519981, 0.014580239), (0.185, -0.032995567, 0.01905), (0.185, -0.25980762, 0.15), (0.185, -0.27716386, 0.11480503), (0.185, -0.03519981, 0.014580239)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_21" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.03519981, 0.014580239), (-0.185, -0.27716386, 0.11480503), (-0.185, -0.28977776, 0.07764571), (-0.185, -0.036801774, 0.0098610055), (0.185, -0.03519981, 0.014580239), (0.185, -0.27716386, 0.11480503), (0.185, -0.28977776, 0.07764571), (0.185, -0.036801774, 0.0098610055)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_22" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.036801774, 0.0098610055), (-0.185, -0.28977776, 0.07764571), (-0.185, -0.29743347, 0.039157856), (-0.185, -0.03777405, 0.004973048), (0.185, -0.036801774, 0.0098610055), (0.185, -0.28977776, 0.07764571), (0.185, -0.29743347, 0.039157856), (0.185, -0.03777405, 0.004973048)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_23" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.03777405, 0.004973048), (-0.185, -0.29743347, 0.039157856), (-0.185, -0.3, 3.6739406e-17), (-0.185, -0.0381, 4.665904e-18), (0.185, -0.03777405, 0.004973048), (0.185, -0.29743347, 0.039157856), (0.185, -0.3, 3.6739406e-17), (0.185, -0.0381, 4.665904e-18)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_24" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.0381, 4.665904e-18), (-0.185, -0.3, 3.6739406e-17), (-0.185, -0.29743347, -0.039157856), (-0.185, -0.03777405, -0.004973048), (0.185, -0.0381, 4.665904e-18), (0.185, -0.3, 3.6739406e-17), (0.185, -0.29743347, -0.039157856), (0.185, -0.03777405, -0.004973048)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_25" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.03777405, -0.004973048), (-0.185, -0.29743347, -0.039157856), (-0.185, -0.28977776, -0.07764571), (-0.185, -0.036801774, -0.0098610055), (0.185, -0.03777405, -0.004973048), (0.185, -0.29743347, -0.039157856), (0.185, -0.28977776, -0.07764571), (0.185, -0.036801774, -0.0098610055)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_26" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.036801774, -0.0098610055), (-0.185, -0.28977776, -0.07764571), (-0.185, -0.27716386, -0.11480503), (-0.185, -0.03519981, -0.014580239), (0.185, -0.036801774, -0.0098610055), (0.185, -0.28977776, -0.07764571), (0.185, -0.27716386, -0.11480503), (0.185, -0.03519981, -0.014580239)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_27" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.03519981, -0.014580239), (-0.185, -0.27716386, -0.11480503), (-0.185, -0.25980762, -0.15), (-0.185, -0.032995567, -0.01905), (0.185, -0.03519981, -0.014580239), (0.185, -0.27716386, -0.11480503), (0.185, -0.25980762, -0.15), (0.185, -0.032995567, -0.01905)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_28" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.032995567, -0.01905), (-0.185, -0.25980762, -0.15), (-0.185, -0.238006, -0.18262842), (-0.185, -0.030226761, -0.02319381), (0.185, -0.032995567, -0.01905), (0.185, -0.25980762, -0.15), (0.185, -0.238006, -0.18262842), (0.185, -0.030226761, -0.02319381)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_29" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.030226761, -0.02319381), (-0.185, -0.238006, -0.18262842), (-0.185, -0.21213204, -0.21213204), (-0.185, -0.026940769, -0.026940769), (0.185, -0.030226761, -0.02319381), (0.185, -0.238006, -0.18262842), (0.185, -0.21213204, -0.21213204), (0.185, -0.026940769, -0.026940769)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_30" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.026940769, -0.026940769), (-0.185, -0.21213204, -0.21213204), (-0.185, -0.18262842, -0.238006), (-0.185, -0.02319381, -0.030226761), (0.185, -0.026940769, -0.026940769), (0.185, -0.21213204, -0.21213204), (0.185, -0.18262842, -0.238006), (0.185, -0.02319381, -0.030226761)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_31" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.02319381, -0.030226761), (-0.185, -0.18262842, -0.238006), (-0.185, -0.15, -0.25980762), (-0.185, -0.01905, -0.032995567), (0.185, -0.02319381, -0.030226761), (0.185, -0.18262842, -0.238006), (0.185, -0.15, -0.25980762), (0.185, -0.01905, -0.032995567)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_32" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.01905, -0.032995567), (-0.185, -0.15, -0.25980762), (-0.185, -0.11480503, -0.27716386), (-0.185, -0.014580239, -0.03519981), (0.185, -0.01905, -0.032995567), (0.185, -0.15, -0.25980762), (0.185, -0.11480503, -0.27716386), (0.185, -0.014580239, -0.03519981)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_33" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.014580239, -0.03519981), (-0.185, -0.11480503, -0.27716386), (-0.185, -0.07764571, -0.28977776), (-0.185, -0.0098610055, -0.036801774), (0.185, -0.014580239, -0.03519981), (0.185, -0.11480503, -0.27716386), (0.185, -0.07764571, -0.28977776), (0.185, -0.0098610055, -0.036801774)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_34" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.0098610055, -0.036801774), (-0.185, -0.07764571, -0.28977776), (-0.185, -0.039157856, -0.29743347), (-0.185, -0.004973048, -0.03777405), (0.185, -0.0098610055, -0.036801774), (0.185, -0.07764571, -0.28977776), (0.185, -0.039157856, -0.29743347), (0.185, -0.004973048, -0.03777405)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_35" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -0.004973048, -0.03777405), (-0.185, -0.039157856, -0.29743347), (-0.185, -5.5109105e-17, -0.3), (-0.185, -6.998856e-18, -0.0381), (0.185, -0.004973048, -0.03777405), (0.185, -0.039157856, -0.29743347), (0.185, -5.5109105e-17, -0.3), (0.185, -6.998856e-18, -0.0381)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_36" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, -6.998856e-18, -0.0381), (-0.185, -5.5109105e-17, -0.3), (-0.185, 0.039157856, -0.29743347), (-0.185, 0.004973048, -0.03777405), (0.185, -6.998856e-18, -0.0381), (0.185, -5.5109105e-17, -0.3), (0.185, 0.039157856, -0.29743347), (0.185, 0.004973048, -0.03777405)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_37" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.004973048, -0.03777405), (-0.185, 0.039157856, -0.29743347), (-0.185, 0.07764571, -0.28977776), (-0.185, 0.0098610055, -0.036801774), (0.185, 0.004973048, -0.03777405), (0.185, 0.039157856, -0.29743347), (0.185, 0.07764571, -0.28977776), (0.185, 0.0098610055, -0.036801774)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_38" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.0098610055, -0.036801774), (-0.185, 0.07764571, -0.28977776), (-0.185, 0.11480503, -0.27716386), (-0.185, 0.014580239, -0.03519981), (0.185, 0.0098610055, -0.036801774), (0.185, 0.07764571, -0.28977776), (0.185, 0.11480503, -0.27716386), (0.185, 0.014580239, -0.03519981)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_39" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.014580239, -0.03519981), (-0.185, 0.11480503, -0.27716386), (-0.185, 0.15, -0.25980762), (-0.185, 0.01905, -0.032995567), (0.185, 0.014580239, -0.03519981), (0.185, 0.11480503, -0.27716386), (0.185, 0.15, -0.25980762), (0.185, 0.01905, -0.032995567)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_40" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.01905, -0.032995567), (-0.185, 0.15, -0.25980762), (-0.185, 0.18262842, -0.238006), (-0.185, 0.02319381, -0.030226761), (0.185, 0.01905, -0.032995567), (0.185, 0.15, -0.25980762), (0.185, 0.18262842, -0.238006), (0.185, 0.02319381, -0.030226761)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_41" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.02319381, -0.030226761), (-0.185, 0.18262842, -0.238006), (-0.185, 0.21213204, -0.21213204), (-0.185, 0.026940769, -0.026940769), (0.185, 0.02319381, -0.030226761), (0.185, 0.18262842, -0.238006), (0.185, 0.21213204, -0.21213204), (0.185, 0.026940769, -0.026940769)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_42" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.026940769, -0.026940769), (-0.185, 0.21213204, -0.21213204), (-0.185, 0.238006, -0.18262842), (-0.185, 0.030226761, -0.02319381), (0.185, 0.026940769, -0.026940769), (0.185, 0.21213204, -0.21213204), (0.185, 0.238006, -0.18262842), (0.185, 0.030226761, -0.02319381)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_43" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.030226761, -0.02319381), (-0.185, 0.238006, -0.18262842), (-0.185, 0.25980762, -0.15), (-0.185, 0.032995567, -0.01905), (0.185, 0.030226761, -0.02319381), (0.185, 0.238006, -0.18262842), (0.185, 0.25980762, -0.15), (0.185, 0.032995567, -0.01905)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_44" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.032995567, -0.01905), (-0.185, 0.25980762, -0.15), (-0.185, 0.27716386, -0.11480503), (-0.185, 0.03519981, -0.014580239), (0.185, 0.032995567, -0.01905), (0.185, 0.25980762, -0.15), (0.185, 0.27716386, -0.11480503), (0.185, 0.03519981, -0.014580239)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_45" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.03519981, -0.014580239), (-0.185, 0.27716386, -0.11480503), (-0.185, 0.28977776, -0.07764571), (-0.185, 0.036801774, -0.0098610055), (0.185, 0.03519981, -0.014580239), (0.185, 0.27716386, -0.11480503), (0.185, 0.28977776, -0.07764571), (0.185, 0.036801774, -0.0098610055)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_46" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.036801774, -0.0098610055), (-0.185, 0.28977776, -0.07764571), (-0.185, 0.29743347, -0.039157856), (-0.185, 0.03777405, -0.004973048), (0.185, 0.036801774, -0.0098610055), (0.185, 0.28977776, -0.07764571), (0.185, 0.29743347, -0.039157856), (0.185, 0.03777405, -0.004973048)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+
+    def Mesh "sector_47" (
+        prepend apiSchemas = ["PhysicsCollisionAPI", "PhysicsMeshCollisionAPI"]
+    )
+    {
+        int[] faceVertexCounts = [4, 4, 4, 4, 4, 4]
+        int[] faceVertexIndices = [0, 3, 2, 1, 4, 5, 6, 7, 0, 1, 5, 4, 1, 2, 6, 5, 2, 3, 7, 6, 3, 0, 4, 7]
+        uniform token physics:approximation = "convexHull"
+        custom float physxCollision:contactOffset = 0.0002
+        point3f[] points = [(-0.185, 0.03777405, -0.004973048), (-0.185, 0.29743347, -0.039157856), (-0.185, 0.3, -7.347881e-17), (-0.185, 0.0381, -9.331808e-18), (0.185, 0.03777405, -0.004973048), (0.185, 0.29743347, -0.039157856), (0.185, 0.3, -7.347881e-17), (0.185, 0.0381, -9.331808e-18)]
+        color3f[] primvars:displayColor = [(0.22, 0.25, 0.27)]
+        uniform token subdivisionScheme = "none"
+    }
+}
+
