@@ -89,6 +89,27 @@ def generate():
         drive.CreateMaxForceAttr(1000)
         return j
 
+    def disc(parent, z, color):
+        # A solid convex object needs one closed hull. Triangular compound
+        # sectors add internal faces which are not surfaces of the real disc.
+        count = 32
+        points = [
+            (0.050 * math.cos(i * 2 * math.pi / count), 0.050 * math.sin(i * 2 * math.pi / count), z + dz)
+            for dz in (-0.001, 0.001)
+            for i in range(count)
+        ]
+        indices = [*reversed(range(count)), *range(count, 2 * count)]
+        for i in range(count):
+            j = (i + 1) % count
+            indices.extend([i, j, j + count, i + count])
+        mesh = UsdGeom.Mesh.Define(stage, "/Machine/" + parent + "/disc")
+        mesh.CreatePointsAttr(Vt.Vec3fArray([Gf.Vec3f(*point) for point in points]))
+        mesh.CreateFaceVertexCountsAttr([count, count] + [4] * count)
+        mesh.CreateFaceVertexIndicesAttr(indices)
+        mesh.CreateSubdivisionSchemeAttr("none")
+        style(mesh, color)
+        UsdPhysics.MeshCollisionAPI.Apply(mesh.GetPrim()).CreateApproximationAttr("convexHull")
+
     steel = (0.55, 0.59, 0.63)
     body("base", (0, 0, 0), 100)
     for i, x in enumerate((-0.25, 0.25)):
@@ -134,8 +155,8 @@ def generate():
     joint("collar", "base", "Collar", "Z", (0, 0, 1.0), (0, 32), revolute=True)
     body("Active", (0, 0, 1.0), 0.125)
     body("Passive", (0, 0, 0), 0.125)
-    arc("Active/disc", 0, 0.050, 0, 2 * math.pi, 0.002, -0.001, (0.22, 0.52, 0.74))
-    arc("Passive/disc", 0, 0.050, 0, 2 * math.pi, 0.002, 0.001, (0.84, 0.48, 0.16))
+    disc("Active", -0.001, (0.22, 0.52, 0.74))
+    disc("Passive", 0.001, (0.84, 0.48, 0.16))
     # The pins belong to the active rotor and physically meet the collar block.
     box("Active/closed_pin", (0.004, 0.004, 0.004), (0.04, 0.125, 0.002), (0.85, 0.2, 0.12))
     box("Active/open_pin", (0.004, 0.004, 0.004), (0, 0.125, 0.04), (0.85, 0.2, 0.12))
@@ -160,7 +181,7 @@ def generate():
                 0,
                 (0.18, 0.20, 0.22),
                 (0.0509, 0),
-                6,
+                4,
             )
             joint(f"seal_{half}_{i}", parent, name, "X", pos, (-0.001, 0.003), angle=angle)
     fixed = UsdPhysics.FixedJoint.Define(stage, "/Machine/anchor")

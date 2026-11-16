@@ -31,6 +31,15 @@ def cycle(proof):
 
 
 class Contract(unittest.TestCase):
+    def test_axial_contact_cannot_masquerade_as_radial_seating(self):
+        for index in range(16):
+            self.assertEqual(spec.radial_force([0, 0, 2000], index), 0)
+
+    def test_radial_contact_is_measured_in_each_shoes_direction(self):
+        for index in range(16):
+            angle = index % 8 * np.pi / 4
+            self.assertAlmostEqual(spec.radial_force([2 * np.cos(angle), 2 * np.sin(angle), 7], index), 2)
+
     def test_full_measured_cycle(self):
         self.assertEqual(cycle(load_proof()), (1.0, True))
 

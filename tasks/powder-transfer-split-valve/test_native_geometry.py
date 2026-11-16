@@ -51,6 +51,15 @@ class Geometry(unittest.TestCase):
         )
         self.assertAlmostEqual(total, 8, places=5)
 
+    def test_each_solid_disc_has_one_closed_convex_collision_mesh(self):
+        for body in ("Active", "Passive"):
+            disc = self.stage.GetPrimAtPath("/Machine/" + body + "/disc")
+            self.assertEqual(disc.GetTypeName(), "Mesh")
+            self.assertTrue(disc.HasAPI(UsdPhysics.CollisionAPI))
+            self.assertLessEqual(len(disc.GetAttribute("points").Get()), 64)
+            self.assertEqual(list(disc.GetChildren()), [])
+            self.assertEqual(len(disc.GetAttribute("faceVertexCounts").Get()), 34)
+
     def test_pins_clear_the_entire_continuous_rim_and_bridge(self):
         radii = []
         for prim in self.stage.Traverse():

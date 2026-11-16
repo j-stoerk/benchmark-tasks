@@ -311,22 +311,24 @@ class Sampler:
         self.term = env.action_manager.get_term("machine")
         self.seal_ids = self.robot.find_joints(["seal_lower_.*", "seal_upper_.*"], preserve_order=True)[0]
 
-    def normal(self, name):
-        return float(np.linalg.norm(array(self.env.scene[name].data.force_matrix_w)[0]))
+    def contact(self, name):
+        return array(self.env.scene[name].data.force_matrix_w)[0].reshape(-1, 3).sum(axis=0)
 
     def physics(self):
         q = array(self.robot.data.joint_pos)[0, self.ids]
         v = array(self.robot.data.joint_vel)[0, self.ids]
         q[3:] *= 180 / math.pi
         v[3:] *= 180 / math.pi
+        forces = [self.contact(f"seal_{half}_{i}") for half in ("lower", "upper") for i in range(8)]
+        retaining = self.contact("retaining_contact")
         return {
             "encoders": q.tolist(),
             "velocities": v.tolist(),
             "seal_deflections_m": array(self.robot.data.joint_pos)[0, self.seal_ids].tolist(),
-            "seal_normals": [
-                self.normal(f"seal_{half}_{i}") for half in ("lower", "upper") for i in range(8)
-            ],
-            "retaining_contact_N": self.normal("retaining_contact"),
+            "seal_normals": [spec.radial_force(force, i) for i, force in enumerate(forces)],
+            "seal_contact_vectors_N": [force.tolist() for force in forces],
+            "retaining_contact_N": max(0.0, -float(retaining[2])),
+            "retaining_contact_vector_N": retaining.tolist(),
             "net_proof_N": float(array(self.term.net_proof)[0]),
         }
 

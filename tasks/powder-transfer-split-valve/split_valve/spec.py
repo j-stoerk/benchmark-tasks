@@ -56,11 +56,19 @@ After opening BOTH discs to at least 88 degrees, close them to within 2 degrees,
 then unlock and raise the upper half 100 mm. The final detached halves each need
 all eight seal contact gauges above 0.5 N. Leak/particle transport is excluded.
 The six encoder readings are X,Y,Z,collar,active,passive, with angles in degrees.
-Sixteen seal normal-force gauges, actual upper retaining contact and the net
+Sixteen radial disc-contact gauges, downward collar contact on the upper half, and the net
 proof effort accompany two RGB views. No score flags are policy inputs.
 At most 30 LLM calls and 1600 control actions at 20 Hz; each call may select a
 sequence of waypoints with 1..400 total actions. Use encoder/force feedback.
 """
+
+
+def radial_force(vector, index):
+    force = np.asarray(vector, float)
+    if force.shape != (3,) or not np.isfinite(force).all():
+        raise ValueError("Expected a finite native contact-force vector")
+    angle = (index % 8) * math.pi / 4
+    return max(0.0, float(force @ np.array([math.cos(angle), math.sin(angle), 0])))
 
 
 def action_space():
