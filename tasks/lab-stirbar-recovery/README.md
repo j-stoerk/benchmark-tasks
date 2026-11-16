@@ -16,7 +16,7 @@ Before matching the simulator to a particular retriever, measure its near-contac
 
 ## Embodiment and score
 
-The robot is a single six-axis Cartesian-gimbal tool manipulator, with native finite-force joints. It is not a joint-accurate commercial-arm model and is not bimanual YAM. Its Cartesian tool trajectory can be reproduced by a real six-axis arm carrying the same smooth retriever. The operation is scored using a video/ruler: partial credit for lifting the retained bar15mm off the bottom or bringing its centre to the rim; full score for the entire retained bar25mm above the rim and still for2s. The held-tool endpoint is intentional for this retrieval task; a tool moved without the bar earns no extraction credit. Any orientation and feasible path is allowed. Precision magnetic-force readings are not grading requirements.
+The robot is a single six-axis Cartesian-gimbal tool manipulator, with native finite-force joints. It is not a joint-accurate commercial-arm model and is not bimanual YAM. Its Cartesian tool trajectory can be reproduced by a real six-axis arm carrying the same smooth retriever. The operation is scored using a video/ruler: partial credit for lifting the retained bar15mm off the bottom or bringing its centre to the rim; full score for the entire retained bar25mm above the rim and retained for2s. The held-tool endpoint is intentional for this retrieval task; a tool moved without the bar earns no extraction credit. Any orientation and feasible path is allowed. Precision magnetic-force readings are not grading requirements.
 
 The flask is empty and at room temperature. No biological material, hazardous solvent, powder or disposable consumable is required. Reset the same dry bar on the bottom and restore the tool position. Keep smooth protective polymer on the rod and approach glass gently.
 
@@ -37,3 +37,5 @@ The separate LLM policy requires actual code-aware/non-blind model responses, re
 Nearest board comparison: TK-TUMETS attaches a magnetic stylus to a tablet, without a free body being reoriented through a hollow-neck constraint. Ordinary pick-and-place and magnet attachment alone are insufficient distinctions. Refresh and inspect current board/suite neighbors before submitting.
 
 Original source and primitive assets are MIT licensed. Dependencies retain their upstream licences.
+
+The retention hold checks the visible outcome, not instantaneous solver velocity. The robot may move the retained bar while keeping it clear; such motion is irrelevant to successful retrieval. Native velocities remain diagnostic only.

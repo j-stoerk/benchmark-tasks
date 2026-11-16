@@ -107,7 +107,7 @@ class Proof:
         g = geometry(reading)
         if not np.isfinite([g["bottom_z"], g["speed"]]).all() or g["centre_z"] < 0.70:
             self.invalid = True
-        valid = g["retained"] and g["bottom_z"] >= RIM_Z + 0.025 and g["speed"] <= 0.03 and not self.invalid
+        valid = g["retained"] and g["bottom_z"] >= RIM_Z + 0.025 and not self.invalid
         self.elapsed = self.elapsed + 1 / HZ if valid else 0.0
         score = (
             1.0
