@@ -55,7 +55,7 @@ class AssemblyAction(ActionTerm):
         self.torque = self.force.clone()
         self.applied_proof = torch.zeros((env.num_envs, 2), device=self.device)
         self.lateral_target = torch.full((env.num_envs, 1), -0.45, device=self.device)
-        self.press_force = torch.full((env.num_envs, 1), 1000.0, device=self.device)
+        self.press_force = torch.full((env.num_envs, 1), 500.0, device=self.device)
 
     @property
     def action_dim(self):
@@ -82,7 +82,7 @@ class AssemblyAction(ActionTerm):
         press_z = tensor(self.robot.data.joint_pos)[:, self.press_ids]
         requested = q[:, 4:5] >= 0.5
         aligned = torch.abs(press_y) < 0.00002
-        desired_force = torch.where(requested & aligned, -500.0, 1000.0)
+        desired_force = torch.where(requested & aligned, -500.0, 500.0)
         # Finite pneumatic force buildup, including reversal from retraction.
         # The sustained clamp remains 500 N; contact gauges score actual load.
         increment = 1500.0 * self._env.physics_dt
@@ -98,12 +98,14 @@ class AssemblyAction(ActionTerm):
         if hasattr(self.robot, "set_joint_position_target_index"):
             self.robot.set_joint_position_target_index(target=xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target_index(target=jaws, joint_ids=self.ids[3:])
-            self.robot.set_joint_effort_target_index(target=press, joint_ids=self.press_ids)
+            self.robot.set_joint_effort_target_index(target=torch.zeros_like(press), joint_ids=self.press_ids)
+            self.robot.set_joint_velocity_target_index(target=press / 25000.0, joint_ids=self.press_ids)
             self.robot.set_joint_position_target_index(target=lateral, joint_ids=self.press_y_ids)
         else:
             self.robot.set_joint_position_target(xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target(jaws, joint_ids=self.ids[3:])
-            self.robot.set_joint_effort_target(press, joint_ids=self.press_ids)
+            self.robot.set_joint_effort_target(torch.zeros_like(press), joint_ids=self.press_ids)
+            self.robot.set_joint_velocity_target(press / 25000.0, joint_ids=self.press_ids)
             self.robot.set_joint_position_target(lateral, joint_ids=self.press_y_ids)
         active = (q[:, 5] >= 0.5).float()
         self.applied_proof[:, 0] = 100 * active
@@ -130,7 +132,7 @@ class AssemblyAction(ActionTerm):
         self._processed[:] = self._raw
         self.applied_proof[:] = 0
         self.lateral_target[:] = -0.45
-        self.press_force[:] = 1000.0
+        self.press_force[:] = 500.0
 
 
 @configclass
@@ -221,9 +223,9 @@ class AssemblyMachine(EmbodimentBase):
                 "press": ImplicitActuatorCfg(
                     joint_names_expr=["press"],
                     joint_effort_limit=1000.0,
-                    joint_velocity_limit=0.02,
+                    joint_velocity_limit=1.0,
                     stiffness=0.0,
-                    damping=800.0,
+                    damping=25000.0,
                 ),
                 "press_carriage": ImplicitActuatorCfg(
                     joint_names_expr=["press_y"],

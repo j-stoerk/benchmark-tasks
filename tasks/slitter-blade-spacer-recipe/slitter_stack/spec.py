@@ -49,6 +49,9 @@ joint-speed limit. The 30 mm tall pads grip OUTSIDE each ring, centred at tool Z
 The palm has a clear central bore; do not try to grasp inside a blade bore.
 Clamp 1 moves the retracted platen from Y=-0.45 to Y=0 at 0.10 m/s, then applies
 500 N DOWNWARD. Clamp 0 raises it before parking at Y=-0.45. The native PLC
+uses a force-limited viscous press drive: nominal20 mm/s and500 N at rest,
+with no platen position hold. Actual filtered load, not drive command, is scored.
+The native PLC
 waits for full vertical retraction before traversing and actual alignment before
 lowering; allow about 11 seconds. Clamp only after all nine parts have been stacked
 and the head is parked at XYZ=(0.60,0.40,1.35) m, clearing the pressure carriage

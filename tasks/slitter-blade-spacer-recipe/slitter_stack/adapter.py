@@ -123,6 +123,11 @@ class SlitterStack(EmbodimentBase):
             "clamp_z": 1.20 + float(numpy(self.robot.data.joint_pos)[0, self.press_ids[0]]),
             "clamp_y": float(numpy(self.robot.data.joint_pos)[0, self.press_y_ids[0]]),
             "applied_proof": numpy(self.term.applied_proof)[0].tolist(),
+            "press_bias_request_N": float(numpy(self.term.press_force)[0, 0]),
+            "press_joint_velocity_m_s": float(numpy(self.robot.data.joint_vel)[0, self.press_ids[0]]),
+            "press_diagnostic_applied_drive_N": float(
+                numpy(self.robot.data.applied_torque)[0, self.press_ids[0]]
+            ),
         }
 
     def observation(self):
