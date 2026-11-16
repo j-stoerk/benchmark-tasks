@@ -1,14 +1,8 @@
 {
   "command": {
-    "id": "slit-contact-bench-09",
-    "mode": "run",
-    "sha": "4995eff4ebe27bdd2c89d50046217a126be240e4",
-    "task": "slitter-blade-spacer-recipe",
-    "trial": {
-      "mode": "smoke",
-      "max_steps": 400,
-      "variant": "contact-bench"
-    }
+    "id": "cancel-valve-06",
+    "mode": "cancel",
+    "target": "valve-smoke-06"
   },
   "responses": {
     "model-final-01:001": {
