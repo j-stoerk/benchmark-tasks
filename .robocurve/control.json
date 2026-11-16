@@ -95,6 +95,18 @@
       ],
       "steps": 200,
       "rationale": "The donor is fully withdrawn and unloaded, with all three pads gripping. Move the supported roll to the marked lateral destination and compensated lift setpoint, then allow the carriage to settle before requesting the load test."
+    },
+    "model-final-01:008": {
+      "action": [
+        0.24,
+        0.35,
+        1.082,
+        1,
+        1,
+        1
+      ],
+      "steps": 60,
+      "rationale": "The measured carriage is settled at the destination, the donor remains unloaded and retracted, and all pad forces are strong. Hold the receiving grip and request the prescribed retention load for longer than two seconds."
     }
   }
 }
