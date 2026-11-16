@@ -20,7 +20,7 @@ def numpy(value):
 
 
 class SlitterStack(EmbodimentBase):
-    def __init__(self, trace_file=None, device="cuda:0", variant="normal", **kwargs):
+    def __init__(self, trace_file=None, device="cpu", variant="normal", **kwargs):
         if kwargs or variant not in ["normal", "no-grip", "unclamped", "contact-bench"]:
             raise ValueError("Unknown assembly embodiment option or control variant")
         self.info = EmbodimentInfo(
@@ -60,7 +60,7 @@ class SlitterStack(EmbodimentBase):
         if APP is None:
             from isaaclab.app import AppLauncher
 
-            APP = AppLauncher(headless=True, device=self.device, enable_cameras=True).app
+            APP = AppLauncher(headless=True, device="cuda:0", enable_cameras=True).app
             atexit.register(lambda: APP.close())
         import torch
 
@@ -149,6 +149,9 @@ class SlitterStack(EmbodimentBase):
         self.start()
         self.instruction = scene.instruction
         self.env.reset(seed=seed)
+        from .physics_audit import verify_cpu_ccd
+
+        verify_cpu_ccd(self.base, self.trace.parent if self.trace else None)
         self.command = spec.INITIAL.copy()
         self.proof = spec.Proof()
         for _ in range(40):

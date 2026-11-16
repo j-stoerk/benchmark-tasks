@@ -20,10 +20,7 @@ Actual contact must grip each ring, lift it, align its bore with the arbor and
 release it onto the accumulating stack. Every task part is a free rigid body.
 No object follows a prescribed pose and no grasp joint attaches it to the tool.
 The head uses finite-speed, force-limited native joint drives. The annular
-tooling geometry is one watertight 96-sided annular surface per free ring, with
-sparse SDF collision (resolution 512, subgrid 6). The bore stays open. The chuck
-and platen retain their compound convex sectors. This avoids internal compound
-faces throughout the free tooling; actual loaded seating still needs validation.
+geometry is constructed from 96 convex sectors that preserve the real bore.
 Source dimensions, densities, masses, transforms, drives and frame structure
 are explicit in `spec.py`, `assets.py`, `native.py` and `task.json`.
 
@@ -67,20 +64,8 @@ Use the pinned Linux/RTX Isaac Lab-Arena environment, Python 3.12, Isaac Sim
 6.1, `yam-arena` and Inspect Robots. Import `native.py` only after AppLauncher
 starts Kit. The runner captures actual dependency versions, source hashes,
 seed, commands, exit status and logs. Seed is 0; actions and scoring run at 20 Hz,
-with 480 Hz discrete physics. The 2 mm lower knives retain their actual thickness.
-GPU PhysX does not support CCD; smaller physics steps and bounded axis speeds
-are used instead of claiming CCD protection.
-TGS resolves articulation contacts last to test whether contact ordering corrects
-the observed loaded-stack penetration. That setting requires fresh native
-validation; the package currently has no full-score assembly evidence.
-
-NVIDIA documents [dynamic SDF collision](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/108.1/dev_guide/rigid_bodies_articulations/collision.html)
-and its [collision tuning limits](https://docs.omniverse.nvidia.com/kit/docs/omni_physics/108.0/dev_guide/guides/collision_guide.html).
-The new closed ring meshes have no internal sector faces. Their planar seating
-faces and actual 2 mm thickness are unchanged. Mesh topology and SDF settings
-are checked offline; cooked geometry accuracy and loaded contacts require native
-evidence. The earlier convex-sector stack failed under load even at 255 position
-iterations. That failed diagnostic is retained and is not successful demo evidence.
+with CPU PGS at 480 Hz and continuous collision detection enabled on the scene and all free rings. The 2 mm lower knives retain their actual thickness.
+The physical contact solver runs on CPU; the RTX GPU remains necessary for native camera rendering. A separate startup audit must confirm actual CPU selection and scene/body CCD flags. No native success is claimed.
 
 ```bash
 source /data/IsaacLab-Arena/yam.env
@@ -112,9 +97,6 @@ The full-score demo and model run must match the submitted package. Videos
 contain all recorded native RGB frames at 20 fps, with a measurement overlay
 derived from the trace. New evidence directories are required for each run.
 An infrastructure error is reported as a failed evaluation, never a model score.
-Reset checks every settling step. Invalid tooling before the policy acts raises
-an environment error and saves `invalid-reset.json`; it cannot become a model
-score. A task's subsequent latched physical workspace failure terminates at zero.
 
 Original code and generated geometry: MIT, see LICENSE. Recheck the board and
 published benchmark objectives before submission; a generic ring-stacking
@@ -125,4 +107,4 @@ The current contact diagnostic uses a 20 um contact-generation offset and zero r
 
 The current loaded-stack diagnostic requests 64 position iterations for both the machine articulation and free tooling, with one velocity iteration. The 1 mm contact-offset experiment failed under gravity; the 20 um offset is restored. No successful assembly run is currently claimed.
 
-Free rings now have explicitly authored uniform-annulus centre of mass and analytic inertias, preserving their stated masses and dimensions. The first SDF reset was unstable before load; the current source needs a short unstacked gravity test before any clamp proof. These settings do not establish assembly success.
+This is an isolated CPU/CCD experiment. All rings retain 96 convex sectors and explicitly authored uniform-annulus mass, centre of mass and inertias. Native reset and complete loaded-contact/assembly validation remain pending. No rigid part is attached, teleported or supported by a hidden constraint.

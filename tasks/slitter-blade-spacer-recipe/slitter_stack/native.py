@@ -286,7 +286,7 @@ class AssemblyMachine(EmbodimentBase):
         self.camera_config = make_configclass("AssemblyCameras", cameras, bases=(ArenaCameraCfg,))()
 
 
-def make_env(device="cuda:0", grip_force=50, contact_bench=False):
+def make_env(device="cpu", grip_force=50, contact_bench=False):
     objects = [
         _box("floor", (3, 3, 0.1), (0, 0, -0.05), (0.22, 0.24, 0.26)),
         _box("bench", (1.10, 1.1, 0.06), (0.25, 0, 0.72), (0.22, 0.25, 0.28)),
@@ -347,12 +347,14 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
 
     def configure(cfg):
         env_cfg_callback(spec.HZ)(cfg)
-        # GPU PhysX does not support CCD. Use bounded joint speeds and smaller
-        # discrete steps for the real 2 mm lower knives.
+        # CPU PhysX is selected to test real thin-ring contacts with CCD.
+        # Geometry, inertia, proof loads and scoring remain unchanged.
         cfg.sim.dt = 1 / 480
         cfg.decimation = 24
         cfg.sim.render_interval = 24
-        cfg.sim.physics.solve_articulation_contact_last = True
+        cfg.sim.physics.solver_type = 0
+        cfg.sim.physics.enable_ccd = True
+        cfg.sim.physics.enable_stabilization = False
         return cfg
 
     environment = IsaacLabArenaEnvironment(
