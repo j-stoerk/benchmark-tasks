@@ -25,7 +25,7 @@ def ready():
 
 def test_full_width_and_actual_blade_recipe():
     assert sum(spec.HEIGHTS) == pytest.approx(0.330)
-    assert spec.BLADE_H == 0.0007 and spec.BLADE_R == 0.050 and spec.BORE == 0.0325
+    assert spec.BLADE_H == 0.002 and spec.BLADE_R == 0.050 and spec.BORE == 0.0325
     actual = [p["target_z"] - p["height"] / 2 - spec.BASE_Z for p in spec.PARTS if p["blade"]]
     np.testing.assert_allclose(actual, spec.POSITIONS)
     np.testing.assert_allclose(np.diff(actual), [0.075, 0.080, 0.075])
@@ -38,7 +38,7 @@ def test_bore_survives_convex_sector_inscription():
 
 def test_actual_tooling_masses_are_not_enlarged_mocks():
     blades = [p for p in spec.PARTS if p["blade"]]
-    assert all(0.04 < p["mass"] < 0.06 for p in blades)
+    assert all(0.12 < p["mass"] < 0.15 for p in blades)
     assert max(p["mass"] for p in spec.PARTS) > 1
 
 

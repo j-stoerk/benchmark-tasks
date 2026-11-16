@@ -341,7 +341,7 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
     def configure(cfg):
         env_cfg_callback(spec.HZ)(cfg)
         # GPU PhysX does not support CCD. Use bounded joint speeds and smaller
-        # discrete steps for the real 0.7 mm knives rather than inflating them.
+        # discrete steps for the real 2 mm lower knives.
         cfg.sim.dt = 1 / 480
         cfg.decimation = 24
         cfg.sim.render_interval = 24

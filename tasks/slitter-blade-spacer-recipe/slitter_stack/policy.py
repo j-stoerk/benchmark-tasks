@@ -34,7 +34,7 @@ class Demo(PolicyBase):
             return ActionChunk(actions=[Action(data=np.array(command, float))], control_hz=spec.HZ)
         part = spec.PARTS[self.item]
         source = np.asarray(part["source"])
-        place_z = part["target_z"] + 0.0001
+        place_z = part["target_z"] + 0.001
         destinations = {
             "approach": [source[0], source[1], 1.35, 0, 0, 0],
             "lower": [*source, 0, 0, 0],

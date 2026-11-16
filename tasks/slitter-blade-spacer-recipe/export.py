@@ -36,7 +36,7 @@ def gauges(trial, trace):
         p = info["physics"]
         parts = p["parts"]
         faces = sorted(
-            (part["pos"][2] - 0.00035 - 0.8) * 1000
+            (part["pos"][2] - 0.001 - 0.8) * 1000
             for name, part in parts.items()
             if name in ("part_1", "part_3", "part_5", "part_7")
         )

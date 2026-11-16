@@ -13,7 +13,7 @@ ARBOR_R = 0.0324
 BORE = 0.0325
 BLADE_R = 0.050
 SPACER_R = 0.040
-BLADE_H = 0.0007
+BLADE_H = 0.002
 SEGMENTS = 96
 POSITIONS = np.array([0.050, 0.125, 0.205, 0.280])
 TOLERANCE = 0.00005
@@ -21,7 +21,7 @@ JOINT_NAMES = ["slide_x", "slide_y", "slide_z", "jaw_0", "jaw_1", "jaw_2"]
 INITIAL = np.array([-0.15, -0.4, 1.35, 0, 0, 0], float)
 LOW = np.array([-0.18, -0.45, 0.78, 0, 0, 0], float)
 HIGH = np.array([0.65, 0.45, 1.40, 1, 1, 1], float)
-HEIGHTS = [0.050, BLADE_H, 0.0743, BLADE_H, 0.0793, BLADE_H, 0.0743, BLADE_H, 0.0493]
+HEIGHTS = [0.050, BLADE_H, 0.073, BLADE_H, 0.078, BLADE_H, 0.073, BLADE_H, 0.048]
 # Initial magazines intentionally do not encode assembly order.
 SLOTS = [4, 0, 6, 2, 8, 1, 3, 5, 7]
 PARTS = []
@@ -57,12 +57,12 @@ gauge to verify the final condition. The native shaft and all free ring contacts
 carry the stack; no grasp attachment or prescribed part trajectory is used.
 The arbor centre is X=Y=0, shoulder top Z=0.800 m. Blade cutting faces are their
 LOWER faces at 50,125,205,280 mm from this shoulder; the final stack is 330 mm.
-Assemble spacer 50 mm, blade 0.7 mm, spacer 74.3 mm, blade, spacer 79.3 mm,
-blade, spacer 74.3 mm, blade, spacer 49.3 mm. Interchangeable 74.3 mm spacers
+Assemble spacer 50 mm, lower knife 2 mm, spacer 73 mm, knife, spacer 78 mm,
+knife, spacer 73 mm, knife, spacer 48 mm. Interchangeable 73 mm spacers
 and identical blades may exchange identity. All magazines have their support
 top at Z=0.800 m. Source XYZ centres and physical sizes are listed in instruction.
 Lift a held part to Z=1.35 m before crossing the table. Place its bottom about
-0.1 mm above the current stack, open the jaws fully, and retract before moving.
+1 mm above the current stack, open the jaws fully, and retract before moving.
 Observations: native RGB, actual tool XYZ/mean normalized jaw extension and last
 clamp/proof commands, three pad normal forces in N, pressure-plate contact N,
 and four blade cutting-face heights in mm (-1 when that blade is off the arbor).

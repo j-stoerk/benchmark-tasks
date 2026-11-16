@@ -1,4 +1,4 @@
-# Assemble and retain an electrode-slitter upper knife cassette
+# Assemble and retain an electrode-slitter lower knife cassette
 
 Implementation candidate; native demo/model evidence and submission are pending.
 This is full-width offline tooling assembly on a vertical service arbor.
@@ -6,7 +6,7 @@ It does not evaluate cutting, burr quality or production throughput.
 
 The blade format is grounded in the manufacturer's
 [electrode slitter specification](https://www.tmaxcn.com/sodium-ion-battery-roll-to-roll-slitting-machine-for-electrode-manufacturing_p2869.html):
-100 mm outside diameter, 65 mm bore and 0.7 mm upper-knife thickness.
+100 mm outside diameter, 65 mm bore and 2 mm lower-knife thickness.
 The 330 mm cassette width and 75/80/75 mm mixed-width recipe define this
 laboratory benchmark fixture. The service orientation, arbor fit, clamp load,
 handling gantry and friction are declared design choices, not an OEM replica.
@@ -14,7 +14,7 @@ No manufacturer mesh or drawing is redistributed.
 
 ## Mechanism and observable outcome
 
-Four 0.7 mm knives and five spacers begin on separate raised pedestals. The
+Four 2 mm lower knives and five spacers begin on separate raised pedestals. The
 handling head has an open-centre annular palm and three geared external jaws.
 Actual contact must grip each ring, lift it, align its bore with the arbor and
 release it onto the accumulating stack. Every task part is a free rigid body.
@@ -24,7 +24,7 @@ geometry is constructed from 96 convex sectors that preserve the real bore.
 Source dimensions, densities, masses, transforms, drives and frame structure
 are explicit in `spec.py`, `assets.py`, `native.py` and `task.json`.
 
-The spacers are 50,74.3,79.3,74.3,49.3 mm thick, interleaved with the knives.
+The spacers are 50,73,78,73,48 mm thick, interleaved with the knives.
 Their total length plus four knife thicknesses is 330 mm. All four cutting
 faces must independently lie at 50,125,205,280 mm from the shoulder; matching
 only the total width is insufficient. Identical blades and equal spacers may
@@ -56,7 +56,7 @@ Use the pinned Linux/RTX Isaac Lab-Arena environment, Python 3.12, Isaac Sim
 6.1, `yam-arena` and Inspect Robots. Import `native.py` only after AppLauncher
 starts Kit. The runner captures actual dependency versions, source hashes,
 seed, commands, exit status and logs. Seed is 0; actions and scoring run at 20 Hz,
-with 480 Hz discrete physics. The 0.7 mm blades retain their actual thickness.
+with 480 Hz discrete physics. The 2 mm lower knives retain their actual thickness.
 GPU PhysX does not support CCD; smaller physics steps and bounded axis speeds
 are used instead of claiming CCD protection.
 
