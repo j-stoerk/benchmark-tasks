@@ -2,7 +2,7 @@
 
 import numpy as np
 from inspect_robots.policy import PolicyBase, PolicyInfo
-from inspect_robots.types import Action
+from inspect_robots.types import Action, ActionChunk
 
 from . import spec
 
@@ -34,4 +34,4 @@ class Demo(PolicyBase):
         if self.remaining <= 0 and self.index < len(self.path) - 1:
             self.index += 1
             self.remaining = self.path[self.index][1]
-        return Action(data=np.array(q, float))
+        return ActionChunk(actions=[Action(data=np.array(q, float))], control_hz=spec.HZ)
