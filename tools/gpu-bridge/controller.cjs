@@ -56,19 +56,30 @@ module.exports = async ({github, context, core}) => {
       args = [path.join(workspace, 'tools/gpu-bridge/probe.sh')];
     } else {
       if (!/^[0-9a-f]{40}$/.test(command.sha || '')) throw Error('An immutable task SHA is required');
-      if (command.task !== 'industrial-roll-handoff') throw Error('Task not allowlisted');
+      const suite = ['industrial-roll-handoff', 'calender-loaded-nip-parallelism',
+        'powder-transfer-split-valve', 'slurry-filter-isolate-service', 'slot-die-shim-manifold-setup',
+        'collector-foil-roller-threading', 'slitter-blade-spacer-recipe', 'collector-foil-butt-splice',
+        'web-tension-idler-calibration', 'secondary-dryer-door-vacuum-test'];
+      if (!suite.includes(command.task)) throw Error('Task not allowlisted');
       const trial = command.trial || {};
       if (!['smoke', 'demo', 'model'].includes(trial.mode)) throw Error('Invalid trial mode');
       if (!Number.isInteger(trial.max_steps) || trial.max_steps < 1 || trial.max_steps > 2400) throw Error('Invalid step cap');
-      if (![1000, 6000].includes(trial.lift_force)) throw Error('Invalid lift setting');
+      if (command.task === 'industrial-roll-handoff' && ![1000, 6000].includes(trial.lift_force)) throw Error('Invalid lift setting');
       if (trial.no_expand !== undefined && typeof trial.no_expand !== 'boolean') throw Error('Invalid grip setting');
+      if (trial.proof_scale !== undefined && ![0, 1].includes(trial.proof_scale)) throw Error('Invalid proof scale');
+      for (const key of ['unloaded_only', 'calibration_bench']) {
+        if (trial[key] !== undefined && typeof trial[key] !== 'boolean') throw Error(`Invalid ${key}`);
+      }
+      if (trial.variant !== undefined && !/^[a-z0-9-]{1,40}$/.test(trial.variant)) throw Error('Invalid control variant');
+      if (trial.mode === 'model' && (trial.no_expand || trial.unloaded_only || trial.calibration_bench ||
+          (trial.variant && trial.variant !== 'normal'))) throw Error('Model cannot use scripted controls');
       const source = path.join(out, 'source');
       const gitEnv = {...process.env, GIT_LFS_SKIP_SMUDGE: '1', GIT_TERMINAL_PROMPT: '0'};
       execFileSync('git', ['clone', '--filter=blob:none', '--no-checkout', `https://github.com/${owner}/${repo}.git`, source], {env: gitEnv, stdio: 'inherit'});
       execFileSync('git', ['sparse-checkout', 'set', `tasks/${command.task}`], {cwd: source, env: gitEnv, stdio: 'inherit'});
       execFileSync('git', ['checkout', command.sha], {cwd: source, env: gitEnv, stdio: 'inherit'});
       args = [path.join(workspace, 'tools/gpu-bridge/trial.sh'), path.join(source, 'tasks', command.task), trial.mode,
-        path.join(out, 'trial'), bridge, String(trial.max_steps), String(trial.lift_force), trial.no_expand ? '1' : '0'];
+        path.join(out, 'trial'), bridge, String(trial.max_steps), JSON.stringify(trial)];
     }
     const consolePath = path.join(out, 'worker.txt');
     const log = fs.openSync(consolePath, 'w');

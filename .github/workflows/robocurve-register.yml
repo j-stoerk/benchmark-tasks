@@ -1,0 +1,33 @@
+name: Register bounded RoboCurve evidence runner
+on:
+  workflow_dispatch:
+    inputs:
+      ssh_port:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  register:
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Register the existing project machine for one bounded evidence job
+        env:
+          RECOVERY_KEY: ${{ secrets.ROBOCURVE_RECOVERY_KEY }}
+          REGISTRATION_TOKEN: ${{ secrets.ROBOCURVE_REGISTRATION_TOKEN }}
+          SSH_PORT: ${{ inputs.ssh_port }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$SSH_PORT" =~ ^[0-9]{2,5}$ ]]
+          helper_dir="$RUNNER_TEMP/robocurve-register"
+          mkdir -m 700 "$helper_dir"
+          printf '%s\n' "$RECOVERY_KEY" > "$helper_dir/key"
+          chmod 600 "$helper_dir/key"
+          trap 'rm -f -- "$helper_dir/key"' EXIT
+          printf '%s\n' "$REGISTRATION_TOKEN" | ssh -o BatchMode=yes -o ConnectTimeout=20 \
+            -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$helper_dir/known_hosts" \
+            -i "$helper_dir/key" -p "$SSH_PORT" ubuntu@global.prd.ga.run.brev.nvidia.com \
+            'read -r ACTIONS_RUNNER_INPUT_TOKEN; export RUNNER_ALLOW_RUNASROOT=1 ACTIONS_RUNNER_INPUT_TOKEN; sudo --preserve-env=RUNNER_ALLOW_RUNASROOT,ACTIONS_RUNNER_INPUT_TOKEN bash -c '\''set -e; cd /data/robocurve-runner; test -x ./config.sh; test "$(pwd -P)" = /data/robocurve-runner; if pgrep -f "[R]unner.Listener" >/dev/null; then echo "A runner is already active"; exit 1; fi; rm -f -- .runner .credentials .credentials_rsaparams; ./config.sh --unattended --url https://github.com/j-stoerk/benchmark-tasks --name robocurve-suite-1116 --labels robocurve-industrial-1116 --work /data/robocurve-runner/work --ephemeral; unset ACTIONS_RUNNER_INPUT_TOKEN; nohup timeout 10800 ./run.sh > /data/robocurve-runner/suite-runner.log 2>&1 < /dev/null & '\'''
