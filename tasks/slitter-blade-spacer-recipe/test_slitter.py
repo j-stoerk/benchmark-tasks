@@ -164,6 +164,9 @@ def test_original_native_ring_geometry_and_hollow_open_centre_head():
         stage = Usd.Stage.Open(str(root / (p["name"] + ".usda")))
         assert stage
         assert UsdPhysics.MassAPI(stage.GetDefaultPrim()).GetMassAttr().Get() == pytest.approx(p["mass"])
+        inertia = np.asarray(UsdPhysics.MassAPI(stage.GetDefaultPrim()).GetDiagonalInertiaAttr().Get())
+        assert np.all(inertia > 0)
+        assert inertia[2] == pytest.approx(p["mass"] * (p["radius"] ** 2 + spec.BORE**2) / 2)
         meshes = [prim for prim in stage.Traverse() if prim.GetTypeName() == "Mesh"]
         assert len(meshes) == 1
         for mesh in meshes:

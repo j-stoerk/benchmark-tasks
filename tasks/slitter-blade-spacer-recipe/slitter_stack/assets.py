@@ -139,7 +139,12 @@ def generate():
     for part in spec.PARTS:
         stage, root = stage_for("Part")
         UsdPhysics.RigidBodyAPI.Apply(root)
-        UsdPhysics.MassAPI.Apply(root).CreateMassAttr(part["mass"])
+        mass_api = UsdPhysics.MassAPI.Apply(root)
+        mass_api.CreateMassAttr(part["mass"])
+        mass_api.CreateCenterOfMassAttr(Gf.Vec3f(0))
+        transverse = part["mass"] * (3 * (part["radius"] ** 2 + spec.BORE**2) + part["height"] ** 2) / 12
+        axial = part["mass"] * (part["radius"] ** 2 + spec.BORE**2) / 2
+        mass_api.CreateDiagonalInertiaAttr(Gf.Vec3f(transverse, transverse, axial))
         tooling_ring(
             stage,
             "/Part",

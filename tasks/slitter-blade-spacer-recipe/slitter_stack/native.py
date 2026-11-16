@@ -179,8 +179,8 @@ class AssemblyMachine(EmbodimentBase):
                 ),
                 articulation_props=PhysxArticulationRootPropertiesCfg(
                     enabled_self_collisions=True,
-                    solver_position_iteration_count=255,
-                    solver_velocity_iteration_count=16,
+                    solver_position_iteration_count=64,
+                    solver_velocity_iteration_count=1,
                 ),
                 collision_props=PhysxCollisionPropertiesCfg(contact_offset=0.00002, rest_offset=0),
                 physics_material=sim.RigidBodyMaterialCfg(static_friction=0.65, dynamic_friction=0.5),
@@ -338,8 +338,8 @@ def make_env(device="cuda:0", grip_force=50, contact_bench=False):
                     "rigid_props": PhysxRigidBodyPropertiesCfg(
                         disable_gravity=False,
                         max_depenetration_velocity=0.1,
-                        solver_position_iteration_count=255,
-                        solver_velocity_iteration_count=16,
+                        solver_position_iteration_count=64,
+                        solver_velocity_iteration_count=1,
                     ),
                 },
             )

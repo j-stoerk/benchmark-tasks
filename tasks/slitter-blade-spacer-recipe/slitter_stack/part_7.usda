@@ -9,6 +9,8 @@ def Xform "Part" (
     prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
 )
 {
+    point3f physics:centerOfMass = (0, 0, 0)
+    float3 physics:diagonalInertia = (0.00011698629, 0.00011698629, 0.00023388489)
     float physics:mass = 0.13153456
 
     def Mesh "tooling_surface" (

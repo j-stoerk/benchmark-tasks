@@ -120,4 +120,6 @@ not establish this task's intended distinction.
 
 The current contact diagnostic uses a 20 um contact-generation offset and zero rest offset for tooling, shaft, pedestals and machine colliders. Actual face seating remains subject to the same 0.05 mm rubric. This numerical change needs native load validation.
 
-The current loaded-stack diagnostic requests 255 position iterations for both the machine articulation and free tooling, with 16 velocity iterations. The 1 mm contact-offset experiment failed under gravity; the 20 um offset is restored. No successful assembly run is currently claimed.
+The current loaded-stack diagnostic requests 64 position iterations for both the machine articulation and free tooling, with one velocity iteration. The 1 mm contact-offset experiment failed under gravity; the 20 um offset is restored. No successful assembly run is currently claimed.
+
+Free rings now have explicitly authored uniform-annulus centre of mass and analytic inertias, preserving their stated masses and dimensions. The first SDF reset was unstable before load; the current source needs a short unstacked gravity test before any clamp proof. These settings do not establish assembly success.
