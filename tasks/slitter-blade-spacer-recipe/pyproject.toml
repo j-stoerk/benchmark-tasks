@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robocurve-slitter-stack"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=1.26", "yam-arena==0.1.0"]
+description = "Native contact-only assembly and loaded retention of a pilot electrode slitter cassette."
+
+[project.entry-points."inspect_robots.embodiments"]
+slitter_stack = "slitter_stack.adapter:slitter_stack"
+
+[project.entry-points."inspect_robots.policies"]
+slitter_demo = "slitter_stack.policy:slitter_demo"
+slitter_llm = "slitter_stack.policy:slitter_llm"
+
+[tool.setuptools.packages.find]
+include = ["slitter_stack*"]
+
+[tool.setuptools.package-data]
+slitter_stack = ["*.usda"]
