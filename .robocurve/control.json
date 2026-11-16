@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "film-no-material-05",
+    "id": "stir-smoke-01",
     "mode": "run",
-    "sha": "0fb9f5fb1a9a07fce51ca0a23633f7ff864735fd",
-    "task": "lab-film-drawdown",
+    "sha": "86d7ef3878536368b34087fd5136151ce3d87a70",
+    "task": "lab-stirbar-recovery",
     "trial": {
       "mode": "smoke",
-      "max_steps": 300,
-      "variant": "no-material"
+      "max_steps": 200,
+      "variant": "normal"
     }
   },
   "responses": {
