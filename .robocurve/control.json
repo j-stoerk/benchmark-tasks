@@ -270,6 +270,59 @@
           "steps": 10
         }
       ]
+    },
+    "film-model-04:002": {
+      "rationale": "The native close-up shows a continuous blue band behind the applicator. Measured coverage is72.5%, with1.84mL remaining and the tool seated on the glass. Continue the same level stroke beyond the far boundary, then lift the bar and hold it clear so the completed coating can be judged.",
+      "sequence": [
+        {
+          "action": [
+            0,
+            0.065,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 12
+        },
+        {
+          "action": [
+            0,
+            0.085,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 12
+        },
+        {
+          "action": [
+            0,
+            0.109,
+            0.7534,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 14
+        },
+        {
+          "action": [
+            0,
+            0.109,
+            0.89,
+            0,
+            0,
+            0,
+            0
+          ],
+          "steps": 65
+        }
+      ]
     }
   }
 }
