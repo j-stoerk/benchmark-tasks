@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "valve-demo-10",
+    "id": "slit-cpu-tgs-02",
     "mode": "run",
-    "sha": "96c838a76bfabaf3291e4c952e21856ac307a3e2",
-    "task": "powder-transfer-split-valve",
+    "sha": "d6cac468f2747f029939d19544d50f48d8383a0d",
+    "task": "slitter-blade-spacer-recipe",
     "trial": {
-      "mode": "demo",
-      "max_steps": 800,
-      "variant": "normal"
+      "mode": "smoke",
+      "max_steps": 400,
+      "variant": "contact-bench"
     }
   },
   "responses": {
