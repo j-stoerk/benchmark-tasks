@@ -315,6 +315,7 @@ def make_env(device="cuda:0", grip_force=50):
         cfg.sim.dt = 1 / 480
         cfg.decimation = 24
         cfg.sim.render_interval = 24
+        return cfg
 
     environment = IsaacLabArenaEnvironment(
         name="slitter_blade_spacer_recipe",
