@@ -136,6 +136,7 @@ def articulation(filename, path, position, initial, lift_force=6000):
         prim_path=path,
         spawn=sim.UsdFileCfg(
             usd_path=str(PACKAGE / filename),
+            ensure_drives_exist=True,
             activate_contact_sensors=True,
             rigid_props=PhysxRigidBodyPropertiesCfg(disable_gravity=False, max_depenetration_velocity=0.2),
             articulation_props=PhysxArticulationRootPropertiesCfg(

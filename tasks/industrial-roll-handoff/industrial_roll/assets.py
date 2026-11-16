@@ -62,6 +62,14 @@ def generate():
         j.CreateLocalRot1Attr(Gf.Quatf(1))
         j.CreateLowerLimitAttr(bounds[0])
         j.CreateUpperLimitAttr(bounds[1])
+        drive = UsdPhysics.DriveAPI.Apply(j.GetPrim(), "linear")
+        jaw = path.rsplit("/", 1)[-1].startswith("jaw_")
+        drive.CreateTypeAttr("force")
+        drive.CreateTargetPositionAttr(0.0)
+        drive.CreateTargetVelocityAttr(0.0)
+        drive.CreateStiffnessAttr(5_000_000.0 if jaw else 1_500_000.0)
+        drive.CreateDampingAttr(5000.0 if jaw else 30000.0)
+        drive.CreateMaxForceAttr(4000.0 if jaw else 6000.0)
 
     for filename in ("receiver.usda", "donor.usda"):
         p = PACKAGE / filename
@@ -70,7 +78,10 @@ def generate():
         stage, root = stage_for(filename)
         UsdPhysics.ArticulationRootAPI.Apply(root.GetPrim())
         body(stage, "/Machine/base", (0, 0, 0), 150)
-        cube(stage, "/Machine/base/frame", (0.12, 0.8, 1.2), (0, 0, 0))
+        for side in (-1, 1):
+            cube(stage, f"/Machine/base/post_{side}", (0.08, 0.06, 1.2), (0, side * 0.37, 0))
+        cube(stage, "/Machine/base/foot", (0.32, 0.8, 0.08), (0, 0, -0.56))
+        cube(stage, "/Machine/base/crossbeam", (0.08, 0.8, 0.08), (0, 0, 0.56))
         fix = UsdPhysics.FixedJoint.Define(stage, "/Machine/root_joint")
         fix.CreateBody1Rel().SetTargets(["/Machine/base"])
         if filename.startswith("receiver"):
