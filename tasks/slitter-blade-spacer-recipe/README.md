@@ -106,3 +106,5 @@ Original code and generated geometry: MIT, see LICENSE. Recheck the board and
 published benchmark objectives before submission; a generic ring-stacking
 scene without the mixed internal recipe and real retention mechanism would
 not establish this task's intended distinction.
+
+The current contact diagnostic uses a 1 mm contact-generation offset and zero rest offset for tooling, shaft, pedestals and machine colliders. Actual face seating remains subject to the same 0.05 mm rubric. This numerical change needs native load validation.
