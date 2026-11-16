@@ -64,7 +64,9 @@ module.exports = async ({github, context, core}) => {
       const suite = ['industrial-roll-handoff', 'calender-loaded-nip-parallelism',
         'powder-transfer-split-valve', 'slurry-filter-isolate-service', 'slot-die-shim-manifold-setup',
         'collector-foil-roller-threading', 'slitter-blade-spacer-recipe', 'collector-foil-butt-splice',
-        'web-tension-idler-calibration', 'secondary-dryer-door-vacuum-test'];
+        'web-tension-idler-calibration', 'secondary-dryer-door-vacuum-test',
+        'lab-film-drawdown', 'lab-stirbar-recovery', 'lab-wet-mount-coverslip',
+        'lab-syringe-membrane-filtration', 'lab-liquid-phase-separation'];
       if (!suite.includes(command.task)) throw Error('Task not allowlisted');
       const trial = command.trial || {};
       if (!['smoke', 'demo', 'model'].includes(trial.mode)) throw Error('Invalid trial mode');
