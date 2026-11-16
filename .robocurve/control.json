@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "smoke-02",
+    "id": "smoke-03",
     "mode": "run",
-    "sha": "5b64e9b08cc7b7c55ab4a4f601b4bd734aa09f8a",
+    "sha": "81ac6c24a61fc35f9a77ada922e3995f6335a1b0",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "smoke",
