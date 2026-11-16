@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "valve-demo-11",
+    "id": "valve-demo-12",
     "mode": "run",
-    "sha": "267864c6d4fa4cceeae52b0f39dd8e2881e873a0",
+    "sha": "65d1c7ed5b25847db713604afd5b9e584dc7bfdc",
     "task": "powder-transfer-split-valve",
     "trial": {
       "mode": "demo",
