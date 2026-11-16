@@ -1,0 +1,53 @@
+name: Read RoboCurve GPU progress
+on:
+  workflow_dispatch:
+    inputs:
+      trial:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read only the named project trial and GPU utilization
+        env:
+          RECOVERY_KEY: ${{ secrets.ROBOCURVE_RECOVERY_KEY }}
+          TRIAL_ID: ${{ inputs.trial }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$TRIAL_ID" =~ ^[a-z0-9-]{1,64}$ ]]
+          repair_dir="$RUNNER_TEMP/robocurve-ssh-diagnose"
+          mkdir -m 700 "$repair_dir"
+          printf '%s\n' "$RECOVERY_KEY" > "$repair_dir/key"
+          chmod 600 "$repair_dir/key"
+          trap 'rm -f -- "$repair_dir/key"' EXIT
+          ssh -o BatchMode=yes -o ConnectTimeout=15 \
+            -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile="$repair_dir/known_hosts" \
+            -i "$repair_dir/key" -p 30711 ubuntu@global.prd.ga.run.brev.nvidia.com bash -s -- "$TRIAL_ID" <<'REMOTE'
+          set -euo pipefail
+          [[ "$1" =~ ^[a-z0-9-]{1,64}$ ]]
+          nvidia-smi --query-gpu=utilization.gpu,memory.used,power.draw --format=csv
+          ps -eo pid,ppid,comm,pcpu,etime --sort=-pcpu | head -12 || true
+          source /data/IsaacLab-Arena/yam.env
+          python - "$1" <<'PY'
+          import json, sys
+          from pathlib import Path
+          root=Path('/data/robocurve-evidence')/sys.argv[1]/'trial'
+          p=root/'physics.jsonl'
+          if p.exists():
+              lines=p.read_text().splitlines()
+              print('PHYSICS_STEPS',len(lines))
+              if lines:print('LATEST_PHYSICS',lines[-1])
+          else:print('NO_PHYSICS_TRACE_YET')
+          p=root/'run_manifest.json'
+          if p.exists():
+              d=json.loads(p.read_text());print('MANIFEST',{k:d.get(k) for k in ['status','exit_code','valid_trial','started_utc','finished_utc']})
+          p=root/'console.txt'
+          if p.exists():print('CONSOLE_TAIL',p.read_text()[-1600:])
+          PY
+          REMOTE
