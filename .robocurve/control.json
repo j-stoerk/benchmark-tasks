@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "handoff-02",
+    "id": "handoff-03",
     "mode": "run",
-    "sha": "14470ff3ca554b885874d077b571a60a4a3c9237",
+    "sha": "04f9512b47e146f6f20a6d5cd4776f555bdc8748",
     "task": "industrial-roll-handoff",
     "trial": {
       "mode": "demo",
