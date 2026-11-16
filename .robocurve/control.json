@@ -2,7 +2,7 @@
   "command": {
     "id": "slit-cpu-960-03",
     "mode": "run",
-    "sha": "017afc33bae082110f397308bfed7b568383e475",
+    "sha": "6e6f299022faf0408377e336d83cfa54699d6b35",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
