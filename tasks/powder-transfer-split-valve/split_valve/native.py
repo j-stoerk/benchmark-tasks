@@ -164,6 +164,7 @@ class ValveMachine(EmbodimentBase):
                     "active": 0,
                     "passive": 0,
                     "seal_.*": 0,
+                    "lip_.*": 0,
                 },
                 joint_vel={".*": 0},
             ),
@@ -193,7 +194,7 @@ class ValveMachine(EmbodimentBase):
                     joint_names_expr=["active"],
                     joint_effort_limit=5,
                     joint_velocity_limit=math.radians(30),
-                    stiffness=120,
+                    stiffness=600,
                     damping=2,
                 ),
                 "passive_return": ImplicitActuatorCfg(
@@ -208,7 +209,14 @@ class ValveMachine(EmbodimentBase):
                     joint_effort_limit=30,
                     joint_velocity_limit=0.1,
                     stiffness=10000,
-                    damping=5,
+                    damping=32,
+                ),
+                "axial_seat_compliance": ImplicitActuatorCfg(
+                    joint_names_expr=["lip_.*"],
+                    joint_effort_limit=10,
+                    joint_velocity_limit=0.1,
+                    stiffness=1000,
+                    damping=9,
                 ),
             },
         )
@@ -310,6 +318,7 @@ class Sampler:
         self.ids = self.robot.find_joints(spec.JOINTS, preserve_order=True)[0]
         self.term = env.action_manager.get_term("machine")
         self.seal_ids = self.robot.find_joints(["seal_lower_.*", "seal_upper_.*"], preserve_order=True)[0]
+        self.lip_ids = self.robot.find_joints(["lip_lower_.*", "lip_upper_.*"], preserve_order=True)[0]
 
     def contact(self, name):
         return array(self.env.scene[name].data.force_matrix_w)[0].reshape(-1, 3).sum(axis=0)
@@ -325,6 +334,7 @@ class Sampler:
             "encoders": q.tolist(),
             "velocities": v.tolist(),
             "seal_deflections_m": array(self.robot.data.joint_pos)[0, self.seal_ids].tolist(),
+            "seal_axial_deflections_m": array(self.robot.data.joint_pos)[0, self.lip_ids].tolist(),
             "seal_normals": [spec.radial_force(force, i) for i, force in enumerate(forces)],
             "seal_contact_vectors_N": [force.tolist() for force in forces],
             "retaining_contact_N": max(0.0, -float(retaining[2])),

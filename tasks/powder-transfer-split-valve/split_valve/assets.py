@@ -170,7 +170,13 @@ def generate():
             angle = i * math.pi / 4
             name = f"Seal_{half}_{i}"
             pos = (0.0509 * math.cos(angle), 0.0509 * math.sin(angle), z)
-            body(name, pos, 0.025, angle)
+            guide = f"Guide_{half}_{i}"
+            body(guide, pos, 0.005, angle)
+            guide_mass = UsdPhysics.MassAPI(stage.GetPrimAtPath("/Machine/" + guide))
+            guide_mass.CreateCenterOfMassAttr(Gf.Vec3f(0))
+            guide_mass.CreateDiagonalInertiaAttr(Gf.Vec3f(1e-7))
+            box(guide + "/guide_cover", (0.010, 0.004, 0.004), (0.005, 0, 0), steel, collision=False)
+            body(name, pos, 0.020, angle)
             arc(
                 name + "/shoe",
                 0.0498,
@@ -183,7 +189,8 @@ def generate():
                 (0.0509, 0),
                 4,
             )
-            joint(f"seal_{half}_{i}", parent, name, "X", pos, (-0.001, 0.003), angle=angle)
+            joint(f"seal_{half}_{i}", parent, guide, "X", pos, (-0.001, 0.003), angle=angle)
+            joint(f"lip_{half}_{i}", guide, name, "Z", (0, 0, 0), (-0.008, 0.008))
     fixed = UsdPhysics.FixedJoint.Define(stage, "/Machine/anchor")
     fixed.CreateBody1Rel().SetTargets(["/Machine/base"])
     stage.GetRootLayer().Export(str(PACKAGE / "machine.usda"))

@@ -2,7 +2,7 @@
 
 Dock an 8 kg supported container half, lock three real lugs, retain a net 100 N separation load with the vertical positioning drive disabled, open both complementary discs through native face contact, reseat, unlock and undock. This is a custom mechanical fixture for battery-ingredient handling; it does not test powder transfer or certify containment.
 
-GEA BUCK describes two independently sealing halves, a central locking/operating ring and DN100Ã¢â‚¬â€œ250 sizes: https://www.gea.com/en/products/pumps-valves-flow-components/powder-valves-airlocks/containment-valves/buck-containment-valve/ . DN100 is representative. The 8 kg payload, lug dimensions, loads, springs and tolerances are explicitly specified fixture parameters, not asserted OEM specifications. Do not extrapolate dry contact success to contamination control.
+GEA BUCK describes two independently sealing halves, a central locking/operating ring and DN100ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“250 sizes: https://www.gea.com/en/products/pumps-valves-flow-components/powder-valves-airlocks/containment-valves/buck-containment-valve/ . DN100 is representative. The 8 kg payload, lug dimensions, loads, springs and tolerances are explicitly specified fixture parameters, not asserted OEM specifications. Do not extrapolate dry contact success to contamination control.
 
 ## Runtime
 
@@ -24,3 +24,5 @@ The sixteen 10 kN/m seal-carrier springs are a reduced seating model; leakage, d
 
 
 Each solid disc uses one closed 32-sided convex collider (64 vertices), with a maximum 0.25 mm radial faceting error. Annular housings use 48 sectors; each shoe uses four sectors matching the disc facets. The reduced model excludes microscopic leakage. Seal gauges project actual disc-contact force onto the shoe radial axis; axial forces do not establish radial seating. The retaining gauge measures the actual downward collar force. Full force vectors and seal deflections are retained in the private physics trace for calibration. The 240 Hz step keeps disc-edge substep motion below 0.12 mm at the specified speed. Fresh native contact and load-control validation is required.
+
+The seat model provides two native compliance axes per shoe: radial 10 kN/m with 32 Ns/m damping, and axial 1 kN/m with 9 Ns/m damping over +/-8 mm. This represents compliant lip motion rather than a rigid ring blocking the butterfly disc. Each seat is a 5 g radial guide plus a 20 g shoe, so the upper aggregate remains 8 kg. The active-disc position drive uses 600 Nm/rad stiffness with the same 5 Nm effort cap. Stationarity is measured from a full second of encoder positions (0.1 mm /0.5 degree range), followed by a two-second loaded hold with the same baseline excursion limits. The demo allows four seconds of proof for settling; instantaneous solver velocity is recorded for diagnostics. Opening credit and final success require actual proof effort to be removed.

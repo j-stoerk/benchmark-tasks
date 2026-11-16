@@ -33,7 +33,7 @@ class Demo(PolicyBase):
         close &= abs(q[4] - command[4]) < 1 and abs(q[5] - command[4]) < 1
         advance = close and t - self.entered >= 0.2
         if self.phase == "proof":
-            advance = t - self.entered >= 2.5
+            advance = t - self.entered >= 4.0
         if self.variant == "unlocked-proof" and self.phase in ("lock", "proof"):
             command[3] = 0
             command[5] = 1

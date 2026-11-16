@@ -47,11 +47,15 @@ mechanism opens an undocked/unlocked vessel or loses its specified support.
 Proof 1 disables Z positioning and applies upward effort equal to payload
 weight plus 100 N; the native guide remains free along Z. Only real collar-lug
 contact can retain it. It is not held by a position drive during the proof.
-Stop proof before operating the discs. The active disc is motorized. The upper
+Allow four seconds of proof to include settling and the two-second loaded hold.
+Stationarity uses one-second encoder ranges <=0.1 mm and <=0.5 degree; loaded
+baseline changes must remain within those bounds. Stop proof before operating the discs. The active disc is motorized. The upper
 passive disc has only a return spring: native contact between the complementary
 half-thickness discs must transmit rotation. It is not a follower joint.
 Eight spring-backed seal carriers per half provide measured native seating
-contact; the ideal 10 kN/m radial springs approximate elastomer compression.
+contact. Native 10 kN/m radial springs (32 Ns/m) and 1 kN/m axial flexures
+(9 Ns/m, +/-8 mm) approximate elastomer seating and lip deflection. Each
+25 g seat unit is a 5 g guide plus a 20 g shoe; total upper payload is 8 kg.
 After opening BOTH discs to at least 88 degrees, close them to within 2 degrees,
 then unlock and raise the upper half 100 mm. The final detached halves each need
 all eight seal contact gauges above 0.5 N. Leak/particle transport is excluded.
@@ -90,6 +94,8 @@ class Proof:
         self.retained = False
         self.opened = False
         self.closed_after_open = False
+        self.history = []
+        self.baseline = None
 
     def update(self, reading, command):
         try:
@@ -120,15 +126,43 @@ class Proof:
         if not discs_closed and not (docked and q[3] >= 10):
             self.invalid = True
             return 0.0, False
-        still = np.max(np.abs(v[:3])) < 0.001 and np.max(np.abs(v[3:])) < 2
+        self.history.append(q.copy())
+        self.history = self.history[-(HZ + 1) :]
+        window = np.asarray(self.history)
+        still = (
+            len(self.history) == HZ + 1
+            and np.max(np.ptp(window[:, :3], axis=0)) <= 0.0001
+            and np.max(np.ptp(window[:, 3:], axis=0)) <= 0.5
+        )
         requested = command[5] >= 0.5
         loaded = abs(net - 100) <= 1 and contact >= 80
+        if requested and self.retained and not (docked and locked and loaded and still):
+            self.retained = self.opened = self.closed_after_open = False
         if requested and docked and locked and loaded and still:
+            if self.baseline is None:
+                self.baseline = q.copy()
+            retained_pose = (
+                np.max(np.abs(q[:3] - self.baseline[:3])) <= 0.0001
+                and np.max(np.abs(q[3:] - self.baseline[3:])) <= 0.5
+            )
+            if not retained_pose:
+                self.elapsed = 0.0
+                self.baseline = q.copy()
+                self.retained = self.opened = self.closed_after_open = False
             self.elapsed += 1 / HZ
             self.retained |= self.elapsed >= 2 - 1e-9
         else:
             self.elapsed = 0.0
-        if self.retained and docked and locked and np.min(q[4:]) >= 88 and abs(q[4] - q[5]) <= 2:
+            self.baseline = None
+        if (
+            self.retained
+            and not requested
+            and abs(net) < 1
+            and docked
+            and locked
+            and np.min(q[4:]) >= 88
+            and abs(q[4] - q[5]) <= 2
+        ):
             self.opened = True
         if self.opened and docked and locked and discs_closed and seals_seated:
             self.closed_after_open = True
@@ -136,6 +170,7 @@ class Proof:
             self.retained
             and self.closed_after_open
             and not requested
+            and abs(net) < 1
             and q[2] >= 1.095
             and abs(q[3]) <= 2
             and discs_closed

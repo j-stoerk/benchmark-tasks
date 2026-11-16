@@ -44,7 +44,12 @@ class Geometry(unittest.TestCase):
         cls.stage = Usd.Stage.Open(str(Path(__file__).parent / "split_valve/machine.usda"))
 
     def test_detached_upper_payload_mass_is_representative(self):
-        names = ["Upper", "Passive", *[f"Seal_upper_{i}" for i in range(8)]]
+        names = [
+            "Upper",
+            "Passive",
+            *[f"Seal_upper_{i}" for i in range(8)],
+            *[f"Guide_upper_{i}" for i in range(8)],
+        ]
         total = sum(
             UsdPhysics.MassAPI(self.stage.GetPrimAtPath("/Machine/" + name)).GetMassAttr().Get()
             for name in names

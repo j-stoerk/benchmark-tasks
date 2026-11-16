@@ -5005,11 +5005,31 @@ def Xform "Machine" (
         float physics:upperLimit = 90
     }
 
+    def Xform "Guide_lower_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        double3 xformOp:translate = (0.0509, 0, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_0" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         double3 xformOp:translate = (0.0509, 0, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 
@@ -5075,7 +5095,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_0>
+        rel physics:body1 = </Machine/Guide_lower_0>
         point3f physics:localPos0 = (0.0509, 0, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (1, 0, 0, 0)
@@ -5084,11 +5104,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_0" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_0>
+        rel physics:body1 = </Machine/Seal_lower_0>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 45
+        double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_1" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 45
         double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5155,7 +5215,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_1>
+        rel physics:body1 = </Machine/Guide_lower_1>
         point3f physics:localPos0 = (0.035991736, 0.035991736, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (0.9238795, 0, 0, 0.38268343)
@@ -5164,11 +5224,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_1" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_1>
+        rel physics:body1 = </Machine/Seal_lower_1>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_2" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 90
+        double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_2" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 90
         double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5235,7 +5335,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_2>
+        rel physics:body1 = </Machine/Guide_lower_2>
         point3f physics:localPos0 = (3.1167262e-18, 0.0509, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (0.70710677, 0, 0, 0.70710677)
@@ -5244,11 +5344,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_2" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_2>
+        rel physics:body1 = </Machine/Seal_lower_2>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_3" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 135
+        double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_3" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 135
         double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5315,7 +5455,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_3>
+        rel physics:body1 = </Machine/Guide_lower_3>
         point3f physics:localPos0 = (-0.035991736, 0.035991736, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (0.38268343, 0, 0, 0.9238795)
@@ -5324,11 +5464,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_3" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_3>
+        rel physics:body1 = </Machine/Seal_lower_3>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_4" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 180
+        double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_4" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 180
         double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5395,7 +5575,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_4>
+        rel physics:body1 = </Machine/Guide_lower_4>
         point3f physics:localPos0 = (-0.0509, 6.2334524e-18, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (6.123234e-17, 0, 0, 1)
@@ -5404,11 +5584,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_4" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_4>
+        rel physics:body1 = </Machine/Seal_lower_4>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_5" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 225
+        double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_5" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 225
         double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5475,7 +5695,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_5>
+        rel physics:body1 = </Machine/Guide_lower_5>
         point3f physics:localPos0 = (-0.035991736, -0.035991736, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (-0.38268343, 0, 0, 0.9238795)
@@ -5484,11 +5704,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_5" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_5>
+        rel physics:body1 = </Machine/Seal_lower_5>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_6" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 270
+        double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_6" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 270
         double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5555,7 +5815,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_6>
+        rel physics:body1 = </Machine/Guide_lower_6>
         point3f physics:localPos0 = (-9.350178e-18, -0.0509, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (-0.70710677, 0, 0, 0.70710677)
@@ -5564,11 +5824,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_6" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_6>
+        rel physics:body1 = </Machine/Seal_lower_6>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_lower_7" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 315
+        double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.999)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_lower_7" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 315
         double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.999)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5635,7 +5935,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/base>
-        rel physics:body1 = </Machine/Seal_lower_7>
+        rel physics:body1 = </Machine/Guide_lower_7>
         point3f physics:localPos0 = (0.035991736, -0.035991736, 0.999)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (-0.9238795, 0, 0, 0.38268343)
@@ -5644,11 +5944,50 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_lower_7" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_lower_7>
+        rel physics:body1 = </Machine/Seal_lower_7>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_0" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        double3 xformOp:translate = (0.0509, 0, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_0" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         double3 xformOp:translate = (0.0509, 0, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate"]
 
@@ -5714,7 +6053,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_0>
+        rel physics:body1 = </Machine/Guide_upper_0>
         point3f physics:localPos0 = (0.0509, 0, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (1, 0, 0, 0)
@@ -5723,11 +6062,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_0" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_0>
+        rel physics:body1 = </Machine/Seal_upper_0>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_1" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 45
+        double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_1" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 45
         double3 xformOp:translate = (0.035991735162395275, 0.035991735162395275, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5794,7 +6173,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_1>
+        rel physics:body1 = </Machine/Guide_upper_1>
         point3f physics:localPos0 = (0.035991736, 0.035991736, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (0.9238795, 0, 0, 0.38268343)
@@ -5803,11 +6182,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_1" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_1>
+        rel physics:body1 = </Machine/Seal_upper_1>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_2" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 90
+        double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_2" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 90
         double3 xformOp:translate = (3.116726103830014e-18, 0.0509, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5874,7 +6293,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_2>
+        rel physics:body1 = </Machine/Guide_upper_2>
         point3f physics:localPos0 = (3.1167262e-18, 0.0509, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (0.70710677, 0, 0, 0.70710677)
@@ -5883,11 +6302,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_2" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_2>
+        rel physics:body1 = </Machine/Seal_upper_2>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_3" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 135
+        double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_3" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 135
         double3 xformOp:translate = (-0.03599173516239527, 0.035991735162395275, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -5954,7 +6413,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_3>
+        rel physics:body1 = </Machine/Guide_upper_3>
         point3f physics:localPos0 = (-0.035991736, 0.035991736, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (0.38268343, 0, 0, 0.9238795)
@@ -5963,11 +6422,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_3" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_3>
+        rel physics:body1 = </Machine/Seal_upper_3>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_4" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 180
+        double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_4" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 180
         double3 xformOp:translate = (-0.0509, 6.233452207660028e-18, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -6034,7 +6533,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_4>
+        rel physics:body1 = </Machine/Guide_upper_4>
         point3f physics:localPos0 = (-0.0509, 6.2334524e-18, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (6.123234e-17, 0, 0, 1)
@@ -6043,11 +6542,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_4" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_4>
+        rel physics:body1 = </Machine/Seal_upper_4>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_5" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 225
+        double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_5" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 225
         double3 xformOp:translate = (-0.035991735162395275, -0.03599173516239527, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -6114,7 +6653,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_5>
+        rel physics:body1 = </Machine/Guide_upper_5>
         point3f physics:localPos0 = (-0.035991736, -0.035991736, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (-0.38268343, 0, 0, 0.9238795)
@@ -6123,11 +6662,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_5" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_5>
+        rel physics:body1 = </Machine/Seal_upper_5>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_6" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 270
+        double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_6" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 270
         double3 xformOp:translate = (-9.350178311490042e-18, -0.0509, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -6194,7 +6773,7 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_6>
+        rel physics:body1 = </Machine/Guide_upper_6>
         point3f physics:localPos0 = (-9.350178e-18, -0.0509, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (-0.70710677, 0, 0, 0.70710677)
@@ -6203,11 +6782,51 @@ def Xform "Machine" (
         float physics:upperLimit = 0.003
     }
 
+    def PhysicsPrismaticJoint "lip_upper_6" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_6>
+        rel physics:body1 = </Machine/Seal_upper_6>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
+    }
+
+    def Xform "Guide_upper_7" (
+        prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
+    )
+    {
+        point3f physics:centerOfMass = (0, 0, 0)
+        float3 physics:diagonalInertia = (1e-7, 1e-7, 1e-7)
+        float physics:mass = 0.005
+        float xformOp:rotateZ = 315
+        double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.001)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
+
+        def Cube "guide_cover"
+        {
+            color3f[] primvars:displayColor = [(0.55, 0.59, 0.63)]
+            double size = 1
+            float3 xformOp:scale = (0.01, 0.004, 0.004)
+            double3 xformOp:translate = (0.005, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
+        }
+    }
+
     def Xform "Seal_upper_7" (
         prepend apiSchemas = ["PhysicsRigidBodyAPI", "PhysicsMassAPI"]
     )
     {
-        float physics:mass = 0.025
+        float physics:mass = 0.02
         float xformOp:rotateZ = 315
         double3 xformOp:translate = (0.03599173516239526, -0.035991735162395275, 0.001)
         uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateZ"]
@@ -6274,13 +6893,32 @@ def Xform "Machine" (
         uniform token drive:linear:physics:type = "force"
         uniform token physics:axis = "X"
         rel physics:body0 = </Machine/Upper>
-        rel physics:body1 = </Machine/Seal_upper_7>
+        rel physics:body1 = </Machine/Guide_upper_7>
         point3f physics:localPos0 = (0.035991736, -0.035991736, 0.001)
         point3f physics:localPos1 = (0, 0, 0)
         quatf physics:localRot0 = (-0.9238795, 0, 0, 0.38268343)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.001
         float physics:upperLimit = 0.003
+    }
+
+    def PhysicsPrismaticJoint "lip_upper_7" (
+        prepend apiSchemas = ["PhysicsDriveAPI:linear"]
+    )
+    {
+        float drive:linear:physics:damping = 0
+        float drive:linear:physics:maxForce = 1000
+        float drive:linear:physics:stiffness = 0
+        uniform token drive:linear:physics:type = "force"
+        uniform token physics:axis = "Z"
+        rel physics:body0 = </Machine/Guide_upper_7>
+        rel physics:body1 = </Machine/Seal_upper_7>
+        point3f physics:localPos0 = (0, 0, 0)
+        point3f physics:localPos1 = (0, 0, 0)
+        quatf physics:localRot0 = (1, 0, 0, 0)
+        quatf physics:localRot1 = (1, 0, 0, 0)
+        float physics:lowerLimit = -0.008
+        float physics:upperLimit = 0.008
     }
 
     def PhysicsFixedJoint "anchor"
