@@ -28,7 +28,7 @@ def verify_cooked_bores(directory=None):
     try:
         sim_view = tensors.create_simulation_view("torch")
         sim_view.set_subspace_roots("/")
-        view = sim_view.create_sdf_shape_view(paths, len(points))
+        view = sim_view.create_sdf_shape_view("/World/envs/env_0/part_*/tooling_surface", len(points))
         report["native_shape_count"] = view.count
         report["native_shape_paths"] = list(view.object_paths)
         if view.count != len(paths):
