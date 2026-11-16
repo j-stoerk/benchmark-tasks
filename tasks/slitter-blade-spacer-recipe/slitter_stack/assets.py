@@ -143,7 +143,7 @@ def generate():
             cylinder(stage, f"/Machine/Platen/rod_{i}_{j}", 0.005, 0.4, (x, side * 0.09, 0.2), collision=False)
     box(stage, "/Machine/base/press_crosshead", (0.16, 1.22, 0.06), (0, 0, 1.63))
     joint(stage, "press_y", "base", "PressY", "Y", (0, 0, 1.20), (-0.46, 0.01))
-    joint(stage, "press", "PressY", "Platen", "Z", (0, 0, 0), (-0.09, 0.01), force=True)
+    joint(stage, "press", "PressY", "Platen", "Z", (0, 0, 0), (-0.09, 0.05), force=True)
     fixed = UsdPhysics.FixedJoint.Define(stage, "/Machine/anchor")
     fixed.CreateBody1Rel().SetTargets(["/Machine/base"])
     stage.GetRootLayer().Export(str(PACKAGE / "machine.usda"))

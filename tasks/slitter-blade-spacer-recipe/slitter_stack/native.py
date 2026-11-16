@@ -84,9 +84,9 @@ class AssemblyAction(ActionTerm):
         # PLC sequencing uses actual joint feedback: retract before parking,
         # and align the crosshead before applying its downward force.
         park = torch.full_like(press_y, -0.45)
-        lateral = torch.where(
-            requested, torch.zeros_like(press_y), torch.where(press_z > 0.0095, park, press_y)
-        )
+        raised = press_z > 0.0495
+        desired_lateral = torch.where(requested, torch.zeros_like(press_y), park)
+        lateral = torch.where(raised, desired_lateral, press_y)
         if hasattr(self.robot, "set_joint_position_target_index"):
             self.robot.set_joint_position_target_index(target=xyz, joint_ids=self.ids[:3])
             self.robot.set_joint_effort_target_index(target=jaws, joint_ids=self.ids[3:])
@@ -188,7 +188,7 @@ class AssemblyMachine(EmbodimentBase):
                     "slide_y": -0.4,
                     "slide_z": 1.35,
                     "jaw_.*": 0,
-                    "press": 0,
+                    "press": 0.05,
                     "press_y": -0.45,
                 },
                 joint_vel={".*": 0.0},

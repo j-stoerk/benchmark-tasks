@@ -171,3 +171,18 @@ def test_original_native_ring_geometry_and_hollow_open_centre_head():
         # authored schema and reference, then confirm the mechanism natively.
         assert "PhysxMimicJointAPI:rotX" in follower.GetMetadata("apiSchemas").GetAddedOrExplicitItems()
         assert str(follower.GetRelationship("physxMimicJoint:rotX:referenceJoint").GetTargets()[0]) == "/Machine/jaw_0"
+
+
+def test_retracted_platen_can_traverse_above_the_actual_arbor():
+    from pxr import Usd
+
+    stage = Usd.Stage.Open(str(Path(__file__).parent / "slitter_stack/machine.usda"))
+    upper = stage.GetPrimAtPath("/Machine/press").GetAttribute("physics:upperLimit").Get()
+    reference_z = stage.GetPrimAtPath("/Machine/Platen").GetAttribute("xformOp:translate").Get()[2]
+    bottom = min(
+        point[2]
+        for prim in stage.Traverse()
+        if str(prim.GetPath()).startswith("/Machine/Platen/ContactRing/")
+        for point in prim.GetAttribute("points").Get()
+    )
+    assert reference_z + upper + bottom > spec.BASE_Z + 0.4 + 0.02

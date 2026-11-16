@@ -49,7 +49,8 @@ joint-speed limit. The 30 mm tall pads grip OUTSIDE each ring, centred at tool Z
 The palm has a clear central bore; do not try to grasp inside a blade bore.
 Clamp 1 moves the retracted platen from Y=-0.45 to Y=0 at 0.10 m/s, then applies
 500 N DOWNWARD. Clamp 0 raises it before parking at Y=-0.45. The native PLC
-waits for actual alignment before lowering; allow about 8 seconds. Clamp only after all nine parts have been stacked
+waits for full vertical retraction before traversing and actual alignment before
+lowering; allow about 11 seconds. Clamp only after all nine parts have been stacked
 and the head is parked at XYZ=(0.60,0.40,1.35) m, clearing the pressure carriage
 and its upper rails as well as the tooling. Proof 1 applies 25 N upward and 0.5 Nm Z
 torque to EACH of the four free blades (100 N / 2 Nm total). It never supports

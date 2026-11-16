@@ -2900,7 +2900,7 @@ def Xform "Machine" (
         quatf physics:localRot0 = (1, 0, 0, 0)
         quatf physics:localRot1 = (1, 0, 0, 0)
         float physics:lowerLimit = -0.09
-        float physics:upperLimit = 0.01
+        float physics:upperLimit = 0.05
     }
 
     def PhysicsFixedJoint "anchor"

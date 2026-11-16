@@ -38,7 +38,10 @@ During loading, the platen is raised and parked at Y=-0.45 m on a native
 only after actual alignment; retract commands raise it before parking. The
 carriage uses the same 3 MN/m, 15 kNs/m, 1 kN limited drive as the handling
 axes. This measured PLC sequence clears the arbor for incoming parts and
-does not handle or seat them. Allow approximately eight seconds for clamping.
+does not handle or seat them. The fully retracted platen centre is Z=1.25 m,
+giving 40 mm clearance above the arbor before lateral travel. Its vertical
+joint range is -90..+50 mm from the 1.20 m reference; initial joint position
+is +50 mm. Allow approximately eleven seconds for clamping.
 First park the handling head at XYZ=(0.60,0.40,1.35) m; its upper carriage must
 also clear the pressure carriage's lateral route. Raising the tool alone does
 not clear those upper rails. The controller must select this parking motion.
