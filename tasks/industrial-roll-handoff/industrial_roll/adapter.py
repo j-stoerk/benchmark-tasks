@@ -87,14 +87,16 @@ class IndustrialRoll(EmbodimentBase):
             "roll_ang_vel": roll.ang_vel.tolist(),
             "receiver_q": q.tolist(),
             "donor_q": d,
-            "donor_contact": float(np.linalg.norm(numpy(self.base.scene["donor_contact"].data.net_forces_w)[0])),
+            "donor_contact": float(np.linalg.norm(numpy(self.base.scene["donor_contact"].data.net_normal_forces_w)[0])),
             "jaw_forces": self.jaw_forces().tolist(),
             "external_pull_N": spec.PROOF_PULL if self.command[5] >= 0.5 else 0,
             "external_torque_Nm": spec.PROOF_TORQUE if self.command[5] >= 0.5 else 0,
         }
 
     def jaw_forces(self):
-        return np.array([np.linalg.norm(numpy(self.base.scene[f"pad_{i}"].data.net_forces_w)[0]) for i in range(3)])
+        return np.array(
+            [np.linalg.norm(numpy(self.base.scene[f"pad_{i}"].data.net_normal_forces_w)[0]) for i in range(3)]
+        )
 
     def observation(self):
         images = {}

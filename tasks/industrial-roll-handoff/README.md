@@ -36,8 +36,10 @@ damping 30 kNs/m; the lift axis is capped at 6 kN. Friction is 0.35 static and
 0.30 dynamic. These are stated fixture parameters, not measured specifications
 of a named commercial machine. Sensitivity and failure-control trials must
 accompany the nominal demo before a feasibility claim.
-Each fixed support frame is 120 x 800 x 1200 mm and reaches the floor from
-its specified 600 mm centre height.
+Each open support frame has two 80 x 60 x 1200 mm posts at local Y=+/-370 mm,
+an 80 x 800 x 80 mm crossbeam and a 320 x 800 x 80 mm foot. It reaches the
+floor from its specified 600 mm centre height. Contact gauges report normal
+force resultants; the applied-load test independently checks actual retention.
 
 ## Run
 

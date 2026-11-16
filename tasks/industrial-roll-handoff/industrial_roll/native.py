@@ -4,7 +4,15 @@ import isaaclab.sim as sim
 import torch
 from isaaclab.actuators import ImplicitActuatorCfg
 from isaaclab.assets import ArticulationCfg
-from isaaclab.managers import ActionTerm, ActionTermCfg, ObservationGroupCfg, ObservationTermCfg
+from isaaclab.envs import mdp
+from isaaclab.managers import (
+    ActionTerm,
+    ActionTermCfg,
+    EventTermCfg,
+    ObservationGroupCfg,
+    ObservationTermCfg,
+    SceneEntityCfg,
+)
 from isaaclab.sensors import CameraCfg, ContactSensorCfg
 from isaaclab.utils import configclass
 from isaaclab_arena.embodiments.embodiment_base import EmbodimentBase
@@ -209,7 +217,25 @@ class TransferMachine(EmbodimentBase):
         )()
         self.action_config = make_configclass("MachineActions", [("machine", MachineActionCfg, MachineActionCfg())])()
         self.observation_config = ObsCfg()
-        self.event_config = make_configclass("MachineEvents", [])()
+        self.event_config = make_configclass(
+            "MachineEvents",
+            [
+                (
+                    "restore_" + name,
+                    EventTermCfg,
+                    EventTermCfg(
+                        func=mdp.reset_joints_by_offset,
+                        mode="reset",
+                        params={
+                            "asset_cfg": SceneEntityCfg(name),
+                            "position_range": (0.0, 0.0),
+                            "velocity_range": (0.0, 0.0),
+                        },
+                    ),
+                )
+                for name in ("robot", "donor")
+            ],
+        )()
         cams = []
         for name, eye, target in [
             ("overview_cam", (1.45, -1.65, 1.9), (0, 0.12, 0.85)),
