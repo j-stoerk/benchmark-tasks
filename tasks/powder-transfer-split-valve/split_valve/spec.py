@@ -54,6 +54,11 @@ Stationarity uses one-second encoder ranges <=0.1 mm and <=0.5 degree; loaded
 baseline changes must remain within those bounds. Stop proof before operating the discs. The active disc is motorized. The upper
 passive disc has only a return spring: native contact between the complementary
 half-thickness discs must transmit rotation. It is not a follower joint.
+Its 0.5 Nm/rad return spring has a fixed -0.6 rad rest angle, giving 0.3 Nm
+closing preload at the zero-degree hard stop, with 0.8 Nm maximum effort.
+The passive spring target is fixed hardware, never a policy command. Verify
+both closed encoders and all sixteen radial gauges for one second before
+unlocking or lifting; a detached half that opens over 2 degrees fails.
 Eight spring-backed seal carriers per half provide measured native seating
 contact. Native 10 kN/m radial springs (32 Ns/m) and 1 kN/m axial flexures
 (9 Ns/m, +/-8 mm) approximate elastomer seating and lip deflection. Tangential

@@ -88,9 +88,13 @@ class ValveAction(ActionTerm):
         if hasattr(self.robot, "set_joint_position_target_index"):
             self.robot.set_joint_position_target_index(target=position, joint_ids=ids)
             self.robot.set_joint_effort_target_index(target=effort, joint_ids=[self.ids[2]])
+            self.robot.set_joint_position_target_index(
+                target=torch.full_like(effort, -0.6), joint_ids=[self.ids[5]]
+            )
         else:
             self.robot.set_joint_position_target(position, joint_ids=ids)
             self.robot.set_joint_effort_target(effort, joint_ids=[self.ids[2]])
+            self.robot.set_joint_position_target(torch.full_like(effort, -0.6), joint_ids=[self.ids[5]])
 
     def reset(self, env_ids=None):
         self._raw[:] = torch.tensor(spec.INITIAL.tolist(), device=self.device)

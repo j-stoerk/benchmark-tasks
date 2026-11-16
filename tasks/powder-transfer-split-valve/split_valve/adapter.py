@@ -123,8 +123,8 @@ class Fixture(EmbodimentBase):
                 stream.write(json.dumps({"t": self.t, "info": info}) + "\n")
         return StepResult(
             observation=self.observation(reading),
-            terminated=success,
-            termination_reason="success" if success else None,
+            terminated=success or self.proof.invalid,
+            termination_reason="success" if success else ("hard_failure" if self.proof.invalid else None),
             info=info,
         )
 

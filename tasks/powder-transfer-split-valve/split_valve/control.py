@@ -14,6 +14,7 @@ class Demo(PolicyBase):
 
     def reset(self, scene):
         self.phase, self.entered = "align", 0.0
+        self.closed_since = None
 
     def act(self, observation):
         q = np.asarray(observation.state["encoders"])
@@ -32,6 +33,15 @@ class Demo(PolicyBase):
         close = np.max(np.abs(q[:3] - command[:3])) < 0.0002 and abs(q[3] - command[3]) < 1
         close &= abs(q[4] - command[4]) < 1 and abs(q[5] - command[4]) < 1
         advance = close and t - self.entered >= 0.2
+        if self.phase in ("close", "unlock"):
+            seated = np.max(np.abs(q[4:])) < 1 and np.min(observation.state["seal_normals"]) >= 0.5
+            if seated and self.closed_since is None:
+                self.closed_since = t
+            if not seated:
+                self.closed_since = None
+            advance &= self.closed_since is not None and t - self.closed_since >= 1.0
+        else:
+            self.closed_since = None
         if self.phase == "proof":
             advance = t - self.entered >= 4.0
         if self.variant == "unlocked-proof" and self.phase in ("lock", "proof"):
