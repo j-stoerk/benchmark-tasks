@@ -1,0 +1,345 @@
+{
+  "trials": {
+    "demo": {
+      "score": 1.0,
+      "policy": "film_drawdown_demo",
+      "steps": 258,
+      "frame_counts": {
+        "overview_cam": 259,
+        "detail_cam": 259
+      },
+      "final": {
+        "t": 12.900000000000048,
+        "info": {
+          "score": 1.0,
+          "success": true,
+          "invalid": false,
+          "proof_seconds": 1.0000000000000002,
+          "physics": {
+            "encoders": [
+              -7.564697566270207e-13,
+              0.10800018906593323,
+              0.879558265209198,
+              7.00630942152003e-11,
+              6.009052196803699e-12,
+              -8.818497147788928e-12
+            ],
+            "tool_pos": [
+              1.1772537078513778e-07,
+              0.10800018906593323,
+              0.879558265209198
+            ],
+            "tool_quat_xyzw": [
+              -4.409244237085774e-12,
+              3.0045260984018496e-12,
+              3.503154710760015e-11,
+              1.0
+            ],
+            "tool_normal_contact_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "parts": {},
+            "process": {
+              "coverage": 1.0,
+              "largest_dry_stripe_mm": 0,
+              "reservoir_ml": 1.400000000000034,
+              "contact_N": 0.0
+            },
+            "physics_device": "cpu",
+            "physics_dt_s": 0.0020833333333333333
+          },
+          "instruments": {
+            "encoders": [
+              -7.564697566270207e-13,
+              0.10800018906593323,
+              0.879558265209198,
+              7.00630942152003e-11,
+              6.009052196803699e-12,
+              -8.818497147788928e-12
+            ],
+            "process_readouts": [
+              0.0,
+              1.400000000000034,
+              100.0,
+              0.0
+            ]
+          }
+        }
+      },
+      "video_bytes": 1112526,
+      "video_sha256": "6de9a2872dfa0b832fa00d684c73bae2aa4fe1ed99d1de7c8c554fc14749446c",
+      "eval_log_sha256": "e64cd2faa2bf2c261c11e3b96fe8a07689feac5db4e3c48ed3fd316d8e316b8c",
+      "source_hashes": {
+        "pyproject.toml": "102fe875b2014f90dde6c5b9fbdf0516756962ba8e5a5920f31f9c66ff615462",
+        "test_material.py": "6d1e18559757c8aa57d9b35c52bf45f3b0e8df91c55f8ee36233039ff1c2df35",
+        "task.json": "1307d9df2b168621e09b2481603e081a5e3015e2050a0778737e961e0763ab6a",
+        "run.py": "1d6350beb0ea6691c04d90b565ffd4135a82cb0991c62348f3d735d074a03916",
+        "export.py": "205c493994146afedb7ed2f9d2ebf1aa8d9e3a723d99c06f02d7d5a70615827b",
+        "film_drawdown/adapter.py": "87038ed00749dace9e8b1b1affeaeb4fe933ad7452f375e7785f8cfa794936af",
+        "film_drawdown/robot.usda": "8211717c0780bf5c61cff811056703d0cefe0afaffc5b8359867b6d7597ebcc8",
+        "film_drawdown/build.py": "a290fb67442376c6efcd7eccf8c95dfb3543c0256adb52bb01b79038e98feb19",
+        "film_drawdown/control.py": "55b8702b674aac43bf7a61ace294f012c0a8bb1123aca4204525c250dc9a878f",
+        "film_drawdown/spec.py": "f16dbc5ba301480e4a9c56ed9a4575126c3465a498a3e18b8a754f7677637805",
+        "film_drawdown/process.py": "1ec6bcabf94f94591e95791bc25e1003d17c135e769d951f50f8f41c23df99b1",
+        "film_drawdown/assets.py": "5691a72a90a440654e3a85ab4a4dc00dfa7594f41eee76f8ec69d8cf8422cbac",
+        "film_drawdown/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "film_drawdown/native.py": "9fa2998d579f3d2e482fae49c4365a108ccd75925e728b88017e015ff09d5f34",
+        "film_drawdown/policy.py": "e1080757ee815546296edfae2af3efe514a2311e779acae0da26cdaa4d9e6bfe",
+        "film_drawdown/fixture.usda": "03cf67abee900877f9487c4a5a2cacc58793997a50b1d3bc440ebb98f0a04382"
+      },
+      "versions": {
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0",
+        "isaacsim": "6.1.0.0",
+        "isaaclab-arena": "0.3.0",
+        "numpy": "2.3.1"
+      },
+      "started_utc": "2026-11-16T23:33:09.127283+00:00",
+      "finished_utc": "2026-11-16T23:33:59.136819+00:00",
+      "simulation_seconds": 12.900000000000048,
+      "video_decode": {
+        "codec": "h264",
+        "fps": 20.0,
+        "frames": 259
+      }
+    },
+    "model": {
+      "score": 1.0,
+      "policy": "film_drawdown_llm",
+      "steps": 218,
+      "frame_counts": {
+        "overview_cam": 219,
+        "detail_cam": 219
+      },
+      "final": {
+        "t": 10.90000000000002,
+        "info": {
+          "score": 1.0,
+          "success": true,
+          "invalid": false,
+          "proof_seconds": 1.0000000000000002,
+          "physics": {
+            "encoders": [
+              -7.693057345672938e-13,
+              0.10900039970874786,
+              0.8895582556724548,
+              6.986218548110656e-11,
+              1.8967369341815754e-11,
+              1.6762321782340384e-12
+            ],
+            "tool_pos": [
+              1.190366845094104e-07,
+              0.10900039970874786,
+              0.8895582556724548
+            ],
+            "tool_quat_xyzw": [
+              8.381214017076644e-13,
+              9.483684670907877e-12,
+              3.493109274055328e-11,
+              1.0
+            ],
+            "tool_normal_contact_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "parts": {},
+            "process": {
+              "coverage": 1.0,
+              "largest_dry_stripe_mm": 0,
+              "reservoir_ml": 1.400000000000034,
+              "contact_N": 0.0
+            },
+            "physics_device": "cpu",
+            "physics_dt_s": 0.0020833333333333333
+          },
+          "instruments": {
+            "encoders": [
+              -7.693057345672938e-13,
+              0.10900039970874786,
+              0.8895582556724548,
+              6.986218548110656e-11,
+              1.8967369341815754e-11,
+              1.6762321782340384e-12
+            ],
+            "process_readouts": [
+              0.0,
+              1.400000000000034,
+              100.0,
+              0.0
+            ]
+          }
+        }
+      },
+      "video_bytes": 931715,
+      "video_sha256": "3afd687ba0f5a58b70741eb2b8c7cc8b0d88fa7f5a1c2cdc4c26a41516f40ecf",
+      "eval_log_sha256": "8926a8c4bf5f2dca9ce3f2a23cc4c612323f05b1610263f6c9fb0eb65d4dfe18",
+      "source_hashes": {
+        "pyproject.toml": "102fe875b2014f90dde6c5b9fbdf0516756962ba8e5a5920f31f9c66ff615462",
+        "test_material.py": "6d1e18559757c8aa57d9b35c52bf45f3b0e8df91c55f8ee36233039ff1c2df35",
+        "task.json": "1307d9df2b168621e09b2481603e081a5e3015e2050a0778737e961e0763ab6a",
+        "run.py": "1d6350beb0ea6691c04d90b565ffd4135a82cb0991c62348f3d735d074a03916",
+        "export.py": "205c493994146afedb7ed2f9d2ebf1aa8d9e3a723d99c06f02d7d5a70615827b",
+        "film_drawdown/adapter.py": "87038ed00749dace9e8b1b1affeaeb4fe933ad7452f375e7785f8cfa794936af",
+        "film_drawdown/robot.usda": "8211717c0780bf5c61cff811056703d0cefe0afaffc5b8359867b6d7597ebcc8",
+        "film_drawdown/build.py": "a290fb67442376c6efcd7eccf8c95dfb3543c0256adb52bb01b79038e98feb19",
+        "film_drawdown/control.py": "55b8702b674aac43bf7a61ace294f012c0a8bb1123aca4204525c250dc9a878f",
+        "film_drawdown/spec.py": "f16dbc5ba301480e4a9c56ed9a4575126c3465a498a3e18b8a754f7677637805",
+        "film_drawdown/process.py": "1ec6bcabf94f94591e95791bc25e1003d17c135e769d951f50f8f41c23df99b1",
+        "film_drawdown/assets.py": "5691a72a90a440654e3a85ab4a4dc00dfa7594f41eee76f8ec69d8cf8422cbac",
+        "film_drawdown/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "film_drawdown/native.py": "9fa2998d579f3d2e482fae49c4365a108ccd75925e728b88017e015ff09d5f34",
+        "film_drawdown/policy.py": "e1080757ee815546296edfae2af3efe514a2311e779acae0da26cdaa4d9e6bfe",
+        "film_drawdown/fixture.usda": "03cf67abee900877f9487c4a5a2cacc58793997a50b1d3bc440ebb98f0a04382"
+      },
+      "versions": {
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0",
+        "isaacsim": "6.1.0.0",
+        "isaaclab-arena": "0.3.0",
+        "numpy": "2.3.1"
+      },
+      "started_utc": "2026-11-16T23:38:03.204654+00:00",
+      "finished_utc": "2026-11-16T23:40:53.217202+00:00",
+      "simulation_seconds": 10.90000000000002,
+      "video_decode": {
+        "codec": "h264",
+        "fps": 20.0,
+        "frames": 219
+      }
+    },
+    "film-no-material-05-result": {
+      "score": 0.0,
+      "policy": "film_drawdown_demo",
+      "steps": 300,
+      "frame_counts": {
+        "overview_cam": 301,
+        "detail_cam": 301
+      },
+      "final": {
+        "t": 15.000000000000078,
+        "info": {
+          "score": 0.0,
+          "success": false,
+          "invalid": false,
+          "proof_seconds": 0.0,
+          "physics": {
+            "encoders": [
+              -7.556560086864617e-13,
+              0.10800018906593323,
+              0.879558265209198,
+              1.1794116949661236e-19,
+              5.06027367498039e-18,
+              8.276217168187716e-13
+            ],
+            "tool_pos": [
+              1.1772537078513778e-07,
+              0.10800018906593323,
+              0.879558265209198
+            ],
+            "tool_quat_xyzw": [
+              4.138108584093858e-13,
+              2.530136837490195e-18,
+              5.897058474830618e-20,
+              1.0
+            ],
+            "tool_normal_contact_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "parts": {},
+            "process": {
+              "coverage": 0.0,
+              "largest_dry_stripe_mm": 80,
+              "reservoir_ml": 3.0,
+              "contact_N": 0.0
+            },
+            "physics_device": "cpu",
+            "physics_dt_s": 0.0020833333333333333
+          },
+          "instruments": {
+            "encoders": [
+              -7.556560086864617e-13,
+              0.10800018906593323,
+              0.879558265209198,
+              1.1794116949661236e-19,
+              5.06027367498039e-18,
+              8.276217168187716e-13
+            ],
+            "process_readouts": [
+              0.0,
+              3.0,
+              0.0,
+              80.0
+            ]
+          }
+        }
+      },
+      "video_bytes": 1102767,
+      "video_sha256": "147bc7637874f109b64b4851baba6bfe2d82775857e7a82d64b81f72cef6bd27",
+      "eval_log_sha256": "7dcf0ba52bb09283a30b73e4970cf97044f125560bbfa529826db251a8c216be",
+      "source_hashes": {
+        "pyproject.toml": "102fe875b2014f90dde6c5b9fbdf0516756962ba8e5a5920f31f9c66ff615462",
+        "test_material.py": "6d1e18559757c8aa57d9b35c52bf45f3b0e8df91c55f8ee36233039ff1c2df35",
+        "task.json": "1307d9df2b168621e09b2481603e081a5e3015e2050a0778737e961e0763ab6a",
+        "run.py": "1d6350beb0ea6691c04d90b565ffd4135a82cb0991c62348f3d735d074a03916",
+        "export.py": "205c493994146afedb7ed2f9d2ebf1aa8d9e3a723d99c06f02d7d5a70615827b",
+        "film_drawdown/adapter.py": "87038ed00749dace9e8b1b1affeaeb4fe933ad7452f375e7785f8cfa794936af",
+        "film_drawdown/robot.usda": "8211717c0780bf5c61cff811056703d0cefe0afaffc5b8359867b6d7597ebcc8",
+        "film_drawdown/build.py": "a290fb67442376c6efcd7eccf8c95dfb3543c0256adb52bb01b79038e98feb19",
+        "film_drawdown/control.py": "55b8702b674aac43bf7a61ace294f012c0a8bb1123aca4204525c250dc9a878f",
+        "film_drawdown/spec.py": "f16dbc5ba301480e4a9c56ed9a4575126c3465a498a3e18b8a754f7677637805",
+        "film_drawdown/process.py": "1ec6bcabf94f94591e95791bc25e1003d17c135e769d951f50f8f41c23df99b1",
+        "film_drawdown/assets.py": "5691a72a90a440654e3a85ab4a4dc00dfa7594f41eee76f8ec69d8cf8422cbac",
+        "film_drawdown/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "film_drawdown/native.py": "9fa2998d579f3d2e482fae49c4365a108ccd75925e728b88017e015ff09d5f34",
+        "film_drawdown/policy.py": "e1080757ee815546296edfae2af3efe514a2311e779acae0da26cdaa4d9e6bfe",
+        "film_drawdown/fixture.usda": "03cf67abee900877f9487c4a5a2cacc58793997a50b1d3bc440ebb98f0a04382"
+      },
+      "versions": {
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0",
+        "isaacsim": "6.1.0.0",
+        "isaaclab-arena": "0.3.0",
+        "numpy": "2.3.1"
+      },
+      "started_utc": "2026-11-16T23:41:47.764025+00:00",
+      "finished_utc": "2026-11-16T23:42:37.773989+00:00",
+      "simulation_seconds": 15.000000000000078,
+      "video_decode": {
+        "codec": "h264",
+        "fps": 20.0,
+        "frames": 301
+      }
+    }
+  },
+  "controller": {
+    "name": "GPT-6 Codex interactive controller",
+    "decisions": 2,
+    "protocol": "Actual LLM observation/response exchanges through Inspect Robots; no scripted fallback",
+    "access": "Code-aware, non-blind interactive evaluation; no independent API checkpoint claimed"
+  },
+  "verified_current_package_sha256": {
+    "export.py": "205c493994146afedb7ed2f9d2ebf1aa8d9e3a723d99c06f02d7d5a70615827b",
+    "film_drawdown/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "film_drawdown/adapter.py": "87038ed00749dace9e8b1b1affeaeb4fe933ad7452f375e7785f8cfa794936af",
+    "film_drawdown/assets.py": "5691a72a90a440654e3a85ab4a4dc00dfa7594f41eee76f8ec69d8cf8422cbac",
+    "film_drawdown/build.py": "a290fb67442376c6efcd7eccf8c95dfb3543c0256adb52bb01b79038e98feb19",
+    "film_drawdown/control.py": "55b8702b674aac43bf7a61ace294f012c0a8bb1123aca4204525c250dc9a878f",
+    "film_drawdown/fixture.usda": "03cf67abee900877f9487c4a5a2cacc58793997a50b1d3bc440ebb98f0a04382",
+    "film_drawdown/native.py": "9fa2998d579f3d2e482fae49c4365a108ccd75925e728b88017e015ff09d5f34",
+    "film_drawdown/policy.py": "e1080757ee815546296edfae2af3efe514a2311e779acae0da26cdaa4d9e6bfe",
+    "film_drawdown/process.py": "1ec6bcabf94f94591e95791bc25e1003d17c135e769d951f50f8f41c23df99b1",
+    "film_drawdown/robot.usda": "8211717c0780bf5c61cff811056703d0cefe0afaffc5b8359867b6d7597ebcc8",
+    "film_drawdown/spec.py": "f16dbc5ba301480e4a9c56ed9a4575126c3465a498a3e18b8a754f7677637805",
+    "pyproject.toml": "102fe875b2014f90dde6c5b9fbdf0516756962ba8e5a5920f31f9c66ff615462",
+    "run.py": "1d6350beb0ea6691c04d90b565ffd4135a82cb0991c62348f3d735d074a03916"
+  },
+  "offline_checks": {
+    "passed": 6,
+    "scope": "Offline geometry/scoring checks; native trials separately establish feasibility"
+  }
+}

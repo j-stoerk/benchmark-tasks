@@ -15,6 +15,6 @@
   "run_limit": "2400 control actions at20Hz (120s); at most30 LLM calls,400 actions per call.",
   "reset_notes": "Wipe glass and applicator clean with water, dry, return level tool to the starting position and dispense3mL of the same washable paint across the bead line. This takes a few minutes. Keep paint off shared robot surfaces; the mounted applicator alone touches it.",
   "fidelity": "Native force-limited robot, rigid applicator and glass contacts. A finite 5mm coating raster responds only to measured tool motion with both feet seated and actual substrate contact; paint use is conserved at0.1mm nominal wet thickness. A bounded viscous reaction acts on the tool. No fluid CFD, drying or electrode-quality claim. Robot uses Cartesian slides and a gimbal rather than a commercial arm model; the tool is mounted before the trial.",
-  "scores": "Unmeasured; native demo and genuine LLM trial required before submission.",
-  "media": null
+  "scores": "GPT-6 Codex interactive LLM (code-aware): 1.0; scripted native-physics demo: 1.0",
+  "media": "M-UZLYM9"
 }

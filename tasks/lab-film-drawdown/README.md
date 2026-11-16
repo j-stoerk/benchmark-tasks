@@ -1,6 +1,6 @@
 # Manual laboratory film drawdown
 
-Implementation candidate. Native demo/model scores and media have not yet been measured. Do not interpret offline checks as physical success.
+Native validation completed on the same source package: scripted demo **1.0** in258 actions/12.90 simulated seconds; genuine interactive Codex LLM **1.0** in218 actions/10.90 seconds, with two actual observation/decision exchanges. The LLM run is explicitly code-aware and non-blind, with no scripted fallback or independent API checkpoint claimed. The no-material native control completes300 actions at **0.0**. Six adversarial offline checks pass. evaluation.json binds exact source hashes, runtime versions and measured results. These are submitted task results, not an organizer acceptance claim.
 
 The robot draws a fixed-gap applicator across a wet test card and lifts clear. This is the manual coating stroke used in materials research, including electrode-formulation work. It tests maintaining tool contact and carrying a wet bead across a complete area. Gap selection, industrial-scale roll handling, coating chemistry and electrode performance are outside the claim.
 
