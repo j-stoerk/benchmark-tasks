@@ -103,7 +103,10 @@ class SlitterStack(EmbodimentBase):
                 float(np.linalg.norm(numpy(self.base.scene[f"pad_{i}"].data.net_normal_forces_w)[0]))
                 for i in range(3)
             ],
-            "clamp_contact_N": max(
+            "clamp_contact_N": spec.clamp_force_from_history(
+                numpy(self.base.scene["platen_contact"].data.force_matrix_w_history)[0]
+            ),
+            "instantaneous_clamp_contact_N": max(
                 0.0,
                 float(
                     numpy(self.base.scene["platen_contact"].data.force_matrix_w)[0]
@@ -111,6 +114,12 @@ class SlitterStack(EmbodimentBase):
                     .sum(axis=0)[2]
                 ),
             ),
+            "clamp_contact_substeps_N": numpy(self.base.scene["platen_contact"].data.force_matrix_w_history)[
+                0
+            ]
+            .reshape(48, -1, 3)
+            .sum(axis=1)[:, 2]
+            .tolist(),
             "clamp_z": 1.20 + float(numpy(self.robot.data.joint_pos)[0, self.press_ids[0]]),
             "clamp_y": float(numpy(self.robot.data.joint_pos)[0, self.press_y_ids[0]]),
             "applied_proof": numpy(self.term.applied_proof)[0].tolist(),
@@ -190,7 +199,7 @@ class SlitterStack(EmbodimentBase):
             "invalid": self.proof.invalid,
             "proof_seconds": self.proof.elapsed,
             "physics": reading,
-            "geometry": spec.geometry(reading),
+            "geometry": self.proof.latest_geometry,
         }
         if self.trace:
             with self.trace.open("a", encoding="utf-8") as stream:

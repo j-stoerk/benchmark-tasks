@@ -241,7 +241,7 @@ class AssemblyMachine(EmbodimentBase):
                 ContactSensorCfg(
                     prim_path="{ENV_REGEX_NS}/Machine/Platen",
                     filter_prim_paths_expr=["{ENV_REGEX_NS}/part_8"],
-                    history_length=1,
+                    history_length=48,
                 ),
             )
         ]

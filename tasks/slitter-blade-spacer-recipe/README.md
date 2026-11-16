@@ -64,7 +64,7 @@ Use the pinned Linux/RTX Isaac Lab-Arena environment, Python 3.12, Isaac Sim
 6.1, `yam-arena` and Inspect Robots. Import `native.py` only after AppLauncher
 starts Kit. The runner captures actual dependency versions, source hashes,
 seed, commands, exit status and logs. Seed is 0; actions and scoring run at 20 Hz,
-with CPU PGS at 480 Hz and continuous collision detection enabled on the scene and all free rings. The 2 mm lower knives retain their actual thickness.
+with CPU TGS at 960 Hz and continuous collision detection enabled on the scene and all free rings. The 2 mm lower knives retain their actual thickness.
 The physical contact solver runs on CPU; the RTX GPU remains necessary for native camera rendering. A separate startup audit must confirm actual CPU selection and scene/body CCD flags. No native success is claimed.
 
 ```bash
@@ -72,7 +72,7 @@ source /data/IsaacLab-Arena/yam.env
 uv pip install --no-deps -e /path/to/tasks/slitter-blade-spacer-recipe
 cd /path/to/tasks/slitter-blade-spacer-recipe
 python -m slitter_stack.assets
-python -m pytest -q test_slitter.py
+python -m pytest -q
 python run.py smoke --output results/smoke --max-steps 200
 python run.py demo --output results/demo
 python run.py model --output results/model --bridge results/model-bridge
@@ -108,3 +108,7 @@ The current contact diagnostic uses a 20 um contact-generation offset and zero r
 The current loaded-stack diagnostic requests 64 position iterations for both the machine articulation and free tooling, with one velocity iteration. The 1 mm contact-offset experiment failed under gravity; the 20 um offset is restored. No successful assembly run is currently claimed.
 
 This is an isolated CPU/CCD experiment. All rings retain 96 convex sectors and explicitly authored uniform-annulus mass, centre of mass and inertias. Native reset and complete loaded-contact/assembly validation remain pending. No rigid part is attached, teleported or supported by a hidden constraint.
+
+The platen force reverses at a bounded1500 N/s rate before reaching the unchanged500 N downward load. Proof starts only after one continuous second of measured blade recipe and clamp load. The20 Hz filtered load-cell reading averages all48 native substeps per 50 ms period; raw instantaneous force and all48 samples are retained for audit. This avoids choosing one impact impulse as a static force measurement.
+
+Stationarity now uses one second of actual pose history for every ring: pairwise translation<=50 micrometres and rotation<=1 degree. Substep velocities remain diagnostic. The three-second loaded blade-baseline limits remain50 micrometres and1 degree. A real slip still requires proof off to reset; a stationarity reset cannot erase it. This readout/scorer change requires fresh native evidence; replayed old traces are diagnostic only and cannot establish a new task score.

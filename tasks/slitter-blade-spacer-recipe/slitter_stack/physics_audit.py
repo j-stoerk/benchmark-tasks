@@ -10,7 +10,13 @@ def verify_cpu_ccd(env, directory=None):
 
     stage = omni.usd.get_context().get_stage()
     scenes = [prim for prim in stage.Traverse() if prim.GetTypeName() == "PhysicsScene"]
-    report = {"device": str(env.device), "scene_ccd": {}, "body_ccd": {}}
+    report = {
+        "device": str(env.device),
+        "physics_dt_s": float(env.physics_dt),
+        "control_dt_s": float(env.step_dt),
+        "scene_ccd": {},
+        "body_ccd": {},
+    }
     for prim in scenes:
         report["scene_ccd"][str(prim.GetPath())] = prim.GetAttribute("physxScene:enableCCD").Get()
     for part in spec.PARTS:
@@ -24,6 +30,8 @@ def verify_cpu_ccd(env, directory=None):
         )
     if (
         report["device"] != "cpu"
+        or abs(report["physics_dt_s"] - 1 / 960) > 1e-10
+        or abs(report["control_dt_s"] - 1 / 20) > 1e-10
         or not report["scene_ccd"]
         or not all(report["scene_ccd"].values())
         or not all(report["body_ccd"].values())

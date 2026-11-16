@@ -28,6 +28,12 @@ def ready():
     }
 
 
+def prime(proof, row=None):
+    for _ in range(spec.HZ):
+        proof.update(ready() if row is None else row, False)
+    return proof
+
+
 def test_full_width_and_actual_blade_recipe():
     assert sum(spec.HEIGHTS) == pytest.approx(0.330)
     assert spec.BLADE_H == 0.002 and spec.BLADE_R == 0.050 and spec.BORE == 0.0325
@@ -50,7 +56,7 @@ def test_actual_tooling_masses_are_not_enlarged_mocks():
 def test_unclamped_stack_only_gets_preparation_credit():
     row = ready()
     row["clamp_contact_N"] = 0
-    p = spec.Proof()
+    p = prime(spec.Proof(), row)
     for _ in range(100):
         assert p.update(row, True) == (0.25, False)
 
@@ -58,11 +64,11 @@ def test_unclamped_stack_only_gets_preparation_credit():
 def test_clamped_without_proof_only_half_credit():
     row = ready()
     row["applied_proof"] = [0, 0]
-    assert spec.Proof().update(row, True) == (0.5, False)
+    assert prime(spec.Proof(), row).update(row, True) == (0.5, False)
 
 
 def test_complete_uninterrupted_native_retention_interval():
-    p = spec.Proof()
+    p = prime(spec.Proof())
     for _ in range(59):
         assert p.update(ready(), True) == (0.5, False)
     assert p.update(ready(), True) == (1, True)
@@ -109,12 +115,14 @@ def test_pose_and_support_shortcuts_fail(mutation):
     if name == "tilted":
         row["parts"]["part_1"]["quat"] = [math.sin(value / 2), 0, 0, math.cos(value / 2)]
     p = spec.Proof()
-    for _ in range(80):
+    for frame in range(80):
+        if name == "moving":
+            row["parts"]["part_1"]["pos"][0] = value * frame / spec.HZ
         assert p.update(row, True)[1] is False
 
 
 def test_actual_translation_breaks_retention_and_requires_proof_reset():
-    p = spec.Proof()
+    p = prime(spec.Proof())
     row = ready()
     for _ in range(40):
         p.update(row, True)
@@ -130,14 +138,54 @@ def test_actual_translation_breaks_retention_and_requires_proof_reset():
 
 
 def test_rotational_slip_breaks_retention():
-    p = spec.Proof()
+    p = prime(spec.Proof())
     row = ready()
     for _ in range(40):
         p.update(row, True)
     angle = math.radians(2)
     row["parts"]["part_1"]["quat"] = [0, 0, math.sin(angle / 2), math.cos(angle / 2)]
-    assert p.update(row, True) == (0.5, False)
+    assert p.update(row, True) == (0.0, False)
     assert p.failed
+
+
+def test_pose_window_rejects_motion_without_trusting_instantaneous_velocity():
+    proof = spec.Proof()
+    row = ready()
+    for index in range(120):
+        row["parts"]["part_1"]["pos"][0] = 0.0001 * math.sin(index / 5)
+        assert proof.update(row, True)[1] is False
+
+
+def test_substep_velocity_jitter_does_not_defeat_a_measured_stationary_hold():
+    proof = spec.Proof()
+    row = ready()
+    for index in range(100):
+        for part in row["parts"].values():
+            part["lin_vel"] = [0.02, 0, 0]
+            part["ang_vel"] = [0, 0, 0.5]
+            part["pos"][0] = 0.000005 * math.sin(index)
+        result = proof.update(row, True)
+    assert result == (1, True)
+
+
+def test_load_cell_integrates_real_impulses_over_one_control_period():
+    samples = np.zeros((48, 1, 1, 3))
+    samples[::2, 0, 0, 2] = 250
+    samples[1::2, 0, 0, 2] = 750
+    assert spec.clamp_force_from_history(samples) == pytest.approx(500)
+    samples[..., 0] = 10000  # lateral rubbing cannot add clamp credit
+    assert spec.clamp_force_from_history(samples) == pytest.approx(500)
+    samples[..., 2] = -500
+    assert spec.clamp_force_from_history(samples) == 0
+
+
+def test_incomplete_or_nonfinite_load_history_is_not_invented():
+    with pytest.raises(ValueError):
+        spec.clamp_force_from_history(np.zeros((47, 3)))
+    samples = np.zeros((48, 3))
+    samples[-1, 2] = np.nan
+    with pytest.raises(ValueError):
+        spec.clamp_force_from_history(samples)
 
 
 @pytest.mark.parametrize(

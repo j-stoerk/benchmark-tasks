@@ -69,7 +69,12 @@ Observations: native RGB, actual tool XYZ/mean normalized jaw extension and last
 clamp/proof commands, three pad normal forces in N, pressure-plate contact N,
 and four blade cutting-face heights in mm (-1 when that blade is off the arbor).
 The clamp gauge is the upward contact force from the final 48 mm spacer on the
-platen, excluding shaft contact and all lateral forces.
+platen, excluding shaft contact and all lateral forces. It averages all 48 native
+substeps in each 50 ms control period, rather than one arbitrary impulse sample.
+Stationarity uses a full second of actual poses: every part's pairwise translation
+range <=0.05 mm and rotation range <=1 degree. Instantaneous substep velocities
+remain diagnostic only. Loaded blade retention uses the same 0.05 mm/1 degree
+baseline limits for three continuous seconds; actual slip requires proof reset.
 No part pose, scorer status or successful-grasp oracle is supplied. The height
 gauges correspond to practical axial metrology, not gripper setpoints.
 At most 30 LLM calls and 2400 control actions at 20 Hz. A response may include
@@ -167,18 +172,47 @@ def geometry(readout):
         return {"valid": False}
 
 
+def clamp_force_from_history(history):
+    """20 Hz load-cell reading from all 48 native contact-impulse substeps."""
+    values = np.asarray(history, float)
+    if values.ndim < 2 or values.shape[0] != 48 or values.shape[-1] != 3 or not np.isfinite(values).all():
+        raise ValueError("Expected 48 finite native XYZ contact-force samples")
+    upward = values.reshape(48, -1, 3).sum(axis=1)[:, 2]
+    return max(0.0, float(np.mean(upward)))
+
+
 class Proof:
     def __init__(self):
         self.invalid = False
         self.elapsed = 0.0
         self.baseline = None
         self.failed = False
+        self.pose_history = []
+        self.latest_geometry = {}
 
     def update(self, readout, requested):
         g = geometry(readout)
         self.invalid |= not g["valid"]
         if self.invalid:
+            self.latest_geometry = g
             return 0.0, False
+        poses = np.asarray([readout["parts"][part["name"]]["pos"] for part in PARTS], float)
+        quats = np.asarray([readout["parts"][part["name"]]["quat"] for part in PARTS], float)
+        quats /= np.linalg.norm(quats, axis=1)[:, None]
+        self.pose_history.append((poses, quats))
+        self.pose_history = self.pose_history[-(HZ + 1) :]
+        still = len(self.pose_history) == HZ + 1
+        if still:
+            positions = np.asarray([entry[0] for entry in self.pose_history])
+            orientations = np.asarray([entry[1] for entry in self.pose_history])
+            distances = np.linalg.norm(positions[:, None] - positions[None, :], axis=-1)
+            still = bool(np.max(distances) <= TOLERANCE)
+            for index in range(len(PARTS)):
+                dots = np.abs(orientations[:, index] @ orientations[:, index].T)
+                still &= bool(np.min(dots) >= math.cos(math.radians(0.5)))
+        g["instantaneous_stable"] = g["stable"]
+        g["stable"] = bool(still)
+        self.latest_geometry = g
         ready = g["assembled"] and g["stable"] and g["released"]
         score = 0.5 if ready and g["clamped"] else (0.25 if ready else 0.0)
         actual = np.asarray(readout.get("applied_proof", []), float)
@@ -187,11 +221,18 @@ class Proof:
         )
         if not requested:
             self.failed = False
-        if not (requested and loaded and ready and g["clamped"]):
-            self.elapsed, self.baseline = 0.0, None
-            return score, False
+            self.baseline = None
         blades = [readout["parts"][p["name"]] for p in PARTS if p["blade"]]
         current = [(np.asarray(p["pos"]), rotation(p["quat"])) for p in blades]
+        # Detect real slip before the stationarity gate can reset the timer.
+        # Once a loaded baseline exists, only switching proof off resets it.
+        if requested and self.baseline is not None:
+            for (pos, rot), (initial, orient) in zip(current, self.baseline, strict=True):
+                angle = math.acos(float(np.clip((np.trace(orient.T @ rot) - 1) / 2, -1, 1)))
+                self.failed |= np.linalg.norm(pos - initial) > TOLERANCE or angle > math.radians(1)
+        if not (requested and loaded and ready and g["clamped"]):
+            self.elapsed = 0.0
+            return score, False
         if self.baseline is None:
             self.baseline = current
         retained = True
