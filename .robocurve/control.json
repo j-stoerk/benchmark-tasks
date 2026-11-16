@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "slit-cooked-bore-01",
+    "id": "slit-cooked-bore-02",
     "mode": "run",
-    "sha": "92449a42503813e315ffa1de2ffa42820500d66b",
+    "sha": "b8b23b8199977dbbd6a52354b681e2768cb4a19e",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
