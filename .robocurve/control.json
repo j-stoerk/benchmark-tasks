@@ -83,6 +83,18 @@
       ],
       "steps": 160,
       "rationale": "The donor gauge now reads zero and every pad retains strong contact. Withdraw the donor through its full stroke while holding the receiver alignment and gripping force."
+    },
+    "model-final-01:007": {
+      "action": [
+        0.24,
+        0.35,
+        1.082,
+        1,
+        1,
+        0
+      ],
+      "steps": 200,
+      "rationale": "The donor is fully withdrawn and unloaded, with all three pads gripping. Move the supported roll to the marked lateral destination and compensated lift setpoint, then allow the carriage to settle before requesting the load test."
     }
   }
 }
