@@ -1,0 +1,28 @@
+name: RoboCurve GPU evidence
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: robocurve-gpu
+  cancel-in-progress: false
+jobs:
+  evidence:
+    if: github.actor == github.repository_owner
+    runs-on: [self-hosted, Linux, X64, robocurve-industrial-1116]
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            tools/gpu-bridge
+      - name: Install artifact transport
+        run: npm install --prefix /tmp/robocurve-artifact --ignore-scripts --no-audit --no-fund @actions/artifact@2.3.2
+      - name: Run bounded evidence controller
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          script: |
+            await require('./tools/gpu-bridge/controller.cjs')({github, context, core});

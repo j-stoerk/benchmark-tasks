@@ -1,0 +1,3 @@
+tools/gpu-bridge/* text eol=lf
+.github/workflows/robocurve-gpu.yml text eol=lf
+.robocurve/*.json text eol=lf
