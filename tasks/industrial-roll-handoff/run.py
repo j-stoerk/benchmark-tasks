@@ -18,6 +18,7 @@ def main():
     parser.add_argument("--bridge", type=Path)
     parser.add_argument("--max-steps", type=int, default=2400)
     parser.add_argument("--lift-force", type=float, default=6000)
+    parser.add_argument("--no-expand", action="store_true", help="Scripted negative control: keep the grip collapsed")
     args = parser.parse_args()
     folder = Path(__file__).resolve().parent
     spec = json.loads((folder / "task.json").read_text(encoding="utf-8"))
@@ -49,9 +50,13 @@ def main():
         str(out),
     ]
     if policy == "industrial_llm":
+        if args.no_expand:
+            parser.error("--no-expand is only a scripted negative control")
         if args.bridge is None:
             parser.error("model needs --bridge directory for actual LLM decisions")
         command += ["-P", f"directory={args.bridge.resolve()}"]
+    elif args.no_expand:
+        command += ["-P", "expand=false"]
     manifest = {
         "started_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
         "command": command,

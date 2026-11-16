@@ -70,7 +70,7 @@ def generate():
         stage, root = stage_for(filename)
         UsdPhysics.ArticulationRootAPI.Apply(root.GetPrim())
         body(stage, "/Machine/base", (0, 0, 0), 150)
-        cube(stage, "/Machine/base/frame", (0.12, 0.8, 0.8), (0, 0, 0))
+        cube(stage, "/Machine/base/frame", (0.12, 0.8, 1.2), (0, 0, 0))
         fix = UsdPhysics.FixedJoint.Define(stage, "/Machine/root_joint")
         fix.CreateBody1Rel().SetTargets(["/Machine/base"])
         if filename.startswith("receiver"):

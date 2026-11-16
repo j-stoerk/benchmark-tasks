@@ -24,7 +24,7 @@ def Xform "Machine" (
             custom float physxCollision:contactOffset = 0.0002
             color3f[] primvars:displayColor = [(0.18, 0.3, 0.5)]
             double size = 1
-            float3 xformOp:scale = (0.12, 0.8, 0.8)
+            float3 xformOp:scale = (0.12, 0.8, 1.2)
             double3 xformOp:translate = (0, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:scale"]
         }

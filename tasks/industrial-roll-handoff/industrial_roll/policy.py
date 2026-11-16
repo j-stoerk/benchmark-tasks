@@ -12,8 +12,9 @@ from . import spec
 
 
 class Demo(PolicyBase):
-    def __init__(self):
+    def __init__(self, expand=True):
         self.info = PolicyInfo(name="industrial_demo", action_space=spec.action_space())
+        self.expand = bool(expand)
 
     def reset(self, scene):
         pass
@@ -23,7 +24,7 @@ class Demo(PolicyBase):
         command = [0, 0, 1, 0, 0, 0]
         if t >= 2:
             command[0] = 0.24
-        if t >= 9:
+        if t >= 9 and self.expand:
             command[3] = 1
         if t >= 12:
             command[4] = 1
