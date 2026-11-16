@@ -44,6 +44,11 @@ module.exports = async ({github, context, core}) => {
     if (!command || completed.has(command.id)) {await sleep(6000); continue;}
     if (!/^[a-z0-9-]{1,64}$/.test(command.id)) throw Error('Invalid command ID');
     if (command.mode === 'exit') break;
+    if (command.mode === 'cancel') {
+      completed.add(command.id);
+      core.info(`Cancellation ${command.id}: no matching running trial.`);
+      continue;
+    }
     if (!['probe', 'run'].includes(command.mode)) throw Error('Unsupported command');
     completed.add(command.id);
     const out = path.join(root, command.id);
@@ -86,12 +91,28 @@ module.exports = async ({github, context, core}) => {
     const child = spawn('bash', args, {stdio: ['ignore', log, log], detached: true});
     let exitCode = null;
     child.on('exit', (code, signal) => {exitCode = code === null ? `signal:${signal}` : code;});
+    child.on('error', error => {exitCode = `spawn-error:${error.code}`;});
+    await upload(`${command.id}-started`, [path.join(out, 'command.json')], out);
+    let cancellationReason = null;
     const uploaded = new Set();
     let nextProgress = Date.now() + 90e3, progressIndex = 0;
     while (exitCode === null) {
-      if (Date.now() >= deadline) {process.kill(-child.pid, 'SIGTERM'); break;}
       const current = await control();
-      if (current.command?.mode === 'exit') {process.kill(-child.pid, 'SIGTERM'); break;}
+      if (Date.now() >= deadline || current.command?.mode === 'exit' ||
+          (current.command?.mode === 'cancel' && current.command?.target === command.id)) {
+        cancellationReason = Date.now() >= deadline ? 'worker time limit' :
+          current.command.mode === 'exit' ? 'worker exit requested' : 'named diagnostic cancelled';
+        if (current.command?.mode === 'cancel') completed.add(current.command.id);
+        // Only this worker's own detached trial process group may be stopped.
+        try {process.kill(-child.pid, 'SIGTERM');} catch (error) {if (error.code !== 'ESRCH') throw error;}
+        const stopDeadline = Date.now() + 15000;
+        while (exitCode === null && Date.now() < stopDeadline) await sleep(250);
+        if (exitCode === null) {
+          try {process.kill(-child.pid, 'SIGKILL');} catch (error) {if (error.code !== 'ESRCH') throw error;}
+          await sleep(1000);
+        }
+        break;
+      }
       for (const f of walk(bridge).filter(p => /request-\d+\.json$/.test(p))) {
         const base = path.basename(f, '.json');
         if (!uploaded.has(base)) {
@@ -116,7 +137,9 @@ module.exports = async ({github, context, core}) => {
       await sleep(5000);
     }
     fs.closeSync(log);
-    fs.writeFileSync(path.join(out, 'worker-result.json'), JSON.stringify({exit_code: exitCode, command, finished_utc: new Date().toISOString()}, null, 2));
+    fs.writeFileSync(path.join(out, 'worker-result.json'), JSON.stringify({exit_code: exitCode,
+      cancelled: cancellationReason !== null, cancellation_reason: cancellationReason,
+      command, finished_utc: new Date().toISOString()}, null, 2));
     const evidence = walk(out).filter(p => !p.includes('/source/') && /\.(json|jsonl|txt|png|mp4)$/.test(p));
     await upload(`${command.id}-result`, evidence, out);
     console.log(`Completed ${command.id}: ${exitCode}`);
