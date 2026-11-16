@@ -20,7 +20,7 @@ def numpy(value):
 
 
 class Fixture(EmbodimentBase):
-    def __init__(self, trace_file=None, device="cuda:0", variant="normal", **kwargs):
+    def __init__(self, trace_file=None, device="cpu", variant="normal", **kwargs):
         if kwargs or variant not in spec.VARIANTS:
             raise ValueError("Unknown native fixture option/control variant")
         self.info = EmbodimentInfo(
@@ -53,7 +53,7 @@ class Fixture(EmbodimentBase):
         if APP is None:
             from isaaclab.app import AppLauncher
 
-            APP = AppLauncher(headless=True, device=self.device, enable_cameras=True).app
+            APP = AppLauncher(headless=True, device="cuda:0", enable_cameras=True).app
             atexit.register(lambda: APP.close())
         import torch
 

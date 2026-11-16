@@ -312,7 +312,7 @@ class ValveMachine(EmbodimentBase):
         self.camera_config = make_configclass("ValveCameras", cameras, bases=(ArenaCameraCfg,))()
 
 
-def make_env(device="cuda:0", variant="normal"):
+def make_env(device="cpu", variant="normal"):
     if variant not in spec.VARIANTS:
         raise ValueError("Unknown control variant")
     objects = [
@@ -330,6 +330,7 @@ def make_env(device="cuda:0", variant="normal"):
         cfg.decimation = 48
         cfg.sim.render_interval = 48
         cfg.sim.physics.solve_articulation_contact_last = True
+        cfg.sim.physics.solver_type = 1
         return cfg
 
     environment = IsaacLabArenaEnvironment(
@@ -367,6 +368,8 @@ class Sampler:
         forces = [self.contact(f"seal_{half}_{i}") for half in ("lower", "upper") for i in range(8)]
         retaining = self.contact("retaining_contact")
         result = {
+            "physics_device": str(self.env.device),
+            "physics_dt_s": float(self.env.physics_dt),
             "encoders": q.tolist(),
             "velocities": v.tolist(),
             "seal_deflections_m": array(self.robot.data.joint_pos)[0, self.seal_ids].tolist(),
