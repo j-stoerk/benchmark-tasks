@@ -1,14 +1,7 @@
 {
   "command": {
-    "id": "slit-contact-bench-02",
-    "mode": "run",
-    "sha": "1d7c8f76b860e14fcff732abe62d2feb6a73e3c3",
-    "task": "slitter-blade-spacer-recipe",
-    "trial": {
-      "mode": "smoke",
-      "max_steps": 400,
-      "variant": "contact-bench"
-    }
+    "id": "rotate-worker-1924",
+    "mode": "exit"
   },
   "responses": {
     "model-final-01:001": {
