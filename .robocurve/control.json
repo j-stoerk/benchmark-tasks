@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "slit-cpu-press-06",
+    "id": "slit-cpu-full-demo-07",
     "mode": "run",
     "sha": "25490058c3ed9b20906c64a7d241b28faf71b9c3",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
-      "mode": "smoke",
-      "max_steps": 600,
-      "variant": "contact-bench"
+      "mode": "demo",
+      "max_steps": 2400,
+      "variant": "normal"
     }
   },
   "responses": {
