@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "slit-normal-sdf-03",
+    "id": "slit-cpu-bench-01",
     "mode": "run",
-    "sha": "94937f3763e3fe13fdf3e18c3f1b9c1cdb67fa31",
+    "sha": "85cddf55fac4d1b1a6ef46bfb5bf480b5453c346",
     "task": "slitter-blade-spacer-recipe",
     "trial": {
       "mode": "smoke",
       "max_steps": 400,
-      "variant": "normal"
+      "variant": "contact-bench"
     }
   },
   "responses": {
