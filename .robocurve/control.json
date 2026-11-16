@@ -1,8 +1,8 @@
 {
   "command": {
-    "id": "stir-smoke-01",
+    "id": "stir-smoke-02",
     "mode": "run",
-    "sha": "86d7ef3878536368b34087fd5136151ce3d87a70",
+    "sha": "fdb7829671592f4e8ffd8abcc80eea31dd1002a8",
     "task": "lab-stirbar-recovery",
     "trial": {
       "mode": "smoke",
