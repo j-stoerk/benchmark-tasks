@@ -1,13 +1,13 @@
 {
   "command": {
-    "id": "film-model-04",
+    "id": "film-no-material-05",
     "mode": "run",
     "sha": "0fb9f5fb1a9a07fce51ca0a23633f7ff864735fd",
     "task": "lab-film-drawdown",
     "trial": {
-      "mode": "model",
-      "max_steps": 1200,
-      "variant": "normal"
+      "mode": "smoke",
+      "max_steps": 300,
+      "variant": "no-material"
     }
   },
   "responses": {
