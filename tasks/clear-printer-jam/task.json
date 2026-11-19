@@ -1,0 +1,19 @@
+{
+  "title": "Clear a jammed A4 sheet through a printer's rear access without tearing it",
+  "category": "Societal relatability",
+  "keywords": [
+    "paper jam",
+    "bimanual paper handling",
+    "printer",
+    "intact extraction"
+  ],
+  "instruction": "Clear the jammed page through the open rear access using both hands. Pull the page evenly out of the rollers without tearing it, and leave the whole sheet on the bench.",
+  "context": "A paper jam is a familiar home and office interruption. Printer manuals call for holding the sheet at both sides and pulling it straight so fragments do not remain in the mechanism.",
+  "setup": "The cooled, unplugged printer is oriented with its open rear paper path toward the arms. A single 210 x 297 mm A4 paper sheet has curled at its exposed end. The rest of the sheet is inside the path between two transverse rubber rollers. The bench in front of the printer is clear.",
+  "scoring": "0 if any part of the sheet tears or remains trapped behind the rear roller. 0.5 for extracting the whole intact sheet from the rollers. 1.0 for leaving it on the bench below the rear lip with neither gripper nor printer supporting it. The original curl is allowed. Use a photo of the sheet and inspect the rear path for fragments.",
+  "run_limit": "800 steps (40 seconds at 20 Hz)",
+  "reset_notes": "Reset the model to the fixed jam layout. For a physical trial use a fresh A4 sheet with the same curl and check that the printer is unplugged and cool.",
+  "fidelity": "An A4 sheet bends at nine connected panels with finite hinge stiffness and break resistance. Solid guides and a spring-loaded roller produce contact loads. The scene represents the rear path and surrounding shell of a powered-off printer. It omits the printer's motor, electronics, and toner.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-WVTYGV"
+}

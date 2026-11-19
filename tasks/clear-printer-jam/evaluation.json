@@ -1,0 +1,37 @@
+{
+  "trials": {
+    "demo": {
+      "score": 1.0,
+      "steps": 266,
+      "simulation_seconds": 13.3,
+      "policy": "yam_scripted",
+      "environment": {
+        "yam-arena": "0.1.0",
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0"
+      },
+      "wall_seconds": 78.528801,
+      "inspect_sha256": "e79b89f5e21cdbd32ea4b8e6ccfaf168236d1973079081a446586ae44a65a4d1",
+      "video_sha256": "ff43d7b658d48124a0a0dbe569569ca210a135ca9f4290e436ca27b8b9c5b771"
+    },
+    "model": {
+      "score": 0.0,
+      "steps": 800,
+      "simulation_seconds": 40.0,
+      "policy": "dream",
+      "environment": {
+        "yam-arena": "0.1.0",
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0"
+      },
+      "wall_seconds": 140.632554,
+      "inspect_sha256": "bf17f3f418395e39700e8cf2c5a1b7bc86f265fb6f97c6e4e162299421c19335",
+      "video_sha256": "e23505d45b349b7edd494465c5d9b14f45ea915f39921f47d1bd7ecde41d6856"
+    }
+  },
+  "verified_current_package_sha256": {
+    "printer_parts.py": "504102421e07c480c10977c5f4d0ca0bb288bf94f6b5ed486d2bc50f24b0aec1",
+    "run_config.json": "ba4b792484e34ad9b7875c80be06d8c2adfc525f18b5a0aa721c7c486d67a2a4",
+    "task.py": "1c4407b93f0b1a3de8666e4d7624b5945e39b62655baab28b3d59bcdd66ebece"
+  }
+}
