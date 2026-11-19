@@ -1,0 +1,19 @@
+{
+  "title": "Measure a wet coating with a notch gauge and leave the comb upright for reading",
+  "category": "Other",
+  "keywords": [
+    "coating inspection",
+    "wet film",
+    "tool use",
+    "bimanual"
+  ],
+  "instruction": "Steady the loose coated coupon at its dry end. Pick up the wet-film comb and lower it straight onto the blue coating until both outer feet touch the coupon. Hold for one second, lift straight up without scraping, and leave the comb upright in the empty slot for reading.",
+  "context": "Wet-film combs let coating labs check a fresh formulation or application before the film cures. The operator has to capture a readable wet/dry tooth boundary without dragging the gauge across the sample.",
+  "setup": "A loose 120 x 190 x 6 mm aluminium coupon rests flat at x=405, y=28 mm. The blue wet stripe is 88 x 54 mm centred at x=405, y=-35 mm. A 64 x 43 x 3 mm steel comb stands in the slot at x=365, y=-255 mm. The empty matching ABS slot is at x=365, y=-155 mm. The x-axis points away from the robot mounts and y points left.",
+  "scoring": "0.5 for a one-second perpendicular impression with both feet down and the 500 micrometre tooth wet without wetting the 1000 micrometre tooth. 1.0 if the released comb stands in the empty slot with both grippers clear and the coupon is within 10 mm of its starting mark. Score 0 for any tooth dragged more than 3 mm across the wet patch or an unreadable pattern. Inspect the wet teeth and impression with a close-up photo and use the trial video to judge contact and withdrawal.",
+  "run_limit": "950 steps at 20 Hz (47.5 s)",
+  "reset_notes": "Wipe the gauge, reapply the blue coating to the marked patch at 750 micrometres, return the coupon and gauge to their starting marks.",
+  "fidelity": "Rigid comb teeth, coupon and racks make real frictional contact with the stock YAM grippers. A fixed-depth wet layer marks the teeth that intersect it, retaining the physical landing, tilt and vertical withdrawal required by the measurement. It omits flow, drying and capillary spreading.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-Y9VWUH"
+}
