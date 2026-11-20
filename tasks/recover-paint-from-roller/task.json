@@ -1,0 +1,20 @@
+{
+  "title": "Squeeze reusable paint out of a full-size roller cover into a tray",
+  "category": "Societal relatability",
+  "keywords": [
+    "painting",
+    "roller squeegee",
+    "paint recovery",
+    "soft nap",
+    "bimanual"
+  ],
+  "instruction": "Hold the loaded roller over the tray. Slide the wire squeegee along the full cover to recover the excess paint. Set the roller and squeegee back down.",
+  "context": "Recovering excess paint lets people reuse it and makes a full-size roller easier to wash. The loop needs alignment and the other gripper must support the frame against the drag.",
+  "setup": "A 229 mm Purdy White Dove 3/8 inch-nap cover on a standard frame holds 60 g of washable water-based paint. A MARSHALLTOWN RCS51 wire squeegee and a 306 by 168 mm catch tray sit next to it.",
+  "scoring": "Score 0 for over 5 g spilled or under 25 g recovered. Score 0.25 for at least 25 g recovered, 0.5 for at least 45 g, and 1.0 when at least 45 g are recovered and the frame and tool are both released at their starting areas.",
+  "run_limit": "720 steps at 20 Hz (36 s)",
+  "reset_notes": "Clean the ring and tray, weigh the dry roller frame and cover, and load the cover with 60 g of washable water-based paint. Restore all parts to their marks.",
+  "fidelity": "The physically grasped wire ring has to slide coaxially over a full-size cover. The model adds opposing drag from nap compression and estimates recoverable paint by axial coverage. It omits individual fibres and paint rheology.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-F6R7HU"
+}
