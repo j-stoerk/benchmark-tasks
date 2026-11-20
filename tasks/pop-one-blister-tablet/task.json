@@ -1,0 +1,19 @@
+{
+  "title": "Pop one tablet through a blister pack into a cup",
+  "category": "Societal relatability",
+  "keywords": [
+    "push-through blister",
+    "foil rupture",
+    "selective release",
+    "bimanual"
+  ],
+  "instruction": "Hold the blister pack against the rim of the cup. Press the red-marked blister to pop its tablet into the cup. Leave the other blisters sealed and set the pack back down.",
+  "context": "Opening a push-through pack requires supporting the thin card against the thumb's force while aiming the tablet as it breaks through the foil. The setup uses inert training tablets.",
+  "setup": "Four 11 mm push-through pockets on a 144 by 23 mm card rest foil-side down on two 22 mm-high supports. The card is centred at X 360, Y 141 mm. A cup 62 mm in diameter and 34 mm tall sits at X 360, Y -76 mm. Red marks identify the pocket near the ungripped end.",
+  "scoring": "Score 0 if any other seal is broken or the marked tablet is outside the cup. Score 0.5 if the marked tablet is resting inside the cup and the other blisters stay sealed. Score 1.0 if the pack is also released back across its two supports.",
+  "run_limit": "600 steps at 20 Hz (30 s)",
+  "reset_notes": "Replace the card with a fresh push-through pack containing inert training tablets. Empty the cup. Match the foil-down orientation and marks.",
+  "fidelity": "The card is rigid, with physically pressed spring-loaded caps. The simulated foil bond ruptures under force, after which the tablet falls and collides as a loose body. Plastic creasing, fragments and variation in foil fracture direction are abstracted.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-GALBX3"
+}
