@@ -1,0 +1,19 @@
+{
+  "title": "Close an open bread bag with its reusable retaining clip",
+  "category": "Societal relatability",
+  "keywords": [
+    "bread bag",
+    "flexible film",
+    "reusable clip",
+    "bimanual"
+  ],
+  "instruction": "Gather the open bag neck. Slide the red clip over the gathered film to close the bag. Let go of both parts.",
+  "context": "The reopening slit on an ordinary bread clip is narrower than its holding hole. One hand gathers and steadies the loose film while the other hand pushes the clip across it.",
+  "setup": "A 240 mm foam loaf fills an open bread bag between three low guide blocks. Its loose neck projects about 100 mm towards the clip and rests on a smooth block near the loaf. The red hand-applied Series A clip rests upright in a shallow slot with the opening toward the robot bases.",
+  "scoring": "Score 0.25 when at least two of the five film sections pass through the clip window and 0.5 when all five are captured. Score 1.0 when the unbroken neck holds the clip with at least 8 mm of tail. The loaf sits upright, both grippers clear the clip by at least 60 mm and the assembly holds its position for two seconds. A torn bag or fewer than two captured sections earns 0.0.",
+  "run_limit": "680 steps at 20 Hz (34 s)",
+  "reset_notes": "Take the clip off the bag and place it upright in its slot. Reopen the loose neck. Return the foam loaf and the bag to the marked starting area.",
+  "fidelity": "The fixture uses the full footprint of a hand-applied Series A closure. Five breakable linked strips approximate a gathered film neck. Actual fit and friction should be checked with the named clip and bag.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-RXC2V2"
+}
