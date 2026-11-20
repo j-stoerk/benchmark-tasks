@@ -1,0 +1,20 @@
+{
+  "title": "Wipe both faces of both eyeglass lenses with a folded cloth",
+  "category": "Societal relatability",
+  "keywords": [
+    "eyeglasses",
+    "microfiber",
+    "wiping",
+    "light contact",
+    "bimanual"
+  ],
+  "instruction": "Steady the glasses by a temple. Wipe the front and back of both lenses with the cloth until their marks are gone. Put the cloth back on its rest and let go of the frame.",
+  "context": "Cleaning eyeglasses involves working both optical surfaces while supporting a delicate frame. The cloth must move across the lens faces under gentle pressure.",
+  "setup": "An ordinary pair of plastic-framed adult reading glasses with roughly 47 mm lenses stands at X 360, Y -8 mm. Smooth blocks hold the unfolded temples level and two short guides limit side slip at the rear rail. A folded microfiber cloth is on a shallow rest at X 351, Y -219 mm. Each side of each lens has three removable marks.",
+  "scoring": "Score 0 for fewer than four marks removed, 0.25 for four or more, 0.5 for eight or more, and 1.0 when all twelve marks are gone and both objects are released at their starting areas.",
+  "run_limit": "1000 steps at 20 Hz (50 s)",
+  "reset_notes": "Restore the glasses and a clean folded microfiber cloth to their marks. Apply the removable marks at the three specified points on both faces.",
+  "fidelity": "Native objects and reaction forces require cloth contact and moving wipes. An estimated patch contact zone removes marks after consistent cloth motion. The prototype approximates lens curvature and the compliance of the folded cloth.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-DP2QWC"
+}
