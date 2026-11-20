@@ -1,0 +1,20 @@
+{
+  "title": "Thread a punched page onto three binder rings and close them",
+  "category": "Societal relatability",
+  "keywords": [
+    "paper",
+    "three-ring binder",
+    "flexible sheet",
+    "hole alignment",
+    "bimanual"
+  ],
+  "instruction": "Put all three holes of the loose page over the open binder rings. Close the rings with the lever and let go of the page.",
+  "context": "Filing a loose page needs both hands to register small holes along a flexible edge before the original ring mechanism can secure the page.",
+  "setup": "A red one-inch three-ring binder lies open at X 399, Y 0 mm with its rings open. The loose punched 216 by 279 mm paper is slightly raised on two bars at X 277, Y 0 mm. The rings and holes are at 108 mm pitch.",
+  "scoring": "Score 0 for a torn page or no threaded hole, 0.25 for one hole, 0.5 for at least two holes, and 1.0 for all three holes threaded through closed rings with the released page settling inside the cover.",
+  "run_limit": "680 steps at 20 Hz (34 s)",
+  "reset_notes": "Remove the loose page from the rings, open the lever and set a fresh punched page on the two bars at its marked location.",
+  "fidelity": "The page has graspable flexible sections and physical openings for the ring tips. The shared ring hinge closes after actual lever motion. The native model approximates paper flex and the over-centre lock and omits sub-millimetre tooth geometry.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-FJN2GQ"
+}
