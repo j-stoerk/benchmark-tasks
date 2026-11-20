@@ -1,0 +1,37 @@
+{
+  "trials": {
+    "demo": {
+      "score": 1.0,
+      "steps": 660,
+      "simulation_seconds": 33.0,
+      "policy": "yam_scripted",
+      "environment": {
+        "yam-arena": "0.1.0",
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0"
+      },
+      "wall_seconds": 104.75785,
+      "inspect_sha256": "196c0daa308d937db093bf452c9b913fcfb4e020817960c2980a4b6bc407f110",
+      "video_sha256": "28690e103e93c09b8fa0b5dc4f5c791de835b2a678f5f4977e5fd3b3220944f3"
+    },
+    "model": {
+      "score": 0.0,
+      "steps": 1000,
+      "simulation_seconds": 50.0,
+      "policy": "dream",
+      "environment": {
+        "yam-arena": "0.1.0",
+        "inspect-robots": "1.0.0",
+        "inspect-robots-yam": "0.38.0"
+      },
+      "wall_seconds": 142.275098,
+      "inspect_sha256": "fb8d61df2dcd75bfd761836fd53b84f94d36b6469a647d7cfaf542b905afa214",
+      "video_sha256": "8769ee6377b1a259b094bd421335ef8be7f4ee5c03b24b6a42765149f20ae890"
+    }
+  },
+  "verified_current_package_sha256": {
+    "run_config.json": "4c04f6d990087f4ba4869d2203c5ec051bd9160de558469bd070dd8b77f1f1ba",
+    "suction_parts.py": "da4e260c432531158f4c87e28506482626f67745ca918c4d092ff2a001ea137d",
+    "task.py": "a4a886e53fbfd33a1de2eb7aefdaf2bc3b574d75f0214992f182489d74068ec5"
+  }
+}

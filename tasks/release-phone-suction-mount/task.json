@@ -1,0 +1,19 @@
+{
+  "title": "Release a dashboard phone mount by levering it open and peeling its suction tab",
+  "category": "Societal relatability",
+  "keywords": [
+    "phone mount",
+    "suction cup",
+    "peel",
+    "bimanual"
+  ],
+  "instruction": "Take the phone mount off the dashboard pad. Support the mount, flip up the locking lever, and peel up the rubber tab until the cup comes free. Leave the mount on the bench and the pad in place.",
+  "context": "Drivers commonly remove suction mounts to change cars or move the holder. A locked cup resists a straight pull. The release lever and peel tab let air in without pulling the adhesive dashboard pad off with it.",
+  "setup": "An empty iOttie Easy One Touch 6 mount with a 74 mm rubber cup is locked to a 96 mm dashboard pad centred at X 360, Y 0 mm. Its plastic arm extends 125 mm toward the left gripper. The closed lever projects toward the right gripper, with the original rubber peel tab next to it. The bench to the left of the pad is clear.",
+  "scoring": "0.25 for opening the lever, 0.5 for peeling the tab and releasing the seal, and 1.0 if the released mount rests clear on the bench with both grippers withdrawn and the dashboard pad still in place. Any damage or forced removal that bypasses the tab scores zero.",
+  "run_limit": "1000 steps at 20 Hz (50 seconds)",
+  "reset_notes": "Restore the mount and pad to the starting marks and engage the suction cup by pressing down the lever.",
+  "fidelity": "Solid props and force-limited hinges preserve the real lever and flexible-edge motion. An incoming-air approximation releases a fixed suction constraint only after the contact-driven lever and peel tab articulate. It omits the static pressure field and long-term ageing of the adhesive pad.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-468ZEP"
+}
