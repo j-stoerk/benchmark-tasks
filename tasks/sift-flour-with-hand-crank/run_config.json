@@ -1,0 +1,14 @@
+{
+  "embodiment": "yam_arena",
+  "scene": "station",
+  "action_dimensions": 14,
+  "demo_policy": "yam_scripted",
+  "task_file": "task.py",
+  "scorer": "task_score",
+  "max_steps": 1200,
+  "seed": 0,
+  "control_hz": 20,
+  "cam_width": 320,
+  "cam_height": 176,
+  "object_jitter": 0
+}

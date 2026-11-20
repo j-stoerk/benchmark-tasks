@@ -1,0 +1,19 @@
+{
+  "title": "Sift flour into a mixing bowl with a hand crank while supporting the sifter",
+  "category": "Societal relatability",
+  "keywords": [
+    "baking",
+    "rotary sifter",
+    "crank",
+    "bimanual"
+  ],
+  "instruction": "Steady the loaded sifter over the blue mixing bowl and turn the crank until the flour has sifted into the bowl. Set the sifter down at the marked spot on the bench.",
+  "context": "Hand-crank sifters aerate flour and remove clumps for light batters such as sponge and angel food cakes. One hand steadies the free sifter while the other drives its agitator.",
+  "setup": "A Norpro 136 rotary sifter holds 60 g of flour and sits on two wooden supports over a 190 mm mixing bowl at X 338, Y -24 mm. The original wooden crank knob faces the right arm at the top of its circle and wears a thin silicone grip sleeve. Mark the bench set-down point at X 372, Y 157 mm.",
+  "scoring": "Weigh the bowl before and after. Score 0 if more than 3 g leaves the vessel without passing through the mesh into the bowl. Score 0.25 for at least 30 g caught, 0.5 for at least 55 g caught and 1.0 when at least 55 g is caught and the released sifter rests within 35 mm of the bench set-down mark. Lesser outcomes score 0.",
+  "run_limit": "1200 steps at 20 Hz (60 s)",
+  "reset_notes": "Clean and dry the sifter and bowl. Add 60 ± 1 g fresh all-purpose flour without packing it. Replace the sifter on the bowl supports and set the crank knob straight up.",
+  "fidelity": "The free sifter, grip, and damped crank use native physical contacts. A finite mass balance estimates flour flow from the measured rotation and upright outlet pose, with losses outside the bowl. It omits individual grains and variations in clump strength.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-RQC72V"
+}
