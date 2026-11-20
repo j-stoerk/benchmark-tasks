@@ -1,0 +1,20 @@
+{
+  "title": "Seat a fresh tape reel in a desktop dispenser and thread its leader",
+  "category": "Societal relatability",
+  "keywords": [
+    "tape dispenser",
+    "office tape",
+    "peeling",
+    "flexible strip",
+    "bimanual"
+  ],
+  "instruction": "Put the tape reel into the dispenser. Pull its starter end over the tear bar and leave enough tape projecting to pick up for the next piece.",
+  "context": "Preparing a desk dispenser requires both hub journals to seat while a thin tape leader peels and follows the route to the cutter.",
+  "setup": "A weighted desktop dispenser is empty with its base centred at X 346, Y -51 mm, its hub slots at Y +5 mm and its cutter at Y -122 mm. A 19 mm tape reel on its removable 25.4 mm hub starts on two narrow bearing blocks at X 346, Y 228 mm with its original leading edge exposed.",
+  "scoring": "Score 0 for a loose reel or torn film. Score 0.25 for the hub seated on both sides and 0.5 when the leader reaches the cutter. Score 1.0 when the released tape stays attached to the cutting lip and its tail projects at least 2 mm while staying within 3 mm of its end position for one second.",
+  "run_limit": "680 steps at 20 Hz (34 s)",
+  "reset_notes": "Return the reel to its starting mark. Put it back on the supplied hub if it separates. Restore the short starter end to the edge of its original winding.",
+  "fidelity": "Physical contacts seat the reel. A linked strip resists peeling and follows the gripper. When an intact segment lands flat against the cutter, a weak breakable joint approximates adhesive tack. The model omits continuous film strain and adhesive residue.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-G9VR5L"
+}
