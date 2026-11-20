@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="170mm" height="96mm" viewBox="0 0 170 96">
+  <title>Printer jam curl profile at actual size</title>
+  <rect width="170" height="96" fill="white"/>
+  <g font-family="sans-serif" fill="#17202a" font-size="3.7">
+    <text x="7" y="8" font-size="5" font-weight="bold">A4 jam curl profile</text>
+    <text x="7" y="15">Print at actual size (100%). Check the 50 mm scale before use.</text>
+    <text x="9" y="75">Toward YAM mounts</text>
+    <text x="100" y="75">Flat sheet continues to the nip</text>
+    <text x="9" y="25">Free edge</text>
+    <text x="42" y="55">33 mm mark</text>
+    <text x="86" y="64">66 mm mark</text>
+    <text x="87" y="89">50 mm</text>
+  </g>
+  <path d="M36.224 22.115 L46.421 53.5 L75 70 L160 70" fill="none" stroke="#0e587a" stroke-width="0.65"/>
+  <g fill="#0e587a">
+    <circle cx="36.224" cy="22.115" r="0.9"/>
+    <circle cx="46.421" cy="53.5" r="0.9"/>
+    <circle cx="75" cy="70" r="0.9"/>
+  </g>
+  <path d="M65 91 V87 M65 89 H115 M115 87 V91" fill="none" stroke="#17202a" stroke-width="0.4"/>
+</svg>
