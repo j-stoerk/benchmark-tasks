@@ -1,0 +1,20 @@
+{
+  "title": "Wring a wet sponge into a basin and return it to its rack",
+  "category": "Societal relatability",
+  "keywords": [
+    "cellulose sponge",
+    "wringing",
+    "compliant object",
+    "bimanual",
+    "cleaning"
+  ],
+  "instruction": "Hold both ends of the wet sponge over the basin and wring water into it. Return the sponge to the rack.",
+  "context": "A wet cleaning sponge is wrung before storage. The arms need opposing grips on a flexible body while keeping the runoff inside the basin.",
+  "setup": "A soft cellulose utility sponge about 152 by 91 by 24 mm, holding 90 g of water, lies across two drying-rack bars centred at X 448, Y 0 mm. An empty 198 by 284 by 44 mm basin is centred at X 295, Y 0 mm.",
+  "scoring": "Score 0 for above 5 g spilled outside the basin or below 20 g caught. Score 0.25 when 20 g or more are caught, and 0.5 at 40 g or more. Score 1.0 if at least 40 g are caught and the sponge is released on its rack.",
+  "run_limit": "900 steps at 20 Hz (45 s)",
+  "reset_notes": "Rinse and squeeze the sponge by hand, then add water until it holds 90 g above its dry reference mass. Empty the basin and clear the catch surface before setting the wet sponge flat on its rack.",
+  "fidelity": "Native torsional joints in three graspable sponge sections transmit resistance to both wrists. Runoff increases under counter-twist. After relaxation, further wringing draws from the reduced water reserve. The foam model omits individual pores, capillary forces and local pressure.",
+  "scores": "Dream-1 run: 0.0; stock YAM scripted demo: 1.0",
+  "media": "M-4JKWCA"
+}
