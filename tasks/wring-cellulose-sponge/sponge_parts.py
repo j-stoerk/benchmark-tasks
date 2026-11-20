@@ -16,6 +16,7 @@ class Solid:
     size: tuple
     color: tuple
     collide: bool = True
+    opacity: float = 1.0
 
 
 @dataclass(frozen=True)
@@ -56,6 +57,8 @@ def spawn(path, cfg, translation=None, orientation=None, **kwargs):
         geom.AddTranslateOp().Set(Gf.Vec3d(*item.pos))
         geom.AddScaleOp().Set(Gf.Vec3f(*item.size))
         geom.CreateDisplayColorAttr([Gf.Vec3f(*item.color)])
+        if item.opacity < 1.0:
+            geom.CreateDisplayOpacityAttr([item.opacity])
         if item.collide:
             UsdPhysics.CollisionAPI.Apply(geom.GetPrim())
             PhysxSchema.PhysxCollisionAPI.Apply(geom.GetPrim()).CreateContactOffsetAttr(0.0006)

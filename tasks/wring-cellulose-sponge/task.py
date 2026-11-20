@@ -25,8 +25,12 @@ SPONGE = (0.87, 0.71, 0.19)
 RACK = (0.24, 0.27, 0.30)
 BASIN = (0.13, 0.28, 0.42)
 WATER = (0.26, 0.53, 0.76)
+SHIELD = (0.40, 0.65, 0.68)
 BASIN_W, BASIN_L = 0.198, 0.284
 INNER_W, INNER_L = 0.192, 0.278
+CONTAIN_X = 0.334
+CONTAIN_W, CONTAIN_L = 0.368, 0.402
+PANEL, PANEL_H = 0.003, 0.064
 
 basin_parts = [Solid((0, 0, 0.0025), (BASIN_W, BASIN_L, 0.005), BASIN)]
 for sign in (-1, 1):
@@ -37,7 +41,18 @@ for sign in (-1, 1):
 WATER_INDEX = len(basin_parts)
 basin_parts.append(Solid((0, 0, 0.006), (INNER_W, INNER_L, 0.00008), WATER, collide=False))
 
+containment = [Solid((0, 0, 0.00018), (CONTAIN_W, CONTAIN_L, 0.00036), SHIELD, collide=False, opacity=0.24)]
+for sign in (-1, 1):
+    containment.extend([
+        Solid((sign * (CONTAIN_W - PANEL) / 2, 0, PANEL_H / 2),
+              (PANEL, CONTAIN_L, PANEL_H), SHIELD, opacity=0.24),
+        Solid((0, sign * (CONTAIN_L - PANEL) / 2, PANEL_H / 2),
+              (CONTAIN_W - 2 * PANEL, PANEL, PANEL_H), SHIELD, opacity=0.24),
+    ])
+
 OBJECTS = [
+    Prop("splash_containment", (CONTAIN_X, 0, TOP), SHIELD, size=(CONTAIN_W, CONTAIN_L, PANEL_H),
+         children=tuple(containment)),
     Prop("basin", (BASIN_X, 0, TOP), BASIN, size=(BASIN_W, BASIN_L, 0.044), children=tuple(basin_parts)),
     Prop("rack", (TRAY_X, 0, TOP), RACK, size=(0.10, 0.12, 0.023), children=tuple(
         Solid((0, y, 0.010), (0.103, 0.009, 0.020), RACK) for y in (-0.030, 0.030))),
