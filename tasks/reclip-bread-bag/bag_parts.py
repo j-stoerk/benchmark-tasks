@@ -177,5 +177,3 @@ def install(reset_hook):
         return result
 
     YamArenaEmbodiment.reset = reset
-
-

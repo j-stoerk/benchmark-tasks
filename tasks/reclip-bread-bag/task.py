@@ -31,6 +31,9 @@ N_FOLDS = 5
 FOLD_WIDTH = 0.009
 FOLD_HALF_LENGTH = 0.051
 CLIP_WINDOW_HALF_HEIGHT = 0.0093 - 0.0028 / 2
+CLIP_HALF_THICKNESS = 0.0006
+MIN_CAPTURE_WIDTH = 0.002
+MIN_TAIL = 0.008
 SUCCESS_HOLD_S = 2.0
 SUCCESS_DRIFT = 0.0015
 SUCCESS_ANGLE_COS = math.cos(math.radians(5) / 2)
@@ -105,45 +108,74 @@ def reset():
 install(reset)
 
 
-def film_section(clip, film):
-    clip_basis = quat_xyzw_to_matrix(clip.quat_xyzw)
-    fold_basis = quat_xyzw_to_matrix(film.quat_xyzw)
-    start = clip_basis.T @ (film.pos - clip.pos)
-    direction = clip_basis.T @ fold_basis[:, 1]
+def clip_interval(interval, start, slope, lower, upper):
+    """Keep the portion of a material-width interval within one geometric bound."""
+    if abs(slope) < 1e-12:
+        return interval if lower <= start <= upper else None
+    a, b = sorted(((lower - start) / slope, (upper - start) / slope))
+    lo, hi = max(interval[0], a), min(interval[1], b)
+    return (lo, hi) if lo < hi else None
+
+
+def capture_interval(clip, film, clip_inverse, fold_basis):
+    """Return captured material coordinates across a fold, checking both clip faces."""
+    start = clip_inverse @ (film.pos - clip.pos)
+    across = clip_inverse @ fold_basis[:, 0] * FOLD_WIDTH
+    direction = clip_inverse @ fold_basis[:, 1]
     if abs(direction[1]) < 0.85:
         return None
-    at_clip = -start[1] / direction[1]
-    if abs(at_clip) >= FOLD_HALF_LENGTH - 0.008:
-        return None
-    centre = start + direction * at_clip
-    lateral = clip_basis.T @ fold_basis[:, 0] * FOLD_WIDTH / 2
-    return np.array([centre + lateral, centre - lateral])
+    interval = (0.0, 1.0)
+    start = start - across / 2
+    axial_slope = -across[1] / direction[1]
+    lateral = across + direction * axial_slope
+    reach = FOLD_HALF_LENGTH - MIN_TAIL
+    for face in (-CLIP_HALF_THICKNESS, CLIP_HALF_THICKNESS):
+        axial_start = (face - start[1]) / direction[1]
+        point = start + direction * axial_start
+        for value, slope, lower, upper in (
+            (axial_start, axial_slope, -reach, reach),
+            (point[0], lateral[0], -0.0118, 0.0015),
+            (point[2], lateral[2], -CLIP_WINDOW_HALF_HEIGHT, CLIP_WINDOW_HALF_HEIGHT),
+        ):
+            interval = clip_interval(interval, value, slope, lower, upper)
+            if interval is None:
+                return None
+    return interval
 
 
-def film_in_clip(clip, film):
-    limits = film_section(clip, film)
-    if limits is None:
-        return False
-    return np.all((-0.0118 < limits[:, 0]) & (limits[:, 0] < 0.0015) & (abs(limits[:, 2]) < CLIP_WINDOW_HALF_HEIGHT))
+def captured_width(intervals):
+    """Measure the longest continuous span along the film, including across creases."""
+    longest = run = 0.0
+    for interval in intervals:
+        if interval is None:
+            run = 0.0
+            continue
+        lo, hi = interval
+        run = (run if lo == 0.0 else 0.0) + (hi - lo) * FOLD_WIDTH
+        longest = max(longest, run)
+        if hi < 1.0:
+            run = 0.0
+    return longest
 
 
-def closure(objects):
+def closure(objects, folds):
     clip, loaf = objects["clip"], objects["loaf"]
-    folds = [objects[f"film_{i}"] for i in range(N_FOLDS)]
     loaf_basis = quat_xyzw_to_matrix(loaf.quat_xyzw)
     anchor = loaf.pos + loaf_basis @ (NECK_CREASE - LOAF)
-    half_spans = [quat_xyzw_to_matrix(fold.quat_xyzw)[:, 0] * (FOLD_WIDTH / 2) for fold in folds]
+    fold_bases = [quat_xyzw_to_matrix(fold.quat_xyzw) for fold in folds]
+    half_spans = [basis[:, 0] * (FOLD_WIDTH / 2) for basis in fold_bases]
     leading = [fold.pos - span for fold, span in zip(folds, half_spans)]
     trailing = [fold.pos + span for fold, span in zip(folds, half_spans)]
     if any(np.linalg.norm(a - b) > 0.005 for a, b in zip([anchor, *trailing[:-1]], leading)):
-        return 0, False
-    in_clip = sum(film_in_clip(clip, fold) for fold in folds)
+        return 0.0, False, False
+    clip_inverse = quat_xyzw_to_matrix(clip.quat_xyzw).T
+    intervals = [capture_interval(clip, fold, clip_inverse, basis) for fold, basis in zip(folds, fold_bases)]
+    complete = all(interval == (0.0, 1.0) for interval in intervals)
     rear = loaf_basis @ (0, -0.120, 0) + loaf.pos
     on_bench = abs(loaf.pos[2] - LOAF[2]) < 0.006 and loaf_basis[2, 2] > math.cos(math.radians(10))
     intact = rear[1] - clip.pos[1] > 0.024 and on_bench
     release = len(tips) == 2 and all(np.linalg.norm(tip - clip.pos) > 0.060 for tip in tips.values())
-    secured = in_clip == N_FOLDS and intact and release
-    return in_clip, secured
+    return captured_width(intervals), complete, complete and intact and release
 
 
 def score(objects):
@@ -152,7 +184,7 @@ def score(objects):
     loaf = objects["loaf"]
     folds = [objects[f"film_{i}"] for i in range(N_FOLDS)]
     film_centre = np.mean([fold.pos for fold in folds], axis=0)
-    in_clip, secured = closure(objects)
+    width, complete, secured = closure(objects, folds)
     if not secured:
         stable_frames, stable_anchor = 0, None
     elif stable_anchor is not None and (
@@ -165,15 +197,13 @@ def score(objects):
         stable_frames = 1
         stable_anchor = (clip_pose.pos.copy(), clip_pose.quat_xyzw.copy(), loaf.pos.copy())
     if os.getenv("BAG_DIAGNOSTICS"):
-        sections = [film_section(clip_pose, fold) for fold in folds]
-        print("BAG", in_clip, "secured", secured, "steady frames", stable_frames,
+        print("BAG", "captured width mm", round(width * 1000, 1), "complete", complete,
+              "secured", secured, "steady frames", stable_frames,
               "clip", np.round(objects["clip"].pos, 4).tolist(),
               "normal", np.round(quat_xyzw_to_matrix(clip_pose.quat_xyzw)[:, 1], 3).tolist(),
-              "opening mm", [np.round(section[:, (0, 2)] * 1000, 1).tolist() if section is not None else None
-                             for section in sections],
               "film", np.round([fold.pos for fold in folds], 4).tolist(),
               "tips", np.round(list(tips.values()), 4).tolist(), flush=True)
-    return 1.0 if success(objects) else 0.5 if in_clip == N_FOLDS else 0.25 if in_clip >= 2 else 0.0
+    return 1.0 if success(objects) else 0.5 if complete else 0.25 if width >= MIN_CAPTURE_WIDTH else 0.0
 
 
 def success(objects):
